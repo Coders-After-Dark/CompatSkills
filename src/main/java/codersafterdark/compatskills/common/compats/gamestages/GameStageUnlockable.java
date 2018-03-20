@@ -6,18 +6,15 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
 public class GameStageUnlockable extends Unlockable{
-    private String gameStage;
+    public String gameStage;
 
-    public GameStageUnlockable(ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... defaultRequirements) {
+    public GameStageUnlockable(String gameStage, ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... defaultRequirements) {
         super(name, x, y, skillName, cost, defaultRequirements);
+        this.gameStage = gameStage;
     }
 
     @Override
     public void onUnlock(EntityPlayer player){
         PlayerDataHandler.getStageData(player).unlockStage(gameStage);
-    }
-
-    public void setGameStage(String gameStage) {
-        this.gameStage = gameStage;
     }
 }
