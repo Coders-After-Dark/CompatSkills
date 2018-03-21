@@ -9,9 +9,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ModOnly("immersiveengineering")
 @ZenClass("mods.compatskills.IEMultiBlockGate")
 @ZenRegister
-public class IEMultiBlockStages {
+public class IEMultiBlockGates {
     @ZenMethod
-    public static void addGate(String multiBlockName, String failureMessage, String... defaultRequirements){
+    public static void addGate(String multiBlockName, String failureMessage, String... defaultRequirements) {
         CraftTweakerAPI.apply(new ActionAddIEMultiBlockGate(multiBlockName, failureMessage, defaultRequirements));
     }
 }

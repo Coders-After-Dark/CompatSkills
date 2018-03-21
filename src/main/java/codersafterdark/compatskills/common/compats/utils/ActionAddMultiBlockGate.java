@@ -1,16 +1,15 @@
-package codersafterdark.compatskills.common.compats.immersiveengineering;
+package codersafterdark.compatskills.common.compats.utils;
 
-import codersafterdark.reskillable.api.requirement.Requirement;
 import com.google.common.base.Strings;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 
-public abstract class ActionAddMultiBlockGate implements IAction{
+public abstract class ActionAddMultiBlockGate implements IAction {
     private final String multiBlockName;
     private final String[] defaultRequirements;
     private final String failureMessage;
 
-    public ActionAddMultiBlockGate(String multiBlockName, String failureMessage, String... defaultRequirements){
+    public ActionAddMultiBlockGate(String multiBlockName, String failureMessage, String... defaultRequirements) {
         this.multiBlockName = multiBlockName;
         this.failureMessage = failureMessage;
         this.defaultRequirements = defaultRequirements;

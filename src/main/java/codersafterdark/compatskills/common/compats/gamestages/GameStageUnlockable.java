@@ -5,7 +5,7 @@ import net.darkhax.gamestages.capabilities.PlayerDataHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class GameStageUnlockable extends Unlockable{
+public class GameStageUnlockable extends Unlockable {
     public String gameStage;
 
     public GameStageUnlockable(String gameStage, ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... defaultRequirements) {
@@ -14,7 +14,7 @@ public class GameStageUnlockable extends Unlockable{
     }
 
     @Override
-    public void onUnlock(EntityPlayer player){
+    public void onUnlock(EntityPlayer player) {
         PlayerDataHandler.getStageData(player).unlockStage(gameStage);
     }
 }

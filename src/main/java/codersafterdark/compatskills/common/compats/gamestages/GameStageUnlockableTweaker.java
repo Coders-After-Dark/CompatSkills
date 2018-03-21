@@ -15,7 +15,7 @@ import static codersafterdark.compatskills.lib.LibMisc.MOD_ID;
 @ZenRegister
 public class GameStageUnlockableTweaker {
     @ZenMethod
-    public static void addGameStageUnlockable(String gamestage, String name, int x, int y, String skillName, int cost, @Optional String... defaultRequirements){
-        ReskillableRegistries.UNLOCKABLES.register(new GameStageUnlockable(gamestage, new ResourceLocation(MOD_ID, name.replaceAll("\\s+","").toLowerCase()), x, y, new ResourceLocation(skillName), cost, defaultRequirements));
+    public static void addGameStageUnlockable(String gamestage, String name, int x, int y, String skillName, int cost, @Optional String... defaultRequirements) {
+        ReskillableRegistries.UNLOCKABLES.register(new GameStageUnlockable(gamestage, new ResourceLocation(MOD_ID, name.replaceAll("\\s+", "").toLowerCase()), x, y, new ResourceLocation(skillName), cost, defaultRequirements));
     }
 }

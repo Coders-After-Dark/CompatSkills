@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.immersiveengineering;
+package codersafterdark.compatskills.common.compats.utils;
 
 import codersafterdark.reskillable.api.data.RequirementHolder;
 
@@ -7,7 +7,7 @@ public class MultiBlockGate {
     private final String failureMessage;
     private final RequirementHolder requirementHolder;
 
-    public MultiBlockGate(String multiBlockName, String failureMessage, String... defaultRequirements){
+    public MultiBlockGate(String multiBlockName, String failureMessage, String... defaultRequirements) {
         this.multiBlockName = multiBlockName;
         this.failureMessage = failureMessage;
         this.requirementHolder = RequirementHolder.fromStringList(defaultRequirements);

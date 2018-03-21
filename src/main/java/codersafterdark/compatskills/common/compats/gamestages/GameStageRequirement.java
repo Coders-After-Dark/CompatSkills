@@ -7,10 +7,10 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.text.TextFormatting;
 
-public class GameStageRequirement extends Requirement{
+public class GameStageRequirement extends Requirement {
     private String gamestage;
 
-    public GameStageRequirement(String gamestage){
+    public GameStageRequirement(String gamestage) {
         this.gamestage = gamestage;
     }
 
@@ -25,7 +25,7 @@ public class GameStageRequirement extends Requirement{
         PlayerDataHandler.IStageData data = PlayerDataHandler.getStageData(playerData.playerWR.get());
         TextFormatting color = TextFormatting.GREEN;
         String toolTip = "";
-        if (!data.hasUnlockedStage(gamestage)){
+        if (!data.hasUnlockedStage(gamestage)) {
             color = TextFormatting.RED;
         }
         return TextFormatting.GRAY + " - " + I18n.format("compatskills.misc.gamestageFormat", color, gamestage);
