@@ -10,9 +10,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 
 public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
-        if (Loader.isModLoaded("immersiveengineering")) {
-            IECompatHandler.setup();
-        }
+
     }
 
     public void Init(FMLInitializationEvent event) {
