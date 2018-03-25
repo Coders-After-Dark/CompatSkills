@@ -2,19 +2,17 @@ package codersafterdark.compatskills.common.compats.crafttweaker;
 
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
-import crafttweaker.CraftTweakerAPI;
-import crafttweaker.IAction;
+import crafttweaker.*;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.item.ItemStack;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
+import stanhebben.zenscript.annotations.*;
 
 @ZenClass("mods.reskillable.Requirement")
 @ZenRegister
 public class RequirementTweaker {
-
+    
     @ZenMethod
     public static void addRequirement(IItemStack item, String locked) {
         CraftTweakerAPI.apply(new IAction() {
@@ -32,12 +30,12 @@ public class RequirementTweaker {
                 RequirementHolder h = RequirementHolder.fromString(locked);
                 LevelLockHandler.craftTweakerLocks.put(realItem, h);
             }
-
+            
             @Override
             public String describe() {
                 return "Setting the requirement of: " + item + " to: " + locked;
             }
         });
-
+        
     }
 }
