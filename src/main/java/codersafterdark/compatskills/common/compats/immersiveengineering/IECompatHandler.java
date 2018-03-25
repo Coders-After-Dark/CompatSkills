@@ -16,7 +16,7 @@ public class IECompatHandler {
     public static void setup() {
         multiBlockHandler = new IEMultiBlockHandler();
         MinecraftForge.EVENT_BUS.register(multiBlockHandler);
-        CTChatCommand.registerCommand(new MultiBlockCommand("ieMultiBlock") {
+        CTChatCommand.registerCommand(new MultiBlockCommand("ie") {
             @Override
             public List<String> getMultiBlockNames() {
                 return MultiblockHandler.getMultiblocks().stream().map(MultiblockHandler.IMultiblock::getUniqueName).collect(Collectors.toList());

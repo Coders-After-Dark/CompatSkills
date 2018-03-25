@@ -16,7 +16,7 @@ public class MagCompatHandler {
     public static void setup() {
         magMultiBlockHandler = new MagMultiBlockHandler();
         MinecraftForge.EVENT_BUS.register(magMultiBlockHandler);
-        CTChatCommand.registerCommand(new MultiBlockCommand("magMultiBlock") {
+        CTChatCommand.registerCommand(new MultiBlockCommand("mag") {
             @Override
             public List<String> getMultiBlockNames() {
                 return new ArrayList<>(MagneticraftApi.getMultiblockManager().getRegisteredMultiblocks().keySet());

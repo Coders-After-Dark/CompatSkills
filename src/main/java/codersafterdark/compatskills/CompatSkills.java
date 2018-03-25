@@ -2,6 +2,7 @@ package codersafterdark.compatskills;
 
 import codersafterdark.compatskills.common.CommonProxy;
 import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
+import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -24,8 +25,13 @@ public class CompatSkills {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit(event);
+
         if (Loader.isModLoaded("immersiveengineering")) {
             IECompatHandler.setup();
+        }
+
+        if (Loader.isModLoaded("magneticraft")){
+            MagCompatHandler.setup();
         }
     }
 

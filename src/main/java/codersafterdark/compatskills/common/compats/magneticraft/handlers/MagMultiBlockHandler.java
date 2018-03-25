@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.magneticraft.handlers;
 import codersafterdark.compatskills.common.compats.utils.MultiBlockGate;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
+import com.cout970.magneticraft.api.multiblock.IMultiblock;
 import com.cout970.magneticraft.api.multiblock.MultiBlockEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
@@ -18,20 +19,20 @@ public class MagMultiBlockHandler {
         multiBlockGates.put(multiBlockGate.getMultiBlockName(), multiBlockGate);
     }
 
-//    @SubscribeEvent
-//    public void multiBlockForm(MultiBlockEvent.CheckIntegrity event) {
-//
-//        EntityPlayer player = event.getPlayer();
-//        PlayerData data = PlayerDataHandler.get(player);
-//        if (multiBlockGates.containsKey()) {
-//            MultiBlockGate gate = multiBlockGates.get() {
-//                if (!data.matchStats(gate.getRequirementHolder())) {
-//                    ITextComponent textComponent = new TextComponentString(gate.getFailureMessage());
-//                    String requirements = gate.getRequirementHolder().getRequirements().toString();
-//                    ITextComponent component = new TextComponentString(textComponent.toString() + requirements);
-//                    event.getIntegrityErrors().add(component);
-//                }
-//            }
-//        }
-//    }
+    @SubscribeEvent
+    public void multiBlockForm(MultiBlockEvent.CheckIntegrity event) {
+        IMultiblock multiblock = event.getMultiblock();
+        EntityPlayer player = event.getPlayer();
+        PlayerData data = PlayerDataHandler.get(player);
+        String name = multiblock.getMultiblockName();
+        if (multiBlockGates.containsKey(name)) {
+            MultiBlockGate gate = multiBlockGates.get(name);
+            if (!data.matchStats(gate.getRequirementHolder())) {
+                ITextComponent textComponent = new TextComponentString(gate.getFailureMessage());
+                String requirements = gate.getRequirementHolder().getRequirements().toString();
+                ITextComponent component = new TextComponentString(textComponent + requirements);
+                event.getIntegrityErrors().add(component);
+            }
+        }
+    }
 }
