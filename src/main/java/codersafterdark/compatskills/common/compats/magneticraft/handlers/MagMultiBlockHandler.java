@@ -5,15 +5,19 @@ import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import com.cout970.magneticraft.api.multiblock.IMultiblock;
 import com.cout970.magneticraft.api.multiblock.MultiBlockEvent;
+import com.google.common.collect.Maps;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.List;
 import java.util.Map;
 
 public class MagMultiBlockHandler {
     private Map<String, MultiBlockGate> multiBlockGates;
+
+    public MagMultiBlockHandler(){ multiBlockGates = Maps.newHashMap();}
 
     public void addMultiBlockGate(MultiBlockGate multiBlockGate) {
         multiBlockGates.put(multiBlockGate.getMultiBlockName(), multiBlockGate);

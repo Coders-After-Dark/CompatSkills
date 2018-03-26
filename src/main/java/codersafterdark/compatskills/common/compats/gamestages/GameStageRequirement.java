@@ -4,7 +4,7 @@ import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import net.darkhax.gamestages.capabilities.PlayerDataHandler;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
 
 public class GameStageRequirement extends Requirement {
@@ -15,7 +15,7 @@ public class GameStageRequirement extends Requirement {
     }
 
     @Override
-    public boolean achievedByPlayer(EntityPlayerMP entityPlayerMP) {
+    public boolean achievedByPlayer(EntityPlayer entityPlayerMP) {
         PlayerDataHandler.IStageData data = PlayerDataHandler.getStageData(entityPlayerMP);
         return data.hasUnlockedStage(gamestage);
     }
