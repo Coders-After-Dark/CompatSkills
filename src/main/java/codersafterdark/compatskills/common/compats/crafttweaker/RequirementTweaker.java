@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenClass("mods.reskillable.Requirement")
+@ZenClass("mods.compatskills.Requirement")
 @ZenRegister
 public class RequirementTweaker {
 

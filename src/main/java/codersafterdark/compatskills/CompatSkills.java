@@ -3,7 +3,6 @@ package codersafterdark.compatskills;
 import codersafterdark.compatskills.common.CommonProxy;
 import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
 import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
-import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -33,9 +32,9 @@ public class CompatSkills {
             IECompatHandler.setup();
         }
 
-        if (Loader.isModLoaded("magneticraft")){
-            MagCompatHandler.setup();
-        }
+//        if (Loader.isModLoaded("magneticraft")){
+//            MagCompatHandler.setup();
+//        }
     }
 
     @EventHandler
