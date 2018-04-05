@@ -1,7 +1,5 @@
 package codersafterdark.compatskills.common;
 
-import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;

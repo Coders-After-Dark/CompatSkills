@@ -25,7 +25,7 @@ public class CompatSkills {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit(event);
-        if (Loader.isModLoaded("gamestages")){
+        if (Loader.isModLoaded("gamestages")) {
             GameStageCompatHandler.setup();
         }
         if (Loader.isModLoaded("immersiveengineering")) {

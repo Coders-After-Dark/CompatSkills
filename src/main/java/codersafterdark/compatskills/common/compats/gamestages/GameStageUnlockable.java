@@ -1,11 +1,8 @@
 package codersafterdark.compatskills.common.compats.gamestages;
 
 import codersafterdark.reskillable.api.unlockable.Unlockable;
-import net.darkhax.gamestages.capabilities.PlayerDataHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 public class GameStageUnlockable extends Unlockable {

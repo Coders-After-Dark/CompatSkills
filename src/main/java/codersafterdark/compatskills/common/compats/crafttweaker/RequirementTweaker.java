@@ -5,12 +5,9 @@ import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
-import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.Ingredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -23,10 +20,10 @@ public class RequirementTweaker {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                if(item == null) {
+                if (item == null) {
                     CraftTweakerAPI.logError("Itemstack: " + item + " was found to be either null or empty!");
                     return;
-                } else if(locked == null || locked.isEmpty()) {
+                } else if (locked == null || locked.isEmpty()) {
                     CraftTweakerAPI.logError("String: " + locked + " was found to be either null or empty!");
                     return;
                 } else {

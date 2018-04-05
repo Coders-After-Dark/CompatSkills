@@ -11,13 +11,14 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.List;
 import java.util.Map;
 
 public class MagMultiBlockHandler {
     private Map<String, MultiBlockGate> multiBlockGates;
 
-    public MagMultiBlockHandler(){ multiBlockGates = Maps.newHashMap();}
+    public MagMultiBlockHandler() {
+        multiBlockGates = Maps.newHashMap();
+    }
 
     public void addMultiBlockGate(MultiBlockGate multiBlockGate) {
         multiBlockGates.put(multiBlockGate.getMultiBlockName(), multiBlockGate);

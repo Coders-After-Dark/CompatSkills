@@ -41,6 +41,9 @@ repositories{
         name = 'Waila'
         url 'https://tehnut.info/maven'
     }
+    maven {
+        url "http://tehnut.info/maven/"
+    }
 }
 
 dependencies {
@@ -52,6 +55,7 @@ dependencies {
     deobfCompile "CraftTweaker2:CraftTweaker2-API:1.12-${crafttweaker_version}"
     deobfCompile "CraftTweaker2:ZenScript:1.12-${crafttweaker_version}"
     deobfCompile "codersafterdark.reskillable:Reskillable:1.12.2-1.0.0-SNAPSHOT.14"
+    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.2.7-90"
     deobfCompile("blusunrize:ImmersiveEngineering:${ieVersion}") {
         exclude module: "crafttweaker"
     }
