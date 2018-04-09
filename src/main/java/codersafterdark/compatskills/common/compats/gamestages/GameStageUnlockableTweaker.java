@@ -19,8 +19,7 @@ import static codersafterdark.compatskills.utils.CompatSkillConstants.MOD_ID;
 public class GameStageUnlockableTweaker {
     @ZenMethod
     public static void addGameStageUnlockable(String gamestage, String name, int x, int y, String skillName, int cost, @Optional String... defaultRequirements) {
-        //defaultRequirements = defaultRequirements == null ? new String[0] : defaultRequirements;
-        ReskillableRegistries.UNLOCKABLES.register(new GameStageUnlockable(gamestage, new ResourceLocation(MOD_ID, name.replaceAll("\\s+", "").toLowerCase()), x, y, new ResourceLocation(skillName), cost, defaultRequirements));
+        ReskillableRegistries.UNLOCKABLES.register(new GameStageUnlockable(gamestage, name.replaceAll("\\s+", "").toLowerCase(), x, y, new ResourceLocation(skillName), cost, defaultRequirements));
         CraftTweakerAPI.logInfo("Added Unlockable Trait: " + name + " With GameStage Link: " + gamestage + " under Skill: " + skillName);
         CraftTweakerAPI.logInfo("Unlockable Trait: " + name + " has requirements: " + Arrays.toString(defaultRequirements));
     }
