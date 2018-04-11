@@ -13,10 +13,10 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class RitualHandlerTweaker {
 
     @ZenMethod
-    public static void addRitualLock(String failureMessage, String ritual, String... requirements){
+    public static void addRitualLock(String failureMessage, String ritual, String... requirements) {
         RitualHandler handler = new RitualHandler();
 
-        if (checkMessage(failureMessage) && checkRitual(ritual) && checkRequirements(requirements)){
+        if (checkMessage(failureMessage) && checkRitual(ritual) && checkRequirements(requirements)) {
             handler.setFailureMessage(failureMessage);
             RequirementHolder holder = RequirementHolder.fromStringList(requirements);
             Ritual ritual1 = RitualRegistry.getRegistry().get(ritual);
@@ -24,8 +24,8 @@ public class RitualHandlerTweaker {
         }
     }
 
-    private static boolean checkMessage(String message){
-        if (message == null || message.isEmpty()){
+    private static boolean checkMessage(String message) {
+        if (message == null || message.isEmpty()) {
             CraftTweakerAPI.logError("'Failure Message' Param is either null or empty!");
             return false;
         }
@@ -33,24 +33,24 @@ public class RitualHandlerTweaker {
     }
 
 
-    private static boolean checkRitual(String ritual){
-        if (ritual == null || ritual.isEmpty()){
+    private static boolean checkRitual(String ritual) {
+        if (ritual == null || ritual.isEmpty()) {
             CraftTweakerAPI.logError("String Ritual was Null or Empty!");
             return false;
-        } else if (!RitualRegistry.getRegistry().containsKey(ritual)){
+        } else if (!RitualRegistry.getRegistry().containsKey(ritual)) {
             CraftTweakerAPI.logError("Invalid Ritual String!");
         }
         return true;
     }
 
 
-    private static boolean checkRequirements (String[] reqs){
-        if (reqs == null || reqs.length == 0){
+    private static boolean checkRequirements(String[] reqs) {
+        if (reqs == null || reqs.length == 0) {
             CraftTweakerAPI.logError("No Requirements Specified");
             return false;
         }
-        for (String req : reqs){
-            if (req == null || req.isEmpty()){
+        for (String req : reqs) {
+            if (req == null || req.isEmpty()) {
                 CraftTweakerAPI.logError("Requirement String was found to either be Null or Empty!");
                 return false;
             }

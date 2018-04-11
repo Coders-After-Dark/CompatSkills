@@ -1,6 +1,5 @@
 package codersafterdark.compatskills.common.compats.bloodmagic.RitualHandler;
 
-import WayofTime.bloodmagic.event.RitualEvent;
 import WayofTime.bloodmagic.event.RitualEvent.RitualActivatedEvent;
 import WayofTime.bloodmagic.ritual.data.Ritual;
 import codersafterdark.reskillable.api.data.PlayerData;
@@ -19,23 +18,23 @@ public class RitualHandler {
 
     private Map<Ritual, RequirementHolder> ritualHolder;
 
-    public RitualHandler(){
+    public RitualHandler() {
         ritualHolder = Maps.newHashMap();
     }
 
-    public void addRitualHolder(Ritual ritual, RequirementHolder holder){
+    public void addRitualHolder(Ritual ritual, RequirementHolder holder) {
         ritualHolder.put(ritual, holder);
     }
 
     @SubscribeEvent
-    public void ritualEvent(RitualActivatedEvent event){
+    public void ritualEvent(RitualActivatedEvent event) {
         Ritual ritual = event.ritual;
         EntityPlayer player = event.player;
         PlayerData data = PlayerDataHandler.get(player);
-        if (ritualHolder.containsKey(ritual)){
-            if (!data.matchStats(ritualHolder.get(ritual))){
+        if (ritualHolder.containsKey(ritual)) {
+            if (!data.matchStats(ritualHolder.get(ritual))) {
                 event.setCanceled(true);
-                if (player.getEntityWorld().isRemote){
+                if (player.getEntityWorld().isRemote) {
                     player.sendStatusMessage(new TextComponentString(failureMessage), true);
                 }
             }

@@ -32,8 +32,7 @@ public class CompatSkills {
         if (Loader.isModLoaded("immersiveengineering")) {
             IECompatHandler.setup();
         }
-
-        if (Loader.isModLoaded("magneticraft")){
+        if (Loader.isModLoaded("magneticraft")) {
             MagCompatHandler.setup();
         }
     }

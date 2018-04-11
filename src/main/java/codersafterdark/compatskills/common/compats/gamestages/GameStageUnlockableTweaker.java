@@ -11,8 +11,6 @@ import stanhebben.zenscript.annotations.ZenMethod;
 
 import java.util.Arrays;
 
-import static codersafterdark.compatskills.utils.CompatSkillConstants.MOD_ID;
-
 @ModOnly("gamestages")
 @ZenClass("mods.compatskills.GameStageUnlockable")
 @ZenRegister

@@ -24,29 +24,29 @@ public class BindHandlerTweaker {
         }
     }
 
-    private static boolean checkMessage(String message){
-        if (message == null || message.isEmpty()){
+    private static boolean checkMessage(String message) {
+        if (message == null || message.isEmpty()) {
             CraftTweakerAPI.logError("'Failure Message' Param is either null or empty!");
             return false;
         }
         return true;
     }
 
-    private static boolean checkStack (IItemStack stack){
-        if (stack == null || stack.isEmpty()){
+    private static boolean checkStack(IItemStack stack) {
+        if (stack == null || stack.isEmpty()) {
             CraftTweakerAPI.logError("'Stack' Param is either Null or Empty!");
             return false;
         }
         return true;
     }
 
-    private static boolean checkRequirements (String[] reqs){
-        if (reqs == null || reqs.length == 0){
+    private static boolean checkRequirements(String[] reqs) {
+        if (reqs == null || reqs.length == 0) {
             CraftTweakerAPI.logError("No Requirements Specified");
             return false;
         }
-        for (String req : reqs){
-            if (req == null || req.isEmpty()){
+        for (String req : reqs) {
+            if (req == null || req.isEmpty()) {
                 CraftTweakerAPI.logError("Requirement String was found to either be Null or Empty!");
                 return false;
             }

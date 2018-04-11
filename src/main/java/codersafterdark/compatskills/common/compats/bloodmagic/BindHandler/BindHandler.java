@@ -14,9 +14,8 @@ import java.util.Map;
 
 public class BindHandler {
 
-    private String failureMessage;
-
     public Map<ItemStack, RequirementHolder> bindHolder;
+    private String failureMessage;
 
     public BindHandler() {
         bindHolder = Maps.newHashMap();

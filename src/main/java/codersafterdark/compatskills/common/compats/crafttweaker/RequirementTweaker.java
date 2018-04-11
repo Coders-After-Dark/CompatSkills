@@ -29,7 +29,7 @@ public class RequirementTweaker {
                 } else {
                     ItemStack i = CraftTweakerMC.getItemStack(item);
                     RequirementHolder h = RequirementHolder.fromString(locked);
-                    LevelLockHandler.craftTweakerLocks.put(i, h);
+                    LevelLockHandler.addLock(i, h);
                 }
             }
 
