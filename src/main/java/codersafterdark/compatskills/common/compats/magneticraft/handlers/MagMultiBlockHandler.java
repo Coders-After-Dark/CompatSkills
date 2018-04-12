@@ -32,7 +32,6 @@ public class MagMultiBlockHandler {
         EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);
         String name = multiblock.getMultiblockName();
-        String newLine = SystemUtils.LINE_SEPARATOR;
 
         if (multiBlockGates.containsKey(name)) {
             MultiBlockGate gate = multiBlockGates.get(name);
