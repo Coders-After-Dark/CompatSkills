@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.crafttweaker;
+package codersafterdark.compatskills.common.compats.crafttweaker.requirements;
 
 import codersafterdark.compatskills.common.compats.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -13,9 +13,17 @@ import stanhebben.zenscript.annotations.*;
 @ZenClass("mods.compatskills.Requirement")
 @ZenRegister
 public class RequirementTweaker {
-    
+
     @ZenMethod
     public static void addRequirement(IItemStack item, String... locked) {
+        StringBuilder descString = new StringBuilder("Requirements: ");
+
+        if (CheckMethods.checkStringArray(locked)){
+            for (String string : locked){
+                descString.append(string).append(", ");
+            }
+        }
+
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
@@ -25,12 +33,11 @@ public class RequirementTweaker {
                     LevelLockHandler.addLock(i, h);
                 }
             }
-            
+
             @Override
             public String describe() {
-                return "Setting the requirement of: " + item + " to: " + locked;
+                return "Setting the requirement of: " + item + " to: " + descString;
             }
         });
-        
     }
 }
