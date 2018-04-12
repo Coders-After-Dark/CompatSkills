@@ -41,6 +41,9 @@ repositories{
         name = 'Waila'
         url 'https://tehnut.info/maven'
     }
+    maven {
+        url "http://tehnut.info/maven/"
+    }
 }
 
 dependencies {

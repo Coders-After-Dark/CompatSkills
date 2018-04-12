@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.immersiveengineering.handlers;
 
+import codersafterdark.compatskills.common.compats.utils.CheckMethods;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
@@ -12,6 +13,8 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class IEMultiBlockGates {
     @ZenMethod
     public static void addGate(String multiBlockName, String failureMessage, String... defaultRequirements) {
-        CraftTweakerAPI.apply(new ActionAddIEMultiBlockGate(multiBlockName, failureMessage, defaultRequirements));
+        if (CheckMethods.checkValidMultiblockNameIE(multiBlockName) & CheckMethods.checkString(failureMessage) & CheckMethods.checkStringArray(defaultRequirements)){
+            CraftTweakerAPI.apply(new ActionAddIEMultiBlockGate(multiBlockName, failureMessage, defaultRequirements));
+        }
     }
 }

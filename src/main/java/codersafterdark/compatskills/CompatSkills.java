@@ -1,6 +1,7 @@
 package codersafterdark.compatskills;
 
 import codersafterdark.compatskills.common.CommonProxy;
+import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
 import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
 import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
@@ -25,12 +26,13 @@ public class CompatSkills {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit(event);
-
+        if (Loader.isModLoaded("gamestages")) {
+            GameStageCompatHandler.setup();
+        }
         if (Loader.isModLoaded("immersiveengineering")) {
             IECompatHandler.setup();
         }
-
-        if (Loader.isModLoaded("magneticraft")){
+        if (Loader.isModLoaded("magneticraft")) {
             MagCompatHandler.setup();
         }
     }
