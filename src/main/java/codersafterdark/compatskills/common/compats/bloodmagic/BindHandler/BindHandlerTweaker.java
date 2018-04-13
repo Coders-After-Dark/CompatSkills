@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.bloodmagic.BindHandler;
 import codersafterdark.compatskills.common.compats.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+@ModOnly("bloodmagic")
 @ZenClass("mods.compatskills.BindHandler")
 @ZenRegister
 public class BindHandlerTweaker {

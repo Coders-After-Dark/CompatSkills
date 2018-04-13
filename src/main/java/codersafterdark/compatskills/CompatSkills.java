@@ -1,6 +1,7 @@
 package codersafterdark.compatskills;
 
 import codersafterdark.compatskills.common.CommonProxy;
+import codersafterdark.compatskills.common.compats.bloodmagic.BMCompatHandler;
 import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
 import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
 import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
@@ -34,6 +35,9 @@ public class CompatSkills {
         }
         if (Loader.isModLoaded("magneticraft")) {
             MagCompatHandler.setup();
+        }
+        if (Loader.isModLoaded("bloodmagic")){
+            BMCompatHandler.setup();
         }
     }
 

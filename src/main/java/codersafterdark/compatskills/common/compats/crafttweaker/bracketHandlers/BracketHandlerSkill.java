@@ -29,7 +29,7 @@ public class BracketHandlerSkill implements IBracketHandler {
     
     @Override
     public IZenSymbol resolve(IEnvironmentGlobal iEnvironmentGlobal, List<Token> list) {
-        if(list.size() <= 2 || list.get(0).getValue().equalsIgnoreCase("skill")) {
+        if(list.size() <= 2 || !list.get(0).getValue().equalsIgnoreCase("skill")) {
             return null;
         }
         

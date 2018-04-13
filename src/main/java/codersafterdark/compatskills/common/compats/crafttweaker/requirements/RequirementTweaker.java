@@ -4,12 +4,14 @@ import codersafterdark.compatskills.common.compats.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.*;
+import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.*;
 
+@ModOnly("crafttweaker")
 @ZenClass("mods.compatskills.Requirement")
 @ZenRegister
 public class RequirementTweaker {

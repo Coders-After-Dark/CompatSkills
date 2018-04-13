@@ -92,21 +92,6 @@ public class CheckMethods {
         return true;
     }
 
-    ////////////////////////////////
-    //   Immersive Engineering    //
-    ////////////////////////////////
-
-    public static boolean checkValidMultiblockNameIE(String multiBlock){
-        if (multiBlock == null || multiBlock.isEmpty()){
-            CraftTweakerAPI.logError("String for Multiblock Name was found to be null or empty!");
-            return false;
-        } else if (!MultiblockHandler.getMultiblocks().parallelStream().map(IMultiblock::getUniqueName).anyMatch(multiBlock::equals)){
-            CraftTweakerAPI.logError("No valid match was found for the String: " + multiBlock);
-            return false;
-        }
-        return true;
-    }
-
     ///////////////////////
     //   Magneticraft    //
     ///////////////////////
