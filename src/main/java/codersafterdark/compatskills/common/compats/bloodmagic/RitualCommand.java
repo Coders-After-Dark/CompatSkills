@@ -9,7 +9,7 @@ import java.util.List;
 
 import static crafttweaker.mc1120.commands.SpecialMessagesChat.*;
 
-public abstract class RitualCommand extends CraftTweakerCommand{
+public abstract class RitualCommand extends CraftTweakerCommand {
     public RitualCommand() {
         super("ritualDump");
     }
@@ -24,7 +24,7 @@ public abstract class RitualCommand extends CraftTweakerCommand{
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
         CraftTweakerAPI.logCommand("Ritual Dump: ");
         List<String> ritualList = getRitualNames();
-        for (String ritual : ritualList){
+        for (String ritual : ritualList) {
             CraftTweakerAPI.logCommand(ritual);
         }
         sender.sendMessage(getLinkToCraftTweakerLog("List of Rituals generated;", sender));

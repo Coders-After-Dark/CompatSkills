@@ -36,7 +36,7 @@ public class CompatSkills {
         if (Loader.isModLoaded("magneticraft")) {
             MagCompatHandler.setup();
         }
-        if (Loader.isModLoaded("bloodmagic")){
+        if (Loader.isModLoaded("bloodmagic")) {
             BMCompatHandler.setup();
         }
     }

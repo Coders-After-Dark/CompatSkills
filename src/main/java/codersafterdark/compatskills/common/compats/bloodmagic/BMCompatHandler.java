@@ -13,7 +13,7 @@ public class BMCompatHandler {
     private static BindHandler bindHandler;
     private static RitualHandler ritualHandler;
 
-    public static void setup(){
+    public static void setup() {
         bindHandler = new BindHandler();
         MinecraftForge.EVENT_BUS.register(bindHandler);
         ritualHandler = new RitualHandler();

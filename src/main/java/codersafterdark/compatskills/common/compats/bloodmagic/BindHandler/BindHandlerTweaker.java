@@ -2,7 +2,6 @@ package codersafterdark.compatskills.common.compats.bloodmagic.BindHandler;
 
 import codersafterdark.compatskills.common.compats.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;

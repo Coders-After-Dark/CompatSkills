@@ -10,7 +10,6 @@ import com.google.common.collect.Maps;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.apache.commons.lang3.SystemUtils;
 
 import java.util.List;
 import java.util.Map;
