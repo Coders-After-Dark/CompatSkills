@@ -1,7 +1,10 @@
-package codersafterdark.compatskills.common.compats.crafttweaker.customcontent;
+package codersafterdark.compatskills.common.compats.reskillable.customcontent;
 
+import codersafterdark.compatskills.common.compats.utils.CheckMethods;
+import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.unlockable.Trait;
+import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.event.*;
 import crafttweaker.api.formatting.IFormattedText;
@@ -17,7 +20,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 import stanhebben.zenscript.annotations.*;
 
 @ZenRegister
-@ZenClass("mods.reskillable.Trait")
+@ZenClass("mods.compatskills.TraitCreator")
 public class CrTTrait extends Trait {
     
     @ZenProperty
@@ -52,16 +55,72 @@ public class CrTTrait extends Trait {
     
     @ZenProperty
     public IFormattedText description = null;
-    
-    
+
     @ZenMethod
-    public static CrTTrait create(String traitLocation, int x, int y, String skillLocation, int cost, String... requirements) {
-        return new CrTTrait(new ResourceLocation(traitLocation), x, y, new ResourceLocation(skillLocation), cost, requirements);
+    public static CrTTrait createTrait(String traitName, int x, int y, String skillLocation, int cost, String... requirements) {
+        if (CheckMethods.checkString(traitName) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillLocation) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+            StringBuilder reqBuilder = new StringBuilder("Requirements: ");
+
+            if (CheckMethods.checkStringArray(requirements)){
+                for (String string : requirements){
+                    reqBuilder.append(string);
+                }
+            }
+
+            CraftTweakerAPI.logCommand("Created new Trait: " + traitName + " With Pos: " + x + y + " With Cost: " + cost + "With requirements: " + reqBuilder);
+            return new CrTTrait(new ResourceLocation(CompatSkillConstants.MOD_ID, traitName), x, y, new ResourceLocation(skillLocation), cost, requirements);
+        }
+        return null;
+    }
+
+    @ZenMethod
+    public static CrTTrait createTrait(String traitName, int x, int y, CrTSkill parentSkill, int cost, String... requirements) {
+        if (CheckMethods.checkString(traitName) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(parentSkill.getRegistryName().toString()) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+            StringBuilder reqBuilder = new StringBuilder("Requirements: ");
+
+            if (CheckMethods.checkStringArray(requirements)){
+                for (String string : requirements){
+                    reqBuilder.append(string);
+                }
+            }
+
+            CraftTweakerAPI.logCommand("Created new Trait: " + traitName + " With Pos: " + x + y + " With Cost: " + cost + "With requirements: " + reqBuilder);
+            return new CrTTrait(new ResourceLocation(CompatSkillConstants.MOD_ID, traitName), x, y, parentSkill.getRegistryName(), cost, requirements);
+        }
+        return null;
+    }
+
+    @ZenMethod
+    public static CrTTrait createNewTrait(String traitLocation, int x, int y, String skillLocation, int cost, String... requirements) {
+        if (CheckMethods.checkString(traitLocation) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillLocation) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+            StringBuilder reqBuilder = new StringBuilder("Requirements: ");
+
+            if (CheckMethods.checkStringArray(requirements)){
+                for (String string : requirements){
+                    reqBuilder.append(string);
+                }
+            }
+
+            CraftTweakerAPI.logCommand("Created new Trait: " + traitLocation + " With Pos: " + x + y + " With Cost: " + cost + "With requirements: " + reqBuilder);
+            return new CrTTrait(new ResourceLocation(traitLocation), x, y, new ResourceLocation(skillLocation), cost, requirements);
+        }
+        return null;
     }
     
     @ZenMethod
-    public static CrTTrait create(String traitLocation, int x, int y, CrTSkill parentSkill, int cost, String... requirements) {
-        return new CrTTrait(new ResourceLocation(traitLocation), x, y, parentSkill.getRegistryName(), cost, requirements);
+    public static CrTTrait createNewTrait(String traitLocation, int x, int y, CrTSkill parentSkill, int cost, String... requirements) {
+        if (CheckMethods.checkString(traitLocation) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(parentSkill.getRegistryName().toString()) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)){
+            StringBuilder reqBuilder = new StringBuilder("Requirements: ");
+            if (CheckMethods.checkStringArray(requirements)){
+                for (String string : requirements){
+                    reqBuilder.append(string);
+                }
+            }
+
+            CraftTweakerAPI.logCommand("Created new Trait: " + traitLocation + " With Pos: " + x + y + " With Cost: " + cost + "With requirements: " + reqBuilder);
+            return new CrTTrait(new ResourceLocation(traitLocation), x, y, parentSkill.getRegistryName(), cost, requirements);
+        }
+        return null;
     }
     
     public CrTTrait(ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... requirements) {

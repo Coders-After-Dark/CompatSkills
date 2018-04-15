@@ -1,7 +1,7 @@
 package codersafterdark.compatskills.common.compats.crafttweaker.bracketHandlers;
 
 
-import codersafterdark.compatskills.common.compats.crafttweaker.wrapper.CTSkill;
+import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.skill.Skill;
 import crafttweaker.annotations.*;
