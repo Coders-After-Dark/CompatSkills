@@ -77,7 +77,7 @@ public class CrTTrait extends Trait {
                 }
             }
 
-            CraftTweakerAPI.logCommand("Created new Trait: " + traitName + " With Pos: " + x + y + " With Cost: " + cost + "With requirements: " + reqBuilder);
+            CraftTweakerAPI.logInfo("Created new Trait: " + traitName + " -" + " With Pos: " + x + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
             return new CrTTrait(new ResourceLocation(CompatSkillConstants.MOD_ID, traitName), x, y, new ResourceLocation(skillLocation), cost, requirements);
         }
         return null;
@@ -94,7 +94,7 @@ public class CrTTrait extends Trait {
                 }
             }
 
-            CraftTweakerAPI.logCommand("Created new Trait: " + traitName + " With Pos: " + x + y + " With Cost: " + cost + "With requirements: " + reqBuilder);
+            CraftTweakerAPI.logInfo("Created new Trait: " + traitName + " -" + " With Pos: " + x + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
             return new CrTTrait(new ResourceLocation(CompatSkillConstants.MOD_ID, traitName), x, y, parentSkill.getRegistryName(), cost, requirements);
         }
         return null;
@@ -111,7 +111,7 @@ public class CrTTrait extends Trait {
                 }
             }
 
-            CraftTweakerAPI.logCommand("Created new Trait: " + traitLocation + " With Pos: " + x + y + " With Cost: " + cost + "With requirements: " + reqBuilder);
+            CraftTweakerAPI.logInfo("Created new Trait: " + traitLocation + " -" + " With Pos: " + x + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
             return new CrTTrait(new ResourceLocation(traitLocation), x, y, new ResourceLocation(skillLocation), cost, requirements);
         }
         return null;
@@ -127,7 +127,7 @@ public class CrTTrait extends Trait {
                 }
             }
 
-            CraftTweakerAPI.logCommand("Created new Trait: " + traitLocation + " With Pos: " + x + y + " With Cost: " + cost + "With requirements: " + reqBuilder);
+            CraftTweakerAPI.logInfo("Created new Trait: " + traitLocation + " -" + " With Pos: " + x + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
             return new CrTTrait(new ResourceLocation(traitLocation), x, y, parentSkill.getRegistryName(), cost, requirements);
         }
         return null;

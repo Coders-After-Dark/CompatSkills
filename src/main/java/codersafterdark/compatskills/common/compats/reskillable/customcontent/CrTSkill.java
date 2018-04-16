@@ -28,7 +28,7 @@ public class CrTSkill extends Skill {
     @ZenMethod
     public static CrTSkill createSkill(String name, String backGroundLocation) {
         if (CheckMethods.checkString(name) & CheckMethods.checkString(backGroundLocation)) {
-            CraftTweakerAPI.logCommand("Created Skill: " + name + " - With Background: " + backGroundLocation);
+            CraftTweakerAPI.logInfo("Created Skill: " + name + " - With Background: " + backGroundLocation);
             return new CrTSkill(new ResourceLocation(CompatSkillConstants.MOD_ID, name), new ResourceLocation(backGroundLocation));
         }
         return null;
@@ -37,7 +37,7 @@ public class CrTSkill extends Skill {
     @ZenMethod
     public static CrTSkill createNewSkill(String nameLocation, String backGroundLocation) {
         if (CheckMethods.checkString(nameLocation) & CheckMethods.checkString(backGroundLocation)) {
-            CraftTweakerAPI.logCommand("Created Skill: " + nameLocation + " - With Background: " + backGroundLocation);
+            CraftTweakerAPI.logInfo("Created Skill: " + nameLocation + " - With Background: " + backGroundLocation);
             return new CrTSkill(new ResourceLocation(nameLocation), new ResourceLocation(backGroundLocation));
         }
         return null;
