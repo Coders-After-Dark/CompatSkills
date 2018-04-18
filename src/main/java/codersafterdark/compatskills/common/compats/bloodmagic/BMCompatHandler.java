@@ -1,6 +1,6 @@
 package codersafterdark.compatskills.common.compats.bloodmagic;
 
-import WayofTime.bloodmagic.core.registry.RitualRegistry;
+import WayofTime.bloodmagic.ritual.RitualRegistry;
 import codersafterdark.compatskills.common.compats.bloodmagic.BindHandler.BindHandler;
 import codersafterdark.compatskills.common.compats.bloodmagic.RitualHandler.RitualHandler;
 import crafttweaker.mc1120.commands.CTChatCommand;
@@ -22,7 +22,7 @@ public class BMCompatHandler {
         CTChatCommand.registerCommand(new RitualCommand() {
             @Override
             public List<String> getRitualNames() {
-                return new ArrayList<>(RitualRegistry.getRegistry().keySet());
+                return new ArrayList<>(RitualRegistry.getIds());
             }
         });
     }
