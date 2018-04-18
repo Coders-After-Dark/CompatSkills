@@ -1,6 +1,6 @@
 package codersafterdark.compatskills.common.compats.utils;
 
-import WayofTime.bloodmagic.core.registry.RitualRegistry;
+import WayofTime.bloodmagic.ritual.RitualRegistry;
 import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import com.cout970.magneticraft.api.MagneticraftApi;

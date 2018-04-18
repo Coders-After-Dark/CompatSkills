@@ -1,7 +1,7 @@
 package codersafterdark.compatskills.common.compats.bloodmagic.RitualHandler;
 
 import WayofTime.bloodmagic.event.RitualEvent.RitualActivatedEvent;
-import WayofTime.bloodmagic.ritual.data.Ritual;
+import WayofTime.bloodmagic.ritual.Ritual;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -28,8 +28,8 @@ public class RitualHandler {
 
     @SubscribeEvent
     public void ritualEvent(RitualActivatedEvent event) {
-        Ritual ritual = event.ritual;
-        EntityPlayer player = event.player;
+        Ritual ritual = event.getRitual();
+        EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);
         if (ritualHolder.containsKey(ritual)) {
             if (!data.matchStats(ritualHolder.get(ritual))) {
