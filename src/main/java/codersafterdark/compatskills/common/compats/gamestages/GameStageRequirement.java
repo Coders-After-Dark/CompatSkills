@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.gamestages;
 
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.requirement.Requirement;
+import codersafterdark.reskillable.api.requirement.RequirementComparision;
 import net.darkhax.gamestages.capabilities.PlayerDataHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,5 +29,11 @@ public class GameStageRequirement extends Requirement {
             color = TextFormatting.RED;
         }
         return TextFormatting.GRAY + " - " + TextFormatting.BLUE + I18n.format("compatskills.misc.gamestageFormat", color, gamestage);
+    }
+
+    @Override
+    public RequirementComparision matches(Requirement other){
+        return other instanceof GameStageRequirement && gamestage.equals(((GameStageRequirement) other).gamestage)
+                ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
     }
 }
