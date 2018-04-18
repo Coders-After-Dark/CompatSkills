@@ -4,11 +4,12 @@ import WayofTime.bloodmagic.core.registry.RitualRegistry;
 import WayofTime.bloodmagic.ritual.data.Ritual;
 import codersafterdark.compatskills.common.compats.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import crafttweaker.CraftTweakerAPI;
+import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+@ModOnly("bloodmagic")
 @ZenClass("mods.compatskills.RitualHandler")
 @ZenRegister
 public class RitualHandlerTweaker {

@@ -1,8 +1,7 @@
 package codersafterdark.compatskills.common.compats.utils;
 
 import WayofTime.bloodmagic.core.registry.RitualRegistry;
-import blusunrize.immersiveengineering.api.MultiblockHandler;
-import blusunrize.immersiveengineering.api.MultiblockHandler.IMultiblock;
+import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import com.cout970.magneticraft.api.MagneticraftApi;
 import crafttweaker.CraftTweakerAPI;
@@ -11,20 +10,20 @@ import net.minecraft.util.ResourceLocation;
 
 public class CheckMethods {
 
-    public static boolean checkIItemstack(IItemStack stack){
-        if (stack == null || stack.isEmpty()){
+    public static boolean checkIItemstack(IItemStack stack) {
+        if (stack == null || stack.isEmpty()) {
             CraftTweakerAPI.logError("Itemstack: " + stack + " was found to be either null or empty!");
             return false;
         }
         return true;
     }
 
-    public static boolean checkStringArray(String[] strings){
-        if (strings == null || strings.length == 0){
+    public static boolean checkStringArray(String[] strings) {
+        if (strings == null || strings.length == 0) {
             CraftTweakerAPI.logError("String Array 'locked' was found to have no entries!");
             return false;
-        } else for (String string : strings){
-            if (string == null || string.isEmpty()){
+        } else for (String string : strings) {
+            if (string == null || string.isEmpty()) {
                 CraftTweakerAPI.logError("String: " + string + " was found to be either null or empty!");
                 return false;
             }
@@ -40,8 +39,8 @@ public class CheckMethods {
         return true;
     }
 
-    public static boolean checkInt(int i){
-        if (i < 0){
+    public static boolean checkInt(int i) {
+        if (i < 0) {
             CraftTweakerAPI.logError("integer was found to be lower than 0, this is not allowed!");
             return false;
         }
@@ -65,57 +64,50 @@ public class CheckMethods {
     //   Traits    //
     /////////////////
 
-    public static boolean checkIntX(int x){
-        if (x < 0 || x > 4){
+    public static boolean checkIntX(int x) {
+        if (x < 0 || x > 4) {
             CraftTweakerAPI.logError("X-Pos needs to be between 0 and 4");
             return false;
         }
         return true;
     }
 
-    public static boolean checkIntY(int y){
-        if (y < 0 || y > 3){
+    public static boolean checkIntY(int y) {
+        if (y < 0 || y > 3) {
             CraftTweakerAPI.logError("Y-Pos needs to be between 0 and 3");
             return false;
         }
         return true;
     }
 
-    public static boolean checkParentSkillsString(String parent){
+    public static boolean checkParentSkillsString(String parent) {
         if (parent == null || parent.isEmpty()) {
             CraftTweakerAPI.logError("String for Parent Skill was found to be null or empty!");
             return false;
-        } else if (!ReskillableRegistries.SKILLS.containsKey(new ResourceLocation(parent))){
+        } else if (!ReskillableRegistries.SKILLS.containsKey(new ResourceLocation(parent))) {
             CraftTweakerAPI.logError("String Resource Location is not a Valid Skill!");
             return false;
         }
         return true;
     }
 
-    ////////////////////////////////
-    //   Immersive Engineering    //
-    ////////////////////////////////
-
-    public static boolean checkValidMultiblockNameIE(String multiBlock){
-        if (multiBlock == null || multiBlock.isEmpty()){
-            CraftTweakerAPI.logError("String for Multiblock Name was found to be null or empty!");
-            return false;
-        } else if (!MultiblockHandler.getMultiblocks().parallelStream().map(IMultiblock::getUniqueName).anyMatch(multiBlock::equals)){
-            CraftTweakerAPI.logError("No valid match was found for the String: " + multiBlock);
+    public static boolean checkCrTSkillParent(CrTSkill parent) {
+        if (parent == null) {
+            CraftTweakerAPI.logError("CrTSkill Parent is found to be Null!");
             return false;
         }
-        return true;
+        return checkParentSkillsString(parent.getRegistryName().toString());
     }
 
     ///////////////////////
     //   Magneticraft    //
     ///////////////////////
 
-    public static boolean checkValidMultiblockNameMag(String multiBlock){
-        if (multiBlock == null || multiBlock.isEmpty()){
+    public static boolean checkValidMultiblockNameMag(String multiBlock) {
+        if (multiBlock == null || multiBlock.isEmpty()) {
             CraftTweakerAPI.logError("String for Multiblock Name was found to be null or empty!");
             return false;
-        } else if (!MagneticraftApi.getMultiblockManager().getRegisteredMultiblocks().containsKey(multiBlock)){
+        } else if (!MagneticraftApi.getMultiblockManager().getRegisteredMultiblocks().containsKey(multiBlock)) {
             CraftTweakerAPI.logError("No valid match was found for the String: " + multiBlock);
             return false;
         }
