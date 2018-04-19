@@ -1,6 +1,7 @@
 package codersafterdark.compatskills;
 
 import codersafterdark.compatskills.common.CommonProxy;
+import codersafterdark.compatskills.common.compats.baubles.BaublesCompatHandler;
 import codersafterdark.compatskills.common.compats.bloodmagic.BMCompatHandler;
 import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
 import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
@@ -27,6 +28,12 @@ public class CompatSkills {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit(event);
+        if (Loader.isModLoaded("baubles")) {
+            BaublesCompatHandler.setup();
+        }
+        if (Loader.isModLoaded("bloodmagic")) {
+            BMCompatHandler.setup();
+        }
         if (Loader.isModLoaded("gamestages")) {
             GameStageCompatHandler.setup();
         }
@@ -35,9 +42,6 @@ public class CompatSkills {
         }
         if (Loader.isModLoaded("magneticraft")) {
             MagCompatHandler.setup();
-        }
-        if (Loader.isModLoaded("bloodmagic")) {
-            BMCompatHandler.setup();
         }
     }
 
