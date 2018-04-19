@@ -45,14 +45,4 @@ public class IEMultiBlockHandler {
             }
         }
     }
-
-//    @SubscribeEvent
-//    public void multiBlockBlockCatch(PlayerInteractEvent.RightClickBlock event){
-//        EntityPlayer player = event.getEntityPlayer();
-//        PlayerData data = PlayerDataHandler.get(player);
-//        BlockPos pos = event.getPos();
-//        World world = event.getWorld();
-//        Block block = world.getBlockState(pos).getBlock();
-//
-//    }
 }
