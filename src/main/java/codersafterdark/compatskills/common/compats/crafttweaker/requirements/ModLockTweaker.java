@@ -16,7 +16,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class ModLockTweaker {
 
     @ZenMethod
-    public static void addModLock(String modId, String... locked){
+    public static void addModLock(String modId, String... locked) {
         StringBuilder descString = new StringBuilder("Requirements: ");
 
         if (CheckMethods.checkStringArray(locked)) {
@@ -28,7 +28,7 @@ public class ModLockTweaker {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                if (CheckMethods.checkString(modId) & CheckMethods.checkModLoaded(modId) & CheckMethods.checkStringArray(locked)){
+                if (CheckMethods.checkString(modId) & CheckMethods.checkModLoaded(modId) & CheckMethods.checkStringArray(locked)) {
                     RequirementHolder holder = RequirementHolder.fromStringList(locked);
                     LevelLockHandler.addModLock(modId, holder);
                 }
