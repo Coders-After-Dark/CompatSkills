@@ -53,4 +53,8 @@ public class CTSkill {
     public int getLevelUpCost(int level) {
         return skill.getLevelUpCost(level);
     }
+
+    public Skill getSkill() {
+        return skill;
+    }
 }
