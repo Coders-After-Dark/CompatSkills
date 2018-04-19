@@ -19,7 +19,6 @@ public abstract class ActionAddMultiBlockGate implements IAction {
 
     @Override
     public void apply() {
-        String[] requirements = new String[defaultRequirements.length];
         if (Strings.isNullOrEmpty(getMultiBlockName())) {
             CraftTweakerAPI.logError("MultiBlock Name cannot be Empty");
         } else if (Strings.isNullOrEmpty(getFailureMessage())) {
