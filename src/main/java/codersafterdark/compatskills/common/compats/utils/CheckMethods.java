@@ -7,6 +7,7 @@ import com.cout970.magneticraft.api.MagneticraftApi;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.item.IItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.Loader;
 
 public class CheckMethods {
 
@@ -42,6 +43,14 @@ public class CheckMethods {
     public static boolean checkInt(int i) {
         if (i < 0) {
             CraftTweakerAPI.logError("integer was found to be lower than 0, this is not allowed!");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkModLoaded(String modid) {
+        if (!Loader.isModLoaded(modid)) {
+            CraftTweakerAPI.logError("Mod Id: " + modid + " Is not Loaded!");
             return false;
         }
         return true;
