@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class CTUnlockable {
     final Unlockable unlockable;
 
-    public CTUnlockable(Unlockable unlockable){
+    public CTUnlockable(Unlockable unlockable) {
         this.unlockable = unlockable;
     }
 
@@ -21,27 +21,27 @@ public class CTUnlockable {
         return unlockable.getParentSkill().getName();
     }
 
-    @ZenGetter ("getRequirements")
-    public String getRequirements(){
+    @ZenGetter("getRequirements")
+    public String getRequirements() {
         return Arrays.toString(unlockable.getRequirements().getRequirements().toArray());
     }
 
-    @ZenGetter ("getName")
-    public String getName(){
+    @ZenGetter("getName")
+    public String getName() {
         return unlockable.getName();
     }
 
-    @ZenGetter ("getDescription")
-    public String getDescription(){
+    @ZenGetter("getDescription")
+    public String getDescription() {
         return unlockable.getDescription();
     }
 
-    @ZenGetter ("hasSpikes")
-    public boolean hasSpikes(){
+    @ZenGetter("hasSpikes")
+    public boolean hasSpikes() {
         return unlockable.hasSpikes();
     }
 
-    @ZenGetter ("getCost")
+    @ZenGetter("getCost")
     public int getCost() {
         return unlockable.getCost();
     }

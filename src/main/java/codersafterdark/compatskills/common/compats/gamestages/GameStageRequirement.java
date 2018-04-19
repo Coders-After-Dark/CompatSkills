@@ -32,7 +32,7 @@ public class GameStageRequirement extends Requirement {
     }
 
     @Override
-    public RequirementComparision matches(Requirement other){
+    public RequirementComparision matches(Requirement other) {
         return other instanceof GameStageRequirement && gamestage.equals(((GameStageRequirement) other).gamestage)
                 ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
     }

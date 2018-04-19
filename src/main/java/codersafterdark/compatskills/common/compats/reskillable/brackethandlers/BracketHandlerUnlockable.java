@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
 
 @BracketHandler
 @ZenRegister
-public class BracketHandlerUnlockable implements IBracketHandler{
+public class BracketHandlerUnlockable implements IBracketHandler {
 
     private static final IJavaMethod method = JavaMethod.get(GlobalRegistry.getTypes(), BracketHandlerUnlockable.class, "getUnlockable", String.class);
 
-    public static CTUnlockable getUnlockable (String name){
+    public static CTUnlockable getUnlockable(String name) {
         Unlockable unlockable = ReskillableRegistries.UNLOCKABLES.getValue(new ResourceLocation(name));
         return unlockable == null ? null : new CTUnlockable(unlockable);
     }

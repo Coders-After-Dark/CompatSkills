@@ -23,10 +23,12 @@ public class CheckMethods {
         if (strings == null || strings.length == 0) {
             CraftTweakerAPI.logError("String Array 'locked' was found to have no entries!");
             return false;
-        } else for (String string : strings) {
-            if (string == null || string.isEmpty()) {
-                CraftTweakerAPI.logError("String: " + string + " was found to be either null or empty!");
-                return false;
+        } else {
+            for (String string : strings) {
+                if (string == null || string.isEmpty()) {
+                    CraftTweakerAPI.logError("String: " + string + " was found to be either null or empty!");
+                    return false;
+                }
             }
         }
         return true;

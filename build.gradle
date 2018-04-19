@@ -46,10 +46,6 @@ repositories{
         url "http://tehnut.info/maven/"
     }
     maven {
-        name = 'Matter Overdrive'
-        url "https://modmaven.k-4u.nl"
-    }
-    maven {
     	name = 'Baubles'
     	url "https://maven.thiakil.com"
     }
@@ -65,7 +61,6 @@ dependencies {
     deobfCompile "CraftTweaker2:ZenScript:1.12-${crafttweaker_version}"
     deobfCompile "codersafterdark.reskillable:Reskillable:1.12.2-1.2.0-SNAPSHOT.25"
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.2.8-91"
-    deobfCompile "matteroverdrive:MatterOverdrive:1.12.2-2.0.0.18"
     deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
     deobfCompile("blusunrize:ImmersiveEngineering:${ieVersion}") {
         exclude module: "crafttweaker"

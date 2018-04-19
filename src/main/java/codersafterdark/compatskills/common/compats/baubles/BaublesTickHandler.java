@@ -12,7 +12,7 @@ public class BaublesTickHandler {
     @SubscribeEvent
     public void tickHandler(TickEvent.PlayerTickEvent event) {
         EntityPlayer player = event.player;
-        if (!player.isCreative() && !LevelLockHandler.isFake(player)){
+        if (!player.isCreative() && !LevelLockHandler.isFake(player)) {
             for (int i = 0; i < BaublesApi.getBaublesHandler(player).getSlots(); i++) {
                 ItemStack stack = BaublesApi.getBaublesHandler(player).getStackInSlot(i);
                 if (!stack.isEmpty() && !LevelLockHandler.canPlayerUseItem(player, stack)) {
