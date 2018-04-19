@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.reskillable.bracketHandlers;
+package codersafterdark.compatskills.common.compats.reskillable.brackethandlers;
 
 
 import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTSkill;
