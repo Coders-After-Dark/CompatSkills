@@ -1,10 +1,10 @@
 package codersafterdark.compatskills.common.compats.reskillable.levellocking;
 
-import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
+import codersafterdark.reskillable.api.skill.Skill;
 
 public class ActionAddTrueLevelLock extends ActionAddLevelLock {
 
-    public ActionAddTrueLevelLock(CrTSkill skill, int level, String... defaultRequirements) {
+    public ActionAddTrueLevelLock(Skill skill, int level, String... defaultRequirements) {
         super(skill, level, defaultRequirements);
     }
 

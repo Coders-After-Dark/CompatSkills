@@ -1,26 +1,26 @@
 package codersafterdark.compatskills.common.compats.reskillable.levellocking;
 
-import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
 import codersafterdark.compatskills.common.compats.utils.CheckMethods;
+import codersafterdark.reskillable.api.skill.Skill;
 import crafttweaker.IAction;
 
 import java.util.Arrays;
 
 public abstract class ActionAddLevelLock implements IAction {
-    private final CrTSkill crTSkill;
+    private final Skill skill;
     private final int level;
     private final String[] defaultRequirements;
 
-    public ActionAddLevelLock(CrTSkill crTSkill, int level, String... defaultRequirements) {
-        this.crTSkill = crTSkill;
+    public ActionAddLevelLock(Skill skill, int level, String... defaultRequirements) {
+        this.skill = skill;
         this.level = level;
         this.defaultRequirements = defaultRequirements;
     }
 
     @Override
     public void apply() {
-        if (CheckMethods.checkCrTSkillParent(crTSkill) & CheckMethods.checkInt(level) & CheckMethods.checkStringArray(defaultRequirements)) {
-            addToHandler(new SkillLock(crTSkill, level, defaultRequirements));
+        if (CheckMethods.checkSkill(skill) & CheckMethods.checkInt(level) & CheckMethods.checkStringArray(defaultRequirements)) {
+            addToHandler(new SkillLock(skill, level, defaultRequirements));
         }
     }
 
@@ -28,11 +28,11 @@ public abstract class ActionAddLevelLock implements IAction {
 
     @Override
     public String describe() {
-        return "Added Level-Lock " + this.crTSkill + ":" + this.level + " With Requirements: " + Arrays.toString(this.defaultRequirements);
+        return "Added Level-Lock " + this.skill + ":" + this.level + " With Requirements: " + Arrays.toString(this.defaultRequirements);
     }
 
-    public CrTSkill getCrTSkill() {
-        return crTSkill;
+    public Skill getSkill() {
+        return skill;
     }
 
     public int getLevel() {

@@ -23,7 +23,7 @@ public class SkillLockHandler {
     }
 
     public void addSkillLock(SkillLock lock) {
-        Skill skill = lock.getCrTSkill();
+        Skill skill = lock.getSkill();
         int level = lock.getLevel();
         RequirementHolder requirementHolder = lock.getRequirementHolder();
 

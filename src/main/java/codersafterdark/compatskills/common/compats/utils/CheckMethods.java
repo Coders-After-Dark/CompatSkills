@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.utils;
 import WayofTime.bloodmagic.ritual.RitualRegistry;
 import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
+import codersafterdark.reskillable.api.skill.Skill;
 import com.cout970.magneticraft.api.MagneticraftApi;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.item.IItemStack;
@@ -108,6 +109,14 @@ public class CheckMethods {
             return false;
         }
         return checkParentSkillsString(parent.getRegistryName().toString());
+    }
+
+    public static boolean checkSkill(Skill skill) {
+        if (skill == null) {
+            CraftTweakerAPI.logError("Skill is found to be Null!");
+            return false;
+        }
+        return checkParentSkillsString(skill.getRegistryName().toString());
     }
 
     ///////////////////////
