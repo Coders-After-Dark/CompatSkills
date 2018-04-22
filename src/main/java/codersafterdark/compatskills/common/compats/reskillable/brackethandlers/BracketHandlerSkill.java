@@ -1,6 +1,7 @@
 package codersafterdark.compatskills.common.compats.reskillable.brackethandlers;
 
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.skill.Skill;
@@ -9,6 +10,7 @@ import crafttweaker.annotations.ZenRegister;
 import crafttweaker.zenscript.GlobalRegistry;
 import crafttweaker.zenscript.IBracketHandler;
 import net.minecraft.util.ResourceLocation;
+import org.apache.logging.log4j.Level;
 import stanhebben.zenscript.compiler.IEnvironmentGlobal;
 import stanhebben.zenscript.expression.ExpressionCallStatic;
 import stanhebben.zenscript.expression.ExpressionString;
@@ -28,6 +30,7 @@ public class BracketHandlerSkill implements IBracketHandler {
 
     public static CTSkill getSkill(String name) {
         Skill skill = ReskillableRegistries.SKILLS.getValue(new ResourceLocation(name));
+        CompatSkills.logger.log(Level.INFO, name);
         return skill == null ? null : new CTSkill(skill);
     }
 

@@ -14,7 +14,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class SkillLocksTweaker {
     @ZenMethod
     public static void addLevelLock(CTSkill skill, int level, String... defaultRequirements) {
-        if (CheckMethods.checkSkill(skill.getSkill()) & CheckMethods.checkInt(level) & CheckMethods.checkStringArray(defaultRequirements)) {
+        if (skill == null){
+            CraftTweakerAPI.logError("Skill is found to be Null!");
+        } else if (CheckMethods.checkSkill(skill.getSkill()) & CheckMethods.checkInt(level) & CheckMethods.checkStringArray(defaultRequirements)) {
             CraftTweakerAPI.apply(new ActionAddTrueLevelLock(skill.getSkill(), level, defaultRequirements));
         }
     }
