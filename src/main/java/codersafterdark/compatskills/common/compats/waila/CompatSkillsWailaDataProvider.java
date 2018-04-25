@@ -17,13 +17,16 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
     @Override
     @Nonnull
     public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
-        if (LevelLockHandler.getSkillLock(accessor.getStack()).isRealLock()){
-            RequirementHolder requirementHolder = LevelLockHandler.getSkillLock(accessor.getStack());
-            List<Requirement> requirements = requirementHolder.getRequirements();
-            EntityPlayer player = accessor.getPlayer();
-            PlayerData playerData = PlayerDataHandler.get(player);
-            for (Requirement req : requirements){
-                currenttip.add(req.getToolTip(playerData));
+        RequirementHolder holder = LevelLockHandler.getSkillLock(itemStack);
+        if (config.getConfig("compatskills.requirements")){
+            if (holder.isRealLock()){
+                List<Requirement> requirements = holder.getRequirements();
+                EntityPlayer player = accessor.getPlayer();
+                PlayerData playerData = PlayerDataHandler.get(player);
+                currenttip.add("Level Locks:");
+                for (Requirement req : requirements){
+                    currenttip.add(req.getToolTip(playerData));
+                }
             }
         }
         return currenttip;
