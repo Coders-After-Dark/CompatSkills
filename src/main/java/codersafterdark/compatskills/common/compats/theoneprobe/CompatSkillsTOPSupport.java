@@ -22,6 +22,7 @@ import java.util.function.Function;
 public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
 
     public static ITheOneProbe probe;
+
     @Nullable
     @Override
     public Void apply(ITheOneProbe iTheOneProbe) {
@@ -36,7 +37,7 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
             public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
                 ItemStack stack = data.getPickBlock();
                 RequirementHolder holder = LevelLockHandler.getSkillLock(stack);
-                if (CompatSkillsConfig.StargazerConfigs.TOP.TOPShifting){
+                if (CompatSkillsConfig.StargazerConfigs.TOP.TOPShifting) {
                     if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
                         if (holder.isRealLock()) {
                             List<Requirement> requirements = holder.getRequirements();
@@ -51,11 +52,11 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                             probeInfo.text("Press Shift to See Requirements");
                         }
                     }
-                } else if (holder.isRealLock()){
+                } else if (holder.isRealLock()) {
                     List<Requirement> requirements = holder.getRequirements();
                     PlayerData playerData = PlayerDataHandler.get(player);
                     probeInfo.text(TextFormatting.GRAY + "Level Locks:");
-                    for (Requirement req : requirements){
+                    for (Requirement req : requirements) {
                         probeInfo.text(req.getToolTip(playerData));
                     }
 

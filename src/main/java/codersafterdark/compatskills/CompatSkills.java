@@ -57,7 +57,7 @@ public class CompatSkills {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.Init(event);
-        if (Loader.isModLoaded("waila")){
+        if (Loader.isModLoaded("waila")) {
             WailaCompatHandler.setup();
         }
     }

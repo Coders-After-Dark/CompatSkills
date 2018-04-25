@@ -1,20 +1,19 @@
 package codersafterdark.compatskills.common.compats.waila;
 
 import codersafterdark.compatskills.utils.CompatSkillsConfig;
-import codersafterdark.reskillable.api.data.*;
+import codersafterdark.reskillable.api.data.PlayerData;
+import codersafterdark.reskillable.api.data.PlayerDataHandler;
+import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
-import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nonnull;
-import java.security.Key;
 import java.util.List;
 
 public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
@@ -23,15 +22,15 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
     @Nonnull
     public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         RequirementHolder holder = LevelLockHandler.getSkillLock(itemStack);
-        if (config.getConfig("compatskills.requirements")){
-            if (CompatSkillsConfig.StargazerConfigs.Hwyla.HwylaShifting){
-                if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)){
-                    if (holder.isRealLock()){
+        if (config.getConfig("compatskills.requirements")) {
+            if (CompatSkillsConfig.StargazerConfigs.Hwyla.HwylaShifting) {
+                if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+                    if (holder.isRealLock()) {
                         List<Requirement> requirements = holder.getRequirements();
                         EntityPlayer player = accessor.getPlayer();
                         PlayerData playerData = PlayerDataHandler.get(player);
                         currenttip.add("Level Locks:");
-                        for (Requirement req : requirements){
+                        for (Requirement req : requirements) {
                             currenttip.add(req.getToolTip(playerData));
                         }
                     }
@@ -40,12 +39,12 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
                         currenttip.add("Press Shift to See Requirements");
                     }
                 }
-            } else if (holder.isRealLock()){
+            } else if (holder.isRealLock()) {
                 List<Requirement> requirements = holder.getRequirements();
                 EntityPlayer player = accessor.getPlayer();
                 PlayerData playerData = PlayerDataHandler.get(player);
                 currenttip.add("Level Locks:");
-                for (Requirement req : requirements){
+                for (Requirement req : requirements) {
                     currenttip.add(req.getToolTip(playerData));
                 }
             }

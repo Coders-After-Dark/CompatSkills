@@ -5,7 +5,7 @@ import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 public class CompatSkillsConfig {
-    public static void postInit(FMLPostInitializationEvent event){
+    public static void postInit(FMLPostInitializationEvent event) {
     }
 
     @Config(modid = CompatSkillConstants.MOD_ID)
