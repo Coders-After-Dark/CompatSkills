@@ -7,6 +7,7 @@ import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHan
 import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
 import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
+import codersafterdark.compatskills.common.compats.theoneprobe.TOPCompatHandler;
 import codersafterdark.compatskills.common.compats.waila.WailaCompatHandler;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import net.minecraftforge.fml.common.Loader;
@@ -47,6 +48,9 @@ public class CompatSkills {
         }
         if (Loader.isModLoaded("reskillable")) {
             ReskillableCompatHandler.setup();
+        }
+        if (Loader.isModLoaded("theoneprobe")) {
+            TOPCompatHandler.setup();
         }
     }
 
