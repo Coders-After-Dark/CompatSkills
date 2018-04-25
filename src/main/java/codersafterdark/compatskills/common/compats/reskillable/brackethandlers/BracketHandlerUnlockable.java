@@ -35,6 +35,6 @@ public class BracketHandlerUnlockable implements IBracketHandler {
         if (list.size() <= 2 || !list.get(0).getValue().equalsIgnoreCase("unlockable")) {
             return null;
         }
-        return zenPosition -> new ExpressionCallStatic(zenPosition, iEnvironmentGlobal, method, new ExpressionString(zenPosition, list.subList(0, 2).stream().map(Token::getValue).collect(Collectors.joining())));
+        return zenPosition -> new ExpressionCallStatic(zenPosition, iEnvironmentGlobal, method, new ExpressionString(zenPosition, list.subList(1, list.size()).stream().map(Token::getValue).collect(Collectors.joining())));
     }
 }

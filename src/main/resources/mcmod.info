@@ -1,16 +1,13 @@
 [
-{
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+  {
+  "modid": "compatskills",
+  "name": "CompatSkills",
+  "description": "CompatSkills is the official compatibility add-on for Reskillable.",
+  "version": "1.2.1",
+  "mcversion": "1.12.2",
+  "url": "https://minecraft.curseforge.com/projects/compatskills",
+  "authorList": ["Lanse505"],
+  "credits": "Buuz135, Jaredlll08 and Kindlich",
+  "dependencies": ["required-after:reskillable"]
+  }
 ]

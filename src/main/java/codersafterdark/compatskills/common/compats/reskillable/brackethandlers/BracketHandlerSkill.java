@@ -40,6 +40,6 @@ public class BracketHandlerSkill implements IBracketHandler {
             return null;
         }
 
-        return zenPosition -> new ExpressionCallStatic(zenPosition, iEnvironmentGlobal, method, new ExpressionString(zenPosition, list.subList(0, 2).stream().map(Token::getValue).collect(Collectors.joining())));
+        return zenPosition -> new ExpressionCallStatic(zenPosition, iEnvironmentGlobal, method, new ExpressionString(zenPosition, list.subList(2, list.size()).stream().map(Token::getValue).collect(Collectors.joining())));
     }
 }

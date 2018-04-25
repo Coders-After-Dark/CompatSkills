@@ -28,7 +28,7 @@ public abstract class ActionAddLevelLock implements IAction {
 
     @Override
     public String describe() {
-        return "Added Level-Lock " + this.skill + ":" + this.level + " With Requirements: " + Arrays.toString(this.defaultRequirements);
+        return "Added Level-Lock " + this.skill.getName() + ":" + this.level + " With Requirements: " + Arrays.toString(this.defaultRequirements);
     }
 
     public Skill getSkill() {
