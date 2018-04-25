@@ -8,7 +8,6 @@ import codersafterdark.compatskills.common.compats.immersiveengineering.IECompat
 import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.theoneprobe.TOPCompatHandler;
-import codersafterdark.compatskills.common.compats.waila.WailaCompatHandler;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
@@ -57,9 +56,6 @@ public class CompatSkills {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.Init(event);
-        if (Loader.isModLoaded("waila")) {
-            WailaCompatHandler.setup();
-        }
     }
 
     @EventHandler
