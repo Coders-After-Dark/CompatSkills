@@ -9,6 +9,7 @@ import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -42,20 +43,20 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                         if (holder.isRealLock()) {
                             List<Requirement> requirements = holder.getRequirements();
                             PlayerData playerData = PlayerDataHandler.get(player);
-                            probeInfo.text(TextFormatting.GRAY + "Level Locks:");
+                            probeInfo.text(TextFormatting.GRAY + I18n.format("compatskills.misc.Requirements"));
                             for (Requirement req : requirements) {
                                 probeInfo.text(req.getToolTip(playerData));
                             }
                         }
                     } else {
                         if (holder.isRealLock()) {
-                            probeInfo.text("Press Shift to See Requirements");
+                            probeInfo.text(I18n.format("compatskills.misc.Hwyla.Shift"));
                         }
                     }
                 } else if (holder.isRealLock()) {
                     List<Requirement> requirements = holder.getRequirements();
                     PlayerData playerData = PlayerDataHandler.get(player);
-                    probeInfo.text(TextFormatting.GRAY + "Level Locks:");
+                    probeInfo.text(TextFormatting.GRAY + I18n.format("compatskills.misc.Requirements"));
                     for (Requirement req : requirements) {
                         probeInfo.text(req.getToolTip(playerData));
                     }

@@ -9,6 +9,7 @@ import codersafterdark.reskillable.base.LevelLockHandler;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.input.Keyboard;
@@ -29,21 +30,21 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
                         List<Requirement> requirements = holder.getRequirements();
                         EntityPlayer player = accessor.getPlayer();
                         PlayerData playerData = PlayerDataHandler.get(player);
-                        currenttip.add("Level Locks:");
+                        currenttip.add(I18n.format("compatskills.misc.Requirements"));
                         for (Requirement req : requirements) {
                             currenttip.add(req.getToolTip(playerData));
                         }
                     }
                 } else {
                     if (holder.isRealLock()) {
-                        currenttip.add("Press Shift to See Requirements");
+                        currenttip.add(I18n.format("compatskills.misc.Shift"));
                     }
                 }
             } else if (holder.isRealLock()) {
                 List<Requirement> requirements = holder.getRequirements();
                 EntityPlayer player = accessor.getPlayer();
                 PlayerData playerData = PlayerDataHandler.get(player);
-                currenttip.add("Level Locks:");
+                currenttip.add(I18n.format("compatskills.misc.Requirements"));
                 for (Requirement req : requirements) {
                     currenttip.add(req.getToolTip(playerData));
                 }
