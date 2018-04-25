@@ -1,6 +1,7 @@
 package codersafterdark.compatskills.common.compats.theoneprobe;
 
 import codersafterdark.compatskills.utils.CompatSkillConstants;
+import codersafterdark.compatskills.utils.CompatSkillsConfig;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -12,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -34,7 +36,22 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
             public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
                 ItemStack stack = data.getPickBlock();
                 RequirementHolder holder = LevelLockHandler.getSkillLock(stack);
-                if (holder.isRealLock()){
+                if (CompatSkillsConfig.StargazerConfigs.TOP.TOPShifting){
+                    if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+                        if (holder.isRealLock()) {
+                            List<Requirement> requirements = holder.getRequirements();
+                            PlayerData playerData = PlayerDataHandler.get(player);
+                            probeInfo.text(TextFormatting.GRAY + "Level Locks:");
+                            for (Requirement req : requirements) {
+                                probeInfo.text(req.getToolTip(playerData));
+                            }
+                        }
+                    } else {
+                        if (holder.isRealLock()) {
+                            probeInfo.text("Press Shift to See Requirements");
+                        }
+                    }
+                } else if (holder.isRealLock()){
                     List<Requirement> requirements = holder.getRequirements();
                     PlayerData playerData = PlayerDataHandler.get(player);
                     probeInfo.text(TextFormatting.GRAY + "Level Locks:");

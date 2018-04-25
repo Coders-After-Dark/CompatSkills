@@ -1,15 +1,20 @@
 package codersafterdark.compatskills.common.compats.waila;
 
+import codersafterdark.compatskills.utils.CompatSkillsConfig;
 import codersafterdark.reskillable.api.data.*;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import mcp.mobius.waila.api.IWailaDataProvider;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.event.GuiScreenEvent;
+import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nonnull;
+import java.security.Key;
 import java.util.List;
 
 public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
@@ -19,7 +24,23 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
     public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         RequirementHolder holder = LevelLockHandler.getSkillLock(itemStack);
         if (config.getConfig("compatskills.requirements")){
-            if (holder.isRealLock()){
+            if (CompatSkillsConfig.StargazerConfigs.Hwyla.HwylaShifting){
+                if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)){
+                    if (holder.isRealLock()){
+                        List<Requirement> requirements = holder.getRequirements();
+                        EntityPlayer player = accessor.getPlayer();
+                        PlayerData playerData = PlayerDataHandler.get(player);
+                        currenttip.add("Level Locks:");
+                        for (Requirement req : requirements){
+                            currenttip.add(req.getToolTip(playerData));
+                        }
+                    }
+                } else {
+                    if (holder.isRealLock()) {
+                        currenttip.add("Press Shift to See Requirements");
+                    }
+                }
+            } else if (holder.isRealLock()){
                 List<Requirement> requirements = holder.getRequirements();
                 EntityPlayer player = accessor.getPlayer();
                 PlayerData playerData = PlayerDataHandler.get(player);
