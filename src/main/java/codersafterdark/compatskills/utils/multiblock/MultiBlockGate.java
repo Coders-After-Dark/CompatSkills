@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.utils;
+package codersafterdark.compatskills.utils.multiblock;
 
 import codersafterdark.reskillable.api.data.RequirementHolder;
 

@@ -1,6 +1,6 @@
 package codersafterdark.compatskills.common.compats.magneticraft.handlers;
 
-import codersafterdark.compatskills.utils.MultiBlockGate;
+import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.requirement.Requirement;

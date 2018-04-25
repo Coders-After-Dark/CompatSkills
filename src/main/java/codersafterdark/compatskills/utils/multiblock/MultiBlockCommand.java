@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.utils;
+package codersafterdark.compatskills.utils.multiblock;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.commands.CraftTweakerCommand;

@@ -1,5 +1,6 @@
-package codersafterdark.compatskills.utils;
+package codersafterdark.compatskills.utils.multiblock;
 
+import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 import com.google.common.base.Strings;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
