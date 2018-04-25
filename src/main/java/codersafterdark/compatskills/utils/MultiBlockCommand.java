@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.utils;
+package codersafterdark.compatskills.utils;
 
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.commands.CraftTweakerCommand;

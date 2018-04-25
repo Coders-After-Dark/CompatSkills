@@ -1,6 +1,6 @@
 package codersafterdark.compatskills.common.compats.reskillable.levellocking;
 
-import codersafterdark.compatskills.common.compats.utils.CheckMethods;
+import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.skill.Skill;
 import crafttweaker.IAction;
 

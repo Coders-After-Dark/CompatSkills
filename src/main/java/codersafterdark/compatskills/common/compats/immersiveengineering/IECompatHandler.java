@@ -2,8 +2,8 @@ package codersafterdark.compatskills.common.compats.immersiveengineering;
 
 import blusunrize.immersiveengineering.api.MultiblockHandler;
 import codersafterdark.compatskills.common.compats.immersiveengineering.handlers.IEMultiBlockHandler;
-import codersafterdark.compatskills.common.compats.utils.MultiBlockCommand;
-import codersafterdark.compatskills.common.compats.utils.MultiBlockGate;
+import codersafterdark.compatskills.utils.MultiBlockCommand;
+import codersafterdark.compatskills.utils.MultiBlockGate;
 import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraftforge.common.MinecraftForge;
 

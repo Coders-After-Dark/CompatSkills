@@ -1,8 +1,8 @@
 package codersafterdark.compatskills.common.compats.immersiveengineering.handlers;
 
 import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
-import codersafterdark.compatskills.common.compats.utils.ActionAddMultiBlockGate;
-import codersafterdark.compatskills.common.compats.utils.MultiBlockGate;
+import codersafterdark.compatskills.utils.ActionAddMultiBlockGate;
+import codersafterdark.compatskills.utils.MultiBlockGate;
 
 public class ActionAddIEMultiBlockGate extends ActionAddMultiBlockGate {
 

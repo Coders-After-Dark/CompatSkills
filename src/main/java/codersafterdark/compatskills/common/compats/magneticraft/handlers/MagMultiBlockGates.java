@@ -1,6 +1,6 @@
 package codersafterdark.compatskills.common.compats.magneticraft.handlers;
 
-import codersafterdark.compatskills.common.compats.utils.CheckMethods;
+import codersafterdark.compatskills.utils.CheckMethods;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;

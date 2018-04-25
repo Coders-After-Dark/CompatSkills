@@ -2,7 +2,7 @@ package codersafterdark.compatskills.common.compats.immersiveengineering.handler
 
 import blusunrize.immersiveengineering.api.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.MultiblockHandler.MultiblockFormEvent;
-import codersafterdark.compatskills.common.compats.utils.MultiBlockGate;
+import codersafterdark.compatskills.utils.MultiBlockGate;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import com.google.common.collect.Maps;

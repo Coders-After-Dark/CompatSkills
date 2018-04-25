@@ -1,8 +1,8 @@
 package codersafterdark.compatskills.common.compats.magneticraft.handlers;
 
 import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
-import codersafterdark.compatskills.common.compats.utils.ActionAddMultiBlockGate;
-import codersafterdark.compatskills.common.compats.utils.MultiBlockGate;
+import codersafterdark.compatskills.utils.ActionAddMultiBlockGate;
+import codersafterdark.compatskills.utils.MultiBlockGate;
 
 public class ActionAddMagMultiBlockGate extends ActionAddMultiBlockGate {
 

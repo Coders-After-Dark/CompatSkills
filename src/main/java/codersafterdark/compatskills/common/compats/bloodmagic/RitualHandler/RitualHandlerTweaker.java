@@ -2,7 +2,7 @@ package codersafterdark.compatskills.common.compats.bloodmagic.RitualHandler;
 
 import WayofTime.bloodmagic.ritual.Ritual;
 import WayofTime.bloodmagic.ritual.RitualRegistry;
-import codersafterdark.compatskills.common.compats.utils.CheckMethods;
+import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;

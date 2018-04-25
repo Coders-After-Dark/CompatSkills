@@ -1,6 +1,6 @@
 package codersafterdark.compatskills.common.compats.gamestages;
 
-import codersafterdark.compatskills.common.compats.utils.CheckMethods;
+import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ModOnly;

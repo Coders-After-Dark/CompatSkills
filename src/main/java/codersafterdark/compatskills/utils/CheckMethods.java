@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.utils;
+package codersafterdark.compatskills.utils;
 
 import WayofTime.bloodmagic.ritual.RitualRegistry;
 import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;

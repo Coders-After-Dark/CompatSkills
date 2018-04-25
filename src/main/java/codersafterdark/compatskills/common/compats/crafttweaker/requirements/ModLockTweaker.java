@@ -1,6 +1,6 @@
 package codersafterdark.compatskills.common.compats.crafttweaker.requirements;
 
-import codersafterdark.compatskills.common.compats.utils.CheckMethods;
+import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.CraftTweakerAPI;
