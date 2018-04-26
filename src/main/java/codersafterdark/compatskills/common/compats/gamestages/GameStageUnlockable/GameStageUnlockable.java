@@ -6,6 +6,7 @@ import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.apache.logging.log4j.Level;
 
@@ -24,6 +25,7 @@ public class GameStageUnlockable extends Unlockable {
         MinecraftServer server = player.getServer();
         if (server != null) {
             GameStageHelper.addStage(player, gameStage);
+            player.sendStatusMessage(new TextComponentString("Unlocked GameStage: " + gameStage), true);
         } else {
             CompatSkills.logger.log(Level.ERROR, "WHY IS THE SERVER NULL!?");
         }
