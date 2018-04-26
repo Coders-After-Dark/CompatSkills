@@ -8,7 +8,15 @@ import codersafterdark.compatskills.common.compats.immersiveengineering.IECompat
 import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.theoneprobe.TOPCompatHandler;
+import codersafterdark.compatskills.common.invertedrequirements.InvertedAdvancement;
+import codersafterdark.compatskills.common.invertedrequirements.InvertedGameStage;
+import codersafterdark.compatskills.common.invertedrequirements.InvertedSkill;
+import codersafterdark.compatskills.common.invertedrequirements.InvertedTrait;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
+import codersafterdark.reskillable.api.ReskillableAPI;
+import codersafterdark.reskillable.api.ReskillableRegistries;
+import codersafterdark.reskillable.api.requirement.RequirementRegistry;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -30,6 +38,7 @@ public class CompatSkills {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit(event);
+
         if (Loader.isModLoaded("baubles")) {
             BaublesCompatHandler.setup();
         }

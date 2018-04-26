@@ -1,7 +1,8 @@
-package codersafterdark.compatskills.common.compats.gamestages;
+package codersafterdark.compatskills.common.compats.gamestages.GameStageUnlockable;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.reskillable.api.unlockable.Unlockable;
+import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
@@ -22,7 +23,7 @@ public class GameStageUnlockable extends Unlockable {
     public void onUnlock(EntityPlayer player) {
         MinecraftServer server = player.getServer();
         if (server != null) {
-            FMLCommonHandler.instance().getMinecraftServerInstance().commandManager.executeCommand(server, "gamestage add " + player.getName() + " " + gameStage);
+            GameStageHelper.addStage(player, gameStage);
         } else {
             CompatSkills.logger.log(Level.ERROR, "WHY IS THE SERVER NULL!?");
         }

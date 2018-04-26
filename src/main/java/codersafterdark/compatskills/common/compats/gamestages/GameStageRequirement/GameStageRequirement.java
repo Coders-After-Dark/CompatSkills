@@ -1,9 +1,9 @@
-package codersafterdark.compatskills.common.compats.gamestages;
+package codersafterdark.compatskills.common.compats.gamestages.GameStageRequirement;
 
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
-import net.darkhax.gamestages.capabilities.PlayerDataHandler;
+import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextFormatting;
@@ -16,17 +16,17 @@ public class GameStageRequirement extends Requirement {
     }
 
     @Override
-    public boolean achievedByPlayer(EntityPlayer entityPlayerMP) {
-        PlayerDataHandler.IStageData data = PlayerDataHandler.getStageData(entityPlayerMP);
-        return data.hasUnlockedStage(gamestage);
+    public boolean achievedByPlayer(EntityPlayer entityPlayer) {
+        return GameStageHelper.hasStage(entityPlayer, gamestage);
     }
 
     @Override
     public String getToolTip(PlayerData playerData) {
-        PlayerDataHandler.IStageData data = PlayerDataHandler.getStageData(playerData.playerWR.get());
         TextFormatting color = TextFormatting.GREEN;
-        if (!data.hasUnlockedStage(gamestage)) {
-            color = TextFormatting.RED;
+        if (playerData.playerWR.get() != null){
+            if (!GameStageHelper.hasStage(playerData.playerWR.get(), gamestage)) {
+                color = TextFormatting.RED;
+            }
         }
         return TextFormatting.GRAY + " - " + TextFormatting.BLUE + I18n.format("compatskills.misc.gamestageFormat", color, gamestage);
     }

@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.reskillable.levellocking;
 
+import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.reskillable.api.skill.Skill;
 
 public class ActionAddTrueLevelLock extends ActionAddLevelLock {
@@ -10,6 +11,6 @@ public class ActionAddTrueLevelLock extends ActionAddLevelLock {
 
     @Override
     public void addToHandler(SkillLock lock) {
-
+        ReskillableCompatHandler.addLevelLock(lock);
     }
 }
