@@ -36,11 +36,11 @@ public class GameStageLockHandler {
                 event.setCanceled(true);
                 String error = I18n.format("compatskills.gamestage.addError");
                 List<Requirement> requirements = gameStageLockMap.get(eventGameStage).getRequirements();
-                StringBuilder reqString = new StringBuilder("Requirements: ");
+                StringBuilder reqString = new StringBuilder(I18n.format("compatskills.misc.Requirements"));
                 for (Requirement requirement : requirements){
                     reqString.append("\n ").append(requirement.getToolTip(data)).append(" ");
                 }
-                ITextComponent textComponent = new TextComponentString(error + reqString);
+                ITextComponent textComponent = new TextComponentString(error + " " + reqString);
                 player.sendStatusMessage(textComponent, false);
             }
         }

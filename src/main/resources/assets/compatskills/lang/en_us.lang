@@ -7,3 +7,8 @@ compatskills.misc.requirements.invertedAchievementFormat=!Advancement: %s
 compatskills.misc.requirements.invertedGamestageFormat=!GameStage: %s%s
 compatskills.misc.requirements.invertedSkillFormat=!%s%s: %s%d
 compatskills.misc.requirements.invertedTraitFormat=!Trait: %s%s
+
+compatskills.gamestage.addError=Requirements for unlocking this Stage aren't met!
+
+compatskills.reskillable.addLevelLockError=To acquire this level:
+compatskills.reskillable.addLevelLockError2=Please fulfill the following requirements!

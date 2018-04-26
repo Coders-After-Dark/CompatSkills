@@ -7,6 +7,7 @@ import codersafterdark.reskillable.api.event.LevelUpEvent;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.skill.Skill;
 import com.google.common.collect.Maps;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -45,14 +46,14 @@ public class SkillLockHandler {
             if (lockMap.containsKey(level)) {
                 if (!data.matchStats(lockMap.get(level))) {
                     event.setCanceled(true);
-                    String error = "To acquire this level:";
-                    String error2 = "\n Please fulfill the following requirements!";
+                    String error = I18n.format("compatskills.reskillable.addLevelLockError");
+                    String error2 = I18n.format("compatskills.reskillable.addLevelLockError2");
                     List<Requirement> requirements = lockMap.get(level).getRequirements();
-                    StringBuilder reqString = new StringBuilder("Requirements: ");
+                    StringBuilder reqString = new StringBuilder(I18n.format("compatskills.misc.Requirements"));
                     for (Requirement requirement : requirements) {
                         reqString.append("\n ").append(requirement.getToolTip(data)).append(" ");
                     }
-                    ITextComponent textComponent = new TextComponentString(error + error2 + reqString);
+                    ITextComponent textComponent = new TextComponentString(error + "\n" + error2 + "\n" + reqString);
                     player.sendStatusMessage(textComponent, false);
                 }
             }
