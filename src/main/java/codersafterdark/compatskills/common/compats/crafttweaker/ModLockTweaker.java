@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.crafttweaker.requirements;
+package codersafterdark.compatskills.common.compats.crafttweaker;
 
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
