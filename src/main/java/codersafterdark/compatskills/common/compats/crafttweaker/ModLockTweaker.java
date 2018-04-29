@@ -17,27 +17,25 @@ public class ModLockTweaker {
 
     @ZenMethod
     public static void addModLock(String modId, String... locked) {
-        StringBuilder descString = new StringBuilder("Requirements: ");
+        if (CheckMethods.checkString(modId) && CheckMethods.checkModLoaded(modId) && CheckMethods.checkStringArray(locked)) {
+            StringBuilder descString = new StringBuilder("Requirements: ");
 
-        if (CheckMethods.checkStringArray(locked)) {
             for (String string : locked) {
                 descString.append(string).append(", ");
             }
-        }
 
-        CraftTweakerAPI.apply(new IAction() {
-            @Override
-            public void apply() {
-                if (CheckMethods.checkString(modId) && CheckMethods.checkModLoaded(modId) && CheckMethods.checkStringArray(locked)) {
+            CraftTweakerAPI.apply(new IAction() {
+                @Override
+                public void apply() {
                     RequirementHolder holder = RequirementHolder.fromStringList(locked);
                     LevelLockHandler.addModLock(modId, holder);
                 }
-            }
 
-            @Override
-            public String describe() {
-                return "Setting the requirement of Mod: " + modId + " to: " + descString;
-            }
-        });
+                @Override
+                public String describe() {
+                    return "Setting the requirement of Mod: " + modId + " to: " + descString;
+                }
+            });
+        }
     }
 }

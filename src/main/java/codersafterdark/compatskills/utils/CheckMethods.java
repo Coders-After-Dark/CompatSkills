@@ -6,6 +6,8 @@ import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.skill.Skill;
 import com.cout970.magneticraft.api.MagneticraftApi;
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.api.data.DataMap;
+import crafttweaker.api.data.IData;
 import crafttweaker.api.item.IItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
@@ -54,6 +56,16 @@ public class CheckMethods {
     public static boolean checkModLoaded(String modid) {
         if (!Loader.isModLoaded(modid)) {
             CraftTweakerAPI.logError("Mod Id: " + modid + " Is not Loaded!");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkValidNBTTagCompound(IData tag) {
+        if (!(tag instanceof DataMap)) {
+            if (tag != null) {
+                CraftTweakerAPI.logError("Invalid NBT Tag: " + tag.asString());
+            }
             return false;
         }
         return true;

@@ -17,27 +17,25 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class SkillLocksTweaker {
     @ZenMethod
     public static void addLevelLock(CTSkill skill, int level, String... defaultRequirements) {
-        StringBuilder descString = new StringBuilder("Requirements: ");
+        if (CheckMethods.checkSkill(skill.getSkill()) && CheckMethods.checkInt(level) && CheckMethods.checkStringArray(defaultRequirements)) {
+            StringBuilder descString = new StringBuilder("Requirements: ");
 
-        if (CheckMethods.checkStringArray(defaultRequirements)) {
             for (String string : defaultRequirements) {
                 descString.append(string).append(", ");
             }
-        }
 
-        CraftTweakerAPI.apply(new IAction() {
-            @Override
-            public void apply() {
-                if (CheckMethods.checkSkill(skill.getSkill()) && CheckMethods.checkInt(level) && CheckMethods.checkStringArray(defaultRequirements)) {
+            CraftTweakerAPI.apply(new IAction() {
+                @Override
+                public void apply() {
                     RequirementHolder holder = RequirementHolder.fromStringList(defaultRequirements);
                     LevelLockHandler.addLockByKey(new SkillLock(skill.getSkill(), level), holder);
                 }
-            }
 
-            @Override
-            public String describe() {
-                return "Added Level-Lock " + skill.getName() + ": " + level + " With Requirements: " + descString;
-            }
-        });
+                @Override
+                public String describe() {
+                    return "Added Level-Lock " + skill.getName() + ": " + level + " With Requirements: " + descString;
+                }
+            });
+        }
     }
 }
