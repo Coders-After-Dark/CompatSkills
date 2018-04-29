@@ -19,12 +19,11 @@ public class RitualHandlerTweaker {
     @ZenMethod
     public static void addRitualLock(String failureMessage, String ritual, String... requirements) {
         if (CheckMethods.checkString(failureMessage) && CheckMethods.checkRitual(ritual) && CheckMethods.checkStringArray(requirements)) {
-            RequirementHolder holder = RequirementHolder.fromStringList(requirements);
             Ritual trueRitual = RitualRegistry.getRegistry().get(ritual);
             if (trueRitual != null) {
                 RitualLockKey ritualKey = new RitualLockKey(trueRitual);
                 MessageStorage.setFailureMessage(ritualKey, failureMessage);
-                LevelLockHandler.addLockByKey(ritualKey, holder);
+                LevelLockHandler.addLockByKey(ritualKey, RequirementHolder.fromStringList(requirements));
             }
         }
     }
