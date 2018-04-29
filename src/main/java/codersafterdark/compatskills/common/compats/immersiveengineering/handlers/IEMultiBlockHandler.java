@@ -2,41 +2,31 @@ package codersafterdark.compatskills.common.compats.immersiveengineering.handler
 
 import blusunrize.immersiveengineering.api.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.MultiblockHandler.MultiblockFormEvent;
+import codersafterdark.compatskills.utils.MessageStorage;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
-import com.google.common.collect.Maps;
+import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.Map;
-
 public class IEMultiBlockHandler {
-    private Map<String, MultiBlockGate> multiBlockGates;
-
-    public IEMultiBlockHandler() {
-        multiBlockGates = Maps.newHashMap();
-    }
-
-    public void addMultiBlockGate(MultiBlockGate multiBlockGate) {
-        multiBlockGates.put(multiBlockGate.getMultiBlockName(), multiBlockGate);
-    }
-
     @SubscribeEvent
     public void multiBlockForm(MultiblockFormEvent event) {
         IMultiblock multiblock = event.getMultiblock();
         EntityPlayer player = event.getEntityPlayer();
         PlayerData data = PlayerDataHandler.get(player);
         String name = multiblock.getUniqueName();
-        if (multiBlockGates.containsKey(name)) {
-            MultiBlockGate gate = multiBlockGates.get(name);
-            if (!data.matchStats(gate.getRequirementHolder())) {
-                event.setCanceled(true);
-                String fail = gate.getFailureMessage();
-                if (player.getEntityWorld().isRemote) {
-                    player.sendStatusMessage(new TextComponentString(fail), true);
-                }
+
+        MultiBlockGate gate = new MultiBlockGate(name);
+
+        RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(gate);
+        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+            event.setCanceled(true);
+            if (player.getEntityWorld().isRemote) {
+                player.sendStatusMessage(new TextComponentString(MessageStorage.getFailureMessage(gate)), true);
             }
         }
     }

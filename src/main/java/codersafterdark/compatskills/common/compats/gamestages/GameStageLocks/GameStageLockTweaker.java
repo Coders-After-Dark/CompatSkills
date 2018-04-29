@@ -16,27 +16,25 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class GameStageLockTweaker {
     @ZenMethod
     public static void addGameStageLock(String gamestage, String... defaultRequirements) {
-        StringBuilder descString = new StringBuilder("Requirements: ");
+        if (CheckMethods.checkString(gamestage) && CheckMethods.checkStringArray(defaultRequirements)) {
+            StringBuilder descString = new StringBuilder("Requirements: ");
 
-        if (CheckMethods.checkStringArray(defaultRequirements)) {
             for (String string : defaultRequirements) {
                 descString.append(string).append(", ");
             }
-        }
 
-        CraftTweakerAPI.apply(new IAction() {
-            @Override
-            public void apply() {
-                if (CheckMethods.checkString(gamestage) && CheckMethods.checkStringArray(defaultRequirements)) {
+            CraftTweakerAPI.apply(new IAction() {
+                @Override
+                public void apply() {
                     RequirementHolder holder = RequirementHolder.fromStringList(defaultRequirements);
                     LevelLockHandler.addLockByKey(new GameStageLock(gamestage), holder);
                 }
-            }
 
-            @Override
-            public String describe() {
-                return "Added GameStage Lock: " + gamestage + ", With Requirements: " + descString;
-            }
-        });
+                @Override
+                public String describe() {
+                    return "Added GameStage Lock: " + gamestage + ", With Requirements: " + descString;
+                }
+            });
+        }
     }
 }

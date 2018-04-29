@@ -24,19 +24,17 @@ public class SkillLockHandler {
         Skill skill = event.getSkill();
         int level = event.getLevel();
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new SkillLock(skill, level));
-        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK)) {
-            if (!data.matchStats(requirementHolder)) {
-                event.setCanceled(true);
-                String error = I18n.format("compatskills.reskillable.addLevelLockError");
-                String error2 = I18n.format("compatskills.reskillable.addLevelLockError2");
-                List<Requirement> requirements = requirementHolder.getRequirements();
-                StringBuilder reqString = new StringBuilder(I18n.format("compatskills.misc.Requirements"));
-                for (Requirement requirement : requirements) {
-                    reqString.append("\n ").append(requirement.getToolTip(data)).append(" ");
-                }
-                ITextComponent textComponent = new TextComponentString(error + "\n" + error2 + "\n" + reqString);
-                player.sendStatusMessage(textComponent, false);
+        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+            event.setCanceled(true);
+            String error = I18n.format("compatskills.reskillable.addLevelLockError");
+            String error2 = I18n.format("compatskills.reskillable.addLevelLockError2");
+            List<Requirement> requirements = requirementHolder.getRequirements();
+            StringBuilder reqString = new StringBuilder(I18n.format("compatskills.misc.Requirements"));
+            for (Requirement requirement : requirements) {
+                reqString.append("\n ").append(requirement.getToolTip(data)).append(" ");
             }
+            ITextComponent textComponent = new TextComponentString(error + "\n" + error2 + "\n" + reqString);
+            player.sendStatusMessage(textComponent, false);
         }
     }
 }

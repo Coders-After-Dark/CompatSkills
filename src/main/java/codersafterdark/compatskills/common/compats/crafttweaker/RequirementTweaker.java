@@ -20,28 +20,26 @@ public class RequirementTweaker {
 
     @ZenMethod
     public static void addRequirement(IItemStack item, String... locked) {
-        StringBuilder descString = new StringBuilder("Requirements: ");
+        if (CheckMethods.checkIItemstack(item) && CheckMethods.checkStringArray(locked)) {
+            StringBuilder descString = new StringBuilder("Requirements: ");
 
-        if (CheckMethods.checkStringArray(locked)) {
             for (String string : locked) {
                 descString.append(string).append(", ");
             }
-        }
 
-        CraftTweakerAPI.apply(new IAction() {
-            @Override
-            public void apply() {
-                if (CheckMethods.checkIItemstack(item) && CheckMethods.checkStringArray(locked)) {
+            CraftTweakerAPI.apply(new IAction() {
+                @Override
+                public void apply() {
                     ItemStack i = CraftTweakerMC.getItemStack(item);
                     RequirementHolder h = RequirementHolder.fromStringList(locked);
                     LevelLockHandler.addLock(i, h);
                 }
-            }
 
-            @Override
-            public String describe() {
-                return "Setting the requirement of: " + item + " to: " + descString;
-            }
-        });
+                @Override
+                public String describe() {
+                    return "Setting the requirement of: " + item + " to: " + descString;
+                }
+            });
+        }
     }
 }

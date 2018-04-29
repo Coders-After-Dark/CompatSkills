@@ -1,27 +1,26 @@
 package codersafterdark.compatskills.utils.multiblock;
 
-import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.compatskills.common.compats.gamestages.GameStageLocks.GameStageLock;
+import codersafterdark.reskillable.api.data.LockKey;
 
-public class MultiBlockGate {
+public class MultiBlockGate implements LockKey {//TODO add an IE and Mag version?
     private final String multiBlockName;
-    private final String failureMessage;
-    private final RequirementHolder requirementHolder;
 
-    public MultiBlockGate(String multiBlockName, String failureMessage, String... defaultRequirements) {
+    public MultiBlockGate(String multiBlockName) {
         this.multiBlockName = multiBlockName;
-        this.failureMessage = failureMessage;
-        this.requirementHolder = RequirementHolder.fromStringList(defaultRequirements);
     }
 
     public String getMultiBlockName() {
         return multiBlockName;
     }
 
-    public String getFailureMessage() {
-        return failureMessage;
+    @Override
+    public boolean equals(Object o) {
+        return o == this || o instanceof MultiBlockGate && multiBlockName.equals(((MultiBlockGate) o).multiBlockName);
     }
 
-    public RequirementHolder getRequirementHolder() {
-        return requirementHolder;
+    @Override
+    public int hashCode() {
+        return multiBlockName.hashCode();
     }
 }
