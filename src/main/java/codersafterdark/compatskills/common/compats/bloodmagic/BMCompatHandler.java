@@ -1,7 +1,6 @@
 package codersafterdark.compatskills.common.compats.bloodmagic;
 
 import WayofTime.bloodmagic.ritual.RitualRegistry;
-import codersafterdark.compatskills.common.compats.bloodmagic.BindHandler.BindHandler;
 import codersafterdark.compatskills.common.compats.bloodmagic.RitualHandler.RitualHandler;
 import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraftforge.common.MinecraftForge;

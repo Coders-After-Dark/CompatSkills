@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.immersiveengineering.handlers;
+package codersafterdark.compatskills.common.compats.immersiveengineering;
 
 import blusunrize.immersiveengineering.api.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.MultiblockHandler.MultiblockFormEvent;
@@ -18,10 +18,7 @@ public class IEMultiBlockHandler {
         IMultiblock multiblock = event.getMultiblock();
         EntityPlayer player = event.getEntityPlayer();
         PlayerData data = PlayerDataHandler.get(player);
-        String name = multiblock.getUniqueName();
-
-        MultiBlockGate gate = new MultiBlockGate(name);
-
+        MultiBlockGate gate = new IEMultiBlockGate(multiblock.getUniqueName());
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(gate);
         if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);

@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.magneticraft.handlers;
+package codersafterdark.compatskills.common.compats.magneticraft;
 
 import codersafterdark.compatskills.utils.MessageStorage;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
@@ -21,10 +21,7 @@ public class MagMultiBlockHandler {
         IMultiblock multiblock = event.getMultiblock();
         EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);
-        String name = multiblock.getMultiblockName();
-
-        MultiBlockGate gate = new MultiBlockGate(name);
-
+        MultiBlockGate gate = new MagMultiBlockGate(multiblock.getMultiblockName());
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(gate);
         if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             List<Requirement> requirements = requirementHolder.getRequirements();

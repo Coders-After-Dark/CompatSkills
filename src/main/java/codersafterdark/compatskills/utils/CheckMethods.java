@@ -66,8 +66,8 @@ public class CheckMethods {
         if (ritual == null || ritual.isEmpty()) {
             CraftTweakerAPI.logError("String Ritual was Null or Empty!");
             return false;
-        } else if (!RitualRegistry.getRegistry().containsKey(ritual)) {
-            CraftTweakerAPI.logError("Invalid Ritual String!");
+        } else if (!RitualRegistry.ritualEnabled(ritual)) {
+            CraftTweakerAPI.logError("Invalid or Disabled Ritual String!");
         }
         return true;
     }
