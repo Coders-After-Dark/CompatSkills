@@ -5,7 +5,6 @@ import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
-import codersafterdark.reskillable.api.requirement.TraitRequirement;
 import codersafterdark.reskillable.api.skill.Skill;
 import codersafterdark.reskillable.api.unlockable.Unlockable;
 import net.minecraft.client.resources.I18n;
@@ -54,7 +53,7 @@ public class InvertedTrait extends Requirement {
 
     @Override
     public RequirementComparision matches(Requirement other) {
-        if (other instanceof TraitRequirement) {
+        if (other instanceof InvertedTrait) {
             InvertedTrait invertedTrait = (InvertedTrait) other;
             if (getUnlockable() == null) {
                 return invertedTrait.getUnlockable() == null ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;

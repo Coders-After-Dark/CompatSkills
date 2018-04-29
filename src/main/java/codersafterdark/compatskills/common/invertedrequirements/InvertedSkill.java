@@ -40,7 +40,20 @@ public class InvertedSkill extends Requirement{
 
     @Override
     public RequirementComparision matches(Requirement other) {
-        return other instanceof InvertedSkill && skill.equals(((InvertedSkill) other).skill)
-                ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
+        if (other instanceof InvertedSkill) {
+            InvertedSkill skillRequirement = (InvertedSkill) other;
+            if (skill == null || skillRequirement.skill == null) {
+                //If they are both invalid don't bother checking the level.
+                return RequirementComparision.NOT_EQUAL;
+            }
+            if (skill.getKey().equals(skillRequirement.skill.getKey())) {
+                if (level == skillRequirement.level) {
+                    return RequirementComparision.EQUAL_TO;
+                }
+                //Greater than means it is the "more restrictive" one which we want to be smaller
+                return level < skillRequirement.level ? RequirementComparision.GREATER_THAN : RequirementComparision.LESS_THAN;
+            }
+        }
+        return RequirementComparision.NOT_EQUAL;
     }
 }
