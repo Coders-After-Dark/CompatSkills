@@ -36,7 +36,7 @@ public class NBTLockTweaker {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                if (CheckMethods.checkString(modId) & CheckMethods.checkModLoaded(modId) & tag != null & tag instanceof DataMap & CheckMethods.checkStringArray(locked)) {
+                if (CheckMethods.checkString(modId) & CheckMethods.checkModLoaded(modId) & tag instanceof DataMap & CheckMethods.checkStringArray(locked)) {
                     RequirementHolder holder = RequirementHolder.fromStringList(locked);
                     LevelLockHandler.addLockByKey(new ModLockKey(modId, (NBTTagCompound) NBTConverter.from(tag)), holder);
                 }
@@ -44,7 +44,7 @@ public class NBTLockTweaker {
 
             @Override
             public String describe() {
-                return "Adding NBT lock: " + tag.asString() + " for Mod: " + modId + " to: " + descString;
+                return "Adding NBT lock: " + (!(tag instanceof DataMap) ? "invalid" : tag.asString()) + " for Mod: " + modId + " to: " + descString;
             }
         });
     }
@@ -62,7 +62,7 @@ public class NBTLockTweaker {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                if (tag != null & tag instanceof DataMap & CheckMethods.checkStringArray(locked)) {
+                if (tag instanceof DataMap & CheckMethods.checkStringArray(locked)) {
                     RequirementHolder holder = RequirementHolder.fromStringList(locked);
                     LevelLockHandler.addLockByKey(new GenericNBTLockKey((NBTTagCompound) NBTConverter.from(tag)), holder);
                 }
@@ -70,7 +70,7 @@ public class NBTLockTweaker {
 
             @Override
             public String describe() {
-                return "Adding Generic NBT lock: " + tag.asString() + " to: " + descString;
+                return "Adding Generic NBT lock: " + (!(tag instanceof DataMap) ? "invalid" : tag.asString()) + " to: " + descString;
             }
         });
     }

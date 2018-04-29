@@ -1,6 +1,5 @@
 package codersafterdark.compatskills.common.compats.gamestages;
 
-import codersafterdark.compatskills.common.compats.gamestages.GameStageLocks.GameStageLock;
 import codersafterdark.compatskills.common.compats.gamestages.GameStageLocks.GameStageLockHandler;
 import codersafterdark.compatskills.common.compats.gamestages.GameStageRequirement.GameStageRequirement;
 import codersafterdark.compatskills.common.invertedrequirements.InvertedGameStage;
@@ -15,9 +14,5 @@ public class GameStageCompatHandler {
         MinecraftForge.EVENT_BUS.register(lockHandler);
         ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("stage", GameStageRequirement::new);
         ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("!stage", InvertedGameStage::new);
-    }
-
-    public static void addGameStageLock(GameStageLock lock){
-        lockHandler.addGameStageLock(lock);
     }
 }

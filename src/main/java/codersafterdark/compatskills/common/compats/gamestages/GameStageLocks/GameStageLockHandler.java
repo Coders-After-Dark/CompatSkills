@@ -4,7 +4,7 @@ import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.requirement.Requirement;
-import com.google.common.collect.Maps;
+import codersafterdark.reskillable.base.LevelLockHandler;
 import net.darkhax.gamestages.event.GameStageEvent;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,31 +13,21 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
-import java.util.Map;
 
 public class GameStageLockHandler {
-    private Map<String, RequirementHolder> gameStageLockMap;
-
-    public GameStageLockHandler(){
-        gameStageLockMap = Maps.newHashMap();
-    }
-
-    public void addGameStageLock(GameStageLock lock) {
-        gameStageLockMap.put(lock.getGamestage(), lock.getHolder());
-    }
-
     @SubscribeEvent
     public void gameStageAdded(GameStageEvent.Add event){
         EntityPlayer player = event.getEntityPlayer();
         PlayerData data = PlayerDataHandler.get(player);
         String eventGameStage = event.getStageName();
-        if (gameStageLockMap.containsKey(eventGameStage)){
-            if (!data.matchStats(gameStageLockMap.get(eventGameStage))){
+        RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new GameStageLock(eventGameStage));
+        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK)) {
+            if (!data.matchStats(requirementHolder)){
                 event.setCanceled(true);
                 String error = I18n.format("compatskills.gamestage.addError");
-                List<Requirement> requirements = gameStageLockMap.get(eventGameStage).getRequirements();
+                List<Requirement> requirements = requirementHolder.getRequirements();
                 StringBuilder reqString = new StringBuilder(I18n.format("compatskills.misc.Requirements"));
-                for (Requirement requirement : requirements){
+                for (Requirement requirement : requirements) {
                     reqString.append("\n ").append(requirement.getToolTip(data)).append(" ");
                 }
                 ITextComponent textComponent = new TextComponentString(error + " " + reqString);

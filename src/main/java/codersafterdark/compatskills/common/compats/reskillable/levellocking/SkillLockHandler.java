@@ -6,7 +6,7 @@ import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.event.LevelUpEvent;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.skill.Skill;
-import com.google.common.collect.Maps;
+import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
@@ -14,26 +14,8 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.List;
-import java.util.Map;
 
 public class SkillLockHandler {
-    private Map<Skill, Map<Integer, RequirementHolder>> skillLockMap;
-
-    public SkillLockHandler() {
-        skillLockMap = Maps.newHashMap();
-    }
-
-    public void addSkillLock(SkillLock lock) {
-        Skill skill = lock.getSkill();
-        int level = lock.getLevel();
-        RequirementHolder requirementHolder = lock.getRequirementHolder();
-
-        if (!skillLockMap.containsKey(skill)) {
-            skillLockMap.put(skill, Maps.newHashMap());
-        }
-        Map<Integer, RequirementHolder> levelLocks = skillLockMap.get(skill);
-        levelLocks.put(level, requirementHolder);
-    }
 
     @SubscribeEvent
     public void levelUpEvent(LevelUpEvent.Pre event) {
@@ -41,21 +23,19 @@ public class SkillLockHandler {
         PlayerData data = PlayerDataHandler.get(player);
         Skill skill = event.getSkill();
         int level = event.getLevel();
-        if (skillLockMap.containsKey(skill)) {
-            Map<Integer, RequirementHolder> lockMap = skillLockMap.get(skill);
-            if (lockMap.containsKey(level)) {
-                if (!data.matchStats(lockMap.get(level))) {
-                    event.setCanceled(true);
-                    String error = I18n.format("compatskills.reskillable.addLevelLockError");
-                    String error2 = I18n.format("compatskills.reskillable.addLevelLockError2");
-                    List<Requirement> requirements = lockMap.get(level).getRequirements();
-                    StringBuilder reqString = new StringBuilder(I18n.format("compatskills.misc.Requirements"));
-                    for (Requirement requirement : requirements) {
-                        reqString.append("\n ").append(requirement.getToolTip(data)).append(" ");
-                    }
-                    ITextComponent textComponent = new TextComponentString(error + "\n" + error2 + "\n" + reqString);
-                    player.sendStatusMessage(textComponent, false);
+        RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new SkillLock(skill, level));
+        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK)) {
+            if (!data.matchStats(requirementHolder)) {
+                event.setCanceled(true);
+                String error = I18n.format("compatskills.reskillable.addLevelLockError");
+                String error2 = I18n.format("compatskills.reskillable.addLevelLockError2");
+                List<Requirement> requirements = requirementHolder.getRequirements();
+                StringBuilder reqString = new StringBuilder(I18n.format("compatskills.misc.Requirements"));
+                for (Requirement requirement : requirements) {
+                    reqString.append("\n ").append(requirement.getToolTip(data)).append(" ");
                 }
+                ITextComponent textComponent = new TextComponentString(error + "\n" + error2 + "\n" + reqString);
+                player.sendStatusMessage(textComponent, false);
             }
         }
     }
