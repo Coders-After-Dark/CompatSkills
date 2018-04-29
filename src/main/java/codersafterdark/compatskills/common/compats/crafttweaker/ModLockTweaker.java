@@ -28,7 +28,7 @@ public class ModLockTweaker {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                if (CheckMethods.checkString(modId) & CheckMethods.checkModLoaded(modId) & CheckMethods.checkStringArray(locked)) {
+                if (CheckMethods.checkString(modId) && CheckMethods.checkModLoaded(modId) && CheckMethods.checkStringArray(locked)) {
                     RequirementHolder holder = RequirementHolder.fromStringList(locked);
                     LevelLockHandler.addModLock(modId, holder);
                 }

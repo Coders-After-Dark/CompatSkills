@@ -18,7 +18,7 @@ public class BindHandlerTweaker {
     @ZenMethod
     public static void addBindLock(String failureMessage, IItemStack stack, String... requirements) {
         BindHandler handler = new BindHandler();
-        if (CheckMethods.checkString(failureMessage) & CheckMethods.checkIItemstack(stack) & CheckMethods.checkStringArray(requirements)) {
+        if (CheckMethods.checkString(failureMessage) && CheckMethods.checkIItemstack(stack) && CheckMethods.checkStringArray(requirements)) {
             ItemStack stack2 = CraftTweakerMC.getItemStack(stack);
             RequirementHolder holder = RequirementHolder.fromStringList(requirements);
             handler.setFailureMessage(failureMessage);

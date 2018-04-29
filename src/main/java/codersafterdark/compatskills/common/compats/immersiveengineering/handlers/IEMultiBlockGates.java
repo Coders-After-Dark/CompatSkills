@@ -13,7 +13,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class IEMultiBlockGates {
     @ZenMethod
     public static void addGate(String multiBlockName, String failureMessage, String... defaultRequirements) {
-        if (CheckMethods.checkString(failureMessage) & CheckMethods.checkStringArray(defaultRequirements)) {
+        if (CheckMethods.checkString(failureMessage) && CheckMethods.checkStringArray(defaultRequirements)) {
             CraftTweakerAPI.apply(new ActionAddIEMultiBlockGate(multiBlockName, failureMessage, defaultRequirements));
         }
     }

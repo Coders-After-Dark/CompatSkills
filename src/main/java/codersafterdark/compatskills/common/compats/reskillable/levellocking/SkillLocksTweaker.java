@@ -28,7 +28,7 @@ public class SkillLocksTweaker {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                if (CheckMethods.checkSkill(skill.getSkill()) & CheckMethods.checkInt(level) & CheckMethods.checkStringArray(defaultRequirements)) {
+                if (CheckMethods.checkSkill(skill.getSkill()) && CheckMethods.checkInt(level) && CheckMethods.checkStringArray(defaultRequirements)) {
                     RequirementHolder holder = RequirementHolder.fromStringList(defaultRequirements);
                     LevelLockHandler.addLockByKey(new SkillLock(skill.getSkill(), level), holder);
                 }

@@ -36,7 +36,7 @@ public class NBTLockTweaker {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                if (CheckMethods.checkString(modId) & CheckMethods.checkModLoaded(modId) & tag instanceof DataMap & CheckMethods.checkStringArray(locked)) {
+                if (CheckMethods.checkString(modId) && CheckMethods.checkModLoaded(modId) && tag instanceof DataMap && CheckMethods.checkStringArray(locked)) {
                     RequirementHolder holder = RequirementHolder.fromStringList(locked);
                     LevelLockHandler.addLockByKey(new ModLockKey(modId, (NBTTagCompound) NBTConverter.from(tag)), holder);
                 }
@@ -62,7 +62,7 @@ public class NBTLockTweaker {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                if (tag instanceof DataMap & CheckMethods.checkStringArray(locked)) {
+                if (tag instanceof DataMap && CheckMethods.checkStringArray(locked)) {
                     RequirementHolder holder = RequirementHolder.fromStringList(locked);
                     LevelLockHandler.addLockByKey(new GenericNBTLockKey((NBTTagCompound) NBTConverter.from(tag)), holder);
                 }

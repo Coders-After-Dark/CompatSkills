@@ -27,7 +27,7 @@ public class GameStageLockTweaker {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                if (CheckMethods.checkString(gamestage) & CheckMethods.checkStringArray(defaultRequirements)) {
+                if (CheckMethods.checkString(gamestage) && CheckMethods.checkStringArray(defaultRequirements)) {
                     RequirementHolder holder = RequirementHolder.fromStringList(defaultRequirements);
                     LevelLockHandler.addLockByKey(new GameStageLock(gamestage), holder);
                 }

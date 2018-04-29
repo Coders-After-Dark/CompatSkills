@@ -31,7 +31,7 @@ public class RequirementTweaker {
         CraftTweakerAPI.apply(new IAction() {
             @Override
             public void apply() {
-                if (CheckMethods.checkIItemstack(item) & CheckMethods.checkStringArray(locked)) {
+                if (CheckMethods.checkIItemstack(item) && CheckMethods.checkStringArray(locked)) {
                     ItemStack i = CraftTweakerMC.getItemStack(item);
                     RequirementHolder h = RequirementHolder.fromStringList(locked);
                     LevelLockHandler.addLock(i, h);

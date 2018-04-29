@@ -18,7 +18,7 @@ public abstract class ActionAddMultiBlockGate implements IAction {
 
     @Override
     public void apply() {
-        if (CheckMethods.checkString(multiBlockName) & CheckMethods.checkStringArray(defaultRequirements) & CheckMethods.checkString(failureMessage)) {
+        if (CheckMethods.checkString(multiBlockName) && CheckMethods.checkStringArray(defaultRequirements) && CheckMethods.checkString(failureMessage)) {
             addToHandler(new MultiBlockGate(multiBlockName, failureMessage, defaultRequirements));
         }
     }

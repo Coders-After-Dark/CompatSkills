@@ -17,7 +17,7 @@ public class RitualHandlerTweaker {
     @ZenMethod
     public static void addRitualLock(String failureMessage, String ritual, String... requirements) {
         RitualHandler handler = new RitualHandler();
-        if (CheckMethods.checkString(failureMessage) & CheckMethods.checkRitual(ritual) & CheckMethods.checkStringArray(requirements)) {
+        if (CheckMethods.checkString(failureMessage) && CheckMethods.checkRitual(ritual) && CheckMethods.checkStringArray(requirements)) {
             handler.setFailureMessage(failureMessage);
             RequirementHolder holder = RequirementHolder.fromStringList(requirements);
             Ritual trueRitual = RitualRegistry.getRegistry().get(ritual);
