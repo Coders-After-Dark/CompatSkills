@@ -1,6 +1,5 @@
-package codersafterdark.compatskills.common.compats.reskillable.levellocking;
+package codersafterdark.compatskills.common.compats.gamestages.gamestagelocks;
 
-import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTSkill;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
@@ -11,13 +10,13 @@ import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ModOnly("crafttweaker")
-@ZenClass("mods.compatskills.SkillLocks")
+@ModOnly("gamestages")
+@ZenClass("mods.compatskills.GameStageLocks")
 @ZenRegister
-public class SkillLocksTweaker {
+public class GameStageLockTweaker {
     @ZenMethod
-    public static void addLevelLock(CTSkill skill, int level, String... defaultRequirements) {
-        if (CheckMethods.checkSkill(skill.getSkill()) && CheckMethods.checkInt(level) && CheckMethods.checkStringArray(defaultRequirements)) {
+    public static void addGameStageLock(String gamestage, String... defaultRequirements) {
+        if (CheckMethods.checkString(gamestage) && CheckMethods.checkStringArray(defaultRequirements)) {
             StringBuilder descString = new StringBuilder("Requirements: ");
 
             for (String string : defaultRequirements) {
@@ -28,12 +27,12 @@ public class SkillLocksTweaker {
                 @Override
                 public void apply() {
                     RequirementHolder holder = RequirementHolder.fromStringList(defaultRequirements);
-                    LevelLockHandler.addLockByKey(new SkillLock(skill.getSkill(), level), holder);
+                    LevelLockHandler.addLockByKey(new GameStageLock(gamestage), holder);
                 }
 
                 @Override
                 public String describe() {
-                    return "Added Level-Lock " + skill.getName() + ": " + level + " With Requirements: " + descString;
+                    return "Added GameStage Lock: " + gamestage + ", With Requirements: " + descString;
                 }
             });
         }

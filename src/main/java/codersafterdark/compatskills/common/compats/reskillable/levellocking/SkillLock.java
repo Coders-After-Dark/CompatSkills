@@ -1,17 +1,17 @@
 package codersafterdark.compatskills.common.compats.reskillable.levellocking;
 
-import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.api.data.LockKey;
 import codersafterdark.reskillable.api.skill.Skill;
 
-public class SkillLock {
+import java.util.Objects;
+
+public class SkillLock implements LockKey {
     private final Skill skill;
     private final int level;
-    private final RequirementHolder requirementHolder;
 
-    public SkillLock(Skill skill, int level, String... defaultRequirements) {
+    public SkillLock(Skill skill, int level) {
         this.skill = skill;
         this.level = level;
-        this.requirementHolder = RequirementHolder.fromStringList(defaultRequirements);
     }
 
     public Skill getSkill() {
@@ -22,7 +22,20 @@ public class SkillLock {
         return level;
     }
 
-    public RequirementHolder getRequirementHolder() {
-        return requirementHolder;
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof SkillLock) {
+            SkillLock other = (SkillLock) o;
+            return skill == null ? other.skill == null && level == other.level : skill.equals(other.skill) && level == other.level;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(skill, level);
     }
 }

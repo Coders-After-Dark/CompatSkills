@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.gamestages.GameStageUnlockable;
+package codersafterdark.compatskills.common.compats.gamestages.gamestageunlockable;
 
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.ReskillableRegistries;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class GameStageUnlockableTweaker {
     @ZenMethod
     public static void addGameStageUnlockable(String gamestage, String name, int x, int y, String skillName, int cost, @Optional String... defaultRequirements) {
-        if (CheckMethods.checkString(gamestage) & CheckMethods.checkString(name) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillName) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(defaultRequirements)) {
+        if (CheckMethods.checkString(gamestage) && CheckMethods.checkString(name) && CheckMethods.checkIntX(x) && CheckMethods.checkIntY(y) && CheckMethods.checkParentSkillsString(skillName) && CheckMethods.checkInt(cost) && CheckMethods.checkStringArray(defaultRequirements)) {
             ReskillableRegistries.UNLOCKABLES.register(new GameStageUnlockable(gamestage, name.replaceAll("\\s+", "").toLowerCase(), x, y, new ResourceLocation(skillName), cost, defaultRequirements));
             CraftTweakerAPI.logInfo("Added Unlockable Trait: " + name + " With GameStage Link: " + gamestage + " under Skill: " + skillName);
             CraftTweakerAPI.logInfo("Unlockable Trait: " + name + " has requirements: " + Arrays.toString(defaultRequirements));

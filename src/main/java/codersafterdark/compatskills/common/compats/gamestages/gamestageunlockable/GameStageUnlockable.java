@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.gamestages.GameStageUnlockable;
+package codersafterdark.compatskills.common.compats.gamestages.gamestageunlockable;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.reskillable.api.unlockable.Unlockable;
@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.apache.logging.log4j.Level;
 
 import static codersafterdark.compatskills.utils.CompatSkillConstants.MOD_ID;

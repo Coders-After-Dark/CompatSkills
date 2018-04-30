@@ -6,6 +6,8 @@ import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.skill.Skill;
 import com.cout970.magneticraft.api.MagneticraftApi;
 import crafttweaker.CraftTweakerAPI;
+import crafttweaker.api.data.DataMap;
+import crafttweaker.api.data.IData;
 import crafttweaker.api.item.IItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
@@ -59,6 +61,16 @@ public class CheckMethods {
         return true;
     }
 
+    public static boolean checkValidNBTTagCompound(IData tag) {
+        if (!(tag instanceof DataMap)) {
+            if (tag != null) {
+                CraftTweakerAPI.logError("Invalid NBT Tag: " + tag.asString());
+            }
+            return false;
+        }
+        return true;
+    }
+
     /////////////////
     // Blood Magic //
     /////////////////
@@ -66,8 +78,8 @@ public class CheckMethods {
         if (ritual == null || ritual.isEmpty()) {
             CraftTweakerAPI.logError("String Ritual was Null or Empty!");
             return false;
-        } else if (!RitualRegistry.getRegistry().containsKey(ritual)) {
-            CraftTweakerAPI.logError("Invalid Ritual String!");
+        } else if (!RitualRegistry.ritualEnabled(ritual)) {
+            CraftTweakerAPI.logError("Invalid or Disabled Ritual String!");
         }
         return true;
     }

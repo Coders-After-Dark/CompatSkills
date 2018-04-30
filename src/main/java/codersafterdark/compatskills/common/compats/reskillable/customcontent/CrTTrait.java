@@ -68,7 +68,7 @@ public class CrTTrait extends Trait {
 
     @ZenMethod
     public static CrTTrait createTrait(String traitName, int x, int y, String skillLocation, int cost, String... requirements) {
-        if (CheckMethods.checkString(traitName) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillLocation) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+        if (CheckMethods.checkString(traitName) && CheckMethods.checkIntX(x) && CheckMethods.checkIntY(y) && CheckMethods.checkParentSkillsString(skillLocation) && CheckMethods.checkInt(cost) && CheckMethods.checkStringArray(requirements)) {
             StringBuilder reqBuilder = new StringBuilder("Requirements: ");
 
             if (CheckMethods.checkStringArray(requirements)) {
@@ -85,7 +85,7 @@ public class CrTTrait extends Trait {
 
     @ZenMethod
     public static CrTTrait createTrait(String traitName, int x, int y, CrTSkill parentSkill, int cost, String... requirements) {
-        if (CheckMethods.checkString(traitName) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkCrTSkillParent(parentSkill) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+        if (CheckMethods.checkString(traitName) && CheckMethods.checkIntX(x) && CheckMethods.checkIntY(y) && CheckMethods.checkCrTSkillParent(parentSkill) && CheckMethods.checkInt(cost) && CheckMethods.checkStringArray(requirements)) {
             StringBuilder reqBuilder = new StringBuilder("Requirements: ");
 
             if (CheckMethods.checkStringArray(requirements)) {
@@ -102,7 +102,7 @@ public class CrTTrait extends Trait {
 
     @ZenMethod
     public static CrTTrait createNewTrait(String traitLocation, int x, int y, String skillLocation, int cost, String... requirements) {
-        if (CheckMethods.checkString(traitLocation) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillLocation) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+        if (CheckMethods.checkString(traitLocation) && CheckMethods.checkIntX(x) && CheckMethods.checkIntY(y) && CheckMethods.checkParentSkillsString(skillLocation) && CheckMethods.checkInt(cost) && CheckMethods.checkStringArray(requirements)) {
             StringBuilder reqBuilder = new StringBuilder("Requirements: ");
 
             if (CheckMethods.checkStringArray(requirements)) {
@@ -119,7 +119,7 @@ public class CrTTrait extends Trait {
 
     @ZenMethod
     public static CrTTrait createNewTrait(String traitLocation, int x, int y, CrTSkill parentSkill, int cost, String... requirements) {
-        if (CheckMethods.checkString(traitLocation) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkCrTSkillParent(parentSkill) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+        if (CheckMethods.checkString(traitLocation) && CheckMethods.checkIntX(x) && CheckMethods.checkIntY(y) && CheckMethods.checkCrTSkillParent(parentSkill) && CheckMethods.checkInt(cost) && CheckMethods.checkStringArray(requirements)) {
             StringBuilder reqBuilder = new StringBuilder("Requirements: ");
             if (CheckMethods.checkStringArray(requirements)) {
                 for (String string : requirements) {

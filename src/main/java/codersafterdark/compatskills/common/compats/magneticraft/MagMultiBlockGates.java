@@ -1,6 +1,7 @@
-package codersafterdark.compatskills.common.compats.magneticraft.handlers;
+package codersafterdark.compatskills.common.compats.magneticraft;
 
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.multiblock.MultiBlockAction;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
@@ -13,8 +14,8 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class MagMultiBlockGates {
     @ZenMethod
     public static void addGate(String multiBlockName, String failureMessage, String... defaultRequirements) {
-        if (CheckMethods.checkValidMultiblockNameMag(multiBlockName) & CheckMethods.checkString(failureMessage) & CheckMethods.checkStringArray(defaultRequirements)) {
-            CraftTweakerAPI.apply(new ActionAddMagMultiBlockGate(multiBlockName, failureMessage, defaultRequirements));
+        if (CheckMethods.checkValidMultiblockNameMag(multiBlockName) && CheckMethods.checkString(failureMessage) && CheckMethods.checkStringArray(defaultRequirements)) {
+            CraftTweakerAPI.apply(new MultiBlockAction(new MagMultiBlockGate(multiBlockName), failureMessage, defaultRequirements));
         }
     }
 }
