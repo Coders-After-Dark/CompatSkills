@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.gamestages.GameStageUnlockable;
+package codersafterdark.compatskills.common.compats.gamestages.gamestageunlockable;
 
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.ReskillableRegistries;

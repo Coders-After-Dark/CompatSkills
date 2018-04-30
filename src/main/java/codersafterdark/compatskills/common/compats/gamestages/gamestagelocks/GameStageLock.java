@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.gamestages.GameStageLocks;
+package codersafterdark.compatskills.common.compats.gamestages.gamestagelocks;
 
 import codersafterdark.reskillable.api.data.LockKey;
 

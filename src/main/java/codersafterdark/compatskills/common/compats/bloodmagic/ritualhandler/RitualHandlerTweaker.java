@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.bloodmagic.RitualHandler;
+package codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler;
 
 import WayofTime.bloodmagic.ritual.Ritual;
 import WayofTime.bloodmagic.ritual.RitualRegistry;
