@@ -3,7 +3,7 @@ package codersafterdark.compatskills.common.compats.immersiveengineering;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 
 public class IEMultiBlockGate implements MultiBlockGate {
-    private final String multiBlockName;
+    private String multiBlockName;
 
     public IEMultiBlockGate(String multiBlockName) {
         this.multiBlockName = multiBlockName;

@@ -18,17 +18,18 @@ public class MultiBlockAction implements IAction {
 
     @Override
     public void apply() {
-        LevelLockHandler.addLockByKey(gate, RequirementHolder.fromStringList(defaultRequirements));
-        MessageStorage.setFailureMessage(gate, failureMessage);
+        if (gate != null){
+            LevelLockHandler.addLockByKey(gate, RequirementHolder.fromStringList(defaultRequirements));
+            MessageStorage.setFailureMessage(gate, failureMessage);
+        }
     }
 
     @Override
     public String describe() {
         StringBuilder descString = new StringBuilder("Requirements: ");
-
         for (String string : defaultRequirements) {
             descString.append(string).append(", ");
         }
-        return "Added MultiBlock " + gate.getMultiBlockName() + " With Requirements: " + descString;
+        return "Added MultiBlock " + gate.getMultiBlockName() + " With " + descString;
     }
 }
