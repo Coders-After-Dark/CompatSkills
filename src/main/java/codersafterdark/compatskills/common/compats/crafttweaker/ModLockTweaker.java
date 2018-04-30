@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.crafttweaker;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
@@ -18,24 +19,33 @@ public class ModLockTweaker {
     @ZenMethod
     public static void addModLock(String modId, String... locked) {
         if (CheckMethods.checkString(modId) && CheckMethods.checkModLoaded(modId) && CheckMethods.checkStringArray(locked)) {
-            StringBuilder descString = new StringBuilder("Requirements: ");
+            CompatSkills.LATE_ADDITIONS.add(new Add(modId, locked));
+        }
+    }
 
-            for (String string : locked) {
+    private static class Add implements IAction {
+        String modID;
+        String[] requirements;
+
+        Add(String modID, String... requirements) {
+            this.modID = modID;
+            this.requirements = requirements;
+        }
+
+        @Override
+        public void apply() {
+            RequirementHolder holder = RequirementHolder.fromStringList(requirements);
+            LevelLockHandler.addModLock(modID, holder);
+        }
+
+        @Override
+        public String describe() {
+            StringBuilder descString = new StringBuilder("Requirements: ");
+            for (String string : requirements) {
                 descString.append(string).append(", ");
             }
 
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    RequirementHolder holder = RequirementHolder.fromStringList(locked);
-                    LevelLockHandler.addModLock(modId, holder);
-                }
-
-                @Override
-                public String describe() {
-                    return "Setting the requirement of Mod: " + modId + " to: " + descString;
-                }
-            });
+            return "Setting the requirement of Mod: " + modID + " to: " + descString;
         }
     }
 }

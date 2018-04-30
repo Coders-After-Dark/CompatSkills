@@ -1,8 +1,10 @@
 package codersafterdark.compatskills.common.compats.reskillable.levellocking;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTSkill;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.api.skill.Skill;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
@@ -17,25 +19,35 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class SkillLocksTweaker {
     @ZenMethod
     public static void addLevelLock(CTSkill skill, int level, String... defaultRequirements) {
-        if (CheckMethods.checkSkill(skill.getSkill()) && CheckMethods.checkInt(level) && CheckMethods.checkStringArray(defaultRequirements)) {
-            StringBuilder descString = new StringBuilder("Requirements: ");
+        CompatSkills.LATE_ADDITIONS.add(new AddLevelLock(skill, level, defaultRequirements));
+    }
 
-            for (String string : defaultRequirements) {
+    private static class AddLevelLock implements IAction {
+        Skill skill;
+        int level;
+        String[] requirements;
+
+        AddLevelLock(CTSkill skill, int level, String... requirements){
+            if (CheckMethods.checkSkill(skill.getSkill()) && CheckMethods.checkInt(level) && CheckMethods.checkStringArray(requirements)) {
+                this.skill = skill.getSkill();
+                this.level = level;
+                this.requirements = requirements;
+            }
+        }
+
+        @Override
+        public void apply() {
+            RequirementHolder holder = RequirementHolder.fromStringList(requirements);
+            LevelLockHandler.addLockByKey(new SkillLock(skill, level), holder);
+        }
+
+        @Override
+        public String describe() {
+            StringBuilder descString = new StringBuilder("Requirements: ");
+            for (String string : requirements) {
                 descString.append(string).append(", ");
             }
-
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    RequirementHolder holder = RequirementHolder.fromStringList(defaultRequirements);
-                    LevelLockHandler.addLockByKey(new SkillLock(skill.getSkill(), level), holder);
-                }
-
-                @Override
-                public String describe() {
-                    return "Added Level-Lock " + skill.getName() + ": " + level + " With Requirements: " + descString;
-                }
-            });
+            return "Added Level-Lock " + skill.getName() + ": " + level + " With Requirements: " + descString;
         }
     }
 }

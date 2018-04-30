@@ -9,6 +9,8 @@ import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler
 import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.theoneprobe.TOPCompatHandler;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
+import crafttweaker.CraftTweakerAPI;
+import crafttweaker.IAction;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -19,8 +21,14 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.Logger;
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 @Mod(modid = CompatSkillConstants.MOD_ID, name = CompatSkillConstants.MOD_NAME, version = CompatSkillConstants.VERSION, dependencies = CompatSkillConstants.DEPENDENCIES, acceptedMinecraftVersions = CompatSkillConstants.MCVER)
 public class CompatSkills {
+    public static final List<IAction> LATE_ADDITIONS = new LinkedList<>();
+
     @SidedProxy(serverSide = CompatSkillConstants.PROXY_COMMON, clientSide = CompatSkillConstants.PROXY_CLIENT)
     public static CommonProxy proxy;
 
@@ -62,6 +70,7 @@ public class CompatSkills {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+        LATE_ADDITIONS.forEach(CraftTweakerAPI::apply);
     }
 
     @EventHandler

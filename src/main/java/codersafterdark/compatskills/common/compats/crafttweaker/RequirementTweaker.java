@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.crafttweaker;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
@@ -20,26 +21,33 @@ public class RequirementTweaker {
 
     @ZenMethod
     public static void addRequirement(IItemStack item, String... locked) {
-        if (CheckMethods.checkIItemstack(item) && CheckMethods.checkStringArray(locked)) {
-            StringBuilder descString = new StringBuilder("Requirements: ");
+        CompatSkills.LATE_ADDITIONS.add(new Add(item, locked));
+    }
 
-            for (String string : locked) {
-                descString.append(string).append(", ");
+    private static class Add implements IAction {
+        ItemStack s;
+        String[] r;
+
+        Add(IItemStack stack, String... requirements){
+            if (CheckMethods.checkIItemstack(stack) && CheckMethods.checkStringArray(requirements)){
+                this.s = CraftTweakerMC.getItemStack(stack);
+                this.r = requirements;
             }
+        }
 
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    ItemStack i = CraftTweakerMC.getItemStack(item);
-                    RequirementHolder h = RequirementHolder.fromStringList(locked);
-                    LevelLockHandler.addLock(i, h);
-                }
+        @Override
+        public void apply() {
+            RequirementHolder h = RequirementHolder.fromStringList(r);
+            LevelLockHandler.addLock(s, h);
+        }
 
-                @Override
-                public String describe() {
-                    return "Setting the requirement of: " + item + " to: " + descString;
-                }
-            });
+        @Override
+        public String describe() {
+            StringBuilder descString = new StringBuilder("Requirements: ");
+            for (String s : r) {
+                descString.append(s).append(", ");
+            }
+            return "Setting the requirement of: " + s.getDisplayName() + " to: " + descString;
         }
     }
 }

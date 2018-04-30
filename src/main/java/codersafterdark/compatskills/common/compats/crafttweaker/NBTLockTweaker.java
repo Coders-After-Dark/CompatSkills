@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.crafttweaker;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.GenericNBTLockKey;
 import codersafterdark.reskillable.api.data.ModLockKey;
@@ -10,7 +11,9 @@ import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.data.IData;
+import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.data.NBTConverter;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -19,54 +22,69 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.compatskills.NBTLock")
 @ZenRegister
 public class NBTLockTweaker {
-
-    //TODO add error messages if the tags are not instances of DataMap
-
     @ZenMethod
     public static void addModNBTLock(String modId, IData tag, String... locked) {
-        if (CheckMethods.checkString(modId) && CheckMethods.checkModLoaded(modId) && CheckMethods.checkValidNBTTagCompound(tag) && CheckMethods.checkStringArray(locked)) {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-
-            for (String string : locked) {
-                descString.append(string).append(", ");
-            }
-
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    RequirementHolder holder = RequirementHolder.fromStringList(locked);
-                    LevelLockHandler.addLockByKey(new ModLockKey(modId, (NBTTagCompound) NBTConverter.from(tag)), holder);
-                }
-
-                @Override
-                public String describe() {
-                    return "Adding NBT lock: " + tag.asString() + " for Mod: " + modId + " to: " + descString;
-                }
-            });
-        }
+        CompatSkills.LATE_ADDITIONS.add(new AddModNBTLock(modId, tag, locked));
     }
 
     @ZenMethod
     public static void addGenericNBTLock(IData tag, String... locked) {
-        if (CheckMethods.checkValidNBTTagCompound(tag) && CheckMethods.checkStringArray(locked)) {
-            StringBuilder descString = new StringBuilder("Requirements: ");
+        CompatSkills.LATE_ADDITIONS.add(new AddGenericNBTLock(tag, locked));
+    }
 
-            for (String string : locked) {
+    private static class AddModNBTLock implements IAction {
+        String modID;
+        IData data;
+        String[] requirements;
+
+        AddModNBTLock(String modId, IData tag, String... locked){
+            if (CheckMethods.checkString(modId) && CheckMethods.checkModLoaded(modId) && CheckMethods.checkValidNBTTagCompound(tag) && CheckMethods.checkStringArray(locked)){
+                this.modID = modId;
+                this.data = tag;
+                this.requirements = locked;
+            }
+        }
+
+        @Override
+        public void apply() {
+            RequirementHolder holder = RequirementHolder.fromStringList(requirements);
+            LevelLockHandler.addLockByKey(new ModLockKey(modID, (NBTTagCompound) NBTConverter.from(data)), holder);
+        }
+
+        @Override
+        public String describe() {
+            StringBuilder descString = new StringBuilder("Requirements: ");
+            for (String string : requirements) {
                 descString.append(string).append(", ");
             }
+            return "Adding NBT lock: " + data.asString() + " for Mod: " + modID + " to: " + descString;
+        }
+    }
 
-            CraftTweakerAPI.apply(new IAction() {
-                @Override
-                public void apply() {
-                    RequirementHolder holder = RequirementHolder.fromStringList(locked);
-                    LevelLockHandler.addLockByKey(new GenericNBTLockKey((NBTTagCompound) NBTConverter.from(tag)), holder);
-                }
+    private static class AddGenericNBTLock implements IAction {
+        IData data;
+        String[] requirements;
 
-                @Override
-                public String describe() {
-                    return "Adding Generic NBT lock: " + tag.asString() + " to: " + descString;
-                }
-            });
+        AddGenericNBTLock(IData data, String... requirements){
+            if (CheckMethods.checkValidNBTTagCompound(data) && CheckMethods.checkStringArray(requirements)){
+                this.data = data;
+                this.requirements = requirements;
+            }
+        }
+
+        @Override
+        public void apply() {
+            RequirementHolder holder = RequirementHolder.fromStringList(requirements);
+            LevelLockHandler.addLockByKey(new GenericNBTLockKey((NBTTagCompound) NBTConverter.from(data)), holder);
+        }
+
+        @Override
+        public String describe() {
+            StringBuilder descString = new StringBuilder("Requirements: ");
+            for (String string : requirements) {
+                descString.append(string).append(", ");
+            }
+            return "Adding Generic NBT lock: " + data.asString() + " to: " + descString;
         }
     }
 }
