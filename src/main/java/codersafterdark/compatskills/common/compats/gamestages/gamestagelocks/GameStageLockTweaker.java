@@ -4,7 +4,6 @@ import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
@@ -24,8 +23,8 @@ public class GameStageLockTweaker {
         String gameStage;
         String[] requirements;
 
-        AddGameStageLock(String gameStage, String... requirements){
-            if (CheckMethods.checkString(gameStage) && CheckMethods.checkStringArray(requirements)){
+        AddGameStageLock(String gameStage, String... requirements) {
+            if (CheckMethods.checkString(gameStage) && CheckMethods.checkStringArray(requirements)) {
                 this.gameStage = gameStage;
                 this.requirements = requirements;
             }

@@ -4,7 +4,6 @@ import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
@@ -28,8 +27,8 @@ public class RequirementTweaker {
         ItemStack s;
         String[] r;
 
-        Add(IItemStack stack, String... requirements){
-            if (CheckMethods.checkIItemstack(stack) && CheckMethods.checkStringArray(requirements)){
+        Add(IItemStack stack, String... requirements) {
+            if (CheckMethods.checkIItemstack(stack) && CheckMethods.checkStringArray(requirements)) {
                 this.s = CraftTweakerMC.getItemStack(stack);
                 this.r = requirements;
             }

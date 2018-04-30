@@ -138,7 +138,7 @@ public class CheckMethods {
     //   Immersive Engineering    //
     ////////////////////////////////
 
-    public static boolean checkValidMultiblockNameIE(String multiBlock){
+    public static boolean checkValidMultiblockNameIE(String multiBlock) {
         List<MultiblockHandler.IMultiblock> multiblocks = MultiblockHandler.getMultiblocks();
         if (multiBlock == null || multiBlock.isEmpty()) {
             CraftTweakerAPI.logError("String for Multiblock Name was found to be null or empty!");

@@ -5,7 +5,7 @@ import codersafterdark.reskillable.api.data.LockKey;
 public class GameStageLock implements LockKey {
     private final String gamestage;
 
-    public GameStageLock(String gamestage){
+    public GameStageLock(String gamestage) {
         this.gamestage = gamestage;
     }
 

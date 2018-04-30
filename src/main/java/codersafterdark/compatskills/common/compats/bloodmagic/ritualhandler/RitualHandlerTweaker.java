@@ -29,7 +29,7 @@ public class RitualHandlerTweaker {
         Ritual trueRitual;
         String[] requirements;
 
-        AddRitualLock(String failureMessage, String ritual, String... requirements){
+        AddRitualLock(String failureMessage, String ritual, String... requirements) {
             this.failureMessage = failureMessage;
             this.ritual = ritual;
             this.requirements = requirements;
@@ -37,9 +37,9 @@ public class RitualHandlerTweaker {
 
         @Override
         public void apply() {
-            if (CheckMethods.checkRitual(ritual)){
+            if (CheckMethods.checkRitual(ritual)) {
                 this.trueRitual = RitualRegistry.getRegistry().get(ritual);
-                if (trueRitual != null){
+                if (trueRitual != null) {
                     RitualLockKey ritualKey = new RitualLockKey(trueRitual);
                     MessageStorage.setFailureMessage(ritualKey, failureMessage);
                     LevelLockHandler.addLockByKey(ritualKey, RequirementHolder.fromStringList(requirements));

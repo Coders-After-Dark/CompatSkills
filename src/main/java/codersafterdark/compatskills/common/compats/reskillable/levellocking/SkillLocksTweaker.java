@@ -6,7 +6,6 @@ import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.skill.Skill;
 import codersafterdark.reskillable.base.LevelLockHandler;
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
@@ -27,7 +26,7 @@ public class SkillLocksTweaker {
         int level;
         String[] requirements;
 
-        AddLevelLock(CTSkill skill, int level, String... requirements){
+        AddLevelLock(CTSkill skill, int level, String... requirements) {
             if (CheckMethods.checkSkill(skill.getSkill()) && CheckMethods.checkInt(level) && CheckMethods.checkStringArray(requirements)) {
                 this.skill = skill.getSkill();
                 this.level = level;

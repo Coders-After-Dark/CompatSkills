@@ -12,11 +12,11 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class InvertedSkill extends Requirement{
+public class InvertedSkill extends Requirement {
     private final Skill skill;
     private final int level;
 
-    public InvertedSkill(Skill skill, int level){
+    public InvertedSkill(Skill skill, int level) {
         this.skill = skill;
         this.level = level;
     }

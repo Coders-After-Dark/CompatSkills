@@ -3,7 +3,6 @@ package codersafterdark.compatskills.common.compats.immersiveengineering;
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockAction;
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;

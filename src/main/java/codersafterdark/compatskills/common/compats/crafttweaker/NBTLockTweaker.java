@@ -6,14 +6,11 @@ import codersafterdark.reskillable.api.data.GenericNBTLockKey;
 import codersafterdark.reskillable.api.data.ModLockKey;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
-import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.data.IData;
-import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.mc1120.data.NBTConverter;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -37,8 +34,8 @@ public class NBTLockTweaker {
         IData data;
         String[] requirements;
 
-        AddModNBTLock(String modId, IData tag, String... locked){
-            if (CheckMethods.checkString(modId) && CheckMethods.checkModLoaded(modId) && CheckMethods.checkValidNBTTagCompound(tag) && CheckMethods.checkStringArray(locked)){
+        AddModNBTLock(String modId, IData tag, String... locked) {
+            if (CheckMethods.checkString(modId) && CheckMethods.checkModLoaded(modId) && CheckMethods.checkValidNBTTagCompound(tag) && CheckMethods.checkStringArray(locked)) {
                 this.modID = modId;
                 this.data = tag;
                 this.requirements = locked;
@@ -65,8 +62,8 @@ public class NBTLockTweaker {
         IData data;
         String[] requirements;
 
-        AddGenericNBTLock(IData data, String... requirements){
-            if (CheckMethods.checkValidNBTTagCompound(data) && CheckMethods.checkStringArray(requirements)){
+        AddGenericNBTLock(IData data, String... requirements) {
+            if (CheckMethods.checkValidNBTTagCompound(data) && CheckMethods.checkStringArray(requirements)) {
                 this.data = data;
                 this.requirements = requirements;
             }

@@ -23,7 +23,7 @@ public class InvertedGameStage extends Requirement {
     @Override
     public String getToolTip(PlayerData playerData) {
         TextFormatting color = TextFormatting.GREEN;
-        if (playerData.playerWR.get() != null){
+        if (playerData.playerWR.get() != null) {
             if (GameStageHelper.hasStage(playerData.playerWR.get(), gamestage)) {
                 color = TextFormatting.RED;
             }
