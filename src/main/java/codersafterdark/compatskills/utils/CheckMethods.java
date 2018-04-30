@@ -10,6 +10,7 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.data.DataMap;
 import crafttweaker.api.data.IData;
 import crafttweaker.api.item.IItemStack;
+import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 
@@ -81,8 +82,9 @@ public class CheckMethods {
         if (ritual == null || ritual.isEmpty()) {
             CraftTweakerAPI.logError("String Ritual was Null or Empty!");
             return false;
-        } else if (!RitualRegistry.ritualEnabled(ritual)) {
-            CraftTweakerAPI.logError("Invalid or Disabled Ritual String!");
+        } else if (!RitualRegistry.getRegistry().containsKey(ritual)){
+            CraftTweakerAPI.logError("Invalid Ritual");
+            return false;
         }
         return true;
     }
