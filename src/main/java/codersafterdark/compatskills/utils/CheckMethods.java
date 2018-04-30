@@ -1,7 +1,6 @@
 package codersafterdark.compatskills.utils;
 
 import WayofTime.bloodmagic.ritual.RitualRegistry;
-import blusunrize.immersiveengineering.api.MultiblockHandler;
 import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.skill.Skill;
@@ -10,8 +9,6 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.item.IItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
-
-import java.util.List;
 
 public class CheckMethods {
 
@@ -120,22 +117,6 @@ public class CheckMethods {
             return false;
         }
         return checkParentSkillsString(skill.getRegistryName().toString());
-    }
-
-    ////////////////////////////////
-    //   Immersive Engineering    //
-    ////////////////////////////////
-
-    public static boolean checkValidMultiblockNameIE(String multiBlock){
-        List<MultiblockHandler.IMultiblock> multiblocks = MultiblockHandler.getMultiblocks();
-        if (multiBlock == null || multiBlock.isEmpty()) {
-            CraftTweakerAPI.logError("String for Multiblock Name was found to be null or empty!");
-            return false;
-        } else if (MultiblockHandler.getMultiblocks().parallelStream().map(MultiblockHandler.IMultiblock::getUniqueName).noneMatch(multiBlock::equals)) {
-            CraftTweakerAPI.logError("No valid match was found for the String: " + multiBlock);
-            return false;
-        }
-        return true;
     }
 
     ///////////////////////

@@ -2,7 +2,6 @@ package codersafterdark.compatskills.common.compats.gamestages.GameStageLocks;
 
 import codersafterdark.compatskills.utils.CheckMethods;
 import crafttweaker.CraftTweakerAPI;
-import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
