@@ -5,6 +5,7 @@ import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
@@ -20,8 +21,7 @@ public class BindHandler {
         if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             if (player.getEntityWorld().isRemote) {
-                //TODO: Localize and probably adjust default fail message. This was just taken from example of old bind handler
-                player.sendStatusMessage(new TextComponentString("Untold Dark Energies swirl around you and then subside"), true);
+                player.sendStatusMessage(new TextComponentString(I18n.format("compatskills.bloodmagic.bindingError")), true);
             }
         }
     }
