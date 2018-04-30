@@ -2,10 +2,10 @@ package codersafterdark.compatskills.common.compats.bloodmagic;
 
 import WayofTime.bloodmagic.ritual.Ritual;
 import WayofTime.bloodmagic.ritual.RitualRegistry;
-import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.RitualCostLockKey;
-import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.RitualCrystalLockKey;
+import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualCostLockKey;
+import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualCrystalLockKey;
 import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.RitualHandler;
-import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.RitualNameLockKey;
+import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualNameLockKey;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraftforge.common.MinecraftForge;

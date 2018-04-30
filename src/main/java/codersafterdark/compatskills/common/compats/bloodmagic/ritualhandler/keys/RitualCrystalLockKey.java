@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler;
+package codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys;
 
 import WayofTime.bloodmagic.ritual.Ritual;
 import codersafterdark.reskillable.api.data.LockKey;
