@@ -1,0 +1,17 @@
+# FORMATS
+compatskills.misc.gamestageFormat=游戏阶段： %s%s
+compatskills.misc.Requirements=需要：
+compatskills.misc.Shift=按住 Shift 键查看需求
+
+compatskills.misc.requirements.invertedAchievementFormat=!进度： %s
+compatskills.misc.requirements.invertedGamestageFormat=!游戏阶段： %s%s
+compatskills.misc.requirements.invertedSkillFormat=!%s%s: %s%d
+compatskills.misc.requirements.invertedTraitFormat=!特性： %s%s
+
+compatskills.gamestage.addError=未满足解锁这个阶段的要求！
+
+compatskills.reskillable.addLevelLockError=要达到这个等级：
+compatskills.reskillable.addLevelLockError2=请满足满足要求！
+
+compatskills.bloodmagic.bindingError=无尽的黑暗能量围绕着你旋转，然后消退
+compatskills.bloodmagic.ritualError=伴随着仪式的激活，你没有得到预期的结果
