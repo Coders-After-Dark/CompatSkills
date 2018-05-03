@@ -56,4 +56,9 @@ public class InvertedSkill extends Requirement {
         }
         return RequirementComparision.NOT_EQUAL;
     }
+
+    @Override
+    public boolean isEnabled() {
+        return skill != null && skill.isEnabled();
+    }
 }
