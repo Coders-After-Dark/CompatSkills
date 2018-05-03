@@ -26,6 +26,10 @@ minecraft {
 
 repositories{
     maven {
+        name = "CurseForge"
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }
+    maven {
         name 'Darkhax'
         url 'https://maven.mcmoddev.com/'
     }
@@ -60,7 +64,7 @@ repositories{
 }
 
 dependencies {
-    //deobfCompile "net.darkhax.gamestages:GameStages-1.12.2:1.0.82"
+    deobfCompile "net.darkhax.gamestages:GameStages-1.12.2:2.0.87"
     deobfCompile "mezz.jei:jei_1.12.2:4.8.5.144"
     deobfCompile "net.darkhax.bookshelf:Bookshelf-1.12.2:2.3.544"
     deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
@@ -71,6 +75,7 @@ dependencies {
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.2.11-96"
     deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.22-13"
+    compileOnly "projecte:ProjectE:1.12:PE1.3.0"
     deobfCompile "cofh:RedstoneFlux:1.12-2.0.1.2:universal"
     deobfCompile("blusunrize:ImmersiveEngineering:${ieVersion}") {
         exclude module: "crafttweaker"
