@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.tinkersconstruct.materialLocks;
+package codersafterdark.compatskills.common.compats.tinkersconstruct.materiallocks;
 
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;

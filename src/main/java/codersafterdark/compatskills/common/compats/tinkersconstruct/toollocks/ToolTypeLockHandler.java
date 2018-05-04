@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.tinkersconstruct.toolLocks;
+package codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks;
 
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;

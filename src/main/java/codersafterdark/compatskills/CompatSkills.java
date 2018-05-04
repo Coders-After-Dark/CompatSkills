@@ -85,5 +85,8 @@ public class CompatSkills {
     @EventHandler
     public void serverStart(FMLServerStartingEvent event) {
         proxy.serverStart(event);
+        if (Loader.isModLoaded("tconstruct")) {
+            TinkersCompatHandler.setupServerStart();
+        }
     }
 }

@@ -1,8 +1,11 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct;
 
-import codersafterdark.compatskills.common.compats.tinkersconstruct.materialLocks.MaterialLockHandler;
-import codersafterdark.compatskills.common.compats.tinkersconstruct.modifierLocks.ModifierLockHandler;
-import codersafterdark.compatskills.common.compats.tinkersconstruct.toolLocks.ToolTypeLockHandler;
+import codersafterdark.compatskills.common.compats.tinkersconstruct.commands.MaterialDumpCommand;
+import codersafterdark.compatskills.common.compats.tinkersconstruct.commands.ModifierDumpCommand;
+import codersafterdark.compatskills.common.compats.tinkersconstruct.materiallocks.MaterialLockHandler;
+import codersafterdark.compatskills.common.compats.tinkersconstruct.modifierlocks.ModifierLockHandler;
+import codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks.ToolTypeLockHandler;
+import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraftforge.common.MinecraftForge;
 
 public class TinkersCompatHandler {
@@ -17,5 +20,10 @@ public class TinkersCompatHandler {
         MinecraftForge.EVENT_BUS.register(modifierLockHandler);
         toolTypeLockHandler = new ToolTypeLockHandler();
         MinecraftForge.EVENT_BUS.register(toolTypeLockHandler);
+    }
+
+    public static void setupServerStart() {
+        CTChatCommand.registerCommand(new MaterialDumpCommand());
+        CTChatCommand.registerCommand(new ModifierDumpCommand());
     }
 }

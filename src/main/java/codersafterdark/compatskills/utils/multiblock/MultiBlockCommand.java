@@ -22,15 +22,19 @@ public abstract class MultiBlockCommand extends CraftTweakerCommand {
 
     @Override
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
-        CraftTweakerAPI.logCommand("####");
+        int count = 0;
+        CraftTweakerAPI.logCommand("#### ");
         CraftTweakerAPI.logCommand("### " + subCommandName + ":");
         List<String> multiBlockList = getMultiBlockNames();
         CraftTweakerAPI.logCommand("## Multiblocks");
         for (String name : multiBlockList) {
+            count++;
             CraftTweakerAPI.logCommand("# " + name);
         }
         CraftTweakerAPI.logCommand("####");
-        sender.sendMessage(getLinkToCraftTweakerLog("List of " + subCommandName + " generated;", sender));
+        sender.sendMessage(getNormalMessage("List of " + subCommandName + " generated;"));
+        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + count + " Entries;", sender));
+        count = 0;
     }
 
     public abstract List<String> getMultiBlockNames();

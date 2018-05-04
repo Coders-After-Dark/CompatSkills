@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.tinkersconstruct.modifierLocks;
+package codersafterdark.compatskills.common.compats.tinkersconstruct.modifierlocks;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
@@ -21,7 +21,7 @@ public class ModifierLockTweaker {
     public static void addModifierLock(String identifier, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddModifierLock(identifier, requirements));
     }
-    
+
     private static class AddModifierLock implements IAction {
         String id;
         String[] requirements;

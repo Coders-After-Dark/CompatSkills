@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.tinkersconstruct.modifierLocks;
+package codersafterdark.compatskills.common.compats.tinkersconstruct.modifierlocks;
 
 import codersafterdark.reskillable.api.data.LockKey;
 import slimeknights.tconstruct.library.modifiers.IModifier;
