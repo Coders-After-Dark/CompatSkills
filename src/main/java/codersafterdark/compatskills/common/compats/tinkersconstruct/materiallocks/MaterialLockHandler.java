@@ -29,8 +29,7 @@ public class MaterialLockHandler {
             for (Requirement req : requirements) {
                 reqs.append("\n").append(req.getToolTip(data));
             }
-            player.sendStatusMessage(new TextComponentString(reqs.toString()), false);
-            event.setCanceled(true);
+            event.setCanceled(reqs.toString());
         }
     }
 
@@ -47,8 +46,7 @@ public class MaterialLockHandler {
                 for (Requirement req : requirements) {
                     reqs.append("\n").append(req.getToolTip(data));
                 }
-                player.sendStatusMessage(new TextComponentString(reqs.toString()), false);
-                event.setCanceled(true);
+                event.setCanceled(reqs.toString());
             }
         }
     }
@@ -61,13 +59,13 @@ public class MaterialLockHandler {
             Material material = TinkerUtil.getMaterialFromStack(stack);
             RequirementHolder holder = LevelLockHandler.getLocks(Material.class, material);
             if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
+                event.setCanceled(true);
                 List<Requirement> requirements = holder.getRequirements();
                 StringBuilder reqs = new StringBuilder(I18n.format("compatskills.tconstruct.materialError") + "\n" + "With Requirements: ");
                 for (Requirement req : requirements) {
                     reqs.append("\n").append(req.getToolTip(data));
                 }
-                player.sendStatusMessage(new TextComponentString(reqs.toString()), false);
-                event.setCanceled(true);
+                event.setCanceled(reqs.toString());
             }
         }
     }
