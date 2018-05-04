@@ -73,7 +73,9 @@ public class CompatSkills {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
-        LATE_ADDITIONS.forEach(CraftTweakerAPI::apply);
+        if (Loader.isModLoaded("crafttweaker")){
+            LATE_ADDITIONS.forEach(CraftTweakerAPI::apply);
+        }
     }
 
     @EventHandler
