@@ -11,7 +11,7 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 @ModOnly("projecte")
-@ZenClass("mods.compatskills.ProjectELock")
+@ZenClass("mods.compatskills.EMCLock")
 @ZenRegister
 public class ProjectETweaker {
 

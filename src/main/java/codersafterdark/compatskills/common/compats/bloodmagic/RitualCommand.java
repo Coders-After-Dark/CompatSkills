@@ -22,16 +22,13 @@ public abstract class RitualCommand extends CraftTweakerCommand {
 
     @Override
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
-        int count = 0;
         CraftTweakerAPI.logCommand("Ritual Dump: ");
         List<String> ritualList = getRitualNames();
         for (String ritual : ritualList) {
-            count++;
             CraftTweakerAPI.logCommand(ritual);
         }
         sender.sendMessage(getNormalMessage("List of Rituals generated;"));
-        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + count + " Entries;", sender));
-        count = 0;
+        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + ritualList.size() + " Entries;", sender));
     }
 
     public abstract List<String> getRitualNames();
