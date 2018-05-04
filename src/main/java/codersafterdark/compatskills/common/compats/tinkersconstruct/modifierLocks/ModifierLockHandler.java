@@ -16,16 +16,16 @@ import java.util.List;
 
 public class ModifierLockHandler {
     @SubscribeEvent
-    public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event){
+    public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event) {
         EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);
-        for (final IModifier modifier : event.getModifiers()){
+        for (final IModifier modifier : event.getModifiers()) {
             RequirementHolder holder = LevelLockHandler.getLocks(IModifier.class, modifier);
-            if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)){
+            if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
                 event.setCanceled(true);
                 List<Requirement> requirements = holder.getRequirements();
                 StringBuilder reqs = new StringBuilder(I18n.format("compatskills.tconstruct.modifierError") + "\n" + "With Requirements: ");
-                for (Requirement req : requirements){
+                for (Requirement req : requirements) {
                     reqs.append("\n").append(req.getToolTip(data));
                 }
                 player.sendStatusMessage(new TextComponentString(reqs.toString()), false);

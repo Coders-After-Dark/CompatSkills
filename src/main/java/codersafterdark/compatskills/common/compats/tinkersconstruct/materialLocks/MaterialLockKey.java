@@ -3,14 +3,14 @@ package codersafterdark.compatskills.common.compats.tinkersconstruct.materialLoc
 import codersafterdark.reskillable.api.data.LockKey;
 import slimeknights.tconstruct.library.materials.Material;
 
-public class MaterialLockKey implements LockKey{
+public class MaterialLockKey implements LockKey {
     final String id;
 
-    public MaterialLockKey (String id){
+    public MaterialLockKey(String id) {
         this.id = id;
     }
 
-    public MaterialLockKey (Material material) {
+    public MaterialLockKey(Material material) {
         this(material == null ? "" : material.getIdentifier());
     }
 

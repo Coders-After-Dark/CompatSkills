@@ -18,16 +18,16 @@ import java.util.List;
 
 public class MaterialLockHandler {
     @SubscribeEvent
-    public void onCraftingMaterial(TinkerCraftingEvent.ToolPartCraftingEvent event){
+    public void onCraftingMaterial(TinkerCraftingEvent.ToolPartCraftingEvent event) {
         Material material = TinkerUtil.getMaterialFromStack(event.getItemStack());
         EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder holder = LevelLockHandler.getLocks(Material.class, material);
-        if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)){
+        if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
             event.setCanceled(true);
             List<Requirement> requirements = holder.getRequirements();
             StringBuilder reqs = new StringBuilder(I18n.format("compatskills.tconstruct.materialError") + "\n" + "With Requirements: ");
-            for (Requirement req : requirements){
+            for (Requirement req : requirements) {
                 reqs.append("\n").append(req.getToolTip(data));
             }
             player.sendStatusMessage(new TextComponentString(reqs.toString()), false);
@@ -35,17 +35,17 @@ public class MaterialLockHandler {
     }
 
     @SubscribeEvent
-    public void onToolCrafted(TinkerCraftingEvent.ToolCraftingEvent event){
+    public void onToolCrafted(TinkerCraftingEvent.ToolCraftingEvent event) {
         EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);
-        for (ItemStack stack : event.getToolParts()){
+        for (ItemStack stack : event.getToolParts()) {
             Material material = TinkerUtil.getMaterialFromStack(stack);
             RequirementHolder holder = LevelLockHandler.getLocks(Material.class, material);
-            if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)){
+            if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
                 event.setCanceled(true);
                 List<Requirement> requirements = holder.getRequirements();
                 StringBuilder reqs = new StringBuilder(I18n.format("compatskills.tconstruct.materialError") + "\n" + "With Requirements: ");
-                for (Requirement req : requirements){
+                for (Requirement req : requirements) {
                     reqs.append("\n").append(req.getToolTip(data));
                 }
                 player.sendStatusMessage(new TextComponentString(reqs.toString()), false);
@@ -54,17 +54,17 @@ public class MaterialLockHandler {
     }
 
     @SubscribeEvent
-    public void onPartReplaced(TinkerCraftingEvent.ToolPartReplaceEvent event){
+    public void onPartReplaced(TinkerCraftingEvent.ToolPartReplaceEvent event) {
         EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);
-        for (ItemStack stack : event.getToolParts()){
+        for (ItemStack stack : event.getToolParts()) {
             Material material = TinkerUtil.getMaterialFromStack(stack);
             RequirementHolder holder = LevelLockHandler.getLocks(Material.class, material);
-            if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)){
+            if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
                 event.setCanceled(true);
                 List<Requirement> requirements = holder.getRequirements();
                 StringBuilder reqs = new StringBuilder(I18n.format("compatskills.tconstruct.materialError") + "\n" + "With Requirements: ");
-                for (Requirement req : requirements){
+                for (Requirement req : requirements) {
                     reqs.append("\n").append(req.getToolTip(data));
                 }
                 player.sendStatusMessage(new TextComponentString(reqs.toString()), false);

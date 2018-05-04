@@ -24,7 +24,7 @@ public class RitualHandler {
             event.setCanceled(true);
             List<Requirement> requirements = requirementHolder.getRequirements();
             StringBuilder reqs = new StringBuilder(I18n.format("compatskills.bloodmagic.ritualError") + "\n" + "With Requirements: ");
-            for (Requirement req : requirements){
+            for (Requirement req : requirements) {
                 reqs.append("\n").append(req.getToolTip(data));
             }
             player.sendStatusMessage(new TextComponentString(reqs.toString()), false);

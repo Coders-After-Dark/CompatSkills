@@ -18,7 +18,7 @@ public class MultiBlockAction implements IAction {
 
     @Override
     public void apply() {
-        if (gate != null){
+        if (gate != null) {
             LevelLockHandler.addLockByKey(gate, RequirementHolder.fromStringList(defaultRequirements));
             MessageStorage.setFailureMessage(gate, failureMessage);
         }

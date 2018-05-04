@@ -9,7 +9,7 @@ import java.util.Objects;
 public class RitualCrystalLockKey implements FuzzyLockKey {
     private final int crystalLevel;
 
-    public  RitualCrystalLockKey(int crystalLevel) {
+    public RitualCrystalLockKey(int crystalLevel) {
         this.crystalLevel = crystalLevel;
     }
 

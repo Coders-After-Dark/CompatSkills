@@ -18,25 +18,25 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class ModifierLockTweaker {
 
     @ZenMethod
-    public static void addModifierLock(String identifier, String... requirements){
+    public static void addModifierLock(String identifier, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddModifierLock(identifier, requirements));
     }
 
 
     private static class AddModifierLock implements IAction {
         String id;
-        String [] requirements;
+        String[] requirements;
 
-        AddModifierLock(String id, String... requirements){
+        AddModifierLock(String id, String... requirements) {
             this.id = id;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkModifier(id)){
+            if (CheckMethods.checkModifier(id)) {
                 IModifier modifier = TinkerRegistry.getModifier(id);
-                if (modifier != null){
+                if (modifier != null) {
                     LevelLockHandler.addLockByKey(new ModifierLockKey(modifier), RequirementHolder.fromStringList(requirements));
                 }
             }

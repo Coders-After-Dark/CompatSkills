@@ -9,6 +9,7 @@ import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler
 import codersafterdark.compatskills.common.compats.projecte.ProjectECompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.theoneprobe.TOPCompatHandler;
+import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
@@ -57,6 +58,9 @@ public class CompatSkills {
         if (Loader.isModLoaded("reskillable")) {
             ReskillableCompatHandler.setup();
         }
+        if (Loader.isModLoaded("tconstruct")) {
+            TinkersCompatHandler.setup();
+        }
         if (Loader.isModLoaded("theoneprobe")) {
             TOPCompatHandler.setup();
         }
@@ -73,7 +77,7 @@ public class CompatSkills {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
-        if (Loader.isModLoaded("crafttweaker")){
+        if (Loader.isModLoaded("crafttweaker")) {
             LATE_ADDITIONS.forEach(CraftTweakerAPI::apply);
         }
     }

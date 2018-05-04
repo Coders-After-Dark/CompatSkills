@@ -11,7 +11,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 
 public class MaterialLockTweaker {
     @ZenMethod
-    public static void addMaterialLock(String id, String... requirements){
+    public static void addMaterialLock(String id, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddMaterialLock(id, requirements));
     }
 
@@ -19,14 +19,14 @@ public class MaterialLockTweaker {
         String id;
         String[] requirements;
 
-        AddMaterialLock(String id, String... requirements){
+        AddMaterialLock(String id, String... requirements) {
             this.id = id;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkMaterial(id)){
+            if (CheckMethods.checkMaterial(id)) {
                 Material material = TinkerRegistry.getMaterial(id);
                 LevelLockHandler.addLockByKey(new MaterialLockKey(material), RequirementHolder.fromStringList(requirements));
             }

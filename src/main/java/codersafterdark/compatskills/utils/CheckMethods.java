@@ -10,15 +10,11 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.data.DataMap;
 import crafttweaker.api.data.IData;
 import crafttweaker.api.item.IItemStack;
-import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
-import slimeknights.tconstruct.library.tools.IToolPart;
-
-import java.util.List;
 
 public class CheckMethods {
 
@@ -86,7 +82,7 @@ public class CheckMethods {
         if (ritual == null || ritual.isEmpty()) {
             CraftTweakerAPI.logError("String Ritual was Null or Empty!");
             return false;
-        } else if (!RitualRegistry.getRegistry().containsKey(ritual)){
+        } else if (!RitualRegistry.getRegistry().containsKey(ritual)) {
             CraftTweakerAPI.logError("Invalid Ritual");
             return false;
         }
@@ -174,8 +170,8 @@ public class CheckMethods {
     //   Tinker's Construct    //
     /////////////////////////////
 
-    public static boolean checkModifier(String identifier){
-        if (identifier == null || identifier.isEmpty()){
+    public static boolean checkModifier(String identifier) {
+        if (identifier == null || identifier.isEmpty()) {
             CraftTweakerAPI.logError("String for Modifier Identifier was found to be null or empty!");
             return false;
         } else if (TinkerRegistry.getAllModifiers().parallelStream().map(IModifier::getIdentifier).noneMatch(identifier::equals)) {
@@ -185,8 +181,8 @@ public class CheckMethods {
         return true;
     }
 
-    public static boolean checkMaterial(String identifier){
-        if (identifier == null || identifier.isEmpty()){
+    public static boolean checkMaterial(String identifier) {
+        if (identifier == null || identifier.isEmpty()) {
             CraftTweakerAPI.logError("String for Material Identifier was found to be null or empty!");
             return false;
         } else if (TinkerRegistry.getAllMaterials().parallelStream().map(Material::getIdentifier).noneMatch(identifier::equals)) {

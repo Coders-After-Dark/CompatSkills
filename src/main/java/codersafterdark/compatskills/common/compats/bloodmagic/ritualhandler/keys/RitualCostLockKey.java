@@ -9,7 +9,7 @@ import java.util.Objects;
 public class RitualCostLockKey implements FuzzyLockKey {
     private final int activationCost;
 
-    public  RitualCostLockKey(int activationCost) {
+    public RitualCostLockKey(int activationCost) {
         this.activationCost = activationCost;
     }
 

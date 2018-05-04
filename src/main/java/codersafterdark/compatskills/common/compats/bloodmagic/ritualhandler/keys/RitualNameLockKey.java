@@ -6,7 +6,7 @@ import codersafterdark.reskillable.api.data.LockKey;
 public class RitualNameLockKey implements LockKey {
     private final String name;
 
-    public  RitualNameLockKey(String name) {
+    public RitualNameLockKey(String name) {
         this.name = name;
     }
 
