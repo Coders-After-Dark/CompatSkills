@@ -62,4 +62,9 @@ public class InvertedTrait extends Requirement {
         }
         return RequirementComparision.NOT_EQUAL;
     }
+
+    @Override
+    public boolean isEnabled() {
+        return getUnlockable() != null && getUnlockable().isEnabled();
+    }
 }
