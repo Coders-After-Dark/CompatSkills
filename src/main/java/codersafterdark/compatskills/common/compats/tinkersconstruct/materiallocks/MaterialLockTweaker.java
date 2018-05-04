@@ -45,7 +45,7 @@ public class MaterialLockTweaker {
             for (String string : requirements) {
                 descString.append(string).append(", ");
             }
-            return "Added Material Lock for Ritual: " + id + " With " + descString;
+            return "Added Material Lock for Material: " + id + " With " + descString;
         }
     }
 }

@@ -47,7 +47,7 @@ public class ModifierLockTweaker {
             for (String string : requirements) {
                 descString.append(string).append(", ");
             }
-            return "Added Modifier Lock for Ritual: " + id + " With " + descString;
+            return "Added Modifier Lock for Modifier: " + id + " With " + descString;
         }
     }
 }
