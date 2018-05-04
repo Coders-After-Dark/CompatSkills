@@ -61,6 +61,10 @@ repositories{
     	name = 'RF'
     	url "http://maven.covers1624.net/"
     }
+    maven{
+        name = 'Tinker'
+        url "http://dvs1.progwml6.com/files/maven/"
+    }
 }
 
 dependencies {
@@ -77,6 +81,8 @@ dependencies {
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.22-13"
     compileOnly "projecte:ProjectE:1.12:PE1.3.0"
     deobfCompile "cofh:RedstoneFlux:1.12-2.0.1.2:universal"
+    deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tinkers_version}"
+    deobfCompile "slimeknights.mantle:Mantle:${mantle_minecraft_version}-${mantle_version}"
     deobfCompile("blusunrize:ImmersiveEngineering:${ieVersion}") {
         exclude module: "crafttweaker"
     }

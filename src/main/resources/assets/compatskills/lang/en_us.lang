@@ -15,3 +15,7 @@ compatskills.reskillable.addLevelLockError2=Please fulfill the following require
 
 compatskills.bloodmagic.bindingError=Untold Dark Energies swirl around you and then subside
 compatskills.bloodmagic.ritualError=As the ritual activates, you don't achieve the expected result
+
+compatskills.tconstruct.materialError=For every stroke of the hammer, the more the material resists.
+compatskills.tconstruct.modifierError=After many countless moments, you can't figure out how to modify the tool to your desire.
+compatskills.tconstruct.toolTypeError=No matter how the instructions, a novice can not create a master piece.

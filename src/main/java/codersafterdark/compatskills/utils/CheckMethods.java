@@ -13,6 +13,10 @@ import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
+import slimeknights.tconstruct.library.TinkerRegistry;
+import slimeknights.tconstruct.library.materials.Material;
+import slimeknights.tconstruct.library.modifiers.IModifier;
+import slimeknights.tconstruct.library.tools.IToolPart;
 
 import java.util.List;
 
@@ -141,12 +145,11 @@ public class CheckMethods {
     ////////////////////////////////
 
     public static boolean checkValidMultiblockNameIE(String multiBlock) {
-        List<MultiblockHandler.IMultiblock> multiblocks = MultiblockHandler.getMultiblocks();
         if (multiBlock == null || multiBlock.isEmpty()) {
             CraftTweakerAPI.logError("String for Multiblock Name was found to be null or empty!");
             return false;
         } else if (MultiblockHandler.getMultiblocks().parallelStream().map(MultiblockHandler.IMultiblock::getUniqueName).noneMatch(multiBlock::equals)) {
-            CraftTweakerAPI.logError("No valid match was found for the String: " + multiBlock);
+            CraftTweakerAPI.logError("No valid IE multiblock match was found for the String: " + multiBlock);
             return false;
         }
         return true;
@@ -161,7 +164,33 @@ public class CheckMethods {
             CraftTweakerAPI.logError("String for Multiblock Name was found to be null or empty!");
             return false;
         } else if (!MagneticraftApi.getMultiblockManager().getRegisteredMultiblocks().containsKey(multiBlock)) {
-            CraftTweakerAPI.logError("No valid match was found for the String: " + multiBlock);
+            CraftTweakerAPI.logError("No valid MagnetiCraft multiblock match was found for the String: " + multiBlock);
+            return false;
+        }
+        return true;
+    }
+
+    /////////////////////////////
+    //   Tinker's Construct    //
+    /////////////////////////////
+
+    public static boolean checkModifier(String identifier){
+        if (identifier == null || identifier.isEmpty()){
+            CraftTweakerAPI.logError("String for Modifier Identifier was found to be null or empty!");
+            return false;
+        } else if (TinkerRegistry.getAllModifiers().parallelStream().map(IModifier::getIdentifier).noneMatch(identifier::equals)) {
+            CraftTweakerAPI.logError("No valid modifier match was found for the String: " + identifier);
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkMaterial(String identifier){
+        if (identifier == null || identifier.isEmpty()){
+            CraftTweakerAPI.logError("String for Material Identifier was found to be null or empty!");
+            return false;
+        } else if (TinkerRegistry.getAllMaterials().parallelStream().map(Material::getIdentifier).noneMatch(identifier::equals)) {
+            CraftTweakerAPI.logError("No valid material match was found for the String: " + identifier);
             return false;
         }
         return true;
