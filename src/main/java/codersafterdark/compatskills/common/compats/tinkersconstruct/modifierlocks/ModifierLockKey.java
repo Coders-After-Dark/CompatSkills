@@ -1,7 +1,7 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct.modifierlocks;
 
 import codersafterdark.reskillable.api.data.LockKey;
-import slimeknights.tconstruct.library.modifiers.IModifier;
+import slimeknights.tconstruct.library.modifiers.IToolMod;
 
 public class ModifierLockKey implements LockKey {
     private final String id;
@@ -10,7 +10,7 @@ public class ModifierLockKey implements LockKey {
         this.id = id;
     }
 
-    public ModifierLockKey(IModifier modifier) {
+    public ModifierLockKey(IToolMod modifier) {
         this(modifier == null ? "" : modifier.getIdentifier());
     }
 

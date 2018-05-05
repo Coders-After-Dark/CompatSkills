@@ -4,23 +4,20 @@ import codersafterdark.reskillable.api.data.LockKey;
 import net.minecraft.item.Item;
 
 public class ToolTypeLockKey implements LockKey{
-    private final String id;
+    private final Item item;
 
-    public ToolTypeLockKey(String id){
-        this.id = id;
-    }
 
     public ToolTypeLockKey(Item item){
-        this(item == null ? "" : item.getUnlocalizedName());
+        this.item = item;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return obj == this || obj instanceof ToolTypeLockKey && id.equals(((ToolTypeLockKey) obj).id);
+    public boolean equals(Object o) {
+        return o == this || o instanceof ToolTypeLockKey && item == ((ToolTypeLockKey) o).item;
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return item == null ? super.hashCode() : item.hashCode();
     }
 }
