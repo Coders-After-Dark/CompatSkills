@@ -1,7 +1,6 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct;
 
 import codersafterdark.compatskills.common.compats.tinkersconstruct.materiallocks.MaterialLockKey;
-import codersafterdark.compatskills.common.compats.tinkersconstruct.modifierlocks.ModifierLockKey;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks.ToolTypeLockKey;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
@@ -24,16 +23,16 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
-        List<RequirementHolder> holders = getModifierRequirements(data, event.getModifiers());
-        if (!holders.isEmpty()) {
-            event.setCanceled(getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.modifierError")));
+        RequirementHolder holder = getModifierRequirement(event.getModifiers());
+        if (!holder.equals(LevelLockHandler.EMPTY_LOCK)) {
+            event.setCanceled(getCanceledMessage(data, holder, I18n.format("compatskills.tconstruct.modifierError")));
         }
     }
 
     @SubscribeEvent
     public void onCraftingMaterial(TinkerCraftingEvent.ToolPartCraftingEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
-        List<RequirementHolder> holders = getMaterialRequirements(data, Collections.singletonList(event.getItemStack()));
+        List<RequirementHolder> holders = getMaterialRequirements(Collections.singletonList(event.getItemStack()));
         if (!holders.isEmpty()) {
             event.setCanceled(getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.materialError")));
         }
@@ -42,7 +41,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onPartReplaced(TinkerCraftingEvent.ToolPartReplaceEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
-        List<RequirementHolder> holders = getMaterialRequirements(data, event.getToolParts());
+        List<RequirementHolder> holders = getMaterialRequirements(event.getToolParts());
         if (!holders.isEmpty()) {
             event.setCanceled(getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.materialError")));
         }
@@ -63,55 +62,52 @@ public class TinkerLockHandler {
             holders.add(toolHolder);
         }
 
-        holders.addAll(getMaterialRequirements(data, event.getToolParts()));
+        holders.addAll(getMaterialRequirements(event.getToolParts()));
 
         if (!holders.isEmpty()) {
             event.setCanceled(getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.toolTypeError")));
         }
     }
 
-    private List<RequirementHolder> getMaterialRequirements(PlayerData data, List<ItemStack> itemstacks) {
-        if (data == null) {
-            return new ArrayList<>();
-        }
+    private List<RequirementHolder> getMaterialRequirements(List<ItemStack> itemstacks) {
         List<RequirementHolder> holders = new ArrayList<>();
         for (ItemStack stack : itemstacks) {
             Material material = TinkerUtil.getMaterialFromStack(stack);
             RequirementHolder materialHolder = LevelLockHandler.getLockByKey(new MaterialLockKey(material));
-            if (materialHolder != null && !materialHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(materialHolder)) {
+            if (!materialHolder.equals(LevelLockHandler.EMPTY_LOCK)) {
                 holders.add(materialHolder);
             }
-            holders.addAll(getModifierRequirements(data, material.getDefaultTraits()));
-        }
-        return holders;
-    }
-
-    private List<RequirementHolder> getModifierRequirements(PlayerData data, List<? extends IToolMod> modifiers) {
-        if (data == null) {
-            return new ArrayList<>();
-        }
-        List<RequirementHolder> holders = new ArrayList<>();
-        for (IToolMod trait : modifiers) {
-            RequirementHolder holder = LevelLockHandler.getLockByKey(new ModifierLockKey(trait));
-            if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
+            RequirementHolder holder = getModifierRequirement(material.getDefaultTraits());
+            if (!holder.equals(LevelLockHandler.EMPTY_LOCK)) {
                 holders.add(holder);
             }
         }
         return holders;
     }
 
+    private RequirementHolder getModifierRequirement(List<? extends IToolMod> modifiers) {
+        IToolMod[] mods = new IToolMod[modifiers.size()];
+        for (int i = 0; i < modifiers.size(); i++) {
+            mods[i] = modifiers.get(i);
+        }
+        return LevelLockHandler.getLocks(IToolMod.class, mods);
+    }
+
     //TODO: Potentially try to make an error message that says what lock types there are OR remove errorType and just have a generic tinker's error
     //This is because material locks could also be just because the material has a modifier that cannot be used
     //Or with full tool creation it could be any of the lock types
     private String getCanceledMessage(PlayerData data, List<RequirementHolder> holders, String errorType) {
-        if (data == null) {
+        return getCanceledMessage(data, new RequirementHolder(holders.toArray(new RequirementHolder[0])), errorType);
+    }
+
+    private String getCanceledMessage(PlayerData data, RequirementHolder holder, String errorType) {
+        if (data == null || holder.equals(LevelLockHandler.EMPTY_LOCK)) {
             return null;
         }
         StringBuilder reqs = new StringBuilder(errorType);
         reqs.append("\n\nRequirements:");
-        RequirementHolder holder = new RequirementHolder(holders.toArray(new RequirementHolder[0]));
         for (Requirement req : holder.getRequirements()) {
-            reqs.append('\n').append(req.getToolTip(data));//Will this be null pointer?
+            reqs.append('\n').append(req.getToolTip(data));
         }
         return reqs.toString();
     }
