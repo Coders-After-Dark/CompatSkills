@@ -30,22 +30,22 @@ public class NBTLockTweaker {
     }
 
     private static class AddModNBTLock implements IAction {
-        String modID;
-        IData data;
-        String[] requirements;
+        private final String modID;
+        private final IData data;
+        private final String[] requirements;
 
-        AddModNBTLock(String modId, IData tag, String... locked) {
-            if (CheckMethods.checkString(modId) && CheckMethods.checkModLoaded(modId) && CheckMethods.checkValidNBTTagCompound(tag) && CheckMethods.checkStringArray(locked)) {
-                this.modID = modId;
-                this.data = tag;
-                this.requirements = locked;
-            }
+        private AddModNBTLock(String modId, IData tag, String... locked) {
+            this.modID = modId;
+            this.data = tag;
+            this.requirements = locked;
         }
 
         @Override
         public void apply() {
-            RequirementHolder holder = RequirementHolder.fromStringList(requirements);
-            LevelLockHandler.addLockByKey(new ModLockKey(modID, (NBTTagCompound) NBTConverter.from(data)), holder);
+            if (CheckMethods.checkModLoaded(modID) & CheckMethods.checkValidNBTTagCompound(data) & CheckMethods.checkStringArray(requirements)) {
+                RequirementHolder holder = RequirementHolder.fromStringList(requirements);
+                LevelLockHandler.addLockByKey(new ModLockKey(modID, (NBTTagCompound) NBTConverter.from(data)), holder);
+            }
         }
 
         @Override
@@ -54,7 +54,7 @@ public class NBTLockTweaker {
             for (String string : requirements) {
                 descString.append(string).append(", ");
             }
-            return "Adding NBT lock: " + data.asString() + " for Mod: " + modID + " to: " + descString;
+            return "Adding NBT lock: " + data + " for Mod: " + modID + " to: " + descString;
         }
     }
 
@@ -62,17 +62,17 @@ public class NBTLockTweaker {
         IData data;
         String[] requirements;
 
-        AddGenericNBTLock(IData data, String... requirements) {
-            if (CheckMethods.checkValidNBTTagCompound(data) && CheckMethods.checkStringArray(requirements)) {
-                this.data = data;
-                this.requirements = requirements;
-            }
+        private AddGenericNBTLock(IData data, String... requirements) {
+            this.data = data;
+            this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            RequirementHolder holder = RequirementHolder.fromStringList(requirements);
-            LevelLockHandler.addLockByKey(new GenericNBTLockKey((NBTTagCompound) NBTConverter.from(data)), holder);
+            if (CheckMethods.checkValidNBTTagCompound(data) & CheckMethods.checkStringArray(requirements)) {
+                RequirementHolder holder = RequirementHolder.fromStringList(requirements);
+                LevelLockHandler.addLockByKey(new GenericNBTLockKey((NBTTagCompound) NBTConverter.from(data)), holder);
+            }
         }
 
         @Override
@@ -81,7 +81,7 @@ public class NBTLockTweaker {
             for (String string : requirements) {
                 descString.append(string).append(", ");
             }
-            return "Adding Generic NBT lock: " + data.asString() + " to: " + descString;
+            return "Adding Generic NBT lock: " + data + " to: " + descString;
         }
     }
 }

@@ -11,8 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-import java.util.Arrays;
-
 @ModOnly("gamestages")
 @ZenClass("mods.compatskills.GameStageUnlockable")
 @ZenRegister
@@ -23,35 +21,39 @@ public class GameStageUnlockableTweaker {
     }
 
     private static class AddGameStageUnlockable implements IAction {
-        String gameStage;
-        String name;
-        int x;
-        int y;
-        String skillName;
-        int cost;
-        String[] requirements;
+        private final String gameStage;
+        private final String name;
+        private final int x;
+        private final int y;
+        private final String skillName;
+        private final int cost;
+        private final String[] requirements;
 
-        AddGameStageUnlockable(String gamestage, String name, int x, int y, String skillName, int cost, String... requirements) {
-            if (CheckMethods.checkString(gamestage) && CheckMethods.checkString(name) && CheckMethods.checkIntX(x) && CheckMethods.checkIntY(y) && CheckMethods.checkParentSkillsString(skillName) && CheckMethods.checkInt(cost) && CheckMethods.checkStringArray(requirements)) {
-                this.gameStage = gamestage;
-                this.name = name;
-                this.x = x;
-                this.y = y;
-                this.skillName = skillName;
-                this.cost = cost;
-                this.requirements = requirements;
-            }
+        private AddGameStageUnlockable(String gamestage, String name, int x, int y, String skillName, int cost, String... requirements) {
+            this.gameStage = gamestage;
+            this.name = name;
+            this.x = x;
+            this.y = y;
+            this.skillName = skillName;
+            this.cost = cost;
+            this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            ReskillableRegistries.UNLOCKABLES.register(new GameStageUnlockable(gameStage, name.replaceAll("\\s+", "").toLowerCase(), x, y, new ResourceLocation(skillName), cost, requirements));
+            if (CheckMethods.checkString(gameStage) & CheckMethods.checkString(name) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillName) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+                ReskillableRegistries.UNLOCKABLES.register(new GameStageUnlockable(gameStage, name.replaceAll("\\s+", "").toLowerCase(), x, y, new ResourceLocation(skillName), cost, requirements));
+            }
         }
 
         @Override
         public String describe() {
             CraftTweakerAPI.logInfo("Added Unlockable Trait: " + name + " With GameStage Link: " + gameStage + " under Skill: " + skillName);
-            CraftTweakerAPI.logInfo("Unlockable Trait: " + name + " has requirements: " + Arrays.toString(requirements));
+            StringBuilder descString = new StringBuilder("Requirements: ");
+            for (String s : requirements) {
+                descString.append(s).append(", ");
+            }
+            CraftTweakerAPI.logInfo("Unlockable Trait: " + name + " has " + descString);
             return null;
         }
     }

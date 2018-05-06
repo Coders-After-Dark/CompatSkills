@@ -9,7 +9,6 @@ import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
-import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -24,29 +23,29 @@ public class RequirementTweaker {
     }
 
     private static class Add implements IAction {
-        ItemStack s;
-        String[] r;
+        private IItemStack stack;
+        private String[] requirements;
 
-        Add(IItemStack stack, String... requirements) {
-            if (CheckMethods.checkIItemstack(stack) && CheckMethods.checkStringArray(requirements)) {
-                this.s = CraftTweakerMC.getItemStack(stack);
-                this.r = requirements;
-            }
+        private Add(IItemStack stack, String... requirements) {
+            this.stack = stack;
+            this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            RequirementHolder h = RequirementHolder.fromStringList(r);
-            LevelLockHandler.addLock(s, h);
+            if (CheckMethods.checkIItemstack(stack) & CheckMethods.checkStringArray(requirements)) {
+                RequirementHolder h = RequirementHolder.fromStringList(requirements);
+                LevelLockHandler.addLock(CraftTweakerMC.getItemStack(stack), h);
+            }
         }
 
         @Override
         public String describe() {
             StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String s : r) {
+            for (String s : requirements) {
                 descString.append(s).append(", ");
             }
-            return "Setting the requirement of: " + s.getDisplayName() + " to: " + descString;
+            return "Setting the requirement of: " + (stack == null ? "null" : stack.getDisplayName()) + " to: " + descString;
         }
     }
 }

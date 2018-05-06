@@ -58,7 +58,10 @@ public class CheckMethods {
     }
 
     public static boolean checkModLoaded(String modid) {
-        if (!Loader.isModLoaded(modid)) {
+        if (modid == null || modid.isEmpty()) {
+            CraftTweakerAPI.logError("String Mod ID was Null or Empty!");
+            return false;
+        } else if (!Loader.isModLoaded(modid)) {
             CraftTweakerAPI.logError("Mod Id: " + modid + " Is not Loaded!");
             return false;
         }
@@ -66,10 +69,12 @@ public class CheckMethods {
     }
 
     public static boolean checkValidNBTTagCompound(IData tag) {
+        if (tag == null) {
+            CraftTweakerAPI.logError("'IData' Param is null!");
+            return false;
+        }
         if (!(tag instanceof DataMap)) {
-            if (tag != null) {
-                CraftTweakerAPI.logError("Invalid NBT Tag: " + tag.asString());
-            }
+            CraftTweakerAPI.logError("Invalid NBT Tag: " + tag.asString());
             return false;
         }
         return true;

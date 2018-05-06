@@ -20,20 +20,20 @@ public class GameStageLockTweaker {
     }
 
     private static class AddGameStageLock implements IAction {
-        String gameStage;
-        String[] requirements;
+        private final String gameStage;
+        private final String[] requirements;
 
-        AddGameStageLock(String gameStage, String... requirements) {
-            if (CheckMethods.checkString(gameStage) && CheckMethods.checkStringArray(requirements)) {
-                this.gameStage = gameStage;
-                this.requirements = requirements;
-            }
+        private AddGameStageLock(String gameStage, String... requirements) {
+            this.gameStage = gameStage;
+            this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            RequirementHolder holder = RequirementHolder.fromStringList(requirements);
-            LevelLockHandler.addLockByKey(new GameStageLock(gameStage), holder);
+            if (CheckMethods.checkString(gameStage) & CheckMethods.checkStringArray(requirements)) {
+                RequirementHolder holder = RequirementHolder.fromStringList(requirements);
+                LevelLockHandler.addLockByKey(new GameStageLock(gameStage), holder);
+            }
         }
 
         @Override

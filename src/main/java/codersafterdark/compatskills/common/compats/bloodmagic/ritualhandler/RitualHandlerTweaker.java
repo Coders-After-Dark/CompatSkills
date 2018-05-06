@@ -36,17 +36,17 @@ public class RitualHandlerTweaker {
     }
 
     private static class AddRitualLock implements IAction {
-        String ritual;
-        String[] requirements;
+        private final String ritual;
+        private final String[] requirements;
 
-        AddRitualLock(String ritual, String... requirements) {
+        private AddRitualLock(String ritual, String... requirements) {
             this.ritual = ritual;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkRitual(ritual)) {
+            if (CheckMethods.checkRitual(ritual) & CheckMethods.checkStringArray(requirements)) {
                 Ritual trueRitual = RitualRegistry.getRegistry().get(ritual);
                 if (trueRitual != null) {
                     LevelLockHandler.addLockByKey(new RitualNameLockKey(trueRitual), RequirementHolder.fromStringList(requirements));
@@ -69,17 +69,16 @@ public class RitualHandlerTweaker {
         int activationCost;
         String[] requirements;
 
-        AddRitualCostLock(int activationCost, String... requirements) {
+        private AddRitualCostLock(int activationCost, String... requirements) {
             this.activationCost = activationCost;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkInt(activationCost)) {
+            if (CheckMethods.checkInt(activationCost) & CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new RitualCostLockKey(activationCost), RequirementHolder.fromStringList(requirements));
             }
-
         }
 
         @Override
@@ -96,14 +95,14 @@ public class RitualHandlerTweaker {
         int crystalLevel;
         String[] requirements;
 
-        AddRitualCrystalLock(int crystalLevel, String... requirements) {
+        private AddRitualCrystalLock(int crystalLevel, String... requirements) {
             this.crystalLevel = crystalLevel;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkInt(crystalLevel)) {
+            if (CheckMethods.checkInt(crystalLevel) & CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new RitualCrystalLockKey(crystalLevel), RequirementHolder.fromStringList(requirements));
             }
 
