@@ -23,9 +23,9 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
-        RequirementHolder holder = getModifierRequirement(event.getModifiers());
-        if (!holder.equals(LevelLockHandler.EMPTY_LOCK)) {
-            event.setCanceled(getCanceledMessage(data, holder, I18n.format("compatskills.tconstruct.modifierError")));
+        String canceledMessage = getCanceledMessage(data, getModifierRequirement(event.getModifiers()), I18n.format("compatskills.tconstruct.modifierError"));
+        if (canceledMessage != null) {
+            event.setCanceled(canceledMessage);
         }
     }
 
@@ -33,17 +33,18 @@ public class TinkerLockHandler {
     public void onCraftingMaterial(TinkerCraftingEvent.ToolPartCraftingEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
         List<RequirementHolder> holders = getMaterialRequirements(Collections.singletonList(event.getItemStack()));
-        if (!holders.isEmpty()) {
-            event.setCanceled(getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.materialError")));
+        String canceledMessage = getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.materialError"));
+        if (canceledMessage != null) {
+            event.setCanceled(canceledMessage);
         }
     }
 
     @SubscribeEvent
     public void onPartReplaced(TinkerCraftingEvent.ToolPartReplaceEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
-        List<RequirementHolder> holders = getMaterialRequirements(event.getToolParts());
-        if (!holders.isEmpty()) {
-            event.setCanceled(getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.materialError")));
+        String canceledMessage = getCanceledMessage(data, getMaterialRequirements(event.getToolParts()), I18n.format("compatskills.tconstruct.materialError"));
+        if (canceledMessage != null) {
+            event.setCanceled(canceledMessage);
         }
     }
 
@@ -58,14 +59,15 @@ public class TinkerLockHandler {
         List<RequirementHolder> holders = new ArrayList<>();
 
         RequirementHolder toolHolder = LevelLockHandler.getLockByKey(new ToolTypeLockKey(event.getItemStack().getItem()));
-        if (toolHolder != null && !toolHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(toolHolder)) {
+        if (!toolHolder.equals(LevelLockHandler.EMPTY_LOCK)) {
             holders.add(toolHolder);
         }
 
         holders.addAll(getMaterialRequirements(event.getToolParts()));
 
-        if (!holders.isEmpty()) {
-            event.setCanceled(getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.toolTypeError")));
+        String canceledMessage = getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.toolTypeError"));
+        if (canceledMessage != null) {
+            event.setCanceled(canceledMessage);
         }
     }
 
@@ -97,11 +99,11 @@ public class TinkerLockHandler {
     //This is because material locks could also be just because the material has a modifier that cannot be used
     //Or with full tool creation it could be any of the lock types
     private String getCanceledMessage(PlayerData data, List<RequirementHolder> holders, String errorType) {
-        return getCanceledMessage(data, new RequirementHolder(holders.toArray(new RequirementHolder[0])), errorType);
+        return holders.isEmpty() ? null : getCanceledMessage(data, new RequirementHolder(holders.toArray(new RequirementHolder[0])), errorType);
     }
 
     private String getCanceledMessage(PlayerData data, RequirementHolder holder, String errorType) {
-        if (data == null || holder.equals(LevelLockHandler.EMPTY_LOCK)) {
+        if (data == null || holder.equals(LevelLockHandler.EMPTY_LOCK) || data.matchStats(holder)) {
             return null;
         }
         StringBuilder reqs = new StringBuilder(errorType);
