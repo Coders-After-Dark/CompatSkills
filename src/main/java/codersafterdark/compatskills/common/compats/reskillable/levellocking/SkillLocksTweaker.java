@@ -4,7 +4,6 @@ import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTSkill;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.api.skill.Skill;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
@@ -22,22 +21,22 @@ public class SkillLocksTweaker {
     }
 
     private static class AddLevelLock implements IAction {
-        Skill skill;
-        int level;
-        String[] requirements;
+        private final CTSkill skill;
+        private final int level;
+        private final String[] requirements;
 
-        AddLevelLock(CTSkill skill, int level, String... requirements) {
-            if (CheckMethods.checkSkill(skill.getSkill()) && CheckMethods.checkInt(level) && CheckMethods.checkStringArray(requirements)) {
-                this.skill = skill.getSkill();
-                this.level = level;
-                this.requirements = requirements;
-            }
+        private AddLevelLock(CTSkill skill, int level, String... requirements) {
+            this.skill = skill;
+            this.level = level;
+            this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            RequirementHolder holder = RequirementHolder.fromStringList(requirements);
-            LevelLockHandler.addLockByKey(new SkillLock(skill, level), holder);
+            if (CheckMethods.checkSkill(skill.getSkill()) & CheckMethods.checkInt(level) & CheckMethods.checkStringArray(requirements)) {
+                RequirementHolder holder = RequirementHolder.fromStringList(requirements);
+                LevelLockHandler.addLockByKey(new SkillLock(skill.getSkill(), level), holder);
+            }
         }
 
         @Override
@@ -46,7 +45,7 @@ public class SkillLocksTweaker {
             for (String string : requirements) {
                 descString.append(string).append(", ");
             }
-            return "Added Level-Lock " + skill.getName() + ": " + level + " With Requirements: " + descString;
+            return "Added Level-Lock " + (skill == null ? "null" : skill.getName()) + ": " + level + " With Requirements: " + descString;
         }
     }
 }

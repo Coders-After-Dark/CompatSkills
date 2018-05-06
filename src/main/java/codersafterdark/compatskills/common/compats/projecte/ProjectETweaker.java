@@ -17,23 +17,23 @@ public class ProjectETweaker {
 
     @ZenMethod
     public static void addEMCLock(int emc, String... locked) {
-        if (CheckMethods.checkInt(emc) && CheckMethods.checkStringArray(locked)) {
-            CompatSkills.LATE_ADDITIONS.add(new AddEMCLock(emc, locked));
-        }
+        CompatSkills.LATE_ADDITIONS.add(new AddEMCLock(emc, locked));
     }
 
     private static class AddEMCLock implements IAction {
-        int emc;
-        String[] requirements;
+        private int emc;
+        private String[] requirements;
 
-        AddEMCLock(int emc, String... requirements) {
+        private AddEMCLock(int emc, String... requirements) {
             this.emc = emc;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            LevelLockHandler.addLockByKey(new EMCLockKey(emc), RequirementHolder.fromStringList(requirements));
+            if (CheckMethods.checkInt(emc) & CheckMethods.checkStringArray(requirements)) {
+                LevelLockHandler.addLockByKey(new EMCLockKey(emc), RequirementHolder.fromStringList(requirements));
+            }
         }
 
         @Override

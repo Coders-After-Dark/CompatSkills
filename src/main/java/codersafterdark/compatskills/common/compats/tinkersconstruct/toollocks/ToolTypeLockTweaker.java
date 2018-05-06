@@ -33,7 +33,7 @@ public class ToolTypeLockTweaker {
 
         @Override
         public void apply() {
-            if (CheckMethods.checkIItemstack(stack) && CheckMethods.checkStringArray(requirements)){
+            if (CheckMethods.checkIItemstack(stack) & CheckMethods.checkStringArray(requirements)){
                 LevelLockHandler.addLockByKey(new ToolTypeLockKey(CraftTweakerMC.getItemStack(stack).getItem()), RequirementHolder.fromStringList(requirements));
             }
         }
@@ -44,7 +44,7 @@ public class ToolTypeLockTweaker {
             for (String string : requirements) {
                 descString.append(string).append(", ");
             }
-            return "Added Tool-Type Lock for Tool-Type: " + stack.getDisplayName() + descString;
+            return "Added Tool-Type Lock for Tool-Type: " + (stack == null ? "null" : stack.getDisplayName()) + descString;
         }
     }
 }
