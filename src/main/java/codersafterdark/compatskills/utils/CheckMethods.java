@@ -9,9 +9,14 @@ import com.cout970.magneticraft.api.MagneticraftApi;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.data.DataMap;
 import crafttweaker.api.data.IData;
+import crafttweaker.api.entity.IEntity;
 import crafttweaker.api.item.IItemStack;
+import crafttweaker.api.minecraft.CraftTweakerMC;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
@@ -72,9 +77,24 @@ public class CheckMethods {
         if (tag == null) {
             CraftTweakerAPI.logError("'IData' Param is null!");
             return false;
-        }
-        if (!(tag instanceof DataMap)) {
+        } else if (!(tag instanceof DataMap)) {
             CraftTweakerAPI.logError("Invalid NBT Tag: " + tag.asString());
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkValidDimension(int dimension) {
+        if (!DimensionManager.isDimensionRegistered(dimension)){
+            CraftTweakerAPI.logError("Dimension: " + dimension + " was found to not be registered!");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkValidIEntity(IEntity entity) {
+        if (entity == null){
+            CraftTweakerAPI.logError("IEntity was found to be null");
             return false;
         }
         return true;
