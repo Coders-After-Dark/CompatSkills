@@ -4,23 +4,26 @@ import codersafterdark.reskillable.api.data.LockKey;
 import slimeknights.tconstruct.library.modifiers.IToolMod;
 
 public class ModifierLockKey implements LockKey {
-    private final String id;
-
-    public ModifierLockKey(String id) {
-        this.id = id;
-    }
+    private final IToolMod modifier;
 
     public ModifierLockKey(IToolMod modifier) {
-        this(modifier == null ? "" : modifier.getIdentifier());
+        this.modifier = modifier;
     }
 
     @Override
     public boolean equals(Object o) {
-        return o == this || o instanceof ModifierLockKey && id.equals(((ModifierLockKey) o).id);
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof ModifierLockKey) {
+            ModifierLockKey other = (ModifierLockKey) o;
+            return modifier == null ? other.modifier == null : modifier.getIdentifier().equals(other.modifier.getIdentifier());
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return id.hashCode();
+        return modifier == null ? super.hashCode() : modifier.getIdentifier().hashCode();
     }
 }
