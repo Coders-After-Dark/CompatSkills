@@ -6,6 +6,7 @@ import codersafterdark.compatskills.common.compats.bloodmagic.BMCompatHandler;
 import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
 import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
 import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
+import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.common.compats.projecte.ProjectECompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.theoneprobe.TOPCompatHandler;
@@ -67,6 +68,7 @@ public class CompatSkills {
         if (Loader.isModLoaded("projecte")) {
             ProjectECompatHandler.setup();
         }
+        MinecraftCompatHandler.setup();
     }
 
     @EventHandler
