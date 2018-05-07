@@ -9,14 +9,11 @@ import com.cout970.magneticraft.api.MagneticraftApi;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.data.DataMap;
 import crafttweaker.api.data.IData;
-import crafttweaker.api.entity.IEntity;
+import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IItemStack;
-import crafttweaker.api.minecraft.CraftTweakerMC;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
@@ -92,9 +89,9 @@ public class CheckMethods {
         return true;
     }
 
-    public static boolean checkValidIEntity(IEntity entity) {
+    public static boolean checkValidIEntityDefinition(IEntityDefinition entity) {
         if (entity == null){
-            CraftTweakerAPI.logError("IEntity was found to be null");
+            CraftTweakerAPI.logError("IEntityDefinition was found to be null");
             return false;
         }
         return true;

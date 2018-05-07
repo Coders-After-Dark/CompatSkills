@@ -2,6 +2,8 @@ package codersafterdark.compatskills.common.compats.minecraft.dimension.dimensio
 
 import codersafterdark.reskillable.api.data.LockKey;
 
+import java.util.Objects;
+
 public class DimensionLockKey implements LockKey {
     private final int dimension;
 
@@ -16,6 +18,6 @@ public class DimensionLockKey implements LockKey {
 
     @Override
     public int hashCode() {
-        return dimension;
+        return Objects.hashCode(dimension);
     }
 }

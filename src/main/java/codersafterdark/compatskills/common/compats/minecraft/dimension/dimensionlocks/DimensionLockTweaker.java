@@ -21,7 +21,7 @@ public class DimensionLockTweaker {
         private final int dimension;
         private final String[] requirements;
 
-        AddDimensionLock(int dimension, String... requirements){
+        private AddDimensionLock(int dimension, String... requirements){
             this.dimension = dimension;
             this.requirements = requirements;
         }
@@ -39,7 +39,7 @@ public class DimensionLockTweaker {
             for (String string : requirements) {
                 descString.append(string).append(", ");
             }
-            return "Added Dimension Lock for Dimension: " + dimension + ", With Requirements: " + descString;
+            return "Added Dimension Lock for Dimension: " + dimension + ", With " + descString;
         }
     }
 }

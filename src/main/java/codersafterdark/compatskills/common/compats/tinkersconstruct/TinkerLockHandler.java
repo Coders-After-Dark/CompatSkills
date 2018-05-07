@@ -52,7 +52,7 @@ public class TinkerLockHandler {
     public void onToolCrafted(TinkerCraftingEvent.ToolCraftingEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
         if (data == null) {
-            //TODO this event is the one that actually can have data be null
+            event.setCanceled(true);//Support for canceling if old tinkers so that they cant create dupes
             return;
         }
 
@@ -107,7 +107,7 @@ public class TinkerLockHandler {
             return null;
         }
         StringBuilder reqs = new StringBuilder(errorType);
-        reqs.append("\n\nRequirements:");
+        reqs.append("\n\n").append(I18n.format("compatskills.misc.Requirements"));
         for (Requirement req : holder.getRequirements()) {
             reqs.append('\n').append(req.getToolTip(data));
         }
