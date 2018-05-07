@@ -1,14 +1,12 @@
 package codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent;
 
 import codersafterdark.compatskills.CompatSkills;
-import codersafterdark.compatskills.common.compats.minecraft.entity.EntityLockKey;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
-import crafttweaker.api.entity.IEntity;
-import crafttweaker.api.minecraft.CraftTweakerMC;
+import crafttweaker.api.entity.IEntityDefinition;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -16,23 +14,23 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenRegister
 public class EntityMountEventTweaker {
     @ZenMethod
-    public static void addMountLock(IEntity entity, String... defaultRequirements){
-        CompatSkills.LATE_ADDITIONS.add(new AddMountLock(entity, defaultRequirements));
+    public static void addMountLock(IEntityDefinition definition, String... defaultRequirements){
+        CompatSkills.LATE_ADDITIONS.add(new AddMountLock(definition, defaultRequirements));
     }
 
     private static class AddMountLock implements IAction {
-        private final IEntity entity;
+        private final IEntityDefinition definition;
         private final String[] requirements;
 
-        AddMountLock(IEntity entity, String... requirements){
-            this.entity = entity;
+        private AddMountLock(IEntityDefinition definition, String... requirements){
+            this.definition = definition;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkValidIEntity(entity) & CheckMethods.checkStringArray(requirements)){
-                LevelLockHandler.addLockByKey(new EntityLockKey(CraftTweakerMC.getEntity(entity)), RequirementHolder.fromStringList(requirements));
+            if (CheckMethods.checkValidIEntityDefinition(definition) & CheckMethods.checkStringArray(requirements)){
+                LevelLockHandler.addLockByKey(new EntityMountKey(definition.getId()), RequirementHolder.fromStringList(requirements));
             }
         }
 
@@ -42,7 +40,7 @@ public class EntityMountEventTweaker {
             for (String string : requirements) {
                 descString.append(string).append(", ");
             }
-            return "Added Entity Mount Lock for Entity: " + entity.getDisplayName() + ", With Requirements: " + descString;
+            return "Added Entity Mount Lock for Entity: " + (definition == null ? "null" : definition.getName()) + ", With " + descString;
         }
     }
 }

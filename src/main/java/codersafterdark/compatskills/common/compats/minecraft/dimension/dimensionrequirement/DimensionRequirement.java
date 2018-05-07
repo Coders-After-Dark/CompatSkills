@@ -33,6 +33,6 @@ public class DimensionRequirement extends Requirement {
 
     @Override
     public RequirementComparision matches(Requirement other) {
-        return other instanceof DimensionRequirement && dimension == (((DimensionRequirement) other).dimension) ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
+        return other instanceof DimensionRequirement && dimension == ((DimensionRequirement) other).dimension ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
     }
 }

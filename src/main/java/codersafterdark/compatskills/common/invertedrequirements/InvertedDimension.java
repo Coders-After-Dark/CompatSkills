@@ -29,11 +29,11 @@ public class InvertedDimension extends Requirement {
                 color = TextFormatting.RED;
             }
         }
-        return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + I18n.format("compatskills.misc.dimensionFormat", color, dimension);
+        return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + I18n.format("compatskills.misc.invertedDimensionFormat", color, dimension);
     }
 
     @Override
     public RequirementComparision matches(Requirement other) {
-        return other instanceof InvertedDimension && dimension == (((InvertedDimension) other).dimension) ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
+        return other instanceof InvertedDimension && dimension == ((InvertedDimension) other).dimension ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
     }
 }
