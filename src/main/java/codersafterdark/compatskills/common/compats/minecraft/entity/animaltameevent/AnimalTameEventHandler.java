@@ -1,13 +1,11 @@
 package codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent;
 
-import codersafterdark.compatskills.common.compats.minecraft.entity.EntityLockKey;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
@@ -19,10 +17,12 @@ import java.util.List;
 public class AnimalTameEventHandler {
     @SubscribeEvent
     public void onTame(AnimalTameEvent event) {
+        if (event.isCanceled()) {
+            return;
+        }
         EntityPlayer player = event.getTamer();
-        EntityAnimal animal = event.getAnimal();
         PlayerData data = PlayerDataHandler.get(player);
-        RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new EntityLockKey(animal));
+        RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new EntityTameKey(event.getAnimal()));
         if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             String error = I18n.format("compatskills.entity.entityTameError");
