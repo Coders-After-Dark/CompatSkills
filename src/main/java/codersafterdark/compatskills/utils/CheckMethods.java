@@ -82,7 +82,7 @@ public class CheckMethods {
     }
 
     public static boolean checkValidDimension(int dimension) {
-        if (!DimensionManager.isDimensionRegistered(dimension)){
+        if (!DimensionManager.isDimensionRegistered(dimension)) {
             CraftTweakerAPI.logError("Dimension: " + dimension + " was found to not be registered!");
             return false;
         }
@@ -90,7 +90,7 @@ public class CheckMethods {
     }
 
     public static boolean checkValidIEntityDefinition(IEntityDefinition entity) {
-        if (entity == null){
+        if (entity == null) {
             CraftTweakerAPI.logError("IEntityDefinition was found to be null");
             return false;
         }

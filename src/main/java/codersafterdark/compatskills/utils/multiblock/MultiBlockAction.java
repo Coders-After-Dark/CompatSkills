@@ -7,9 +7,9 @@ import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 
 public abstract class MultiBlockAction implements IAction {
+    protected final String multiblockName;
     private final String failureMessage;
     private final String[] defaultRequirements;
-    protected final String multiblockName;
 
     public MultiBlockAction(String multiblockName, String failureMessage, String... defaultRequirements) {
         this.multiblockName = multiblockName;

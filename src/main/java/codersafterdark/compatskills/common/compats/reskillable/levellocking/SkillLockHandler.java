@@ -7,7 +7,6 @@ import codersafterdark.reskillable.api.event.LevelUpEvent;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.skill.Skill;
 import codersafterdark.reskillable.base.LevelLockHandler;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;

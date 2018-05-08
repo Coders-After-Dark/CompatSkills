@@ -14,7 +14,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenRegister
 public class AnimalTameEventTweaker {
     @ZenMethod
-    public static void addTameLock(IEntityDefinition definition, String... defaultRequirements){
+    public static void addTameLock(IEntityDefinition definition, String... defaultRequirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddTameLock(definition, defaultRequirements));
     }
 
@@ -22,7 +22,7 @@ public class AnimalTameEventTweaker {
         private final IEntityDefinition definition;
         private final String[] requirements;
 
-        private AddTameLock(IEntityDefinition definition, String... requirements){
+        private AddTameLock(IEntityDefinition definition, String... requirements) {
             this.definition = definition;
             this.requirements = requirements;
         }

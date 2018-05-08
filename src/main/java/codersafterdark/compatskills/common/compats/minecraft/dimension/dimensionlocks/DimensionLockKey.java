@@ -7,7 +7,7 @@ import java.util.Objects;
 public class DimensionLockKey implements LockKey {
     private final int dimension;
 
-    public DimensionLockKey (int dimension) {
+    public DimensionLockKey(int dimension) {
         this.dimension = dimension;
     }
 

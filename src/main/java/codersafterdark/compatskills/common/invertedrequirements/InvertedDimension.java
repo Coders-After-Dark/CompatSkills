@@ -3,7 +3,6 @@ package codersafterdark.compatskills.common.invertedrequirements;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -26,7 +25,7 @@ public class InvertedDimension extends Requirement {
         TextFormatting color = TextFormatting.GREEN;
         EntityPlayer player = data.playerWR.get();
         if (player != null) {
-            if (player.dimension == dimension){
+            if (player.dimension == dimension) {
                 color = TextFormatting.RED;
             }
         }

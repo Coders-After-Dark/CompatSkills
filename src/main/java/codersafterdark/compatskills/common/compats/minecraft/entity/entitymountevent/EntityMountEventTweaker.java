@@ -14,7 +14,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenRegister
 public class EntityMountEventTweaker {
     @ZenMethod
-    public static void addMountLock(IEntityDefinition definition, String... defaultRequirements){
+    public static void addMountLock(IEntityDefinition definition, String... defaultRequirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddMountLock(definition, defaultRequirements));
     }
 
@@ -22,14 +22,14 @@ public class EntityMountEventTweaker {
         private final IEntityDefinition definition;
         private final String[] requirements;
 
-        private AddMountLock(IEntityDefinition definition, String... requirements){
+        private AddMountLock(IEntityDefinition definition, String... requirements) {
             this.definition = definition;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkValidIEntityDefinition(definition) & CheckMethods.checkStringArray(requirements)){
+            if (CheckMethods.checkValidIEntityDefinition(definition) & CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new EntityMountKey(definition.getId()), RequirementHolder.fromStringList(requirements));
             }
         }

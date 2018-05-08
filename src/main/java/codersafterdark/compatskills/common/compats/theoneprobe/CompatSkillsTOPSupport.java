@@ -9,7 +9,6 @@ import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;

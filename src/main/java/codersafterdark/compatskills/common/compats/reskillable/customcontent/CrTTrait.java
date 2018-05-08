@@ -60,18 +60,6 @@ public class CrTTrait extends Trait {
     @ZenProperty
     public IFormattedText description;
 
-    @ZenSetter("enabled")
-    @ZenMethod
-    public void setEnabled(boolean enabled) {
-        unlockableConfig.setEnabled(enabled);
-    }
-
-    @ZenGetter("enabled")
-    @ZenMethod
-    public boolean getEnabled() {
-        return isEnabled();
-    }
-
     public CrTTrait(ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... requirements) {
         super(name, x, y, skillName, cost, requirements);
         ReskillableRegistries.UNLOCKABLES.register(this);
@@ -152,6 +140,18 @@ public class CrTTrait extends Trait {
             return createTrait(new ResourceLocation(traitLocation), x, y, parentSkill.getRegistryName(), cost, requirements);
         }
         return null;
+    }
+
+    @ZenGetter("enabled")
+    @ZenMethod
+    public boolean getEnabled() {
+        return isEnabled();
+    }
+
+    @ZenSetter("enabled")
+    @ZenMethod
+    public void setEnabled(boolean enabled) {
+        unlockableConfig.setEnabled(enabled);
     }
 
     @Override

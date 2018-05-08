@@ -17,55 +17,10 @@ public class CrTSkill extends Skill {
     @ZenProperty
     public IFormattedText name;
 
-    @ZenSetter("levelCap")
-    @ZenMethod
-    public void setLevelCap(int cap) {
-        skillConfig.setLevelCap(cap);
-    }
-
-    @ZenGetter("levelCap")
-    @ZenMethod
-    public int getLevelCap() {
-        return getCap();
-    }
-
-    @ZenSetter("enabled")
-    @ZenMethod
-    public void setEnabled(boolean enabled) {
-        skillConfig.setEnabled(enabled);
-    }
-
-    @ZenGetter("enabled")
-    @ZenMethod
-    public boolean getEnabled() {
-        return isEnabled();
-    }
-
-    @ZenSetter("skillPointInterval")
-    @ZenMethod
-    public void setSkillPointInterval(int amount) {
-        skillConfig.setSkillPointInterval(amount);
-    }
-
-    @ZenSetter("baseLevelCost")
-    @ZenMethod
-    public void setBaseLevelCost(int cost) {
-        skillConfig.setBaseLevelCost(cost);
-    }
-
-    @ZenGetter("baseLevelCost")
-    @ZenMethod
-    public int getBaseLevelCost() {
-        return skillConfig.getBaseLevelCost();
-    }
-
-    //TODO make a way to set the level staggering
-
     public CrTSkill(ResourceLocation name, ResourceLocation background) {
         super(name, background);
         ReskillableRegistries.SKILLS.register(this);
     }
-
 
     private static CrTSkill createSkill(ResourceLocation name, ResourceLocation background) {
         if (ReskillableRegistries.SKILLS.containsKey(name)) {
@@ -99,6 +54,50 @@ public class CrTSkill extends Skill {
             return createSkill(new ResourceLocation(nameLocation), new ResourceLocation(backGroundLocation));
         }
         return null;
+    }
+
+    @ZenGetter("levelCap")
+    @ZenMethod
+    public int getLevelCap() {
+        return getCap();
+    }
+
+    @ZenSetter("levelCap")
+    @ZenMethod
+    public void setLevelCap(int cap) {
+        skillConfig.setLevelCap(cap);
+    }
+
+    @ZenGetter("enabled")
+    @ZenMethod
+    public boolean getEnabled() {
+        return isEnabled();
+    }
+
+    //TODO make a way to set the level staggering
+
+    @ZenSetter("enabled")
+    @ZenMethod
+    public void setEnabled(boolean enabled) {
+        skillConfig.setEnabled(enabled);
+    }
+
+    @ZenSetter("skillPointInterval")
+    @ZenMethod
+    public void setSkillPointInterval(int amount) {
+        skillConfig.setSkillPointInterval(amount);
+    }
+
+    @ZenGetter("baseLevelCost")
+    @ZenMethod
+    public int getBaseLevelCost() {
+        return skillConfig.getBaseLevelCost();
+    }
+
+    @ZenSetter("baseLevelCost")
+    @ZenMethod
+    public void setBaseLevelCost(int cost) {
+        skillConfig.setBaseLevelCost(cost);
     }
 
     @Override

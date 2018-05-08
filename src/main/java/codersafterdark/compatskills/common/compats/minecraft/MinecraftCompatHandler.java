@@ -9,7 +9,7 @@ import codersafterdark.reskillable.api.ReskillableAPI;
 import net.minecraftforge.common.MinecraftForge;
 
 public class MinecraftCompatHandler {
-    public static void setup(){
+    public static void setup() {
         AnimalTameEventHandler tameEventHandler = new AnimalTameEventHandler();
         EntityMountEventHandler entityMountEventHandler = new EntityMountEventHandler();
         DimensionLockHandler dimensionLockHandler = new DimensionLockHandler();

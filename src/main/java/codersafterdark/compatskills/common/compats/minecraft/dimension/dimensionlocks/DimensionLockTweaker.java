@@ -13,7 +13,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenRegister
 public class DimensionLockTweaker {
     @ZenMethod
-    public static void addDimensionLock(int dimension, String... defaultRequirements){
+    public static void addDimensionLock(int dimension, String... defaultRequirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddDimensionLock(dimension, defaultRequirements));
     }
 
@@ -21,14 +21,14 @@ public class DimensionLockTweaker {
         private final int dimension;
         private final String[] requirements;
 
-        private AddDimensionLock(int dimension, String... requirements){
+        private AddDimensionLock(int dimension, String... requirements) {
             this.dimension = dimension;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkValidDimension(dimension) && CheckMethods.checkStringArray(requirements)){
+            if (CheckMethods.checkValidDimension(dimension) && CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new DimensionLockKey(dimension), RequirementHolder.fromStringList(requirements));
             }
         }

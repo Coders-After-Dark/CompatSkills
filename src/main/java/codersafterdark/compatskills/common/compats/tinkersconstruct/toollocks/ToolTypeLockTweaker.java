@@ -26,14 +26,14 @@ public class ToolTypeLockTweaker {
         IItemStack stack;
         String[] requirements;
 
-        AddToolTypeLock(IItemStack stack, String... requirements){
+        AddToolTypeLock(IItemStack stack, String... requirements) {
             this.stack = stack;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkIItemstack(stack) & CheckMethods.checkStringArray(requirements)){
+            if (CheckMethods.checkIItemstack(stack) & CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new ToolTypeLockKey(CraftTweakerMC.getItemStack(stack).getItem()), RequirementHolder.fromStringList(requirements));
             }
         }

@@ -6,7 +6,6 @@ import codersafterdark.reskillable.api.data.PlayerSkillInfo;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
 import codersafterdark.reskillable.api.skill.Skill;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
