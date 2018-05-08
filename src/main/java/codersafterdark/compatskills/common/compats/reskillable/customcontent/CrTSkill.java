@@ -8,9 +8,7 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.formatting.IFormattedText;
 import net.minecraft.util.ResourceLocation;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-import stanhebben.zenscript.annotations.ZenProperty;
+import stanhebben.zenscript.annotations.*;
 
 @ZenClass("mods.compatskills.SkillCreator")
 @ZenRegister
@@ -19,24 +17,46 @@ public class CrTSkill extends Skill {
     @ZenProperty
     public IFormattedText name;
 
+    @ZenSetter("levelCap")
     @ZenMethod
     public void setLevelCap(int cap) {
         skillConfig.setLevelCap(cap);
     }
 
+    @ZenGetter("levelCap")
+    @ZenMethod
+    public int getLevelCap() {
+        return getCap();
+    }
+
+    @ZenSetter("enabled")
     @ZenMethod
     public void setEnabled(boolean enabled) {
         skillConfig.setEnabled(enabled);
     }
 
+    @ZenGetter("enabled")
+    @ZenMethod
+    public boolean getEnabled() {
+        return isEnabled();
+    }
+
+    @ZenSetter("skillPointInterval")
     @ZenMethod
     public void setSkillPointInterval(int amount) {
         skillConfig.setSkillPointInterval(amount);
     }
 
+    @ZenSetter("baseLevelCost")
     @ZenMethod
-    public void setBaseCost(int cost) {
+    public void setBaseLevelCost(int cost) {
         skillConfig.setBaseLevelCost(cost);
+    }
+
+    @ZenGetter("baseLevelCost")
+    @ZenMethod
+    public int getBaseLevelCost() {
+        return skillConfig.getBaseLevelCost();
     }
 
     //TODO make a way to set the level staggering
