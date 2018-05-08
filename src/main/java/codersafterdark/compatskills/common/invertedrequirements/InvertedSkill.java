@@ -8,6 +8,7 @@ import codersafterdark.reskillable.api.requirement.RequirementComparision;
 import codersafterdark.reskillable.api.skill.Skill;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -35,7 +36,7 @@ public class InvertedSkill extends Requirement {
         if (info.getLevel() >= level) {
             color = TextFormatting.RED;
         }
-        return TextFormatting.GRAY + " - " + I18n.format("compatskills.misc.requirements.invertedSkillFormat", TextFormatting.DARK_AQUA, skill.getName(), color, level);
+        return TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.invertedSkillFormat", TextFormatting.DARK_AQUA, skill.getName(), color, level);
     }
 
     @Override

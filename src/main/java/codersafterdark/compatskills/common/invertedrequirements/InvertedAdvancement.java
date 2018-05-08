@@ -10,6 +10,7 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -32,13 +33,11 @@ public class InvertedAdvancement extends Requirement {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
     public String getToolTip(PlayerData data) {
         Advancement adv = getAdvancement();
         String toolTip = "";
         if (adv != null) {
-            toolTip = TextFormatting.GRAY + " - " + TextFormatting.GOLD + I18n.format(
-                    "compatskills.misc.requirements.invertedAchievementFormat",
+            toolTip = TextFormatting.GRAY + " - " + TextFormatting.GOLD + new TextComponentTranslation("compatskills.misc.requirements.invertedAchievementFormat",
                     adv.getDisplayText()
                             .getUnformattedText()
                             .replaceAll("[\\[\\]]", ""));

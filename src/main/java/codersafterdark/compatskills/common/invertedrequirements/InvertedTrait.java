@@ -10,6 +10,7 @@ import codersafterdark.reskillable.api.unlockable.Unlockable;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -40,7 +41,7 @@ public class InvertedTrait extends Requirement {
             }
             name = unlockable.getName();
         }
-        return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + I18n.format("compatskills.misc.requirements.invertedTraitFormat", color, name);
+        return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.misc.requirements.invertedTraitFormat", color, name);
     }
 
     public Skill getSkill() {

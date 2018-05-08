@@ -6,6 +6,7 @@ import codersafterdark.reskillable.api.requirement.RequirementComparision;
 import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 public class InvertedGameStage extends Requirement {
@@ -28,7 +29,7 @@ public class InvertedGameStage extends Requirement {
                 color = TextFormatting.RED;
             }
         }
-        return TextFormatting.GRAY + " - " + TextFormatting.BLUE + I18n.format("compatskills.misc.requirements.invertedGamestageFormat", color, gamestage);
+        return TextFormatting.GRAY + " - " + TextFormatting.BLUE + new TextComponentTranslation("compatskills.misc.requirements.invertedGamestageFormat", color, gamestage);
     }
 
     @Override
