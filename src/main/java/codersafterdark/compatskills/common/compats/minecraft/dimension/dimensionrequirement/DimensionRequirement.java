@@ -28,7 +28,7 @@ public class DimensionRequirement extends Requirement {
                 color = TextFormatting.RED;
             }
         }
-        return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.misc.dimensionFormat", color, dimension);
+        return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.misc.dimensionFormat", color, dimension).getUnformattedComponentText();
     }
 
     @Override

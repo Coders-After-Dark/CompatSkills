@@ -29,7 +29,7 @@ public class InvertedDimension extends Requirement {
                 color = TextFormatting.RED;
             }
         }
-        return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.misc.invertedDimensionFormat", color, dimension);
+        return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.misc.invertedDimensionFormat", color, dimension).getUnformattedComponentText();
     }
 
     @Override

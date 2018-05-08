@@ -28,7 +28,7 @@ public class GameStageRequirement extends Requirement {
                 color = TextFormatting.RED;
             }
         }
-        return TextFormatting.GRAY + " - " + TextFormatting.BLUE + new TextComponentTranslation("compatskills.misc.gamestageFormat", color, gamestage);
+        return TextFormatting.GRAY + " - " + TextFormatting.BLUE + new TextComponentTranslation("compatskills.misc.gamestageFormat", color, gamestage).getUnformattedComponentText();
     }
 
     @Override

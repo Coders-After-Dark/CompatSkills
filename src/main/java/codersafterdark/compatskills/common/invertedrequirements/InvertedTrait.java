@@ -28,7 +28,6 @@ public class InvertedTrait extends Requirement {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
     public String getToolTip(PlayerData data) {
         Unlockable unlockable = getUnlockable();
         TextFormatting color = TextFormatting.GREEN;
@@ -40,7 +39,7 @@ public class InvertedTrait extends Requirement {
             }
             name = unlockable.getName();
         }
-        return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.misc.requirements.invertedTraitFormat", color, name);
+        return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.misc.requirements.invertedTraitFormat", color, name).getUnformattedComponentText();
     }
 
     public Skill getSkill() {

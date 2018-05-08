@@ -37,7 +37,7 @@ public class InvertedAdvancement extends Requirement {
             toolTip = TextFormatting.GRAY + " - " + TextFormatting.GOLD + new TextComponentTranslation("compatskills.misc.requirements.invertedAchievementFormat",
                     adv.getDisplayText()
                             .getUnformattedText()
-                            .replaceAll("[\\[\\]]", ""));
+                            .replaceAll("[\\[\\]]", "")).getUnformattedComponentText();
         }
         return toolTip;
     }

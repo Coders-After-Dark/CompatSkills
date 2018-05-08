@@ -28,14 +28,13 @@ public class InvertedSkill extends Requirement {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
     public String getToolTip(PlayerData data) {
         PlayerSkillInfo info = data.getSkillInfo(skill);
         TextFormatting color = TextFormatting.GREEN;
         if (info.getLevel() >= level) {
             color = TextFormatting.RED;
         }
-        return TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.invertedSkillFormat", TextFormatting.DARK_AQUA, skill.getName(), color, level);
+        return TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.invertedSkillFormat", TextFormatting.DARK_AQUA, skill.getName(), color, level).getUnformattedComponentText();
     }
 
     @Override

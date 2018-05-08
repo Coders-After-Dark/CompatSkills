@@ -28,7 +28,7 @@ public class InvertedGameStage extends Requirement {
                 color = TextFormatting.RED;
             }
         }
-        return TextFormatting.GRAY + " - " + TextFormatting.BLUE + new TextComponentTranslation("compatskills.misc.requirements.invertedGamestageFormat", color, gamestage);
+        return TextFormatting.GRAY + " - " + TextFormatting.BLUE + new TextComponentTranslation("compatskills.misc.requirements.invertedGamestageFormat", color, gamestage).getUnformattedComponentText();
     }
 
     @Override
