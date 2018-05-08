@@ -44,7 +44,7 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                             List<Requirement> requirements = holder.getRequirements();
                             PlayerData playerData = PlayerDataHandler.get(player);
                             TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
-                            probeInfo.text(TextFormatting.GRAY + error.getFormattedText());
+                            probeInfo.text(TextFormatting.GRAY + error.getUnformattedComponentText());
                             for (Requirement req : requirements) {
                                 probeInfo.text(req.getToolTip(playerData));
                             }
@@ -52,14 +52,14 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                     } else {
                         if (holder.isRealLock()) {
                             TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Hwyla.Shift");
-                            probeInfo.text(error.getFormattedText());
+                            probeInfo.text(error.getUnformattedComponentText());
                         }
                     }
                 } else if (holder.isRealLock()) {
                     List<Requirement> requirements = holder.getRequirements();
                     PlayerData playerData = PlayerDataHandler.get(player);
                     TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
-                    probeInfo.text(TextFormatting.GRAY + error.getFormattedText());
+                    probeInfo.text(TextFormatting.GRAY + error.getUnformattedComponentText());
                     for (Requirement req : requirements) {
                         probeInfo.text(req.getToolTip(playerData));
                     }

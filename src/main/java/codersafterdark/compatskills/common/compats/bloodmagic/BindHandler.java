@@ -29,7 +29,7 @@ public class BindHandler {
             for (Requirement req : requirements) {
                 reqs.append("\n").append(req.getToolTip(data));
             }
-            player.sendStatusMessage(new TextComponentString(error + reqs.toString()), false);
+            player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + reqs.toString()), false);
         }
     }
 }

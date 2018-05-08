@@ -31,7 +31,7 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
                         EntityPlayer player = accessor.getPlayer();
                         PlayerData playerData = PlayerDataHandler.get(player);
                         TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
-                        currenttip.add(error.getFormattedText());
+                        currenttip.add(error.getUnformattedComponentText());
                         for (Requirement req : requirements) {
                             currenttip.add(req.getToolTip(playerData));
                         }
@@ -39,7 +39,7 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
                 } else {
                     if (holder.isRealLock()) {
                         TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Shift");
-                        currenttip.add(error.getFormattedText());
+                        currenttip.add(error.getUnformattedComponentText());
                     }
                 }
             } else if (holder.isRealLock()) {
@@ -47,7 +47,7 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
                 EntityPlayer player = accessor.getPlayer();
                 PlayerData playerData = PlayerDataHandler.get(player);
                 TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
-                currenttip.add(error.getFormattedText());
+                currenttip.add(error.getUnformattedComponentText());
                 for (Requirement req : requirements) {
                     currenttip.add(req.getToolTip(playerData));
                 }

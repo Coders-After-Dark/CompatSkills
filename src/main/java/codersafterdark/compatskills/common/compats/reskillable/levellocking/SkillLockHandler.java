@@ -34,7 +34,10 @@ public class SkillLockHandler {
             for (Requirement requirement : requirements) {
                 reqString.append("\n ").append(requirement.getToolTip(data)).append(" ");
             }
-            ITextComponent textComponent = new TextComponentString(error + "\n" + error2 + "\n" + error3 + " " + reqString);
+            ITextComponent textComponent = new TextComponentString(
+                    error.getUnformattedComponentText() + "\n" +
+                            error2.getUnformattedComponentText() + "\n" +
+                            error3.getUnformattedComponentText() + " " + reqString);
             player.sendStatusMessage(textComponent, false);
         }
     }

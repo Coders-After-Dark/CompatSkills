@@ -23,7 +23,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
-        String canceledMessage = getCanceledMessage(data, getModifierRequirement(event.getModifiers()), new TextComponentTranslation("compatskills.tconstruct.modifierError").getFormattedText());
+        String canceledMessage = getCanceledMessage(data, getModifierRequirement(event.getModifiers()), new TextComponentTranslation("compatskills.tconstruct.modifierError").getUnformattedComponentText());
         if (canceledMessage != null) {
             event.setCanceled(canceledMessage);
         }
@@ -33,7 +33,7 @@ public class TinkerLockHandler {
     public void onCraftingMaterial(TinkerCraftingEvent.ToolPartCraftingEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
         List<RequirementHolder> holders = getMaterialRequirements(Collections.singletonList(event.getItemStack()));
-        String canceledMessage = getCanceledMessage(data, holders, new TextComponentTranslation("compatskills.tconstruct.materialError").getFormattedText());
+        String canceledMessage = getCanceledMessage(data, holders, new TextComponentTranslation("compatskills.tconstruct.materialError").getUnformattedComponentText());
         if (canceledMessage != null) {
             event.setCanceled(canceledMessage);
         }
@@ -42,7 +42,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onPartReplaced(TinkerCraftingEvent.ToolPartReplaceEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
-        String canceledMessage = getCanceledMessage(data, getMaterialRequirements(event.getToolParts()), new TextComponentTranslation("compatskills.tconstruct.materialError").getFormattedText());
+        String canceledMessage = getCanceledMessage(data, getMaterialRequirements(event.getToolParts()), new TextComponentTranslation("compatskills.tconstruct.materialError").getUnformattedComponentText());
         if (canceledMessage != null) {
             event.setCanceled(canceledMessage);
         }
@@ -65,7 +65,7 @@ public class TinkerLockHandler {
 
         holders.addAll(getMaterialRequirements(event.getToolParts()));
 
-        String canceledMessage = getCanceledMessage(data, holders, new TextComponentTranslation("compatskills.tconstruct.toolTypeError").getFormattedText());
+        String canceledMessage = getCanceledMessage(data, holders, new TextComponentTranslation("compatskills.tconstruct.toolTypeError").getUnformattedComponentText());
         if (canceledMessage != null) {
             event.setCanceled(canceledMessage);
         }
@@ -107,7 +107,7 @@ public class TinkerLockHandler {
             return null;
         }
         StringBuilder reqs = new StringBuilder(errorType);
-        reqs.append("\n\n").append(new TextComponentTranslation("compatskills.misc.Requirements").getFormattedText());
+        reqs.append("\n\n").append(new TextComponentTranslation("compatskills.misc.Requirements").getUnformattedComponentText());
         for (Requirement req : holder.getRequirements()) {
             reqs.append('\n').append(req.getToolTip(data));
         }
