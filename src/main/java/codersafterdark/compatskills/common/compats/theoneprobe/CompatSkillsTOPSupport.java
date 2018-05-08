@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
@@ -43,20 +44,23 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                         if (holder.isRealLock()) {
                             List<Requirement> requirements = holder.getRequirements();
                             PlayerData playerData = PlayerDataHandler.get(player);
-                            probeInfo.text(TextFormatting.GRAY + I18n.format("compatskills.misc.Requirements"));
+                            TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
+                            probeInfo.text(TextFormatting.GRAY + error.getFormattedText());
                             for (Requirement req : requirements) {
                                 probeInfo.text(req.getToolTip(playerData));
                             }
                         }
                     } else {
                         if (holder.isRealLock()) {
-                            probeInfo.text(I18n.format("compatskills.misc.Hwyla.Shift"));
+                            TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Hwyla.Shift");
+                            probeInfo.text(error.getFormattedText());
                         }
                     }
                 } else if (holder.isRealLock()) {
                     List<Requirement> requirements = holder.getRequirements();
                     PlayerData playerData = PlayerDataHandler.get(player);
-                    probeInfo.text(TextFormatting.GRAY + I18n.format("compatskills.misc.Requirements"));
+                    TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
+                    probeInfo.text(TextFormatting.GRAY + error.getFormattedText());
                     for (Requirement req : requirements) {
                         probeInfo.text(req.getToolTip(playerData));
                     }

@@ -9,6 +9,7 @@ import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent;
 import slimeknights.tconstruct.library.materials.Material;
@@ -23,7 +24,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
-        String canceledMessage = getCanceledMessage(data, getModifierRequirement(event.getModifiers()), I18n.format("compatskills.tconstruct.modifierError"));
+        String canceledMessage = getCanceledMessage(data, getModifierRequirement(event.getModifiers()), new TextComponentTranslation("compatskills.tconstruct.modifierError").getFormattedText());
         if (canceledMessage != null) {
             event.setCanceled(canceledMessage);
         }
@@ -33,7 +34,7 @@ public class TinkerLockHandler {
     public void onCraftingMaterial(TinkerCraftingEvent.ToolPartCraftingEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
         List<RequirementHolder> holders = getMaterialRequirements(Collections.singletonList(event.getItemStack()));
-        String canceledMessage = getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.materialError"));
+        String canceledMessage = getCanceledMessage(data, holders, new TextComponentTranslation("compatskills.tconstruct.materialError").getFormattedText());
         if (canceledMessage != null) {
             event.setCanceled(canceledMessage);
         }
@@ -42,7 +43,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onPartReplaced(TinkerCraftingEvent.ToolPartReplaceEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
-        String canceledMessage = getCanceledMessage(data, getMaterialRequirements(event.getToolParts()), I18n.format("compatskills.tconstruct.materialError"));
+        String canceledMessage = getCanceledMessage(data, getMaterialRequirements(event.getToolParts()), new TextComponentTranslation("compatskills.tconstruct.materialError").getFormattedText());
         if (canceledMessage != null) {
             event.setCanceled(canceledMessage);
         }
@@ -65,7 +66,7 @@ public class TinkerLockHandler {
 
         holders.addAll(getMaterialRequirements(event.getToolParts()));
 
-        String canceledMessage = getCanceledMessage(data, holders, I18n.format("compatskills.tconstruct.toolTypeError"));
+        String canceledMessage = getCanceledMessage(data, holders, new TextComponentTranslation("compatskills.tconstruct.toolTypeError").getFormattedText());
         if (canceledMessage != null) {
             event.setCanceled(canceledMessage);
         }
@@ -107,7 +108,7 @@ public class TinkerLockHandler {
             return null;
         }
         StringBuilder reqs = new StringBuilder(errorType);
-        reqs.append("\n\n").append(I18n.format("compatskills.misc.Requirements"));
+        reqs.append("\n\n").append(new TextComponentTranslation("compatskills.misc.Requirements").getFormattedText());
         for (Requirement req : holder.getRequirements()) {
             reqs.append('\n').append(req.getToolTip(data));
         }

@@ -12,6 +12,7 @@ import mcp.mobius.waila.api.IWailaDataProvider;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextComponentTranslation;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nonnull;
@@ -30,21 +31,24 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
                         List<Requirement> requirements = holder.getRequirements();
                         EntityPlayer player = accessor.getPlayer();
                         PlayerData playerData = PlayerDataHandler.get(player);
-                        currenttip.add(I18n.format("compatskills.misc.Requirements"));
+                        TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
+                        currenttip.add(error.getFormattedText());
                         for (Requirement req : requirements) {
                             currenttip.add(req.getToolTip(playerData));
                         }
                     }
                 } else {
                     if (holder.isRealLock()) {
-                        currenttip.add(I18n.format("compatskills.misc.Shift"));
+                        TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Shift");
+                        currenttip.add(error.getFormattedText());
                     }
                 }
             } else if (holder.isRealLock()) {
                 List<Requirement> requirements = holder.getRequirements();
                 EntityPlayer player = accessor.getPlayer();
                 PlayerData playerData = PlayerDataHandler.get(player);
-                currenttip.add(I18n.format("compatskills.misc.Requirements"));
+                TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
+                currenttip.add(error.getFormattedText());
                 for (Requirement req : requirements) {
                     currenttip.add(req.getToolTip(playerData));
                 }
