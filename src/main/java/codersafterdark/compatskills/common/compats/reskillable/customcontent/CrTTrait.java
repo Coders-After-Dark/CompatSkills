@@ -21,9 +21,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-import stanhebben.zenscript.annotations.ZenProperty;
+import stanhebben.zenscript.annotations.*;
 
 @ZenRegister
 @ZenClass("mods.compatskills.TraitCreator")
@@ -62,9 +60,16 @@ public class CrTTrait extends Trait {
     @ZenProperty
     public IFormattedText description;
 
+    @ZenSetter("enabled")
     @ZenMethod
     public void setEnabled(boolean enabled) {
         unlockableConfig.setEnabled(enabled);
+    }
+
+    @ZenGetter("enabled")
+    @ZenMethod
+    public boolean getEnabled() {
+        return isEnabled();
     }
 
     public CrTTrait(ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... requirements) {
