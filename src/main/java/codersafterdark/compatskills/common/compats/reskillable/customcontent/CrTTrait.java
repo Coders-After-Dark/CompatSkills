@@ -3,7 +3,9 @@ package codersafterdark.compatskills.common.compats.reskillable.customcontent;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.reskillable.api.ReskillableRegistries;
+import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.unlockable.Trait;
+import codersafterdark.reskillable.api.unlockable.Unlockable;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.event.*;
@@ -28,37 +30,42 @@ import stanhebben.zenscript.annotations.ZenProperty;
 public class CrTTrait extends Trait {
 
     @ZenProperty
-    public IEventHandler<BlockHarvestDropsEvent> onBlockDrops = null;
+    public IEventHandler<BlockHarvestDropsEvent> onBlockDrops;
 
     @ZenProperty
-    public IEventHandler<crafttweaker.api.event.EnderTeleportEvent> onEnderTeleport = null;
+    public IEventHandler<crafttweaker.api.event.EnderTeleportEvent> onEnderTeleport;
 
     @ZenProperty
-    public IEventHandler<PlayerTickEvent> onPlayerTick = null;
+    public IEventHandler<PlayerTickEvent> onPlayerTick;
 
     @ZenProperty
-    public IEventHandler<PlayerBreakSpeedEvent> getBreakSpeed = null;
+    public IEventHandler<PlayerBreakSpeedEvent> getBreakSpeed;
 
     @ZenProperty
-    public IEventHandler<EntityLivingDeathDropsEvent> onMobDrops = null;
+    public IEventHandler<EntityLivingDeathDropsEvent> onMobDrops;
 
     @ZenProperty
-    public IEventHandler<EntityLivingHurtEvent> onAttackMob = null;
+    public IEventHandler<EntityLivingHurtEvent> onAttackMob;
 
     @ZenProperty
-    public IEventHandler<EntityLivingHurtEvent> onHurt = null;
+    public IEventHandler<EntityLivingHurtEvent> onHurt;
 
     @ZenProperty
-    public IEventHandler<PlayerRightClickBlockEvent> onRightClickBlock = null;
+    public IEventHandler<PlayerRightClickBlockEvent> onRightClickBlock;
 
     @ZenProperty
-    public IEventHandler<EntityLivingDeathEvent> onKillMob = null;
+    public IEventHandler<EntityLivingDeathEvent> onKillMob;
 
     @ZenProperty
-    public IFormattedText name = null;
+    public IFormattedText name;
 
     @ZenProperty
-    public IFormattedText description = null;
+    public IFormattedText description;
+
+    @ZenMethod
+    public void setEnabled(boolean enabled) {
+        unlockableConfig.setEnabled(enabled);
+    }
 
     public CrTTrait(ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... requirements) {
         super(name, x, y, skillName, cost, requirements);
@@ -66,16 +73,54 @@ public class CrTTrait extends Trait {
 
     }
 
+    private static CrTTrait createTrait(ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... requirements) {
+        StringBuilder reqBuilder = new StringBuilder("Requirements: ");
+        for (String string : requirements) {
+            reqBuilder.append(string);
+        }
+        if (ReskillableRegistries.UNLOCKABLES.containsKey(name)) {
+            Unlockable value = ReskillableRegistries.UNLOCKABLES.getValue(name);
+            if (value instanceof CrTTrait) {
+                CrTTrait customTrait = (CrTTrait) value;
+                String updated = "";
+                //Update values that are not in sync
+                if (customTrait.getX() != x) {
+                    customTrait.unlockableConfig.setX(x);
+                    updated += " - Updated X Pos: " + x;
+                }
+                if (customTrait.getY() != y) {
+                    customTrait.unlockableConfig.setY(y);
+                    updated += " - Updated Y Pos: " + y;
+                }
+                if (!skillName.equals(customTrait.getParentSkill().getRegistryName())) {
+                    customTrait.setParentSkill(skillName);
+                    updated += " - Updated Parent Skill: " + skillName;
+                }
+                if (customTrait.getCost() != cost) {
+                    customTrait.unlockableConfig.setCost(cost);
+                    updated += " - Updated Cost: " + cost;
+                }
+                RequirementHolder holder = RequirementHolder.fromStringList(requirements);
+                if (!holder.equals(customTrait.getRequirements())) {
+                    customTrait.unlockableConfig.setRequirementHolder(holder);
+                    updated += " - Updated Cost: " + cost;
+                }
+                if (!updated.isEmpty()) {
+                    CraftTweakerAPI.logInfo("Loaded Trait: " + name + updated);
+                } else {
+                    CraftTweakerAPI.logInfo("Loaded Trait: " + name);
+                }
+                return customTrait;
+            }
+        }
+        CraftTweakerAPI.logInfo("Created new Trait: " + name + " -" + " With Pos: " + x + ", " + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
+        return new CrTTrait(name, x, y, skillName, cost, requirements);
+    }
+
     @ZenMethod
     public static CrTTrait createTrait(String traitName, int x, int y, String skillLocation, int cost, String... requirements) {
         if (CheckMethods.checkString(traitName) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillLocation) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
-            StringBuilder reqBuilder = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                reqBuilder.append(string);
-            }
-
-            CraftTweakerAPI.logInfo("Created new Trait: " + traitName + " -" + " With Pos: " + x + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
-            return new CrTTrait(new ResourceLocation(CompatSkillConstants.MOD_ID, traitName), x, y, new ResourceLocation(skillLocation), cost, requirements);
+            return createTrait(new ResourceLocation(CompatSkillConstants.MOD_ID, traitName), x, y, new ResourceLocation(skillLocation), cost, requirements);
         }
         return null;
     }
@@ -83,13 +128,7 @@ public class CrTTrait extends Trait {
     @ZenMethod
     public static CrTTrait createTrait(String traitName, int x, int y, CrTSkill parentSkill, int cost, String... requirements) {
         if (CheckMethods.checkString(traitName) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkCrTSkillParent(parentSkill) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
-            StringBuilder reqBuilder = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                reqBuilder.append(string);
-            }
-
-            CraftTweakerAPI.logInfo("Created new Trait: " + traitName + " -" + " With Pos: " + x + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
-            return new CrTTrait(new ResourceLocation(CompatSkillConstants.MOD_ID, traitName), x, y, parentSkill.getRegistryName(), cost, requirements);
+            return createTrait(new ResourceLocation(CompatSkillConstants.MOD_ID, traitName), x, y, parentSkill.getRegistryName(), cost, requirements);
         }
         return null;
     }
@@ -97,13 +136,7 @@ public class CrTTrait extends Trait {
     @ZenMethod
     public static CrTTrait createNewTrait(String traitLocation, int x, int y, String skillLocation, int cost, String... requirements) {
         if (CheckMethods.checkString(traitLocation) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillLocation) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
-            StringBuilder reqBuilder = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                reqBuilder.append(string);
-            }
-
-            CraftTweakerAPI.logInfo("Created new Trait: " + traitLocation + " -" + " With Pos: " + x + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
-            return new CrTTrait(new ResourceLocation(traitLocation), x, y, new ResourceLocation(skillLocation), cost, requirements);
+            return createTrait(new ResourceLocation(traitLocation), x, y, new ResourceLocation(skillLocation), cost, requirements);
         }
         return null;
     }
@@ -111,13 +144,7 @@ public class CrTTrait extends Trait {
     @ZenMethod
     public static CrTTrait createNewTrait(String traitLocation, int x, int y, CrTSkill parentSkill, int cost, String... requirements) {
         if (CheckMethods.checkString(traitLocation) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkCrTSkillParent(parentSkill) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
-            StringBuilder reqBuilder = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                reqBuilder.append(string);
-            }
-
-            CraftTweakerAPI.logInfo("Created new Trait: " + traitLocation + " -" + " With Pos: " + x + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
-            return new CrTTrait(new ResourceLocation(traitLocation), x, y, parentSkill.getRegistryName(), cost, requirements);
+            return createTrait(new ResourceLocation(traitLocation), x, y, parentSkill.getRegistryName(), cost, requirements);
         }
         return null;
     }
