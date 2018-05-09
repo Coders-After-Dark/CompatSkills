@@ -24,3 +24,5 @@ compatskills.tconstruct.toolTypeError=No matter how the instructions, a novice c
 
 compatskills.entity.entityMountError=No matter how hard you try you are unable to find your balance, and fall off.
 compatskills.entity.entityTameError=As you attempt to tame the creature it resists you.
+
+compatskills.tileentity.interactError=Even after countless hours you cannot figure out how the device works.

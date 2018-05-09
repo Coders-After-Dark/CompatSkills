@@ -2,6 +2,7 @@ package codersafterdark.compatskills.utils;
 
 import WayofTime.bloodmagic.ritual.RitualRegistry;
 import blusunrize.immersiveengineering.api.MultiblockHandler;
+import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.skill.Skill;
@@ -92,6 +93,18 @@ public class CheckMethods {
     public static boolean checkValidIEntityDefinition(IEntityDefinition entity) {
         if (entity == null) {
             CraftTweakerAPI.logError("IEntityDefinition was found to be null");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkValidTileEntityName(String tileName) {
+        if (tileName == null || tileName.isEmpty()) {
+            CraftTweakerAPI.logError("String Tile Name Param is either null or empty!");
+            return false;
+        }
+        if (!MinecraftCompatHandler.teRegistryContains(new ResourceLocation(tileName))) {
+            CraftTweakerAPI.logError("Tile Entity " + tileName + " is not a valid Tile Entity Name");
             return false;
         }
         return true;
