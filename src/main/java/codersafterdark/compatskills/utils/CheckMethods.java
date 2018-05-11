@@ -2,7 +2,6 @@ package codersafterdark.compatskills.utils;
 
 import WayofTime.bloodmagic.ritual.RitualRegistry;
 import blusunrize.immersiveengineering.api.MultiblockHandler;
-import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.skill.Skill;
@@ -12,6 +11,7 @@ import crafttweaker.api.data.DataMap;
 import crafttweaker.api.data.IData;
 import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.Loader;
@@ -103,7 +103,7 @@ public class CheckMethods {
             CraftTweakerAPI.logError("String Tile Name Param is either null or empty!");
             return false;
         }
-        if (!MinecraftCompatHandler.teRegistryContains(new ResourceLocation(tileName))) {
+        if (!TileEntity.REGISTRY.containsKey(new ResourceLocation(tileName))) {
             CraftTweakerAPI.logError("Tile Entity " + tileName + " is not a valid Tile Entity Name");
             return false;
         }
