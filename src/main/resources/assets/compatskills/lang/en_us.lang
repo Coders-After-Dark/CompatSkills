@@ -13,9 +13,6 @@ compatskills.misc.requirements.invertedGamestageFormat=!GameStage: %s%s
 compatskills.misc.requirements.invertedDimensionFormat=!Dimension: %s%s
 
 
-
-
-
 # Error Messages
 ## Game Stages
 compatskills.gamestage.addError=Requirements for unlocking this Stage aren't met!
@@ -36,9 +33,6 @@ compatskills.tconstruct.toolTypeError=No matter how the instructions, a novice c
 ## Minecraft
 compatskills.entity.entityMountError=No matter how hard you try you are unable to find your balance, and fall off.
 compatskills.entity.entityTameError=As you attempt to tame the creature it resists you.
-
-
-
 
 
 ## Misc:
