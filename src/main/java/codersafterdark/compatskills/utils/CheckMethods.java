@@ -11,6 +11,7 @@ import crafttweaker.api.data.DataMap;
 import crafttweaker.api.data.IData;
 import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.Loader;
@@ -92,6 +93,18 @@ public class CheckMethods {
     public static boolean checkValidIEntityDefinition(IEntityDefinition entity) {
         if (entity == null) {
             CraftTweakerAPI.logError("IEntityDefinition was found to be null");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkValidTileEntityName(String tileName) {
+        if (tileName == null || tileName.isEmpty()) {
+            CraftTweakerAPI.logError("String Tile Name Param is either null or empty!");
+            return false;
+        }
+        if (!TileEntity.REGISTRY.containsKey(new ResourceLocation(tileName))) {
+            CraftTweakerAPI.logError("Tile Entity " + tileName + " is not a valid Tile Entity Name");
             return false;
         }
         return true;
