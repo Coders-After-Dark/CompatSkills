@@ -33,8 +33,15 @@ public class InvertedAdvancement extends Requirement {
     public String getToolTip(PlayerData data) {
         Advancement adv = getAdvancement();
         String toolTip = "";
+        TextFormatting color = TextFormatting.GREEN;
+
+        if (achievedByPlayer(data.playerWR.get())){
+            color = TextFormatting.RED;
+        }
+
         if (adv != null) {
             toolTip = TextFormatting.GRAY + " - " + TextFormatting.GOLD + new TextComponentTranslation("compatskills.misc.requirements.invertedAchievementFormat",
+                    color,
                     adv.getDisplayText()
                             .getUnformattedText()
                             .replaceAll("[\\[\\]]", "")).getUnformattedComponentText();
