@@ -4,8 +4,11 @@ import codersafterdark.compatskills.common.compats.minecraft.dimension.dimension
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent.AnimalTameEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountEventHandler;
+import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
+import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
 import codersafterdark.compatskills.common.invertedrequirements.InvertedDimension;
 import codersafterdark.reskillable.api.ReskillableAPI;
+import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraftforge.common.MinecraftForge;
 
 public class MinecraftCompatHandler {
