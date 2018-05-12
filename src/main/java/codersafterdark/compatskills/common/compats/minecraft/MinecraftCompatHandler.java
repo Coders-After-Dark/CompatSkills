@@ -4,8 +4,11 @@ import codersafterdark.compatskills.common.compats.minecraft.dimension.dimension
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent.AnimalTameEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountEventHandler;
+import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
+import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
 import codersafterdark.compatskills.common.invertedrequirements.InvertedDimension;
 import codersafterdark.reskillable.api.ReskillableAPI;
+import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraftforge.common.MinecraftForge;
 
 public class MinecraftCompatHandler {
@@ -13,9 +16,11 @@ public class MinecraftCompatHandler {
         AnimalTameEventHandler tameEventHandler = new AnimalTameEventHandler();
         EntityMountEventHandler entityMountEventHandler = new EntityMountEventHandler();
         DimensionLockHandler dimensionLockHandler = new DimensionLockHandler();
+        TileEntityEventHandler tileEntityHandler = new TileEntityEventHandler();
         MinecraftForge.EVENT_BUS.register(tameEventHandler);
         MinecraftForge.EVENT_BUS.register(entityMountEventHandler);
         MinecraftForge.EVENT_BUS.register(dimensionLockHandler);
+        MinecraftForge.EVENT_BUS.register(tileEntityHandler);
         ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("dim", input -> {
             try {
                 return new DimensionRequirement(Integer.parseInt(input));
@@ -30,5 +35,7 @@ public class MinecraftCompatHandler {
             }
             return null;
         });
+
+        CTChatCommand.registerCommand(new TileEntityCommand());
     }
 }
