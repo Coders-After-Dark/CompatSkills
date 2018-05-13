@@ -9,13 +9,16 @@ import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEnti
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
 import codersafterdark.compatskills.common.invertedrequirements.InvertedDimension;
 import codersafterdark.reskillable.api.ReskillableAPI;
-import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.api.data.GenericNBTLockKey;
+import codersafterdark.reskillable.api.data.ItemInfo;
+import codersafterdark.reskillable.api.data.ModLockKey;
+import codersafterdark.reskillable.api.data.NBTLockKey;
 import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.nbt.JsonToNBT;
+import net.minecraft.nbt.NBTException;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class MinecraftCompatHandler {
@@ -43,31 +46,54 @@ public class MinecraftCompatHandler {
             return null;
         });
         ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("stack", input -> {
-            try {
-                if (input.length() == 2){
-                    String name = input.toLowerCase();
-                    String[] parts = name.split(":");
+            String[] inputInfo = input.split("\\|");
+            //(modid,empty, or modid:item:optional metadata)|nbt as json
+            String type = inputInfo[0]; //mod, generic, or item
+            NBTTagCompound nbt = null;
+            if (inputInfo.length > 1) {
+                String nbtString = input.substring(type.length() + 1).trim();
+                try {
+                    nbt = JsonToNBT.getTagFromJson(nbtString);
+                } catch (NBTException e) {
+                    //Invalid NBT
+                    return null;
+                }
+            }
+            NBTLockKey key;
+            type = type.trim();
+            if (type.isEmpty()) {
+                if (nbt == null) {
+                    return null;
+                }
+                key = new GenericNBTLockKey(nbt);
+            } else {
+                String[] itemParts = type.split(":");
+                if (itemParts.length == 1) {//is a modid
+                    //TODO should it check if a mod is loaded, and would this cause issues in when requirements are read from config
+                    key = new ModLockKey(type, nbt);
+                } else {
                     int metadata = 0;
-                    if (parts.length > 2){
-                        String meta = parts[2];
+                    if (itemParts.length > 2) {
+                        String meta = itemParts[2];
                         try {
-                            if (meta.equals("*")){
+                            if (meta.equals("*")) {
                                 metadata = OreDictionary.WILDCARD_VALUE;
                             } else {
                                 metadata = Integer.parseInt(meta);
                             }
-                            name = parts[0] + ":" + parts[1];
+                            type = itemParts[0] + ':' + itemParts[1];
                         } catch (NumberFormatException ignored) {
-
-                        }
-                        if (Item.getByNameOrId(name) != null){
-                            new ItemRequirement(new ItemStack(Item.getByNameOrId(name), 1, metadata));
+                            //Do nothing if the meta is not a valid number or wildcard (Maybe it somehow is part of the item name)
                         }
                     }
+                    Item item = Item.getByNameOrId(type);
+                    if (item == null) {
+                        return null;
+                    }
+                    key = new ItemInfo(item, metadata, nbt);
                 }
-            } catch (TypeNotPresentException ignored){
             }
-            return null;
+            return new ItemRequirement(key);
         });
 
         CTChatCommand.registerCommand(new TileEntityCommand());

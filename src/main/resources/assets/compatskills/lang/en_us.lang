@@ -4,6 +4,7 @@ compatskills.misc.gamestageFormat=GameStage: %s%s
 
 ## Minecraft
 compatskills.misc.dimensionFormat=Dimension: %s%s
+compatskills.misc.requirements.itemRequirementFormat=Item: %s%s
 
 ## Inverted Requirements
 compatskills.misc.requirements.invertedAchievementFormat=!Advancement: %s
