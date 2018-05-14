@@ -38,7 +38,7 @@ public class ItemRequirement extends Requirement {
         if (key.getTag() != null) {
             displayName += " With NBT Tag: " + key.getTag().toString();//Maybe format NBT slightly better
         }
-        TextFormatting color = achievedByPlayer(data.playerWR.get()) ? TextFormatting.GREEN : TextFormatting.RED;
+        TextFormatting color = data != null && achievedByPlayer(data.playerWR.get()) ? TextFormatting.GREEN : TextFormatting.RED;
         return TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.itemRequirementFormat", color, displayName.trim()).getUnformattedComponentText();
     }
 

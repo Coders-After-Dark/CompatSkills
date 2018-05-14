@@ -75,7 +75,7 @@ dependencies {
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${crafttweaker_version}"
     deobfCompile "CraftTweaker2:CraftTweaker2-API:1.12-${crafttweaker_version}"
     deobfCompile "CraftTweaker2:ZenScript:1.12-${crafttweaker_version}"
-    deobfCompile "codersafterdark.reskillable:Reskillable:1.12.2-1.4.0-SNAPSHOT.53"
+    deobfCompile "codersafterdark.reskillable:Reskillable:1.12.2-1.4.0-PR-97.1"
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.2.11-96"
     deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.22-13"

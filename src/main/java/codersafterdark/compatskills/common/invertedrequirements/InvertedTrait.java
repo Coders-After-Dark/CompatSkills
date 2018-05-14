@@ -11,8 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class InvertedTrait extends Requirement {
     private Unlockable unlockable;
@@ -34,7 +32,7 @@ public class InvertedTrait extends Requirement {
         String name = "";
 
         if (unlockable != null) {
-            if (data.getSkillInfo(unlockable.getParentSkill()).isUnlocked(unlockable)) {
+            if (data == null || data.getSkillInfo(unlockable.getParentSkill()).isUnlocked(unlockable)) {
                 color = TextFormatting.RED;
             }
             name = unlockable.getName();

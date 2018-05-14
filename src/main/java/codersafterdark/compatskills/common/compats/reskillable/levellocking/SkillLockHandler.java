@@ -19,10 +19,16 @@ public class SkillLockHandler {
 
     @SubscribeEvent
     public void levelUpEvent(LevelUpEvent.Pre event) {
+        int level = event.getLevel();
+        int oldLevel = event.getOldLevel();
+        if (level < oldLevel || level > oldLevel + 1) {
+            //Do not bother locking them going down in level
+            //If their level changed by more than one it was by command and is ignoring locks
+            return;
+        }
         EntityPlayer player = event.getEntityPlayer();
         PlayerData data = PlayerDataHandler.get(player);
         Skill skill = event.getSkill();
-        int level = event.getLevel();
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new SkillLock(skill, level));
         if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
