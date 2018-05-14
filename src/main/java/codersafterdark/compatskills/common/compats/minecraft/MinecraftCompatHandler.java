@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.minecraft;
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionlocks.DimensionLockHandler;
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent.AnimalTameEventHandler;
+import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.item.ItemRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
@@ -27,10 +28,12 @@ public class MinecraftCompatHandler {
         EntityMountEventHandler entityMountEventHandler = new EntityMountEventHandler();
         DimensionLockHandler dimensionLockHandler = new DimensionLockHandler();
         TileEntityEventHandler tileEntityHandler = new TileEntityEventHandler();
+        EntityDamageEventHandler entityDamageHandler = new EntityDamageEventHandler();
         MinecraftForge.EVENT_BUS.register(tameEventHandler);
         MinecraftForge.EVENT_BUS.register(entityMountEventHandler);
         MinecraftForge.EVENT_BUS.register(dimensionLockHandler);
         MinecraftForge.EVENT_BUS.register(tileEntityHandler);
+        MinecraftForge.EVENT_BUS.register(entityDamageHandler);
         ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("dim", input -> {
             try {
                 return new DimensionRequirement(Integer.parseInt(input));
