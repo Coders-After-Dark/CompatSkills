@@ -2,15 +2,12 @@ package codersafterdark.compatskills.common.invertedrequirements;
 
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
-import codersafterdark.reskillable.api.data.PlayerSkillInfo;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
 import codersafterdark.reskillable.api.skill.Skill;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class InvertedSkill extends Requirement {
     private final Skill skill;
@@ -29,9 +26,8 @@ public class InvertedSkill extends Requirement {
 
     @Override
     public String getToolTip(PlayerData data) {
-        PlayerSkillInfo info = data.getSkillInfo(skill);
         TextFormatting color = TextFormatting.GREEN;
-        if (info.getLevel() >= level) {
+        if (data == null || data.getSkillInfo(skill).getLevel() >= level) {
             color = TextFormatting.RED;
         }
         return TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.invertedSkillFormat", TextFormatting.DARK_AQUA, skill.getName(), color, level).getUnformattedComponentText();

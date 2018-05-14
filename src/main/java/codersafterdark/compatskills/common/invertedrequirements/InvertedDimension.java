@@ -23,9 +23,11 @@ public class InvertedDimension extends Requirement {
     @Override
     public String getToolTip(PlayerData data) {
         TextFormatting color = TextFormatting.GREEN;
-        EntityPlayer player = data.playerWR.get();
-        if (player != null) {
-            if (player.dimension == dimension) {
+        if (data == null) {
+            color = TextFormatting.RED;
+        } else {
+            EntityPlayer player = data.playerWR.get();
+            if (player != null && player.dimension == dimension) {
                 color = TextFormatting.RED;
             }
         }

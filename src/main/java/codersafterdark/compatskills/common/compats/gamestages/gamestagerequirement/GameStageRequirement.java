@@ -23,10 +23,8 @@ public class GameStageRequirement extends Requirement {
     @Override
     public String getToolTip(PlayerData playerData) {
         TextFormatting color = TextFormatting.GREEN;
-        if (playerData.playerWR.get() != null) {
-            if (!GameStageHelper.hasStage(playerData.playerWR.get(), gamestage)) {
-                color = TextFormatting.RED;
-            }
+        if (playerData == null || playerData.playerWR.get() != null && !GameStageHelper.hasStage(playerData.playerWR.get(), gamestage)) {
+            color = TextFormatting.RED;
         }
         return TextFormatting.GRAY + " - " + TextFormatting.BLUE + new TextComponentTranslation("compatskills.misc.gamestageFormat", color, gamestage).getUnformattedComponentText();
     }

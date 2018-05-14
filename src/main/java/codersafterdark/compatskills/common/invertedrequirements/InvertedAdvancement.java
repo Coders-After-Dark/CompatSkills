@@ -35,7 +35,7 @@ public class InvertedAdvancement extends Requirement {
         String toolTip = "";
         TextFormatting color = TextFormatting.GREEN;
 
-        if (achievedByPlayer(data.playerWR.get())){
+        if (data == null || achievedByPlayer(data.playerWR.get())){
             color = TextFormatting.RED;
         }
 
