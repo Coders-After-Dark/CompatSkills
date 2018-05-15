@@ -31,7 +31,6 @@ public class AnimalTameEventTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkValidIEntityDefinition(definition) & CheckMethods.checkStringArray(requirements)) {
-                definition.getInternal();
                 LevelLockHandler.addLockByKey(new EntityTameKey(definition.getId()), RequirementHolder.fromStringList(requirements));
             }
         }

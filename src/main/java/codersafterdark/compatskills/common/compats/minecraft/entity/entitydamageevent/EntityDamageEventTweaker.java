@@ -31,7 +31,6 @@ public class EntityDamageEventTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkValidIEntityDefinition(definition) & CheckMethods.checkStringArray(requirements)) {
-                definition.getInternal();
                 LevelLockHandler.addLockByKey(new EntityDamageKey(definition.getId()), RequirementHolder.fromStringList(requirements));
             }
         }
