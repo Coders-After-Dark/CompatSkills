@@ -44,6 +44,18 @@ public class CheckMethods {
         return true;
     }
 
+    public static boolean checkOptionalRequirements(String[] strings) {
+        if (strings != null && strings.length > 0) {
+            for (String string : strings) {
+                if (string == null || string.isEmpty()) {
+                    CraftTweakerAPI.logError("String: " + string + " was found to be either null or empty!");
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static boolean checkString(String message) {
         if (message == null || message.isEmpty()) {
             CraftTweakerAPI.logError("'String' Param is either null or empty!");
