@@ -15,6 +15,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import org.apache.logging.log4j.Level;
+import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import stanhebben.zenscript.annotations.ZenProperty;
@@ -61,18 +62,18 @@ public class GameStageUnlockable extends Unlockable {
     }
 
     @ZenMethod
-    public static GameStageUnlockable addGameStageUnlockable(String gameStage, String name, int x, int y, String skillName, int cost, String... requirements) {
-        if (CheckMethods.checkString(gameStage) & CheckMethods.checkString(name) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillName) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
-            StringBuilder reqBuilder = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                reqBuilder.append(string);
-            }
+    public static GameStageUnlockable addGameStageUnlockable(String gameStage, String name, int x, int y, String skillName, int cost, @Optional String... requirements) {
+        if (CheckMethods.checkString(gameStage) & CheckMethods.checkString(name) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillName) & CheckMethods.checkInt(cost) & CheckMethods.checkOptionalRequirements(requirements)) {
             ResourceLocation skillLoc = new ResourceLocation(skillName);
             ResourceLocation loc = new ResourceLocation(MOD_ID, name);
+            if (requirements == null) {
+                requirements = new String[0];
+            }
+            GameStageUnlockable dummyTrait = new GameStageUnlockable(gameStage, loc, x, y, skillLoc, cost, requirements);
             if (ReskillableRegistries.UNLOCKABLES.containsKey(loc)) {
                 Unlockable value = ReskillableRegistries.UNLOCKABLES.getValue(loc);
                 if (value instanceof GameStageUnlockable) {
-                    GameStageUnlockable dummyTrait = (GameStageUnlockable) value;
+                    dummyTrait = (GameStageUnlockable) value;
                     String updated = "";
                     //Update values that are not in sync
                     if (!dummyTrait.gameStage.equals(gameStage)) {
@@ -95,21 +96,23 @@ public class GameStageUnlockable extends Unlockable {
                         dummyTrait.unlockableConfig.setCost(cost);
                         updated += " - Updated Cost: " + cost;
                     }
+                    StringBuilder reqBuilder = new StringBuilder();
+                    for (String string : requirements) {
+                        reqBuilder.append(string);
+                    }
                     RequirementHolder holder = RequirementHolder.fromStringList(requirements);
                     if (!holder.equals(dummyTrait.getRequirements())) {
                         dummyTrait.unlockableConfig.setRequirementHolder(holder);
-                        updated += " - Updated Cost: " + cost;
+                        updated += " - Updated Requirements: " + reqBuilder;
                     }
                     if (!updated.isEmpty()) {
                         CraftTweakerAPI.logInfo("Loaded Dummy Trait: " + loc + updated);
                     } else {
-                        CraftTweakerAPI.logInfo("Loaded Dummy Trait: " + loc);
+                        CraftTweakerAPI.logInfo("Created or Loaded Dummy Trait: " + loc + " - for GameStage: " + gameStage + " - With Pos: " + x + ", " + y + " -  With Cost: " + cost + " - Requirements: " + reqBuilder);
                     }
-                    return dummyTrait;
                 }
             }
-            CraftTweakerAPI.logInfo("Created new Dummy Trait: " + loc + " - for GameStage: " + gameStage + " - With Pos: " + x + ", " + y + " -  With Cost: " + cost + " - " + reqBuilder);
-            return new GameStageUnlockable(gameStage, loc, x, y, skillLoc, cost, requirements);
+            return dummyTrait;
         }
         return null;
     }

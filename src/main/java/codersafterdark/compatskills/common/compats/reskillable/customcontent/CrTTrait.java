@@ -63,18 +63,16 @@ public class CrTTrait extends Trait {
     public CrTTrait(ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... requirements) {
         super(name, x, y, skillName, cost, requirements);
         ReskillableRegistries.UNLOCKABLES.register(this);
-
     }
 
     private static CrTTrait createTrait(ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... requirements) {
-        StringBuilder reqBuilder = new StringBuilder("Requirements: ");
-        for (String string : requirements) {
-            reqBuilder.append(string);
+        if (requirements == null) {
+            requirements = new String[0];
         }
+        CrTTrait customTrait = new CrTTrait(name, x, y, skillName, cost, requirements);
         if (ReskillableRegistries.UNLOCKABLES.containsKey(name)) {
             Unlockable value = ReskillableRegistries.UNLOCKABLES.getValue(name);
             if (value instanceof CrTTrait) {
-                CrTTrait customTrait = (CrTTrait) value;
                 String updated = "";
                 //Update values that are not in sync
                 if (customTrait.getX() != x) {
@@ -93,50 +91,52 @@ public class CrTTrait extends Trait {
                     customTrait.unlockableConfig.setCost(cost);
                     updated += " - Updated Cost: " + cost;
                 }
+                StringBuilder reqBuilder = new StringBuilder();
+                for (String string : requirements) {
+                    reqBuilder.append(string);
+                }
                 RequirementHolder holder = RequirementHolder.fromStringList(requirements);
                 if (!holder.equals(customTrait.getRequirements())) {
                     customTrait.unlockableConfig.setRequirementHolder(holder);
-                    updated += " - Updated Cost: " + cost;
+                    updated += " - Updated Requirements: " + reqBuilder;
                 }
                 if (!updated.isEmpty()) {
                     CraftTweakerAPI.logInfo("Loaded Trait: " + name + updated);
                 } else {
-                    CraftTweakerAPI.logInfo("Loaded Trait: " + name);
+                    CraftTweakerAPI.logInfo("Created or Loaded Trait: " + name + " -" + " With Pos: " + x + ", " + y + " - " + " With Cost: " + cost + " - Requirements: " + reqBuilder);
                 }
-                return customTrait;
             }
         }
-        CraftTweakerAPI.logInfo("Created new Trait: " + name + " -" + " With Pos: " + x + ", " + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
-        return new CrTTrait(name, x, y, skillName, cost, requirements);
+        return customTrait;
     }
 
     @ZenMethod
-    public static CrTTrait createTrait(String traitName, int x, int y, String skillLocation, int cost, String... requirements) {
-        if (CheckMethods.checkString(traitName) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillLocation) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+    public static CrTTrait createTrait(String traitName, int x, int y, String skillLocation, int cost, @Optional String... requirements) {
+        if (CheckMethods.checkString(traitName) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillLocation) & CheckMethods.checkInt(cost) & CheckMethods.checkOptionalRequirements(requirements)) {
             return createTrait(new ResourceLocation(CompatSkillConstants.MOD_ID, traitName), x, y, new ResourceLocation(skillLocation), cost, requirements);
         }
         return null;
     }
 
     @ZenMethod
-    public static CrTTrait createTrait(String traitName, int x, int y, CrTSkill parentSkill, int cost, String... requirements) {
-        if (CheckMethods.checkString(traitName) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkCrTSkillParent(parentSkill) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+    public static CrTTrait createTrait(String traitName, int x, int y, CrTSkill parentSkill, int cost, @Optional String... requirements) {
+        if (CheckMethods.checkString(traitName) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkCrTSkillParent(parentSkill) & CheckMethods.checkInt(cost) & CheckMethods.checkOptionalRequirements(requirements)) {
             return createTrait(new ResourceLocation(CompatSkillConstants.MOD_ID, traitName), x, y, parentSkill.getRegistryName(), cost, requirements);
         }
         return null;
     }
 
     @ZenMethod
-    public static CrTTrait createNewTrait(String traitLocation, int x, int y, String skillLocation, int cost, String... requirements) {
-        if (CheckMethods.checkString(traitLocation) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillLocation) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+    public static CrTTrait createNewTrait(String traitLocation, int x, int y, String skillLocation, int cost, @Optional String... requirements) {
+        if (CheckMethods.checkString(traitLocation) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillLocation) & CheckMethods.checkInt(cost) & CheckMethods.checkOptionalRequirements(requirements)) {
             return createTrait(new ResourceLocation(traitLocation), x, y, new ResourceLocation(skillLocation), cost, requirements);
         }
         return null;
     }
 
     @ZenMethod
-    public static CrTTrait createNewTrait(String traitLocation, int x, int y, CrTSkill parentSkill, int cost, String... requirements) {
-        if (CheckMethods.checkString(traitLocation) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkCrTSkillParent(parentSkill) & CheckMethods.checkInt(cost) & CheckMethods.checkStringArray(requirements)) {
+    public static CrTTrait createNewTrait(String traitLocation, int x, int y, CrTSkill parentSkill, int cost, @Optional String... requirements) {
+        if (CheckMethods.checkString(traitLocation) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkCrTSkillParent(parentSkill) & CheckMethods.checkInt(cost) & CheckMethods.checkOptionalRequirements(requirements)) {
             return createTrait(new ResourceLocation(traitLocation), x, y, parentSkill.getRegistryName(), cost, requirements);
         }
         return null;
