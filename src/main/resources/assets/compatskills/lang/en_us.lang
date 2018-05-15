@@ -32,6 +32,9 @@ compatskills.tconstruct.modifierError=After many countless moments, you can't fi
 compatskills.tconstruct.toolTypeError=No matter how the instructions, a novice can not create a master piece.
 
 ## Minecraft
+### Dimension
+compatskills.dimension.travelError=A strange power is stopping you from reaching your destination
+
 ### Entity
 compatskills.entity.entityMountError=No matter how hard you try you are unable to find your balance, and fall off.
 compatskills.entity.entityTameError=As you attempt to tame the creature it resists you.
