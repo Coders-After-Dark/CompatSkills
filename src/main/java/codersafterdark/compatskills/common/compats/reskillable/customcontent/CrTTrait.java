@@ -67,14 +67,10 @@ public class CrTTrait extends Trait {
     }
 
     private static CrTTrait createTrait(ResourceLocation name, int x, int y, ResourceLocation skillName, int cost, String... requirements) {
-        StringBuilder reqBuilder = new StringBuilder("Requirements: ");
-        for (String string : requirements) {
-            reqBuilder.append(string);
-        }
+        CrTTrait customTrait = new CrTTrait(name, x, y, skillName, cost, requirements);
         if (ReskillableRegistries.UNLOCKABLES.containsKey(name)) {
             Unlockable value = ReskillableRegistries.UNLOCKABLES.getValue(name);
             if (value instanceof CrTTrait) {
-                CrTTrait customTrait = (CrTTrait) value;
                 String updated = "";
                 //Update values that are not in sync
                 if (customTrait.getX() != x) {
@@ -93,21 +89,23 @@ public class CrTTrait extends Trait {
                     customTrait.unlockableConfig.setCost(cost);
                     updated += " - Updated Cost: " + cost;
                 }
+                StringBuilder reqBuilder = new StringBuilder();
+                for (String string : requirements) {
+                    reqBuilder.append(string);
+                }
                 RequirementHolder holder = RequirementHolder.fromStringList(requirements);
                 if (!holder.equals(customTrait.getRequirements())) {
                     customTrait.unlockableConfig.setRequirementHolder(holder);
-                    updated += " - Updated Cost: " + cost;
+                    updated += " - Updated Requirements: " + reqBuilder;
                 }
                 if (!updated.isEmpty()) {
                     CraftTweakerAPI.logInfo("Loaded Trait: " + name + updated);
                 } else {
-                    CraftTweakerAPI.logInfo("Loaded Trait: " + name);
+                    CraftTweakerAPI.logInfo("Created or Loaded Trait: " + name + " -" + " With Pos: " + x + ", " + y + " - " + " With Cost: " + cost + " - Requirements: " + reqBuilder);
                 }
-                return customTrait;
             }
         }
-        CraftTweakerAPI.logInfo("Created new Trait: " + name + " -" + " With Pos: " + x + ", " + y + " - " + " With Cost: " + cost + " - " + reqBuilder);
-        return new CrTTrait(name, x, y, skillName, cost, requirements);
+        return customTrait;
     }
 
     @ZenMethod

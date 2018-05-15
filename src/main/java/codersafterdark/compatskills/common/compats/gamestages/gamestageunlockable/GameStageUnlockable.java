@@ -69,10 +69,13 @@ public class GameStageUnlockable extends Unlockable {
             }
             ResourceLocation skillLoc = new ResourceLocation(skillName);
             ResourceLocation loc = new ResourceLocation(MOD_ID, name);
+
+            GameStageUnlockable dummyTrait = new GameStageUnlockable(gameStage, loc, x, y, skillLoc, cost, requirements);
+
             if (ReskillableRegistries.UNLOCKABLES.containsKey(loc)) {
                 Unlockable value = ReskillableRegistries.UNLOCKABLES.getValue(loc);
                 if (value instanceof GameStageUnlockable) {
-                    GameStageUnlockable dummyTrait = (GameStageUnlockable) value;
+                    dummyTrait = (GameStageUnlockable) value;
                     String updated = "";
                     //Update values that are not in sync
                     if (!dummyTrait.gameStage.equals(gameStage)) {
@@ -95,21 +98,23 @@ public class GameStageUnlockable extends Unlockable {
                         dummyTrait.unlockableConfig.setCost(cost);
                         updated += " - Updated Cost: " + cost;
                     }
+                    StringBuilder reqBuilder = new StringBuilder();
+                    for (String string : requirements) {
+                        reqBuilder.append(string);
+                    }
                     RequirementHolder holder = RequirementHolder.fromStringList(requirements);
                     if (!holder.equals(dummyTrait.getRequirements())) {
                         dummyTrait.unlockableConfig.setRequirementHolder(holder);
-                        updated += " - Updated Cost: " + cost;
+                        updated += " - Updated Requirements: " + reqBuilder;
                     }
                     if (!updated.isEmpty()) {
                         CraftTweakerAPI.logInfo("Loaded Dummy Trait: " + loc + updated);
                     } else {
-                        CraftTweakerAPI.logInfo("Loaded Dummy Trait: " + loc);
+                        CraftTweakerAPI.logInfo("Created or Loaded Dummy Trait: " + loc + " - for GameStage: " + gameStage + " - With Pos: " + x + ", " + y + " -  With Cost: " + cost + " - Requirements: " + reqBuilder);
                     }
-                    return dummyTrait;
                 }
             }
-            CraftTweakerAPI.logInfo("Created new Dummy Trait: " + loc + " - for GameStage: " + gameStage + " - With Pos: " + x + ", " + y + " -  With Cost: " + cost + " - " + reqBuilder);
-            return new GameStageUnlockable(gameStage, loc, x, y, skillLoc, cost, requirements);
+            return dummyTrait;
         }
         return null;
     }

@@ -23,21 +23,20 @@ public class CrTSkill extends Skill {
     }
 
     private static CrTSkill createSkill(ResourceLocation name, ResourceLocation background) {
+        CrTSkill customSkill = new CrTSkill(name, background);
         if (ReskillableRegistries.SKILLS.containsKey(name)) {
             Skill value = ReskillableRegistries.SKILLS.getValue(name);
             if (value instanceof CrTSkill) {
-                CrTSkill customSkill = (CrTSkill) value;
+                customSkill = (CrTSkill) value;
                 if (!background.equals(customSkill.getBackground())) {
                     customSkill.background = background;
                     CraftTweakerAPI.logInfo("Loaded Skill: " + name + " - Updated Background: " + background);
                 } else {
-                    CraftTweakerAPI.logInfo("Loaded Skill: " + name);
+                    CraftTweakerAPI.logInfo("Created or Loaded Skill: " + name + " - With Background: " + background);
                 }
-                return customSkill;
             }
         }
-        CraftTweakerAPI.logInfo("Created new Skill: " + name + " - With Background: " + background);
-        return new CrTSkill(name, background);
+        return customSkill;
     }
 
     @ZenMethod
