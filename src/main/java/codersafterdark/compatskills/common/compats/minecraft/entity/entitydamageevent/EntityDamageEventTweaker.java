@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent;
+package codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
@@ -10,19 +10,19 @@ import crafttweaker.api.entity.IEntityDefinition;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-@ZenClass("mods.compatskills.AnimalTameLock")
+@ZenClass("mods.compatskills.EntityDamageLock")
 @ZenRegister
-public class AnimalTameEventTweaker {
+public class EntityDamageEventTweaker {
     @ZenMethod
-    public static void addTameLock(IEntityDefinition definition, String... defaultRequirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddTameLock(definition, defaultRequirements));
+    public static void addEntityLock(IEntityDefinition definition, String... defaultRequirements) {
+        CompatSkills.LATE_ADDITIONS.add(new AddDamageLock(definition, defaultRequirements));
     }
 
-    private static class AddTameLock implements IAction {
+    private static class AddDamageLock implements IAction {
         private final IEntityDefinition definition;
         private final String[] requirements;
 
-        private AddTameLock(IEntityDefinition definition, String... requirements) {
+        private AddDamageLock(IEntityDefinition definition, String... requirements) {
             this.definition = definition;
             this.requirements = requirements;
         }
@@ -31,7 +31,7 @@ public class AnimalTameEventTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkValidIEntityDefinition(definition) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new EntityTameKey(definition.getId()), RequirementHolder.fromStringList(requirements));
+                LevelLockHandler.addLockByKey(new EntityDamageKey(definition.getId()), RequirementHolder.fromStringList(requirements));
             }
         }
 
@@ -41,7 +41,7 @@ public class AnimalTameEventTweaker {
             for (String string : requirements) {
                 descString.append(string).append(", ");
             }
-            return "Added Entity Tame Lock for Entity: " + (definition == null ? "null" : definition.getName()) + ", With " + descString;
+            return "Added Entity Damage Lock for Entity: " + (definition == null ? "null" : definition.getName()) + ", With " + descString;
         }
     }
 }
