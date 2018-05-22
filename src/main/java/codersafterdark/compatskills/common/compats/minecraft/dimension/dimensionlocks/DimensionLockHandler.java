@@ -25,9 +25,8 @@ public class DimensionLockHandler {
         for (int i = 0; i < player.inventory.armorInventory.size(); i++) {
             ItemStack stack = player.inventory.armorInventory.get(i);
             if (!LevelLockHandler.canPlayerUseItem(player, stack)) {
-                ItemStack copy = stack.copy();
-                if (!player.inventory.addItemStackToInventory(copy)) {
-                    player.dropItem(copy, false);
+                if (!player.inventory.addItemStackToInventory(stack)) {
+                    player.dropItem(stack, false);
                 }
                 player.inventory.armorInventory.set(i, ItemStack.EMPTY);
                 LevelLockHandler.tellPlayer(player, stack, MessageLockedItem.MSG_ARMOR_EQUIP_LOCKED);
