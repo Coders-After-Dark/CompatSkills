@@ -6,6 +6,8 @@ import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameev
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.item.ItemRequirement;
+import codersafterdark.compatskills.common.compats.minecraft.item.OreDictRequirement;
+import codersafterdark.compatskills.common.compats.minecraft.item.ParentOreDictLock;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
 import codersafterdark.compatskills.common.invertedrequirements.InvertedDimension;
@@ -14,8 +16,10 @@ import codersafterdark.reskillable.api.data.GenericNBTLockKey;
 import codersafterdark.reskillable.api.data.ItemInfo;
 import codersafterdark.reskillable.api.data.ModLockKey;
 import codersafterdark.reskillable.api.data.NBTLockKey;
+import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
 import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,6 +28,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class MinecraftCompatHandler {
     public static void setup() {
+        LevelLockHandler.registerLockKey(ItemStack.class, ParentOreDictLock.class);
+
         AnimalTameEventHandler tameEventHandler = new AnimalTameEventHandler();
         EntityMountEventHandler entityMountEventHandler = new EntityMountEventHandler();
         DimensionLockHandler dimensionLockHandler = new DimensionLockHandler();
@@ -47,6 +53,25 @@ public class MinecraftCompatHandler {
             } catch (NumberFormatException ignored) {
             }
             return null;
+        });
+        ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("ore", input -> {
+            if (input == null) {
+                return null;
+            }
+            String[] inputInfo = input.split("\\|");
+            //(modid,empty, or modid:item:optional metadata)|nbt as json
+            String type = inputInfo[0]; //mod, generic, or item
+            NBTTagCompound nbt = null;
+            if (inputInfo.length > 1) {
+                String nbtString = input.substring(type.length() + 1).trim();
+                try {
+                    nbt = JsonToNBT.getTagFromJson(nbtString);
+                } catch (NBTException e) {
+                    //Invalid NBT
+                    return null;
+                }
+            }
+            return OreDictionary.doesOreNameExist(inputInfo[0]) ? new OreDictRequirement(inputInfo[0], nbt) : null;
         });
         ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("stack", input -> {
             String[] inputInfo = input.split("\\|");
