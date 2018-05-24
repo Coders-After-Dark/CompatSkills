@@ -1,6 +1,5 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct;
 
-import codersafterdark.compatskills.common.compats.tinkersconstruct.materiallocks.MaterialLockKey;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks.ToolTypeLockKey;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
@@ -18,12 +17,14 @@ import slimeknights.tconstruct.library.utils.TinkerUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TinkerLockHandler {
     @SubscribeEvent
     public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event) {
         PlayerData data = PlayerDataHandler.get(event.getPlayer());
-        String canceledMessage = getCanceledMessage(data, getModifierRequirement(event.getModifiers()), new TextComponentTranslation("compatskills.tconstruct.modifierError").getUnformattedComponentText());
+        RequirementHolder holder = LevelLockHandler.getLocks(IToolMod.class, event.getModifiers().toArray(new IToolMod[0]));
+        String canceledMessage = getCanceledMessage(data, holder, new TextComponentTranslation("compatskills.tconstruct.modifierError").getUnformattedComponentText());
         if (canceledMessage != null) {
             event.setCanceled(canceledMessage);
         }
@@ -72,27 +73,8 @@ public class TinkerLockHandler {
     }
 
     private List<RequirementHolder> getMaterialRequirements(List<ItemStack> itemstacks) {
-        List<RequirementHolder> holders = new ArrayList<>();
-        for (ItemStack stack : itemstacks) {
-            Material material = TinkerUtil.getMaterialFromStack(stack);
-            RequirementHolder materialHolder = LevelLockHandler.getLockByKey(new MaterialLockKey(material));
-            if (!materialHolder.equals(LevelLockHandler.EMPTY_LOCK)) {
-                holders.add(materialHolder);
-            }
-            RequirementHolder holder = getModifierRequirement(material.getDefaultTraits());
-            if (!holder.equals(LevelLockHandler.EMPTY_LOCK)) {
-                holders.add(holder);
-            }
-        }
-        return holders;
-    }
-
-    private RequirementHolder getModifierRequirement(List<? extends IToolMod> modifiers) {
-        IToolMod[] mods = new IToolMod[modifiers.size()];
-        for (int i = 0; i < modifiers.size(); i++) {
-            mods[i] = modifiers.get(i);
-        }
-        return LevelLockHandler.getLocks(IToolMod.class, mods);
+        return itemstacks.stream().map(stack -> LevelLockHandler.getLocks(Material.class, TinkerUtil.getMaterialFromStack(stack))).filter(materialHolder ->
+                !materialHolder.equals(LevelLockHandler.EMPTY_LOCK)).collect(Collectors.toList());
     }
 
     //TODO: Potentially try to make an error message that says what lock types there are OR remove errorType and just have a generic tinker's error

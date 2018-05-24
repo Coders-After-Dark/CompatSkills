@@ -11,10 +11,12 @@ import crafttweaker.api.data.DataMap;
 import crafttweaker.api.data.IData;
 import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IItemStack;
+import crafttweaker.api.oredict.IOreDictEntry;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.oredict.OreDictionary;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
@@ -121,6 +123,15 @@ public class CheckMethods {
         }
         return true;
     }
+
+    public static boolean checkIOreDictEntry(IOreDictEntry entry) {
+        if (entry == null || !OreDictionary.doesOreNameExist(entry.getName())) {
+            CraftTweakerAPI.logError("Ore Dictionary Entry: " + entry + " was found to be either null or does not exist!");
+            return false;
+        }
+        return true;
+    }
+
 
     /////////////////
     // Blood Magic //
