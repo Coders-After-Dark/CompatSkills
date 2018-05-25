@@ -1,0 +1,51 @@
+# FORMATS
+## GameStages
+compatskills.misc.gamestageFormat=GameStage: %s%s
+
+## Minecraft
+compatskills.misc.dimensionFormat=Dimension: %s%s
+compatskills.misc.requirements.itemRequirementFormat=Item: %s%s
+
+## Forge
+compatskills.misc.requirements.oreDictRequirementFormat=Ore Dictionary Entry: %s%s
+
+## Inverted Requirements
+compatskills.misc.requirements.invertedAchievementFormat=!Достижение: %s
+compatskills.misc.requirements.invertedSkillFormat=!%s%s: %s%d
+compatskills.misc.requirements.invertedTraitFormat=!Награда: %s%s
+compatskills.misc.requirements.invertedGamestageFormat=!Стадия: %s%s
+compatskills.misc.requirements.invertedDimensionFormat=!Измерение: %s%s
+
+
+# Error Messages
+## Game Stages
+compatskills.gamestage.addError=Требования для разблокирования этой Стадии не достигнуты!
+
+## Reskillable
+compatskills.reskillable.addLevelLockError=Чтобы получить этот Уровень:
+compatskills.reskillable.addLevelLockError2=Пожалуйста, достигните следующих требований!
+
+## Blood Magic
+compatskills.bloodmagic.bindingError=Безмолвные Темные Материи кружат вокруг Вас и затем исчезают
+compatskills.bloodmagic.ritualError=Ритуал не принёс Вам ожидаемого результата
+
+## Tinker's Construct
+compatskills.tconstruct.materialError=Чем больше молот ударяет, тем больше материал сопротивляется.
+compatskills.tconstruct.modifierError=После бесчисленных попыток, Вы всё еще не можете понять, как модифицировать инструмент.
+compatskills.tconstruct.toolTypeError=Неважно, какими будут инструкции, новичок не может создать шедевр
+
+## Minecraft
+### Dimension
+compatskills.dimension.travelError=Неведомая сила не даёт Вам достичь Вашего места назначения
+
+### Entity
+compatskills.entity.entityMountError=Как сильно Вы не стараетесь, Вам не удается найти баланс и Вы падаете.
+compatskills.entity.entityTameError=Существо противится Вашим попыткам приручения.
+compatskills.entity.entityDamageError=Ваши атаки не могут причинить урон зверю.
+
+### Tile-Entities
+compatskills.tileentity.interactError=Даже после бесчисленных часов Вы не можете сообразить, как работает это устройство.
+
+## Misc:
+compatskills.misc.Requirements=Требования:
+compatskills.misc.Shift=Нажмите Shift для отображения Требований
