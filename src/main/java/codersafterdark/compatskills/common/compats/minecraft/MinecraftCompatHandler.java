@@ -1,7 +1,6 @@
 package codersafterdark.compatskills.common.compats.minecraft;
 
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionlocks.DimensionLockHandler;
-import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent.AnimalTameEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountEventHandler;
@@ -10,12 +9,12 @@ import codersafterdark.compatskills.common.compats.minecraft.item.OreDictRequire
 import codersafterdark.compatskills.common.compats.minecraft.item.ParentOreDictLock;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
-import codersafterdark.compatskills.common.invertedrequirements.InvertedDimension;
 import codersafterdark.reskillable.api.ReskillableAPI;
 import codersafterdark.reskillable.api.data.GenericNBTLockKey;
 import codersafterdark.reskillable.api.data.ItemInfo;
 import codersafterdark.reskillable.api.data.ModLockKey;
 import codersafterdark.reskillable.api.data.NBTLockKey;
+import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraft.item.Item;
@@ -40,21 +39,9 @@ public class MinecraftCompatHandler {
         MinecraftForge.EVENT_BUS.register(dimensionLockHandler);
         MinecraftForge.EVENT_BUS.register(tileEntityHandler);
         MinecraftForge.EVENT_BUS.register(entityDamageHandler);
-        ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("dim", input -> {
-            try {
-                return new DimensionRequirement(Integer.parseInt(input));
-            } catch (NumberFormatException ignored) {
-            }
-            return null;
-        });
-        ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("!dim", input -> {
-            try {
-                return new InvertedDimension(Integer.parseInt(input));
-            } catch (NumberFormatException ignored) {
-            }
-            return null;
-        });
-        ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("ore", input -> {
+        RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
+        registry.addRequirementHandler("!dim", input -> registry.getRequirement("not|dim|" + input));
+        registry.addRequirementHandler("ore", input -> {
             if (input == null) {
                 return null;
             }
@@ -73,7 +60,7 @@ public class MinecraftCompatHandler {
             }
             return OreDictionary.doesOreNameExist(inputInfo[0]) ? new OreDictRequirement(inputInfo[0], nbt) : null;
         });
-        ReskillableAPI.getInstance().getRequirementRegistry().addRequirementHandler("stack", input -> {
+        registry.addRequirementHandler("stack", input -> {
             String[] inputInfo = input.split("\\|");
             //(modid,empty, or modid:item:optional metadata)|nbt as json
             String type = inputInfo[0]; //mod, generic, or item
