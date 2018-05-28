@@ -15,10 +15,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import org.apache.logging.log4j.Level;
-import stanhebben.zenscript.annotations.Optional;
-import stanhebben.zenscript.annotations.ZenClass;
-import stanhebben.zenscript.annotations.ZenMethod;
-import stanhebben.zenscript.annotations.ZenProperty;
+import stanhebben.zenscript.annotations.*;
 
 import static codersafterdark.compatskills.utils.CompatSkillConstants.MOD_ID;
 
@@ -59,6 +56,20 @@ public class GameStageUnlockable extends Unlockable {
     @Override
     public String getDescription() {
         return description == null ? super.getDescription() : description.getText();
+    }
+
+    @ZenGetter("icon")
+    @ZenMethod
+    public String retrieveIcon() {
+        return getIcon().toString();
+    }
+
+    @ZenSetter("icon")
+    @ZenMethod
+    public void changeIcon(String resourceLocation) {
+        if (CheckMethods.checkResourceLocation(resourceLocation)) {
+            setIcon(new ResourceLocation(resourceLocation));
+        }
     }
 
     @ZenMethod
