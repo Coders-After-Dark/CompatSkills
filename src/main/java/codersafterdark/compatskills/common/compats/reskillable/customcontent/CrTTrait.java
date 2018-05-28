@@ -154,6 +154,20 @@ public class CrTTrait extends Trait {
         unlockableConfig.setEnabled(enabled);
     }
 
+    @ZenGetter("icon")
+    @ZenMethod
+    public String retrieveIcon() {
+        return getIcon().toString();
+    }
+
+    @ZenSetter("icon")
+    @ZenMethod
+    public void changeIcon(String resourceLocation) {
+        if (CheckMethods.checkResourceLocation(resourceLocation)) {
+            setIcon(new ResourceLocation(resourceLocation));
+        }
+    }
+
     @Override
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (onPlayerTick != null) {

@@ -132,6 +132,18 @@ public class CheckMethods {
         return true;
     }
 
+    public static boolean checkResourceLocation(String message) {
+        if (message == null || message.isEmpty()) {
+            CraftTweakerAPI.logError("'String' Param is either null or empty!");
+            return false;
+        }
+        if (!message.contains(":")) {
+            CraftTweakerAPI.logError("'String' Param is not a valid resource location!");
+            return false;
+        }
+        return true;
+    }
+
 
     /////////////////
     // Blood Magic //
