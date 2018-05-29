@@ -1,6 +1,7 @@
 package codersafterdark.compatskills.common.compats.minecraft;
 
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionlocks.DimensionLockHandler;
+import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent.AnimalTameEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountEventHandler;
@@ -40,6 +41,13 @@ public class MinecraftCompatHandler {
         MinecraftForge.EVENT_BUS.register(tileEntityHandler);
         MinecraftForge.EVENT_BUS.register(entityDamageHandler);
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
+        registry.addRequirementHandler("dim", input -> {
+            try {
+                return new DimensionRequirement(Integer.parseInt(input));
+            } catch (NumberFormatException ignored) {
+            }
+            return null;
+        });
         registry.addRequirementHandler("!dim", input -> registry.getRequirement("not|dim|" + input));
         registry.addRequirementHandler("ore", input -> {
             if (input == null) {
