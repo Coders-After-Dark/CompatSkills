@@ -15,12 +15,12 @@ public class CompatSkillsConfig {
 
         public static class Hwyla {
             @Comment("Should Hwyla Requirements Support require Shifting?")
-            public static boolean HwylaShifting = false;
+            public static boolean HwylaShifting;
         }
 
         public static class TOP {
             @Comment("Should TOP Requirements Support require Shifting?")
-            public static boolean TOPShifting = false;
+            public static boolean TOPShifting;
         }
     }
 }

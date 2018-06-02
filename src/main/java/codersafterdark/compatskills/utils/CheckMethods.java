@@ -195,7 +195,12 @@ public class CheckMethods {
             CraftTweakerAPI.logError("CrTSkill Parent is found to be Null!");
             return false;
         }
-        return checkParentSkillsString(parent.getRegistryName().toString());
+        ResourceLocation registryName = parent.getRegistryName();
+        if (registryName == null) {
+            CraftTweakerAPI.logError("CrTSkill Parent registry found to be Null!");
+            return false;
+        }
+        return checkParentSkillsString(registryName.toString());
     }
 
     public static boolean checkSkill(Skill skill) {
@@ -203,7 +208,12 @@ public class CheckMethods {
             CraftTweakerAPI.logError("Skill is found to be Null!");
             return false;
         }
-        return checkParentSkillsString(skill.getRegistryName().toString());
+        ResourceLocation registryName = skill.getRegistryName();
+        if (registryName == null) {
+            CraftTweakerAPI.logError("Skill registry found to be Null!");
+            return false;
+        }
+        return checkParentSkillsString(registryName.toString());
     }
 
     ////////////////////////////////
