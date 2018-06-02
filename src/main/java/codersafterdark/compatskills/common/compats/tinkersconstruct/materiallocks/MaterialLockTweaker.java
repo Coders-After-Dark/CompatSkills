@@ -23,8 +23,8 @@ public class MaterialLockTweaker {
     }
 
     private static class AddMaterialLock implements IAction {
-        String id;
-        String[] requirements;
+        private final String id;
+        private final String[] requirements;
 
         AddMaterialLock(String id, String... requirements) {
             this.id = id;

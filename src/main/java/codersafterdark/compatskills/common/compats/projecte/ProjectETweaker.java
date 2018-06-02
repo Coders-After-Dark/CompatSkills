@@ -21,8 +21,8 @@ public class ProjectETweaker {
     }
 
     private static class AddEMCLock implements IAction {
-        private int emc;
-        private String[] requirements;
+        private final int emc;
+        private final String[] requirements;
 
         private AddEMCLock(int emc, String... requirements) {
             this.emc = emc;

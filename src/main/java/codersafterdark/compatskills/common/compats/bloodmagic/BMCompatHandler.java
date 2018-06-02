@@ -14,16 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BMCompatHandler {
-    private static BindHandler bindHandler;
-    private static RitualHandler ritualHandler;
-
     public static void setup() {
         LevelLockHandler.registerLockKey(Ritual.class, RitualNameLockKey.class, RitualCrystalLockKey.class, RitualCostLockKey.class);
 
-        bindHandler = new BindHandler();
-        MinecraftForge.EVENT_BUS.register(bindHandler);
-        ritualHandler = new RitualHandler();
-        MinecraftForge.EVENT_BUS.register(ritualHandler);
+        MinecraftForge.EVENT_BUS.register(new BindHandler());
+        MinecraftForge.EVENT_BUS.register(new RitualHandler());
 
         CTChatCommand.registerCommand(new RitualCommand() {
             @Override

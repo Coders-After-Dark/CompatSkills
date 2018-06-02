@@ -23,8 +23,8 @@ public class RequirementTweaker {
     }
 
     private static class Add implements IAction {
-        private IItemStack stack;
-        private String[] requirements;
+        private final IItemStack stack;
+        private final String[] requirements;
 
         private Add(IItemStack stack, String... requirements) {
             this.stack = stack;

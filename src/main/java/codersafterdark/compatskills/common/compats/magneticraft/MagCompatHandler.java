@@ -9,12 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MagCompatHandler {
-    private static MagMultiBlockHandler magMultiBlockHandler;
-
     public static void setup() {
-
-        magMultiBlockHandler = new MagMultiBlockHandler();
-        MinecraftForge.EVENT_BUS.register(magMultiBlockHandler);
+        MinecraftForge.EVENT_BUS.register(new MagMultiBlockHandler());
         CTChatCommand.registerCommand(new MultiBlockCommand("mag") {
             @Override
             public List<String> getMultiBlockNames() {

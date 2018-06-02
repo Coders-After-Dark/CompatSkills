@@ -23,8 +23,8 @@ public class ModifierLockTweaker {
     }
 
     private static class AddModifierLock implements IAction {
-        String id;
-        String[] requirements;
+        private final String id;
+        private final String[] requirements;
 
         AddModifierLock(String id, String... requirements) {
             this.id = id;

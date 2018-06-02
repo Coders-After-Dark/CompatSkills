@@ -23,8 +23,8 @@ public class ToolTypeLockTweaker {
     }
 
     private static class AddToolTypeLock implements IAction {
-        IItemStack stack;
-        String[] requirements;
+        private final IItemStack stack;
+        private final String[] requirements;
 
         AddToolTypeLock(IItemStack stack, String... requirements) {
             this.stack = stack;

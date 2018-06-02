@@ -13,8 +13,8 @@ import java.util.List;
 //This lock should never be created directly, but only be used by the automated checking for items so that we can call the getSubRequirements on it
 //The methods for creating it directly are for in case we ever change our mind about this. (Unlikely)
 public class ParentOreDictLock implements ParentLockKey {
-    private NBTTagCompound tag;
-    private int[] oreIDs;
+    private final NBTTagCompound tag;
+    private final int[] oreIDs;
 
     public ParentOreDictLock(ItemStack stack) {
         this(OreDictionary.getOreIDs(stack), stack.getTagCompound());

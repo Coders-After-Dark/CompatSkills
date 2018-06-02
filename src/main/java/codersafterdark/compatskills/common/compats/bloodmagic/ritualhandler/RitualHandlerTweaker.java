@@ -66,8 +66,8 @@ public class RitualHandlerTweaker {
     }
 
     private static class AddRitualCostLock implements IAction {
-        int activationCost;
-        String[] requirements;
+        private final int activationCost;
+        private final String[] requirements;
 
         private AddRitualCostLock(int activationCost, String... requirements) {
             this.activationCost = activationCost;
@@ -92,8 +92,8 @@ public class RitualHandlerTweaker {
     }
 
     private static class AddRitualCrystalLock implements IAction {
-        int crystalLevel;
-        String[] requirements;
+        private final int crystalLevel;
+        private final String[] requirements;
 
         private AddRitualCrystalLock(int crystalLevel, String... requirements) {
             this.crystalLevel = crystalLevel;

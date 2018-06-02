@@ -59,8 +59,8 @@ public class NBTLockTweaker {
     }
 
     private static class AddGenericNBTLock implements IAction {
-        IData data;
-        String[] requirements;
+        private final IData data;
+        private final String[] requirements;
 
         private AddGenericNBTLock(IData data, String... requirements) {
             this.data = data;

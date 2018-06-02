@@ -7,11 +7,8 @@ import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import net.minecraftforge.common.MinecraftForge;
 
 public class GameStageCompatHandler {
-    private static GameStageLockHandler lockHandler;
-
     public static void setup() {
-        lockHandler = new GameStageLockHandler();
-        MinecraftForge.EVENT_BUS.register(lockHandler);
+        MinecraftForge.EVENT_BUS.register(new GameStageLockHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("stage", GameStageRequirement::new);
         registry.addRequirementHandler("!stage", input -> registry.getRequirement("not|stage|" + input));

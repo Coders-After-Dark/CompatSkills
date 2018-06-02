@@ -9,7 +9,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 public class GameStageRequirement extends Requirement {
-    private String gamestage;
+    private final String gamestage;
 
     public GameStageRequirement(String gamestage) {
         this.gamestage = gamestage;

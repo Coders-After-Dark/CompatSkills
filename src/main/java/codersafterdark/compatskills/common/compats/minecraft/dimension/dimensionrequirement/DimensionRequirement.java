@@ -8,7 +8,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 public class DimensionRequirement extends Requirement {
-    private int dimension;
+    private final int dimension;
 
     public DimensionRequirement(int dimension) {
         this.dimension = dimension;

@@ -9,11 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class IECompatHandler {
-    private static IEMultiBlockHandler multiBlockHandler;
-
     public static void setup() {
-        multiBlockHandler = new IEMultiBlockHandler();
-        MinecraftForge.EVENT_BUS.register(multiBlockHandler);
+        MinecraftForge.EVENT_BUS.register(new IEMultiBlockHandler());
         CTChatCommand.registerCommand(new MultiBlockCommand("ie") {
             @Override
             public List<String> getMultiBlockNames() {
