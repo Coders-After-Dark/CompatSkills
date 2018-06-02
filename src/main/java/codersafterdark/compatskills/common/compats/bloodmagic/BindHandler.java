@@ -25,9 +25,9 @@ public class BindHandler {
             event.setCanceled(true);
             List<Requirement> requirements = requirementHolder.getRequirements();
             TextComponentTranslation error = new TextComponentTranslation("compatskills.bloodmagic.bindingError");
-            StringBuilder reqs = new StringBuilder("\n" + "With Requirements: ");
+            StringBuilder reqs = new StringBuilder('\n' + "With Requirements: ");
             for (Requirement req : requirements) {
-                reqs.append("\n").append(req.getToolTip(data));
+                reqs.append('\n').append(req.getToolTip(data));
             }
             player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + reqs.toString()), false);
         }

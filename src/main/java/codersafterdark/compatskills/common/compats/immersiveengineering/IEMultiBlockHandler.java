@@ -27,9 +27,9 @@ public class IEMultiBlockHandler {
             event.setCanceled(true);
             if (player.getEntityWorld().isRemote) {
                 List<Requirement> requirements = requirementHolder.getRequirements();
-                StringBuilder reqs = new StringBuilder(MessageStorage.getFailureMessage(gate) + "\n" + "With Requirements: ");
+                StringBuilder reqs = new StringBuilder(MessageStorage.getFailureMessage(gate) + '\n' + "With Requirements: ");
                 for (Requirement req : requirements) {
-                    reqs.append("\n").append(req.getToolTip(data));
+                    reqs.append('\n').append(req.getToolTip(data));
                 }
                 player.sendStatusMessage(new TextComponentString(reqs.toString()), false);
             }

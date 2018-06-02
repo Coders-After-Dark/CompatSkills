@@ -32,7 +32,7 @@ public class EntityMountEventHandler {
             for (Requirement requirement : requirements) {
                 reqString.append("\n ").append(requirement.getToolTip(data)).append(' ');
             }
-            ITextComponent textComponent = new TextComponentString(error.getUnformattedComponentText() + " " + error2.getUnformattedComponentText() + " " + reqString);
+            ITextComponent textComponent = new TextComponentString(error.getUnformattedComponentText() + ' ' + error2.getUnformattedComponentText() + ' ' + reqString);
             player.sendStatusMessage(textComponent, false);
         }
     }

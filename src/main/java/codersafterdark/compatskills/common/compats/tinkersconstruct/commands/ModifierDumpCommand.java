@@ -36,6 +36,5 @@ public class ModifierDumpCommand extends CraftTweakerCommand {
         CraftTweakerAPI.logCommand("#########");
         sender.sendMessage(getNormalMessage("List of Tinker's Modifiers Generated;"));
         sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + count + " Entries;", sender));
-        count = 0;
     }
 }

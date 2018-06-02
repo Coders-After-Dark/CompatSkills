@@ -38,12 +38,12 @@ public class SkillLockHandler {
             List<Requirement> requirements = requirementHolder.getRequirements();
             StringBuilder reqString = new StringBuilder();
             for (Requirement requirement : requirements) {
-                reqString.append("\n ").append(requirement.getToolTip(data)).append(" ");
+                reqString.append("\n ").append(requirement.getToolTip(data)).append(' ');
             }
             ITextComponent textComponent = new TextComponentString(
-                    error.getUnformattedComponentText() + "\n" +
-                            error2.getUnformattedComponentText() + "\n" +
-                            error3.getUnformattedComponentText() + " " + reqString);
+                    error.getUnformattedComponentText() + '\n' +
+                            error2.getUnformattedComponentText() + '\n' +
+                            error3.getUnformattedComponentText() + ' ' + reqString);
             player.sendStatusMessage(textComponent, false);
         }
     }

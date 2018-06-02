@@ -31,7 +31,7 @@ public class EntityDamageEventHandler {
                 TextComponentTranslation error = new TextComponentTranslation("compatskills.entity.entityDamageError");
                 TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");
                 String reqString = requirements.stream().map(requirement -> "\n " + requirement.getToolTip(data) + ' ').collect(Collectors.joining());
-                ITextComponent textComponent = new TextComponentString(error.getUnformattedComponentText() + " " + error2.getUnformattedComponentText() + " " + reqString);
+                ITextComponent textComponent = new TextComponentString(error.getUnformattedComponentText() + ' ' + error2.getUnformattedComponentText() + ' ' + reqString);
                 player.sendStatusMessage(textComponent, false);
             }
         }
