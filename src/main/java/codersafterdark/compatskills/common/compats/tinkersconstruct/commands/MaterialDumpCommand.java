@@ -4,6 +4,7 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.commands.CraftTweakerCommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.text.TextFormatting;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.traits.ITrait;
@@ -19,8 +20,8 @@ public class MaterialDumpCommand extends CraftTweakerCommand {
 
     @Override
     protected void init() {
-        setDescription(getClickableCommandText("\\u00A72/cttinkersmaterials", "/ct tinkersmaterials", true),
-                getNormalMessage(" \u00A73Outputs a list of all materials ids/names/descriptions in the game to the crafttweaker.log"));
+        setDescription(getClickableCommandText(TextFormatting.DARK_GREEN + "/ct tinkersmaterials", "/ct tinkersmaterials", true),
+                getNormalMessage(TextFormatting.DARK_AQUA + "Outputs a list of all materials ids/names/descriptions in the game to the crafttweaker.log"));
     }
 
     @Override
