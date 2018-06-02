@@ -16,7 +16,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.List;
 
 public class SkillLockHandler {
-
     @SubscribeEvent
     public void levelUpEvent(LevelUpEvent.Pre event) {
         int level = event.getLevel();

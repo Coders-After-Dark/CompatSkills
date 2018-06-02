@@ -10,17 +10,14 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
 import stanhebben.zenscript.annotations.ZenMethod;
 
-
 @ZenRegister
 @ZenClass("mods.compatskills.PlayerSkillInfo")
 public class CTPlayerSkillInfo {
-
     private final PlayerSkillInfo playerSkillInfo;
 
     public CTPlayerSkillInfo(PlayerSkillInfo playerSkillInfo) {
         this.playerSkillInfo = playerSkillInfo;
     }
-
 
     @ZenGetter("level")
     public int getLevel() {

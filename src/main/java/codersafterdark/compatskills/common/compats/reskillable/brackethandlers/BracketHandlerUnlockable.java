@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 @BracketHandler
 @ZenRegister
 public class BracketHandlerUnlockable implements IBracketHandler {
-
     private static final IJavaMethod method = JavaMethod.get(GlobalRegistry.getTypes(), BracketHandlerUnlockable.class, "getUnlockable", String.class);
 
     public static CTUnlockable getUnlockable(String name) {

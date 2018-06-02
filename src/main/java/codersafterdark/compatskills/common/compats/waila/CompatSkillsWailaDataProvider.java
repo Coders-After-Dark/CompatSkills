@@ -18,7 +18,6 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
-
     @Override
     @Nonnull
     public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {

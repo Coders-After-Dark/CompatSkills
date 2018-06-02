@@ -16,7 +16,6 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.compatskills.ToolTypeLock")
 @ZenRegister
 public class ToolTypeLockTweaker {
-
     @ZenMethod
     public static void addToolTypeLock(IItemStack stack, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddToolTypeLock(stack, requirements));

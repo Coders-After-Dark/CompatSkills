@@ -27,7 +27,6 @@ public class AnimalTameEventTweaker {
             this.requirements = requirements;
         }
 
-
         @Override
         public void apply() {
             if (CheckMethods.checkValidIEntityDefinition(definition) & CheckMethods.checkStringArray(requirements)) {

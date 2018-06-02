@@ -16,7 +16,6 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.compatskills.MaterialLock")
 @ZenRegister
 public class MaterialLockTweaker {
-
     @ZenMethod
     public static void addMaterialLock(String id, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddMaterialLock(id, requirements));

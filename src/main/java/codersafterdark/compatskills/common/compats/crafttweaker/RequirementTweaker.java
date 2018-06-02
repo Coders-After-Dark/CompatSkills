@@ -16,7 +16,6 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.compatskills.Requirement")
 @ZenRegister
 public class RequirementTweaker {
-
     @ZenMethod
     public static void addRequirement(IItemStack item, String... locked) {
         CompatSkills.LATE_ADDITIONS.add(new Add(item, locked));

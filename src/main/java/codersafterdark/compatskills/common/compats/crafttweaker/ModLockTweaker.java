@@ -14,7 +14,6 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.compatskills.ModLock")
 @ZenRegister
 public class ModLockTweaker {
-
     @ZenMethod
     public static void addModLock(String modId, String... locked) {
         CompatSkills.LATE_ADDITIONS.add(new Add(modId, locked));

@@ -19,7 +19,6 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.compatskills.RitualHandler")
 @ZenRegister
 public class RitualHandlerTweaker {
-
     @ZenMethod
     public static void addRitualLock(String ritual, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddRitualLock(ritual, requirements));
@@ -52,7 +51,6 @@ public class RitualHandlerTweaker {
                     LevelLockHandler.addLockByKey(new RitualNameLockKey(trueRitual), RequirementHolder.fromStringList(requirements));
                 }
             }
-
         }
 
         @Override
@@ -105,7 +103,6 @@ public class RitualHandlerTweaker {
             if (CheckMethods.checkInt(crystalLevel) & CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new RitualCrystalLockKey(crystalLevel), RequirementHolder.fromStringList(requirements));
             }
-
         }
 
         @Override

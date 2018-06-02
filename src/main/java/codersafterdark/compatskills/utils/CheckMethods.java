@@ -22,7 +22,6 @@ import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
 
 public class CheckMethods {
-
     public static boolean checkIItemstack(IItemStack stack) {
         if (stack == null || stack.isEmpty()) {
             CraftTweakerAPI.logError("Itemstack: " + stack + " was found to be either null or empty!");
@@ -143,7 +142,6 @@ public class CheckMethods {
         }
         return true;
     }
-
 
     /////////////////
     // Blood Magic //

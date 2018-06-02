@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.function.Function;
 
 public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
-
     public static ITheOneProbe probe;
 
     @Nullable
@@ -63,7 +62,6 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                     for (Requirement req : requirements) {
                         probeInfo.text(req.getToolTip(playerData));
                     }
-
                 }
             }
         });

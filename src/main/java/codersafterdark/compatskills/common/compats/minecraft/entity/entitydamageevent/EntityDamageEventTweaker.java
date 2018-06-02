@@ -27,7 +27,6 @@ public class EntityDamageEventTweaker {
             this.requirements = requirements;
         }
 
-
         @Override
         public void apply() {
             if (CheckMethods.checkValidIEntityDefinition(definition) & CheckMethods.checkStringArray(requirements)) {

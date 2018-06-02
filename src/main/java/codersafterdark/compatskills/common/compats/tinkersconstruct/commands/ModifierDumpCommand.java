@@ -14,7 +14,6 @@ public class ModifierDumpCommand extends CraftTweakerCommand {
         super("tinkersmodifiers");
     }
 
-
     @Override
     protected void init() {
         setDescription(getClickableCommandText("\\u00A72/cttinkersmodifiers", "/ct tinkersmodifiers", true),
