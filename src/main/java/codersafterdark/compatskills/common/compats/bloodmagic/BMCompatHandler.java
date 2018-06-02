@@ -20,11 +20,6 @@ public class BMCompatHandler {
         MinecraftForge.EVENT_BUS.register(new BindHandler());
         MinecraftForge.EVENT_BUS.register(new RitualHandler());
 
-        CTChatCommand.registerCommand(new RitualCommand() {
-            @Override
-            public List<String> getRitualNames() {
-                return new ArrayList<>(RitualRegistry.getIds());
-            }
-        });
+        CTChatCommand.registerCommand(new RitualCommand());
     }
 }

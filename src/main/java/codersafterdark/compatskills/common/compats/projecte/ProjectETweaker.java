@@ -10,6 +10,9 @@ import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ModOnly("projecte")
 @ZenClass("mods.compatskills.EMCLock")
 @ZenRegister
@@ -38,12 +41,8 @@ public class ProjectETweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-
-            return "Setting the requirement of items with emc value: " + emc + " or higher to: " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Setting the requirement of items with emc value: " + emc + " or higher to Requirements: " + descString;
         }
     }
 }

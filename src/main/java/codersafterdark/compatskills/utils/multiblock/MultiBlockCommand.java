@@ -26,9 +26,7 @@ public abstract class MultiBlockCommand extends CraftTweakerCommand {
         CraftTweakerAPI.logCommand("### " + subCommandName + ':');
         List<String> multiBlockList = getMultiBlockNames();
         CraftTweakerAPI.logCommand("## Multiblocks");
-        for (String name : multiBlockList) {
-            CraftTweakerAPI.logCommand("# " + name);
-        }
+        multiBlockList.stream().map(name -> "# " + name).forEach(CraftTweakerAPI::logCommand);
         CraftTweakerAPI.logCommand("####");
         sender.sendMessage(getNormalMessage("List of " + subCommandName + " generated;"));
         sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + multiBlockList.size() + " Entries;", sender));

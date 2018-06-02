@@ -10,6 +10,9 @@ import crafttweaker.api.entity.IEntityDefinition;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ZenClass("mods.compatskills.EntityMountLock")
 @ZenRegister
 public class EntityMountEventTweaker {
@@ -36,11 +39,8 @@ public class EntityMountEventTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Added Entity Mount Lock for Entity: " + (definition == null ? "null" : definition.getName()) + ", With " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Added Entity Mount Lock for Entity: " + (definition == null ? "null" : definition.getName()) + ", With Requirements: " + descString;
         }
     }
 }

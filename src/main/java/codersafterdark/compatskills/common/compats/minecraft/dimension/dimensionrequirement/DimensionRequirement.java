@@ -22,13 +22,9 @@ public class DimensionRequirement extends Requirement {
     @Override
     public String getToolTip(PlayerData data) {
         TextFormatting color = TextFormatting.GREEN;
-        if (data == null) {
+        EntityPlayer player;
+        if (data == null || (player = data.playerWR.get()) != null && player.dimension != dimension) {
             color = TextFormatting.RED;
-        } else {
-            EntityPlayer player = data.playerWR.get();
-            if (player != null && player.dimension != dimension) {
-                color = TextFormatting.RED;
-            }
         }
         return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.misc.dimensionFormat", color, dimension).getUnformattedComponentText();
     }

@@ -12,6 +12,9 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ModOnly("tconstruct")
 @ZenClass("mods.compatskills.ToolTypeLock")
 @ZenRegister
@@ -25,7 +28,7 @@ public class ToolTypeLockTweaker {
         private final IItemStack stack;
         private final String[] requirements;
 
-        AddToolTypeLock(IItemStack stack, String... requirements) {
+        private AddToolTypeLock(IItemStack stack, String... requirements) {
             this.stack = stack;
             this.requirements = requirements;
         }
@@ -39,11 +42,8 @@ public class ToolTypeLockTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder(" With Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Added Tool-Type Lock for Tool-Type: " + (stack == null ? "null" : stack.getDisplayName()) + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Added Tool-Type Lock for Tool-Type: " + (stack == null ? "null" : stack.getDisplayName()) + " With Requirements: " + descString;
         }
     }
 }

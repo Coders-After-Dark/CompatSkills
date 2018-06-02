@@ -15,6 +15,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ModOnly("crafttweaker")
 @ZenClass("mods.compatskills.NBTLock")
 @ZenRegister
@@ -50,11 +53,8 @@ public class NBTLockTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Adding NBT lock: " + data + " for Mod: " + modID + " to: " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Adding NBT lock: " + data + " for Mod: " + modID + " to Requirements: " + descString;
         }
     }
 
@@ -77,11 +77,8 @@ public class NBTLockTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Adding Generic NBT lock: " + data + " to: " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Adding Generic NBT lock: " + data + " to Requirements: " + descString;
         }
     }
 }

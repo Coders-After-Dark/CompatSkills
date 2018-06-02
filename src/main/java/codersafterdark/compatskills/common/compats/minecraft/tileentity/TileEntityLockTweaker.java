@@ -9,6 +9,9 @@ import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ZenClass("mods.compatskills.TileEntityLock")
 @ZenRegister
 public class TileEntityLockTweaker {
@@ -35,12 +38,8 @@ public class TileEntityLockTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-
-            return "Setting the requirement of Tile Entity: " + tileName + " to " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Setting the requirement of Tile Entity: " + tileName + " to Requirements: " + descString;
         }
     }
 }

@@ -6,6 +6,9 @@ import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public abstract class MultiBlockAction implements IAction {
     protected final String multiblockName;
     private final String failureMessage;
@@ -32,10 +35,7 @@ public abstract class MultiBlockAction implements IAction {
 
     @Override
     public String describe() {
-        StringBuilder descString = new StringBuilder("Requirements: ");
-        for (String string : defaultRequirements) {
-            descString.append(string).append(", ");
-        }
-        return "Added MultiBlock " + multiblockName + " With " + descString;
+        String descString = Arrays.stream(defaultRequirements).map(string -> string + ", ").collect(Collectors.joining());
+        return "Added MultiBlock " + multiblockName + " With Requirements: " + descString;
     }
 }

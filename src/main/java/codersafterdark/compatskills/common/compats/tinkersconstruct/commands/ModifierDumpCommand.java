@@ -7,6 +7,8 @@ import net.minecraft.server.MinecraftServer;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.modifiers.IModifier;
 
+import java.util.Collection;
+
 import static crafttweaker.mc1120.commands.SpecialMessagesChat.*;
 
 public class ModifierDumpCommand extends CraftTweakerCommand {
@@ -22,10 +24,9 @@ public class ModifierDumpCommand extends CraftTweakerCommand {
 
     @Override
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
-        int count = 0;
         CraftTweakerAPI.logCommand("##### Tinker's Construct Modifier Dump #####");
-        for (IModifier modifier : TinkerRegistry.getAllModifiers()) {
-            count++;
+        Collection<IModifier> modifiers = TinkerRegistry.getAllModifiers();
+        for (IModifier modifier : modifiers) {
             CraftTweakerAPI.logCommand("## " + modifier.getLocalizedName());
             CraftTweakerAPI.logCommand("#  Identifier: " + modifier.getIdentifier());
             CraftTweakerAPI.logCommand("#  Localized:  " + modifier.getLocalizedName());
@@ -34,6 +35,6 @@ public class ModifierDumpCommand extends CraftTweakerCommand {
         }
         CraftTweakerAPI.logCommand("#########");
         sender.sendMessage(getNormalMessage("List of Tinker's Modifiers Generated;"));
-        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + count + " Entries;", sender));
+        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + modifiers.size() + " Entries;", sender));
     }
 }

@@ -4,7 +4,6 @@ import codersafterdark.compatskills.utils.CompatSkillsConfig;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
@@ -26,14 +25,11 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
             if (CompatSkillsConfig.StargazerConfigs.Hwyla.HwylaShifting) {
                 if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
                     if (holder.isRealLock()) {
-                        List<Requirement> requirements = holder.getRequirements();
                         EntityPlayer player = accessor.getPlayer();
                         PlayerData playerData = PlayerDataHandler.get(player);
                         TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
                         currenttip.add(error.getUnformattedComponentText());
-                        for (Requirement req : requirements) {
-                            currenttip.add(req.getToolTip(playerData));
-                        }
+                        holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(currenttip::add);
                     }
                 } else {
                     if (holder.isRealLock()) {
@@ -42,14 +38,11 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
                     }
                 }
             } else if (holder.isRealLock()) {
-                List<Requirement> requirements = holder.getRequirements();
                 EntityPlayer player = accessor.getPlayer();
                 PlayerData playerData = PlayerDataHandler.get(player);
                 TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
                 currenttip.add(error.getUnformattedComponentText());
-                for (Requirement req : requirements) {
-                    currenttip.add(req.getToolTip(playerData));
-                }
+                holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(currenttip::add);
             }
         }
         return currenttip;

@@ -4,7 +4,6 @@ import codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks.To
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -90,9 +89,7 @@ public class TinkerLockHandler {
         }
         StringBuilder reqs = new StringBuilder(errorType);
         reqs.append("\n\n").append(new TextComponentTranslation("compatskills.misc.Requirements").getUnformattedComponentText());
-        for (Requirement req : holder.getRequirements()) {
-            reqs.append('\n').append(req.getToolTip(data));
-        }
+        holder.getRequirements().forEach(req -> reqs.append('\n').append(req.getToolTip(data)));
         return reqs.toString();
     }
 }

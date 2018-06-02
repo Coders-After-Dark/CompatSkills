@@ -11,6 +11,9 @@ import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ModOnly("crafttweaker")
 @ZenClass("mods.compatskills.SkillLocks")
 @ZenRegister
@@ -41,10 +44,7 @@ public class SkillLocksTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
             return "Added Level-Lock " + (skill == null ? "null" : skill.getName()) + ": " + level + " With Requirements: " + descString;
         }
     }

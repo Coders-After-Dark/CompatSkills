@@ -8,6 +8,8 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.traits.ITrait;
 
+import java.util.Collection;
+
 import static crafttweaker.mc1120.commands.SpecialMessagesChat.*;
 
 public class MaterialDumpCommand extends CraftTweakerCommand {
@@ -23,10 +25,9 @@ public class MaterialDumpCommand extends CraftTweakerCommand {
 
     @Override
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
-        int count = 0;
         CraftTweakerAPI.logCommand("######### Tinker's Construct Material Dump #########");
-        for (Material material : TinkerRegistry.getAllMaterials()) {
-            count++;
+        Collection<Material> materials = TinkerRegistry.getAllMaterials();
+        for (Material material : materials) {
             CraftTweakerAPI.logCommand("##### " + material.getLocalizedName() + " #####");
             CraftTweakerAPI.logCommand("# Identifier: " + material.getIdentifier());
             CraftTweakerAPI.logCommand("# Localized: " + material.getLocalizedName());
@@ -38,6 +39,6 @@ public class MaterialDumpCommand extends CraftTweakerCommand {
         }
         CraftTweakerAPI.logCommand("#########");
         sender.sendMessage(getNormalMessage("List of Tinker's Materials Generated;"));
-        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + count + " Entries;", sender));
+        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + materials.size() + " Entries;", sender));
     }
 }

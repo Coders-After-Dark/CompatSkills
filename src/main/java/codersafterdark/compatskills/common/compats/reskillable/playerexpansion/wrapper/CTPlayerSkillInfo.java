@@ -1,11 +1,9 @@
 package codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper;
 
 import codersafterdark.reskillable.api.data.PlayerSkillInfo;
-import codersafterdark.reskillable.api.unlockable.Unlockable;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.api.player.IPlayer;
-import net.minecraft.entity.player.EntityPlayer;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -56,8 +54,6 @@ public class CTPlayerSkillInfo {
 
     @ZenMethod
     public void unlock(CTUnlockable ctUnlockable, IPlayer player) {
-        Unlockable u = ctUnlockable.unlockable;
-        EntityPlayer p = CraftTweakerMC.getPlayer(player);
-        playerSkillInfo.unlock(u, p);
+        playerSkillInfo.unlock(ctUnlockable.unlockable, CraftTweakerMC.getPlayer(player));
     }
 }

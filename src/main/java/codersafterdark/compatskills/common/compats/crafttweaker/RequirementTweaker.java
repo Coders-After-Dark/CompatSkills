@@ -12,6 +12,9 @@ import crafttweaker.api.minecraft.CraftTweakerMC;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ModOnly("crafttweaker")
 @ZenClass("mods.compatskills.Requirement")
 @ZenRegister
@@ -40,11 +43,8 @@ public class RequirementTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String s : requirements) {
-                descString.append(s).append(", ");
-            }
-            return "Setting the requirement of: " + (stack == null ? "null" : stack.getDisplayName()) + " to: " + descString;
+            String descString = Arrays.stream(requirements).map(s -> s + ", ").collect(Collectors.joining());
+            return "Setting the requirement of: " + (stack == null ? "null" : stack.getDisplayName()) + " to Requirements: " + descString;
         }
     }
 }
