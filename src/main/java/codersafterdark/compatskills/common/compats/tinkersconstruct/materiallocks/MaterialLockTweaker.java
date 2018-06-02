@@ -12,21 +12,23 @@ import slimeknights.tconstruct.library.materials.Material;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ModOnly("tconstruct")
 @ZenClass("mods.compatskills.MaterialLock")
 @ZenRegister
 public class MaterialLockTweaker {
-
     @ZenMethod
     public static void addMaterialLock(String id, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddMaterialLock(id, requirements));
     }
 
     private static class AddMaterialLock implements IAction {
-        String id;
-        String[] requirements;
+        private final String id;
+        private final String[] requirements;
 
-        AddMaterialLock(String id, String... requirements) {
+        private AddMaterialLock(String id, String... requirements) {
             this.id = id;
             this.requirements = requirements;
         }
@@ -41,11 +43,8 @@ public class MaterialLockTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Added Material Lock for Material: " + id + " With " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Added Material Lock for Material: " + id + " With Requirements: " + descString;
         }
     }
 }

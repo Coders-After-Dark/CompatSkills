@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import java.util.Objects;
 
 public class EMCLockKey implements FuzzyLockKey {
-    private int emc;
+    private final int emc;
 
     public EMCLockKey(int emc) {
         this.emc = emc;

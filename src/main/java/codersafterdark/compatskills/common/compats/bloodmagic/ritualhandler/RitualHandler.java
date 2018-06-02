@@ -5,14 +5,13 @@ import WayofTime.bloodmagic.ritual.Ritual;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class RitualHandler {
     @SubscribeEvent
@@ -22,13 +21,9 @@ public class RitualHandler {
         RequirementHolder requirementHolder = LevelLockHandler.getLocks(Ritual.class, event.getRitual());
         if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
-            List<Requirement> requirements = requirementHolder.getRequirements();
             TextComponentTranslation error = new TextComponentTranslation("compatskills.bloodmagic.ritualError");
-            StringBuilder reqs = new StringBuilder("\n" + "With Requirements: ");
-            for (Requirement req : requirements) {
-                reqs.append("\n").append(req.getToolTip(data));
-            }
-            player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + reqs.toString()), false);
+            String reqs = requirementHolder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
+            player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + "\nWith Requirements: " + reqs), false);
         }
     }
 }

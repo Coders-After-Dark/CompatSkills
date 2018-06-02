@@ -9,6 +9,9 @@ import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ZenClass("mods.compatskills.DimensionLock")
 @ZenRegister
 public class DimensionLockTweaker {
@@ -35,11 +38,8 @@ public class DimensionLockTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Added Dimension Lock for Dimension: " + dimension + ", With " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Added Dimension Lock for Dimension: " + dimension + ", With Requirements: " + descString;
         }
     }
 }

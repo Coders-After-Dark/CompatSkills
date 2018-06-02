@@ -15,11 +15,13 @@ import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ModOnly("bloodmagic")
 @ZenClass("mods.compatskills.RitualHandler")
 @ZenRegister
 public class RitualHandlerTweaker {
-
     @ZenMethod
     public static void addRitualLock(String ritual, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddRitualLock(ritual, requirements));
@@ -52,22 +54,18 @@ public class RitualHandlerTweaker {
                     LevelLockHandler.addLockByKey(new RitualNameLockKey(trueRitual), RequirementHolder.fromStringList(requirements));
                 }
             }
-
         }
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Added Ritual Lock for Ritual: " + ritual + " With " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Added Ritual Lock for Ritual: " + ritual + " With Requirements: " + descString;
         }
     }
 
     private static class AddRitualCostLock implements IAction {
-        int activationCost;
-        String[] requirements;
+        private final int activationCost;
+        private final String[] requirements;
 
         private AddRitualCostLock(int activationCost, String... requirements) {
             this.activationCost = activationCost;
@@ -83,17 +81,14 @@ public class RitualHandlerTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Added Ritual Lock for rituals with a costs equal to " + activationCost + " With " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Added Ritual Lock for rituals with a costs equal to " + activationCost + " With Requirements: " + descString;
         }
     }
 
     private static class AddRitualCrystalLock implements IAction {
-        int crystalLevel;
-        String[] requirements;
+        private final int crystalLevel;
+        private final String[] requirements;
 
         private AddRitualCrystalLock(int crystalLevel, String... requirements) {
             this.crystalLevel = crystalLevel;
@@ -105,16 +100,12 @@ public class RitualHandlerTweaker {
             if (CheckMethods.checkInt(crystalLevel) & CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new RitualCrystalLockKey(crystalLevel), RequirementHolder.fromStringList(requirements));
             }
-
         }
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Added Ritual Lock for rituals with a crystal requirement of level: " + crystalLevel + " With " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Added Ritual Lock for rituals with a crystal requirement of level: " + crystalLevel + " With Requirements: " + descString;
         }
     }
 }

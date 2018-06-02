@@ -12,7 +12,6 @@ import stanhebben.zenscript.annotations.ZenGetter;
 @ZenExpansion("crafttweaker.player.IPlayer")
 @ZenRegister
 public class PlayerExpansion {
-
     @ZenGetter("skillData")
     public static CTPlayerData getSkillData(IPlayer iPlayer) {
         PlayerData playerData = PlayerDataHandler.get(CraftTweakerMC.getPlayer(iPlayer));

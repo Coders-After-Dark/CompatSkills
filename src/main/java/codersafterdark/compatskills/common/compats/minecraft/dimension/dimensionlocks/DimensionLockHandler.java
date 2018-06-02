@@ -3,7 +3,6 @@ package codersafterdark.compatskills.common.compats.minecraft.dimension.dimensio
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import codersafterdark.reskillable.network.MessageLockedItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -15,7 +14,7 @@ import net.minecraftforge.event.entity.EntityTravelToDimensionEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class DimensionLockHandler {
     @SubscribeEvent
@@ -46,12 +45,8 @@ public class DimensionLockHandler {
             event.setCanceled(true);
             TextComponentTranslation error = new TextComponentTranslation("compatskills.dimension.travelError");
             TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");
-            List<Requirement> requirements = requirementHolder.getRequirements();
-            StringBuilder reqString = new StringBuilder();
-            for (Requirement requirement : requirements) {
-                reqString.append("\n ").append(requirement.getToolTip(data)).append(' ');
-            }
-            ITextComponent textComponent = new TextComponentString(error.getUnformattedComponentText() + " " + error2.getUnformattedComponentText() + " " + reqString);
+            String reqString = requirementHolder.getRequirements().stream().map(requirement -> "\n " + requirement.getToolTip(data) + ' ').collect(Collectors.joining());
+            ITextComponent textComponent = new TextComponentString(error.getUnformattedComponentText() + ' ' + error2.getUnformattedComponentText() + ' ' + reqString);
             player.sendStatusMessage(textComponent, false);
         }
     }

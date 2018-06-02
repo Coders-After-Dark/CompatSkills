@@ -6,11 +6,8 @@ import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ReskillableCompatHandler {
-    private static SkillLockHandler lockHandler;
-
     public static void setup() {
-        lockHandler = new SkillLockHandler();
-        MinecraftForge.EVENT_BUS.register(lockHandler);
+        MinecraftForge.EVENT_BUS.register(new SkillLockHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("!adv", input -> registry.getRequirement("not|adv|" + input));
         registry.addRequirementHandler("!trait", input -> registry.getRequirement("not|trait|" + input));

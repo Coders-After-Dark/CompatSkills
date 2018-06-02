@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import java.util.Objects;
 
 public class OreDictLock extends NBTLockKey {
-    private String oreDict;
+    private final String oreDict;
 
     public OreDictLock(String oreDict) {
         this(oreDict, null);

@@ -8,7 +8,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 public class DimensionRequirement extends Requirement {
-    private int dimension;
+    private final int dimension;
 
     public DimensionRequirement(int dimension) {
         this.dimension = dimension;
@@ -22,13 +22,9 @@ public class DimensionRequirement extends Requirement {
     @Override
     public String getToolTip(PlayerData data) {
         TextFormatting color = TextFormatting.GREEN;
-        if (data == null) {
+        EntityPlayer player;
+        if (data == null || (player = data.playerWR.get()) != null && player.dimension != dimension) {
             color = TextFormatting.RED;
-        } else {
-            EntityPlayer player = data.playerWR.get();
-            if (player != null && player.dimension != dimension) {
-                color = TextFormatting.RED;
-            }
         }
         return TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.misc.dimensionFormat", color, dimension).getUnformattedComponentText();
     }

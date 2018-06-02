@@ -6,6 +6,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 
 import java.util.Set;
 
@@ -18,8 +19,8 @@ public class TileEntityCommand extends CraftTweakerCommand {
 
     @Override
     protected void init() {
-        setDescription(getClickableCommandText("/ct tileentityDump", "/ct tileentities", true),
-                getNormalMessage("Outputs a list of all Tile Entities in the game to the crafttweaker.log"));
+        setDescription(getClickableCommandText(TextFormatting.DARK_GREEN + "/ct tileentityDump", "/ct tileentities", true),
+                getNormalMessage(TextFormatting.DARK_AQUA + "Outputs a list of all Tile Entities in the game to the crafttweaker.log"));
     }
 
     @Override

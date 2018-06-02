@@ -11,12 +11,10 @@ import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IToolMod;
 
 public class TinkersCompatHandler {
-    private static TinkerLockHandler tinkerLockHandler;
-
     public static void setup() {
         LevelLockHandler.registerLockKey(Material.class, MaterialLockKey.class);
         LevelLockHandler.registerLockKey(IToolMod.class, ModifierLockKey.class);
-        MinecraftForge.EVENT_BUS.register(tinkerLockHandler = new TinkerLockHandler());
+        MinecraftForge.EVENT_BUS.register(new TinkerLockHandler());
     }
 
     public static void setupServerStart() {

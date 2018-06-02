@@ -13,7 +13,6 @@ import stanhebben.zenscript.annotations.*;
 @ZenClass("mods.compatskills.SkillCreator")
 @ZenRegister
 public class CrTSkill extends Skill {
-
     @ZenProperty
     public IFormattedText name;
 

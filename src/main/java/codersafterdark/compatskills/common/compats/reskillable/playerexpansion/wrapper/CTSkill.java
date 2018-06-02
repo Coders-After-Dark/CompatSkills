@@ -7,7 +7,6 @@ import stanhebben.zenscript.annotations.*;
 @ZenClass("mods.compatskills.Skill")
 @ZenRegister
 public class CTSkill {
-
     final Skill skill;
 
     public CTSkill(Skill skill) {

@@ -26,7 +26,6 @@ import stanhebben.zenscript.annotations.*;
 @ZenRegister
 @ZenClass("mods.compatskills.TraitCreator")
 public class CrTTrait extends Trait {
-
     @ZenProperty
     public IEventHandler<BlockHarvestDropsEvent> onBlockDrops;
 

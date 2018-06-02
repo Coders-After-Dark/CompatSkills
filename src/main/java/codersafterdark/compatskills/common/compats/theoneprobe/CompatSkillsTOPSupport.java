@@ -5,7 +5,6 @@ import codersafterdark.compatskills.utils.CompatSkillsConfig;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
@@ -17,11 +16,9 @@ import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.function.Function;
 
 public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
-
     public static ITheOneProbe probe;
 
     @Nullable
@@ -41,13 +38,10 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                 if (CompatSkillsConfig.StargazerConfigs.TOP.TOPShifting) {
                     if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
                         if (holder.isRealLock()) {
-                            List<Requirement> requirements = holder.getRequirements();
                             PlayerData playerData = PlayerDataHandler.get(player);
                             TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
                             probeInfo.text(TextFormatting.GRAY + error.getUnformattedComponentText());
-                            for (Requirement req : requirements) {
-                                probeInfo.text(req.getToolTip(playerData));
-                            }
+                            holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(probeInfo::text);
                         }
                     } else {
                         if (holder.isRealLock()) {
@@ -56,14 +50,10 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                         }
                     }
                 } else if (holder.isRealLock()) {
-                    List<Requirement> requirements = holder.getRequirements();
                     PlayerData playerData = PlayerDataHandler.get(player);
                     TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
                     probeInfo.text(TextFormatting.GRAY + error.getUnformattedComponentText());
-                    for (Requirement req : requirements) {
-                        probeInfo.text(req.getToolTip(playerData));
-                    }
-
+                    holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(probeInfo::text);
                 }
             }
         });

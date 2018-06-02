@@ -26,5 +26,4 @@ public class CTPlayerData {
         PlayerSkillInfo info = playerData.getSkillInfo(skill.skill);
         return info == null ? null : new CTPlayerSkillInfo(info);
     }
-
 }

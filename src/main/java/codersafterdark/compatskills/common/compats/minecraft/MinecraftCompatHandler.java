@@ -30,16 +30,11 @@ public class MinecraftCompatHandler {
     public static void setup() {
         LevelLockHandler.registerLockKey(ItemStack.class, ParentOreDictLock.class);
 
-        AnimalTameEventHandler tameEventHandler = new AnimalTameEventHandler();
-        EntityMountEventHandler entityMountEventHandler = new EntityMountEventHandler();
-        DimensionLockHandler dimensionLockHandler = new DimensionLockHandler();
-        TileEntityEventHandler tileEntityHandler = new TileEntityEventHandler();
-        EntityDamageEventHandler entityDamageHandler = new EntityDamageEventHandler();
-        MinecraftForge.EVENT_BUS.register(tameEventHandler);
-        MinecraftForge.EVENT_BUS.register(entityMountEventHandler);
-        MinecraftForge.EVENT_BUS.register(dimensionLockHandler);
-        MinecraftForge.EVENT_BUS.register(tileEntityHandler);
-        MinecraftForge.EVENT_BUS.register(entityDamageHandler);
+        MinecraftForge.EVENT_BUS.register(new AnimalTameEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EntityMountEventHandler());
+        MinecraftForge.EVENT_BUS.register(new DimensionLockHandler());
+        MinecraftForge.EVENT_BUS.register(new TileEntityEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EntityDamageEventHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("dim", input -> {
             try {

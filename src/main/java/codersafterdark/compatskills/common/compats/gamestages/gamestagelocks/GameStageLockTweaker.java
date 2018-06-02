@@ -10,6 +10,9 @@ import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ModOnly("gamestages")
 @ZenClass("mods.compatskills.GameStageLocks")
 @ZenRegister
@@ -38,10 +41,7 @@ public class GameStageLockTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
             return "Added GameStage Lock: " + gameStage + ", With Requirements: " + descString;
         }
     }

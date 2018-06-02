@@ -10,6 +10,9 @@ import crafttweaker.api.entity.IEntityDefinition;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ZenClass("mods.compatskills.EntityDamageLock")
 @ZenRegister
 public class EntityDamageEventTweaker {
@@ -27,7 +30,6 @@ public class EntityDamageEventTweaker {
             this.requirements = requirements;
         }
 
-
         @Override
         public void apply() {
             if (CheckMethods.checkValidIEntityDefinition(definition) & CheckMethods.checkStringArray(requirements)) {
@@ -37,11 +39,8 @@ public class EntityDamageEventTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Added Entity Damage Lock for Entity: " + (definition == null ? "null" : definition.getName()) + ", With " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Added Entity Damage Lock for Entity: " + (definition == null ? "null" : definition.getName()) + ", With Requirements: " + descString;
         }
     }
 }

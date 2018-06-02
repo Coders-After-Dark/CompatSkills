@@ -1,6 +1,5 @@
 package codersafterdark.compatskills.common.compats.reskillable.brackethandlers;
 
-
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 @BracketHandler
 @ZenRegister
 public class BracketHandlerSkill implements IBracketHandler {
-
     private static final IJavaMethod method = JavaMethod.get(GlobalRegistry.getTypes(), BracketHandlerSkill.class, "getSkill", String.class);
 
     public static CTSkill getSkill(String name) {

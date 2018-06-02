@@ -12,21 +12,23 @@ import slimeknights.tconstruct.library.modifiers.IModifier;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ModOnly("tconstruct")
 @ZenClass("mods.compatskills.ModifierLock")
 @ZenRegister
 public class ModifierLockTweaker {
-
     @ZenMethod
     public static void addModifierLock(String identifier, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddModifierLock(identifier, requirements));
     }
 
     private static class AddModifierLock implements IAction {
-        String id;
-        String[] requirements;
+        private final String id;
+        private final String[] requirements;
 
-        AddModifierLock(String id, String... requirements) {
+        private AddModifierLock(String id, String... requirements) {
             this.id = id;
             this.requirements = requirements;
         }
@@ -43,11 +45,8 @@ public class ModifierLockTweaker {
 
         @Override
         public String describe() {
-            StringBuilder descString = new StringBuilder("Requirements: ");
-            for (String string : requirements) {
-                descString.append(string).append(", ");
-            }
-            return "Added Modifier Lock for Modifier: " + id + " With " + descString;
+            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Added Modifier Lock for Modifier: " + id + " With Requirements: " + descString;
         }
     }
 }

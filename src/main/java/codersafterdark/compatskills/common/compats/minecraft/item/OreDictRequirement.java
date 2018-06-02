@@ -14,9 +14,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.Arrays;
 
 public class OreDictRequirement extends Requirement {
-    private NBTTagCompound tag;
-    private String oreDictEntry;
-    private int oreEntry;
+    private final NBTTagCompound tag;
+    private final String oreDictEntry;
+    private final int oreEntry;
 
     public OreDictRequirement(String oreDictEntry, NBTTagCompound tag) {
         this.oreDictEntry = oreDictEntry;
