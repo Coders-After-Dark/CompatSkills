@@ -8,6 +8,9 @@ import codersafterdark.compatskills.common.compats.minecraft.entity.entitymounte
 import codersafterdark.compatskills.common.compats.minecraft.item.ItemRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.OreDictRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.ParentOreDictLock;
+import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.BlockHarvestLock;
+import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.HarvestLevelRequirement;
+import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.ToolHarvestLock;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
 import codersafterdark.reskillable.api.ReskillableAPI;
@@ -28,7 +31,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class MinecraftCompatHandler {
     public static void setup() {
-        LevelLockHandler.registerLockKey(ItemStack.class, ParentOreDictLock.class);
+        //TODO: Maybe only register ones if at least one has been added via a script. This may not be a good idea if our config rewrite ends up supporting custom locks in it
+        LevelLockHandler.registerLockKey(ItemStack.class, ParentOreDictLock.class, ToolHarvestLock.class, BlockHarvestLock.class);
 
         MinecraftForge.EVENT_BUS.register(new AnimalTameEventHandler());
         MinecraftForge.EVENT_BUS.register(new EntityMountEventHandler());
@@ -36,6 +40,13 @@ public class MinecraftCompatHandler {
         MinecraftForge.EVENT_BUS.register(new TileEntityEventHandler());
         MinecraftForge.EVENT_BUS.register(new EntityDamageEventHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
+        registry.addRequirementHandler("harvest", input -> {
+            try {
+                return new HarvestLevelRequirement(Integer.parseInt(input));
+            } catch (NumberFormatException ignored) {
+            }
+            return null;
+        });
         registry.addRequirementHandler("dim", input -> {
             try {
                 return new DimensionRequirement(Integer.parseInt(input));
