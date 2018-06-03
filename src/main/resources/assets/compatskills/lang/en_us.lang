@@ -8,13 +8,7 @@ compatskills.misc.requirements.itemRequirementFormat=Item: %s%s
 
 ## Forge
 compatskills.misc.requirements.oreDictRequirementFormat=Ore Dictionary Entry: %s%s
-
-## Inverted Requirements
-compatskills.misc.requirements.invertedAchievementFormat=!Advancement: %s
-compatskills.misc.requirements.invertedSkillFormat=!%s%s: %s%d
-compatskills.misc.requirements.invertedTraitFormat=!Trait: %s%s
-compatskills.misc.requirements.invertedGamestageFormat=!GameStage: %s%s
-compatskills.misc.requirements.invertedDimensionFormat=!Dimension: %s%s
+compatskills.misc.requirements.harvestLevelRequirementFormat=Harvest Level: %s%s
 
 
 # Error Messages
