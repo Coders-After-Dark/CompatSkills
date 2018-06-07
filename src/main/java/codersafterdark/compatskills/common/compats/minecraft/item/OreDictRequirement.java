@@ -38,7 +38,7 @@ public class OreDictRequirement extends Requirement {
 
     @Override
     public String getToolTip(PlayerData data) {
-        TextFormatting color = data != null && achievedByPlayer(data.playerWR.get()) ? TextFormatting.GREEN : TextFormatting.RED;
+        TextFormatting color = data != null && data.requirementAchieved(this) ? TextFormatting.GREEN : TextFormatting.RED;
         String name = oreDictEntry;
         if (tag != null) {
             name += " With NBT Tag: " + tag;//Maybe format NBT slightly better

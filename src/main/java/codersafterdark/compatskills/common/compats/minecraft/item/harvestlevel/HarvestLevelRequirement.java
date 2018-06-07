@@ -23,7 +23,7 @@ public class HarvestLevelRequirement extends Requirement {
 
     @Override
     public String getToolTip(PlayerData data) {
-        TextFormatting color = data == null || !achievedByPlayer(data.playerWR.get()) ? TextFormatting.RED : TextFormatting.GREEN;
+        TextFormatting color = data == null || !data.requirementAchieved(this) ? TextFormatting.RED : TextFormatting.GREEN;
         return TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.harvestLevelRequirementFormat", color, harvestLevel).getUnformattedComponentText();
     }
 

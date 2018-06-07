@@ -16,17 +16,13 @@ public class GameStageRequirement extends Requirement {
     }
 
     @Override
-    public boolean achievedByPlayer(EntityPlayer entityPlayer) {
-        return GameStageHelper.hasStage(entityPlayer, gamestage);
+    public boolean achievedByPlayer(EntityPlayer player) {
+        return GameStageHelper.hasStage(player, gamestage);
     }
 
     @Override
-    public String getToolTip(PlayerData playerData) {
-        TextFormatting color = TextFormatting.GREEN;
-        EntityPlayer player;
-        if (playerData == null || (player = playerData.playerWR.get()) != null && !GameStageHelper.hasStage(player, gamestage)) {
-            color = TextFormatting.RED;
-        }
+    public String getToolTip(PlayerData data) {
+        TextFormatting color = data == null || !data.requirementAchieved(this) ? TextFormatting.RED : TextFormatting.GREEN;
         return TextFormatting.GRAY + " - " + TextFormatting.BLUE + new TextComponentTranslation("compatskills.misc.gamestageFormat", color, gamestage).getUnformattedComponentText();
     }
 
