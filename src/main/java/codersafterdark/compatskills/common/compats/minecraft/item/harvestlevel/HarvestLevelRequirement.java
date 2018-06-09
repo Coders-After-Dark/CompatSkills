@@ -1,6 +1,5 @@
 package codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel;
 
-import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,17 +13,12 @@ public class HarvestLevelRequirement extends Requirement {
 
     public HarvestLevelRequirement(int level) {
         this.harvestLevel = level;
+        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.harvestLevelRequirementFormat", "%s", harvestLevel).getUnformattedComponentText();
     }
 
     @Override
     public boolean achievedByPlayer(EntityPlayer player) {
         return hasHarvestLevel(player.getHeldItemMainhand()) || hasHarvestLevel(player.getHeldItemOffhand());
-    }
-
-    @Override
-    public String getToolTip(PlayerData data) {
-        TextFormatting color = data == null || !data.requirementAchieved(this) ? TextFormatting.RED : TextFormatting.GREEN;
-        return TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.harvestLevelRequirementFormat", color, harvestLevel).getUnformattedComponentText();
     }
 
     @Override

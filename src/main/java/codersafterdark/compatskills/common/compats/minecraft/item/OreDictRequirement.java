@@ -15,13 +15,16 @@ import java.util.Arrays;
 
 public class OreDictRequirement extends Requirement {
     private final NBTTagCompound tag;
-    private final String oreDictEntry;
     private final int oreEntry;
 
     public OreDictRequirement(String oreDictEntry, NBTTagCompound tag) {
-        this.oreDictEntry = oreDictEntry;
         this.oreEntry = OreDictionary.getOreID(oreDictEntry); //Cache the value
         this.tag = tag;
+        String name = oreDictEntry;
+        if (tag != null) {
+            name += " With NBT Tag: " + tag;//Maybe format NBT slightly better
+        }
+        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.oreDictRequirementFormat", "%s", name).getUnformattedComponentText();
     }
 
     @Override
@@ -34,16 +37,6 @@ public class OreDictRequirement extends Requirement {
             return false;
         }
         return new GenericNBTLockKey(stack.getTagCompound()).fuzzyEquals(new GenericNBTLockKey(tag));
-    }
-
-    @Override
-    public String getToolTip(PlayerData data) {
-        TextFormatting color = data != null && data.requirementAchieved(this) ? TextFormatting.GREEN : TextFormatting.RED;
-        String name = oreDictEntry;
-        if (tag != null) {
-            name += " With NBT Tag: " + tag;//Maybe format NBT slightly better
-        }
-        return TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.oreDictRequirementFormat", color, name).getUnformattedComponentText();
     }
 
     @Override
