@@ -8,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
+import java.util.Objects;
+
 public class HarvestLevelRequirement extends Requirement {
     private final int harvestLevel;
 
@@ -39,5 +41,15 @@ public class HarvestLevelRequirement extends Requirement {
         }
         Item item = stack.getItem();
         return item.getToolClasses(stack).stream().anyMatch(toolClass -> item.getHarvestLevel(stack, toolClass, null, null) >= harvestLevel);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this || o instanceof HarvestLevelRequirement && harvestLevel == ((HarvestLevelRequirement) o).harvestLevel;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(harvestLevel);
     }
 }

@@ -6,6 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
+import java.util.Objects;
+
 public class DimensionRequirement extends Requirement {
     private final int dimension;
 
@@ -21,5 +23,15 @@ public class DimensionRequirement extends Requirement {
     @Override
     public RequirementComparision matches(Requirement other) {
         return other instanceof DimensionRequirement && dimension == ((DimensionRequirement) other).dimension ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this || o instanceof DimensionRequirement && dimension == ((DimensionRequirement) o).dimension;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dimension);
     }
 }

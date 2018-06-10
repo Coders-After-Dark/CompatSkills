@@ -120,4 +120,14 @@ public class ItemRequirement extends Requirement {
         }
         return false;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this || o instanceof ItemRequirement && key.equals(((ItemRequirement) o).key);
+    }
+
+    @Override
+    public int hashCode() {
+        return key.hashCode();
+    }
 }

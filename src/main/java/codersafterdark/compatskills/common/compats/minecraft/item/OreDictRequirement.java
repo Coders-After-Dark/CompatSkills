@@ -1,7 +1,6 @@
 package codersafterdark.compatskills.common.compats.minecraft.item;
 
 import codersafterdark.reskillable.api.data.GenericNBTLockKey;
-import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +11,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class OreDictRequirement extends Requirement {
     private final NBTTagCompound tag;
@@ -56,5 +56,25 @@ public class OreDictRequirement extends Requirement {
             }
         }
         return RequirementComparision.NOT_EQUAL;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof OreDictRequirement) {
+            OreDictRequirement oreReq = (OreDictRequirement) o;
+            if (tag == null) {
+                return oreEntry == oreReq.oreEntry && oreReq.tag == null;
+            }
+            return oreEntry == oreReq.oreEntry && tag.equals(oreReq.tag);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(oreEntry, tag);
     }
 }

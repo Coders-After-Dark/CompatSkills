@@ -25,4 +25,14 @@ public class GameStageRequirement extends Requirement {
         return other instanceof GameStageRequirement && gamestage.equals(((GameStageRequirement) other).gamestage)
                 ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this || o instanceof GameStageRequirement && gamestage.equals(((GameStageRequirement) o).gamestage);
+    }
+
+    @Override
+    public int hashCode() {
+        return gamestage.hashCode();
+    }
 }
