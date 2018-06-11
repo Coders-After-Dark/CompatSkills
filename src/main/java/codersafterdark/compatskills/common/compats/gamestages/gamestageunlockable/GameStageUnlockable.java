@@ -11,6 +11,7 @@ import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.formatting.IFormattedText;
 import net.darkhax.gamestages.GameStageHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
@@ -42,6 +43,9 @@ public class GameStageUnlockable extends Unlockable {
         MinecraftServer server = player.getServer();
         if (server != null) {
             GameStageHelper.addStage(player, gameStage);
+            if (player instanceof EntityPlayerMP) {
+                GameStageHelper.syncPlayer((EntityPlayerMP) player);
+            }
             player.sendStatusMessage(new TextComponentString("Unlocked GameStage: " + gameStage), true);
         } else {
             CompatSkills.logger.log(Level.ERROR, "WHY IS THE SERVER NULL!?");
