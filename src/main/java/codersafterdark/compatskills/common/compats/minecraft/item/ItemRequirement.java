@@ -16,15 +16,7 @@ public class ItemRequirement extends Requirement {
 
     public ItemRequirement(NBTLockKey key) {
         this.key = key;
-    }
 
-    @Override
-    public boolean achievedByPlayer(EntityPlayer player) {
-        return itemMatches(player.getHeldItemMainhand()) || itemMatches(player.getHeldItemOffhand());
-    }
-
-    @Override
-    public String getToolTip(PlayerData data) {
         //TODO make the combined information look nicer in the formatting
         String displayName = "";
         if (key instanceof ItemInfo) {
@@ -38,8 +30,12 @@ public class ItemRequirement extends Requirement {
         if (key.getTag() != null) {
             displayName += " With NBT Tag: " + key.getTag().toString();//Maybe format NBT slightly better
         }
-        TextFormatting color = data != null && achievedByPlayer(data.playerWR.get()) ? TextFormatting.GREEN : TextFormatting.RED;
-        return TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.itemRequirementFormat", color, displayName.trim()).getUnformattedComponentText();
+        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.itemRequirementFormat", "%s", displayName.trim()).getUnformattedComponentText();
+    }
+
+    @Override
+    public boolean achievedByPlayer(EntityPlayer player) {
+        return itemMatches(player.getHeldItemMainhand()) || itemMatches(player.getHeldItemOffhand());
     }
 
     @Override
@@ -123,5 +119,15 @@ public class ItemRequirement extends Requirement {
             return notFuzzy.equals(fullNotFuzzy) && fullKey.fuzzyEquals(key);
         }
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return o == this || o instanceof ItemRequirement && key.equals(((ItemRequirement) o).key);
+    }
+
+    @Override
+    public int hashCode() {
+        return key.hashCode();
     }
 }

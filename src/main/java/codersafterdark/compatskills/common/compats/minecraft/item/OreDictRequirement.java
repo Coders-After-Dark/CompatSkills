@@ -1,7 +1,6 @@
 package codersafterdark.compatskills.common.compats.minecraft.item;
 
 import codersafterdark.reskillable.api.data.GenericNBTLockKey;
-import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,16 +11,20 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class OreDictRequirement extends Requirement {
     private final NBTTagCompound tag;
-    private final String oreDictEntry;
     private final int oreEntry;
 
     public OreDictRequirement(String oreDictEntry, NBTTagCompound tag) {
-        this.oreDictEntry = oreDictEntry;
         this.oreEntry = OreDictionary.getOreID(oreDictEntry); //Cache the value
         this.tag = tag;
+        String name = oreDictEntry;
+        if (tag != null) {
+            name += " With NBT Tag: " + tag;//Maybe format NBT slightly better
+        }
+        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.oreDictRequirementFormat", "%s", name).getUnformattedComponentText();
     }
 
     @Override
@@ -34,16 +37,6 @@ public class OreDictRequirement extends Requirement {
             return false;
         }
         return new GenericNBTLockKey(stack.getTagCompound()).fuzzyEquals(new GenericNBTLockKey(tag));
-    }
-
-    @Override
-    public String getToolTip(PlayerData data) {
-        TextFormatting color = data != null && achievedByPlayer(data.playerWR.get()) ? TextFormatting.GREEN : TextFormatting.RED;
-        String name = oreDictEntry;
-        if (tag != null) {
-            name += " With NBT Tag: " + tag;//Maybe format NBT slightly better
-        }
-        return TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.oreDictRequirementFormat", color, name).getUnformattedComponentText();
     }
 
     @Override
@@ -63,5 +56,25 @@ public class OreDictRequirement extends Requirement {
             }
         }
         return RequirementComparision.NOT_EQUAL;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof OreDictRequirement) {
+            OreDictRequirement oreReq = (OreDictRequirement) o;
+            if (tag == null) {
+                return oreEntry == oreReq.oreEntry && oreReq.tag == null;
+            }
+            return oreEntry == oreReq.oreEntry && tag.equals(oreReq.tag);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(oreEntry, tag);
     }
 }

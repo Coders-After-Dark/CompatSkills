@@ -5,6 +5,7 @@ import codersafterdark.compatskills.common.compats.minecraft.dimension.dimension
 import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent.AnimalTameEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountEventHandler;
+import codersafterdark.compatskills.common.compats.minecraft.item.ItemChangeHandler;
 import codersafterdark.compatskills.common.compats.minecraft.item.ItemRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.OreDictRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.ParentOreDictLock;
@@ -39,6 +40,7 @@ public class MinecraftCompatHandler {
         MinecraftForge.EVENT_BUS.register(new DimensionLockHandler());
         MinecraftForge.EVENT_BUS.register(new TileEntityEventHandler());
         MinecraftForge.EVENT_BUS.register(new EntityDamageEventHandler());
+        MinecraftForge.EVENT_BUS.register(new ItemChangeHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("harvest", input -> {
             try {

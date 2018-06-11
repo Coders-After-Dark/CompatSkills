@@ -1,8 +1,10 @@
 package codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionlocks;
 
+import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirement;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.api.requirement.RequirementCache;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import codersafterdark.reskillable.network.MessageLockedItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,6 +33,7 @@ public class DimensionLockHandler {
                 LevelLockHandler.tellPlayer(player, stack, MessageLockedItem.MSG_ARMOR_EQUIP_LOCKED);
             }
         }
+        RequirementCache.invalidateCache(player, DimensionRequirement.class);
     }
 
     @SubscribeEvent
