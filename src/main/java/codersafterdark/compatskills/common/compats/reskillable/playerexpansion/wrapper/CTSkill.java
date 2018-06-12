@@ -14,26 +14,31 @@ public class CTSkill {
     }
 
     @ZenGetter("key")
+    @ZenMethod
     public String getKey() {
         return skill.getKey();
     }
 
     @ZenGetter("name")
+    @ZenMethod
     public String getName() {
         return skill.getName();
     }
 
     @ZenGetter("backgroundLocation")
+    @ZenMethod
     public String getBackgroundLocation() {
         return skill.getBackground().toString();
     }
 
     @ZenGetter("cap")
+    @ZenMethod
     public int getCap() {
         return skill.getCap();
     }
 
     @ZenGetter("enabled")
+    @ZenMethod
     public boolean getEnabled() {
         return skill.isEnabled();
     }
@@ -44,6 +49,7 @@ public class CTSkill {
     }
 
     @ZenGetter("skillPointInterval")
+    @ZenMethod
     public int getSkillPointInterval() {
         return skill.getSkillPointInterval();
     }

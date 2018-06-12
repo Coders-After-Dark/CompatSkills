@@ -19,6 +19,7 @@ import codersafterdark.reskillable.api.data.GenericNBTLockKey;
 import codersafterdark.reskillable.api.data.ItemInfo;
 import codersafterdark.reskillable.api.data.ModLockKey;
 import codersafterdark.reskillable.api.data.NBTLockKey;
+import codersafterdark.reskillable.api.requirement.RequirementException;
 import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.mc1120.commands.CTChatCommand;
@@ -45,22 +46,19 @@ public class MinecraftCompatHandler {
         registry.addRequirementHandler("harvest", input -> {
             try {
                 return new HarvestLevelRequirement(Integer.parseInt(input));
-            } catch (NumberFormatException ignored) {
+            } catch (NumberFormatException e) {
+                throw new RequirementException("Invalid harvest level '" + input + "'.");
             }
-            return null;
         });
         registry.addRequirementHandler("dim", input -> {
             try {
                 return new DimensionRequirement(Integer.parseInt(input));
-            } catch (NumberFormatException ignored) {
+            } catch (NumberFormatException e) {
+                throw new RequirementException("Invalid dimension id '" + input + "'.");
             }
-            return null;
         });
         registry.addRequirementHandler("!dim", input -> registry.getRequirement("not|dim|" + input));
         registry.addRequirementHandler("ore", input -> {
-            if (input == null) {
-                return null;
-            }
             String[] inputInfo = input.split("\\|");
             //(modid,empty, or modid:item:optional metadata)|nbt as json
             String type = inputInfo[0]; //mod, generic, or item
@@ -71,10 +69,14 @@ public class MinecraftCompatHandler {
                     nbt = JsonToNBT.getTagFromJson(nbtString);
                 } catch (NBTException e) {
                     //Invalid NBT
-                    return null;
+                    throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
                 }
             }
-            return OreDictionary.doesOreNameExist(inputInfo[0]) ? new OreDictRequirement(inputInfo[0], nbt) : null;
+            String ore = inputInfo[0];
+            if (!OreDictionary.doesOreNameExist(ore)) {
+                throw new RequirementException("Ore dictionary entry '" + ore + "' not found.");
+            }
+            return new OreDictRequirement(ore, nbt);
         });
         registry.addRequirementHandler("stack", input -> {
             String[] inputInfo = input.split("\\|");
@@ -87,14 +89,14 @@ public class MinecraftCompatHandler {
                     nbt = JsonToNBT.getTagFromJson(nbtString);
                 } catch (NBTException e) {
                     //Invalid NBT
-                    return null;
+                    throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
                 }
             }
             NBTLockKey key;
             type = type.trim();
             if (type.isEmpty()) {
                 if (nbt == null) {
-                    return null;
+                    throw new RequirementException("Invalid Item Requirement format. No input data found.");
                 }
                 key = new GenericNBTLockKey(nbt);
             } else {
@@ -119,7 +121,7 @@ public class MinecraftCompatHandler {
                     }
                     Item item = Item.getByNameOrId(type);
                     if (item == null) {
-                        return null;
+                        throw new RequirementException("No Item found matching: '" + type + "'.");
                     }
                     key = new ItemInfo(item, metadata, nbt);
                 }

@@ -17,6 +17,7 @@ public class CTPlayerData {
     }
 
     @ZenGetter("hasAnyAbilities")
+    @ZenMethod
     public boolean getHasAnyAbilities() {
         return playerData.hasAnyAbilities();
     }
