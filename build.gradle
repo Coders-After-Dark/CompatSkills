@@ -79,6 +79,7 @@ dependencies {
     deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.2.12-97"
     deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.22-13"
+    compileOnly "magneticraft:Magneticraft_1.12:2.4.0:dev"
     compileOnly "projecte:ProjectE:1.12:PE1.3.0"
     deobfCompile "cofh:RedstoneFlux:1.12-2.0.2.3:universal"
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tinkers_version}"
