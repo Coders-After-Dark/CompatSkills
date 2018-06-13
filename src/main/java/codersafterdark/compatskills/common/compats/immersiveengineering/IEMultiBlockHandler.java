@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.immersiveengineering;
 
 import blusunrize.immersiveengineering.api.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.MultiblockHandler.MultiblockFormEvent;
+import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.compatskills.utils.MessageStorage;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 import codersafterdark.reskillable.api.data.PlayerData;
@@ -26,7 +27,7 @@ public class IEMultiBlockHandler {
             event.setCanceled(true);
             if (player.getEntityWorld().isRemote) {
                 String reqs = requirementHolder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
-                player.sendStatusMessage(new TextComponentString(MessageStorage.getFailureMessage(gate) + "\nWith Requirements: " + reqs), false);
+                player.sendStatusMessage(new TextComponentString(MessageStorage.getFailureMessage(gate) + CompatSkillConstants.REQUIREMENT_STRING + reqs), false);
             }
         }
     }

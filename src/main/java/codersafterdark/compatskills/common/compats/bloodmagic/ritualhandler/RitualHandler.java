@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler;
 
 import WayofTime.bloodmagic.event.RitualEvent.RitualActivatedEvent;
 import WayofTime.bloodmagic.ritual.Ritual;
+import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -23,7 +24,7 @@ public class RitualHandler {
             event.setCanceled(true);
             TextComponentTranslation error = new TextComponentTranslation("compatskills.bloodmagic.ritualError");
             String reqs = requirementHolder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
-            player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + "\nWith Requirements: " + reqs), false);
+            player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + CompatSkillConstants.REQUIREMENT_STRING + reqs), false);
         }
     }
 }
