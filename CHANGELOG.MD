@@ -9,6 +9,7 @@
 - Bump minimum Reskillable version to 1.8.0 for use of the tooltip injection.
 - Replaced incorrect usages of `With Requirements` to `Requirements`. We also now actually use the localization string for `Requirements` for displaying them.
 - Ensures that any mods with compat support are loaded before CompatSkills.
+- Made Tinkers locking automatically pass up to the item level as well. That way the tools are still inaccessible if a friend provides a crafted version.
 
 
 

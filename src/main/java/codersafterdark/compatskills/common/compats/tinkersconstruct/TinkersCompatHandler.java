@@ -6,6 +6,7 @@ import codersafterdark.compatskills.common.compats.tinkersconstruct.materiallock
 import codersafterdark.compatskills.common.compats.tinkersconstruct.modifierlocks.ModifierLockKey;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.mc1120.commands.CTChatCommand;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IToolMod;
@@ -14,6 +15,7 @@ public class TinkersCompatHandler {
     public static void setup() {
         LevelLockHandler.registerLockKey(Material.class, MaterialLockKey.class);
         LevelLockHandler.registerLockKey(IToolMod.class, ModifierLockKey.class);
+        LevelLockHandler.registerLockKey(ItemStack.class, ToolWrapperLockKey.class);
         MinecraftForge.EVENT_BUS.register(new TinkerLockHandler());
     }
 
