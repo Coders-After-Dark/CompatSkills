@@ -2,8 +2,6 @@ package codersafterdark.compatskills.common.compats.projecte;
 
 import codersafterdark.reskillable.api.data.FuzzyLockKey;
 import codersafterdark.reskillable.api.data.LockKey;
-import moze_intel.projecte.api.ProjectEAPI;
-import net.minecraft.item.ItemStack;
 
 import java.util.Objects;
 
@@ -12,10 +10,6 @@ public class EMCLockKey implements FuzzyLockKey {
 
     public EMCLockKey(int emc) {
         this.emc = emc;
-    }
-
-    public EMCLockKey(ItemStack itemStack) {
-        this(ProjectEAPI.getEMCProxy().getValue(itemStack));
     }
 
     @Override

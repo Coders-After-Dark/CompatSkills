@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.9.0
+
+- Modified ProjectE support to lock transmutation learning and condenser multiplication.
+  - The syntax is the same as before `mods.compatskills.EMCLock.addEMCLock(int emc, String... requirements);`
+  - Players will be able to use items that do not meet the emc lock but will not be able to learn or duplicate that item. Learning and duplication now also requires the player to meet any requirements the item has on it.
+  - *Note*: For putting items in the transmutation table you will still gain the emc but will not be able to get the item back out.
+- Bump minimum Reskillable version to 1.8.0 for use of the tooltip injection.
+
+
 ## 1.8.0
 
 - Some internal code cleanup and small performance improvements.

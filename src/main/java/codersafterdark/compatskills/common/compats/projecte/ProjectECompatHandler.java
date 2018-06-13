@@ -1,11 +1,17 @@
 package codersafterdark.compatskills.common.compats.projecte;
 
-import codersafterdark.reskillable.base.LevelLockHandler;
-import net.minecraft.item.ItemStack;
+import codersafterdark.reskillable.base.ToolTipHandler;
+import moze_intel.projecte.gameObjs.gui.GUICondenser;
+import moze_intel.projecte.gameObjs.gui.GUICondenserMK2;
+import moze_intel.projecte.gameObjs.gui.GUITransmutation;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ProjectECompatHandler {
-    //TODO: In the future potentially support stopping entity transmutation and item transmutation instead of just allowing items to be locked by emc value
     public static void setup() {
-        LevelLockHandler.registerLockKey(ItemStack.class, EMCLockKey.class);
+        TransmutationLockHandler handler = new TransmutationLockHandler();
+        MinecraftForge.EVENT_BUS.register(handler);
+        ToolTipHandler.addTooltipInjector(GUITransmutation.class, handler::transmutationTooltip);
+        ToolTipHandler.addTooltipInjector(GUICondenser.class, handler::condenserTooltip);
+        ToolTipHandler.addTooltipInjector(GUICondenserMK2.class, handler::condenserTooltip); //The class does not extend the other one so it is also needed
     }
 }
