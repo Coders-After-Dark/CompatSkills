@@ -7,6 +7,8 @@
   - Players will be able to use items that do not meet the emc lock but will not be able to learn or duplicate that item. Learning and duplication now also requires the player to meet any requirements the item has on it.
   - *Note*: For putting items in the transmutation table you will still gain the emc but will not be able to get the item back out.
 - Bump minimum Reskillable version to 1.8.0 for use of the tooltip injection.
+- Replaced incorrect usages of `With Requirements` to `Requirements`. We also now actually use the localization string for `Requirements` for displaying them.
+
 
 
 ## 1.8.0

@@ -15,6 +15,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class MagMultiBlockHandler {
     @SubscribeEvent
     public void multiBlockForm(MultiBlockEvent.CheckIntegrity event) {
+        //TODO: Magneticraft compat spams requirement achieved
+        if (!event.getIntegrityErrors().isEmpty()) {//Already has issues
+            return;
+        }
         IMultiblock multiblock = event.getMultiblock();
         EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);

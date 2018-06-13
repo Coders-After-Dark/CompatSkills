@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.projecte;
 
+import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -33,7 +34,7 @@ public class TransmutationLockHandler {
                 if (player.getEntityWorld().isRemote) {
                     String reqs = holder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
                     TextComponentTranslation error = new TextComponentTranslation("compatskills.projecte.condenserError");
-                    player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + "\nRequirements: " + reqs), false);
+                    player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + CompatSkillConstants.REQUIREMENT_STRING + reqs), false);
                 }
             }
         }
@@ -50,7 +51,7 @@ public class TransmutationLockHandler {
                 if (player.getEntityWorld().isRemote) {
                     String reqs = holder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
                     TextComponentTranslation error = new TextComponentTranslation("compatskills.projecte.learnError");
-                    player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + "\nRequirements: " + reqs), false);
+                    player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + CompatSkillConstants.REQUIREMENT_STRING + reqs), false);
                 }
             }
         }
@@ -66,7 +67,7 @@ public class TransmutationLockHandler {
         } else if (itemHolder.equals(LevelLockHandler.EMPTY_LOCK)) {
             return emcHolder;
         } //else
-        return new RequirementHolder(emcHolder, itemHolder);
+        return new RequirementHolder(itemHolder, emcHolder);
     }
 
     //TODO should this have sideonly annotation
