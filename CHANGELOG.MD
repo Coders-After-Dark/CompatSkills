@@ -12,7 +12,9 @@
 - Made Tinkers locking automatically pass up to the item level as well. That way the tools are still inaccessible if a friend provides a crafted version.
 - Added support for locking by an item's attack damage, and armor value.
   - mods.compatskills.ArmorLock.addArmorLock(5, "reskillable:defense|5");
-  - mods.compatskills.WeaponLock.addDamageLock(3, "reskillable:attack|5");
+  - mods.compatskills.DamageLock.addDamageLock(3, "reskillable:attack|5");
+- Added the ability to change CTSkill and CTUnlockable config options via CraftTweaker.
+- Added the ability to adjust level staggering. It works the same way as in the config, as a list of `integer|integer`.
 
 
 

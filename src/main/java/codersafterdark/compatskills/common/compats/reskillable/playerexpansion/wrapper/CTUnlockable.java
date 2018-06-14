@@ -4,6 +4,8 @@ import codersafterdark.reskillable.api.unlockable.Unlockable;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
+import stanhebben.zenscript.annotations.ZenMethod;
+import stanhebben.zenscript.annotations.ZenSetter;
 
 import java.util.Arrays;
 
@@ -44,5 +46,17 @@ public class CTUnlockable {
     @ZenGetter("getCost")
     public int getCost() {
         return unlockable.getCost();
+    }
+
+    @ZenGetter("enabled")
+    @ZenMethod
+    public boolean getEnabled() {
+        return unlockable.isEnabled();
+    }
+
+    @ZenSetter("enabled")
+    @ZenMethod
+    public void setEnabled(boolean enabled) {
+        unlockable.getUnlockableConfig().setEnabled(enabled);
     }
 }

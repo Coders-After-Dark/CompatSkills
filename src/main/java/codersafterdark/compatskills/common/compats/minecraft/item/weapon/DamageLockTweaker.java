@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @ZenClass("mods.compatskills.DamageLock")
 @ZenRegister
-public class WeaponLockTweaker {
+public class DamageLockTweaker {
     @ZenMethod
     public static void addDamageLock(double damage, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddDamageLock(damage, requirements));

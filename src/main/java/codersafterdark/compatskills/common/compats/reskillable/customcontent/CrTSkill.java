@@ -8,7 +8,11 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.formatting.IFormattedText;
 import net.minecraft.util.ResourceLocation;
+import org.apache.commons.lang3.tuple.Pair;
 import stanhebben.zenscript.annotations.*;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @ZenClass("mods.compatskills.SkillCreator")
 @ZenRegister
@@ -72,7 +76,38 @@ public class CrTSkill extends Skill {
         return isEnabled();
     }
 
-    //TODO make a way to set the level staggering
+    //TODO levelStaggering use a list of strings as input and then parse it like
+
+    @ZenSetter("levelStaggering")
+    @ZenMethod
+    public void setLevelStaggering(String[] stagger) {
+        //Uses code from initializing skill config
+        Map<Integer, Integer> configLevelStaggering = Arrays.stream(stagger)
+                .map(string -> string.split("\\|"))
+                .filter(array -> array.length == 2)
+                .map(array -> Pair.of(array[0], array[1]))
+                .map(pair -> Pair.of(Integer.parseInt(pair.getKey()), Integer.parseInt(pair.getValue())))
+                .collect(Collectors.toMap(Pair::getKey, Pair::getValue));
+        Map<Integer, Integer> levelStaggering = new HashMap<>();
+
+        int lastLevel = skillConfig.getBaseLevelCost();
+        for (int i = 1; i < skillConfig.getLevelCap(); i++) {
+            if (configLevelStaggering.containsKey(i)) {
+                lastLevel = configLevelStaggering.get(i);
+            }
+            levelStaggering.put(i, lastLevel);
+        }
+
+        skillConfig.setLevelStaggering(levelStaggering);
+    }
+
+    @ZenGetter("levelStaggering")
+    @ZenMethod
+    public String[] getLevelStaggering() {
+        List<String> stagger = new ArrayList<>();
+        skillConfig.getLevelStaggering().forEach((key, value) -> stagger.add(key + "|" + value));
+        return stagger.toArray(new String[0]);
+    }
 
     @ZenSetter("enabled")
     @ZenMethod
