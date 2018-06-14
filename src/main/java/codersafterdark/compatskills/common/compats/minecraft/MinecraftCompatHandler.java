@@ -9,9 +9,11 @@ import codersafterdark.compatskills.common.compats.minecraft.item.ItemChangeHand
 import codersafterdark.compatskills.common.compats.minecraft.item.ItemRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.OreDictRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.ParentOreDictLock;
+import codersafterdark.compatskills.common.compats.minecraft.item.armor.ArmorLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.BlockHarvestLock;
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.HarvestLevelRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.ToolHarvestLock;
+import codersafterdark.compatskills.common.compats.minecraft.item.weapon.AttackDamageLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
 import codersafterdark.reskillable.api.ReskillableAPI;
@@ -34,7 +36,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class MinecraftCompatHandler {
     public static void setup() {
         //TODO: Maybe only register ones if at least one has been added via a script. This may not be a good idea if our config rewrite ends up supporting custom locks in it
-        LevelLockHandler.registerLockKey(ItemStack.class, ParentOreDictLock.class, ToolHarvestLock.class, BlockHarvestLock.class);
+        LevelLockHandler.registerLockKey(ItemStack.class, ParentOreDictLock.class, ToolHarvestLock.class, BlockHarvestLock.class, ArmorLockKey.class, AttackDamageLockKey.class);
 
         MinecraftForge.EVENT_BUS.register(new AnimalTameEventHandler());
         MinecraftForge.EVENT_BUS.register(new EntityMountEventHandler());

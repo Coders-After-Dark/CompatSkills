@@ -10,6 +10,9 @@
 - Replaced incorrect usages of `With Requirements` to `Requirements`. We also now actually use the localization string for `Requirements` for displaying them.
 - Ensures that any mods with compat support are loaded before CompatSkills.
 - Made Tinkers locking automatically pass up to the item level as well. That way the tools are still inaccessible if a friend provides a crafted version.
+- Added support for locking by an item's attack damage, and armor value.
+  - mods.compatskills.ArmorLock.addArmorLock(5, "reskillable:defense|5");
+  - mods.compatskills.WeaponLock.addDamageLock(3, "reskillable:attack|5");
 
 
 

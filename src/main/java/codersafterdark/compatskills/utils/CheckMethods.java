@@ -67,7 +67,15 @@ public class CheckMethods {
 
     public static boolean checkInt(int i) {
         if (i < 0) {
-            CraftTweakerAPI.logError("integer was found to be lower than 0, this is not allowed!");
+            CraftTweakerAPI.logError("Integer was found to be lower than 0, this is not allowed!");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkDouble(double i) {
+        if (i < 0) {
+            CraftTweakerAPI.logError("Double was found to be lower than 0, this is not allowed!");
             return false;
         }
         return true;
