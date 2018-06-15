@@ -42,6 +42,6 @@ public class BlockHarvestLock implements FuzzyLockKey {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(harvestLevel);
+        return Objects.hash(harvestLevel);
     }
 }

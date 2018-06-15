@@ -54,6 +54,6 @@ public class AttackDamageLockKey implements FuzzyLockKey {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(attackDamage);
+        return Objects.hash(attackDamage);
     }
 }

@@ -24,7 +24,7 @@ public class RitualCrystalLockKey implements FuzzyLockKey {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(crystalLevel);
+        return Objects.hash(crystalLevel);
     }
 
     @Override
