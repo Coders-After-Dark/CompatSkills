@@ -24,7 +24,7 @@ public class RitualCostLockKey implements FuzzyLockKey {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(activationCost);
+        return Objects.hash(activationCost);
     }
 
     @Override

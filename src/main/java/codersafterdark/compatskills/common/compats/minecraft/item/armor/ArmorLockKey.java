@@ -50,6 +50,6 @@ public class ArmorLockKey implements FuzzyLockKey {//TODO: Eventually support ar
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(armor);
+        return Objects.hash(armor);
     }
 }

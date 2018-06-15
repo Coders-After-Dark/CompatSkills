@@ -15,6 +15,8 @@
   - mods.compatskills.DamageLock.addDamageLock(3, "reskillable:attack|5");
 - Added the ability to change CTSkill and CTUnlockable config options via CraftTweaker.
 - Added the ability to adjust level staggering. It works the same way as in the config, as a list of `integer|integer`.
+- Added a way to specify the tool type that harvest locks look for. It still works by looking generically if there is no specific tool given.
+  - mods.compatskills.HarvestLock.addToolLevelLock("pickaxe", 1, "reskillable:mining|3");
 
 
 

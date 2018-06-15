@@ -10,7 +10,7 @@ import net.minecraft.util.text.TextFormatting;
 
 import java.util.Objects;
 
-public class HarvestLevelRequirement extends Requirement {
+public class HarvestLevelRequirement extends Requirement { //TODO support optional specific toolType
     private final int harvestLevel;
 
     public HarvestLevelRequirement(int level) {

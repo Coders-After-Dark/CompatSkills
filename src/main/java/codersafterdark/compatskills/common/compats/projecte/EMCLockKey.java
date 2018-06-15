@@ -19,7 +19,7 @@ public class EMCLockKey implements FuzzyLockKey {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(emc);
+        return Objects.hash(emc);
     }
 
     @Override
