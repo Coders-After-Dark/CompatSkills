@@ -16,22 +16,22 @@ import java.util.stream.Collectors;
 @ZenRegister
 public class ArmorLockTweaker {
     @ZenMethod
-    public static void addArmorLock(int armor, String... requirements) {
+    public static void addArmorLock(double armor, String... requirements) {
         CompatSkills.LATE_ADDITIONS.add(new AddArmorLock(armor, requirements));
     }
 
     private static class AddArmorLock implements IAction {
-        private final int armor;
+        private final double armor;
         private final String[] requirements;
 
-        private AddArmorLock(int armor, String... requirements) {
+        private AddArmorLock(double armor, String... requirements) {
             this.armor = armor;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkInt(armor) & CheckMethods.checkStringArray(requirements)) {
+            if (CheckMethods.checkDouble(armor) & CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new ArmorLockKey(armor), RequirementHolder.fromStringList(requirements));
             }
         }

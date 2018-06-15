@@ -23,13 +23,14 @@ public class AttackDamageLockKey implements FuzzyLockKey {
             this.attackDamage = 0;
             return;
         }
+        //TODO check if this needs to grab the base ad level from sword/tool
         Multimap<String, AttributeModifier> attributeModifiers = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
-        Collection<AttributeModifier> aSpeed = attributeModifiers.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
-        if (aSpeed.isEmpty()) {
+        Collection<AttributeModifier> damage = attributeModifiers.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
+        if (damage.isEmpty()) {
             this.attackDamage = 0;
             return;
         }
-        this.attackDamage = aSpeed.stream().findFirst().map(AttributeModifier::getAmount).orElse(0D);
+        this.attackDamage = damage.stream().findFirst().map(AttributeModifier::getAmount).orElse(0D);
     }
 
     @Override
