@@ -2,16 +2,20 @@ package codersafterdark.compatskills.common.compats.minecraft.item.armor;
 
 import codersafterdark.reskillable.api.data.FuzzyLockKey;
 import codersafterdark.reskillable.api.data.LockKey;
+import com.google.common.collect.Multimap;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
+import java.util.Collection;
 import java.util.Objects;
 
 public class ArmorLockKey implements FuzzyLockKey {//TODO: Eventually support armor toughness
-    private final int armor;
+    private final double armor;
 
-    public ArmorLockKey(int armor) {
+    public ArmorLockKey(double armor) {
         this.armor = armor;
     }
 
@@ -22,7 +26,14 @@ public class ArmorLockKey implements FuzzyLockKey {//TODO: Eventually support ar
         }
         Item item = stack.getItem();
         if (item instanceof ItemArmor) {
-            this.armor = ((ItemArmor) item).damageReduceAmount;
+            ItemArmor itemArmor = (ItemArmor) item;
+            Multimap<String, AttributeModifier> attributeModifiers = itemArmor.getAttributeModifiers(itemArmor.armorType, stack);
+            Collection<AttributeModifier> protection = attributeModifiers.get(SharedMonsterAttributes.ARMOR.getName());
+            if (protection.isEmpty()) {
+                this.armor = itemArmor.damageReduceAmount;
+            } else {
+                this.armor = itemArmor.damageReduceAmount + protection.stream().findFirst().map(AttributeModifier::getAmount).orElse(0D);
+            }
         } else {
             this.armor = 0;
         }
