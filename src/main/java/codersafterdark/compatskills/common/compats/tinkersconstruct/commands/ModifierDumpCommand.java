@@ -27,15 +27,19 @@ public class ModifierDumpCommand extends CraftTweakerCommand {
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
         CraftTweakerAPI.logCommand("##### Tinker's Construct Modifier Dump #####");
         Collection<IModifier> modifiers = TinkerRegistry.getAllModifiers();
+        int size = 0;
         for (IModifier modifier : modifiers) {
-            CraftTweakerAPI.logCommand("## " + modifier.getLocalizedName());
-            CraftTweakerAPI.logCommand("#  Identifier: " + modifier.getIdentifier());
-            CraftTweakerAPI.logCommand("#  Localized:  " + modifier.getLocalizedName());
-            CraftTweakerAPI.logCommand("#  Description:" + modifier.getLocalizedDesc());
-            CraftTweakerAPI.logCommand("##");
+            if (modifier.hasItemsToApplyWith()) {
+                CraftTweakerAPI.logCommand("## " + modifier.getLocalizedName());
+                CraftTweakerAPI.logCommand("#  Identifier: " + modifier.getIdentifier());
+                CraftTweakerAPI.logCommand("#  Localized:  " + modifier.getLocalizedName());
+                CraftTweakerAPI.logCommand("#  Description:" + modifier.getLocalizedDesc());
+                CraftTweakerAPI.logCommand("##");
+                size++;
+            }
         }
         CraftTweakerAPI.logCommand("#########");
         sender.sendMessage(getNormalMessage("List of Tinker's Modifiers Generated;"));
-        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + modifiers.size() + " Entries;", sender));
+        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + size + " Entries;", sender));
     }
 }
