@@ -53,6 +53,18 @@ public class CTSkill {
         return skill.isEnabled();
     }
 
+    @ZenSetter("hidden")
+    @ZenMethod
+    public void setHidden(boolean hidden) {
+        skill.setHidden(hidden);
+    }
+
+    @ZenGetter("hidden")
+    @ZenMethod
+    public boolean isHidden() {
+        return skill.isHidden();
+    }
+
     @ZenSetter("enabled")
     @ZenMethod
     public void setEnabled(boolean enabled) {
