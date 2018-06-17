@@ -18,6 +18,7 @@
 - Added a way to specify the tool type that harvest locks look for. It still works by looking generically if there is no specific tool given.
   - mods.compatskills.HarvestLock.addToolLevelLock("pickaxe", 1, "reskillable:mining|3");
 - Changed tinker modifier dump command to only print modifiers that get used by materials/items.
+- Allow hiding of CrTSkills and CTSkills
 
 
 

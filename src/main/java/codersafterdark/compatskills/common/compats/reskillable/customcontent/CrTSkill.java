@@ -133,6 +133,20 @@ public class CrTSkill extends Skill {
         skillConfig.setBaseLevelCost(cost);
     }
 
+    @ZenSetter("hidden")
+    @ZenMethod
+    @Override
+    public void setHidden(boolean hidden) {
+        super.setHidden(hidden);
+    }
+
+    @ZenGetter("hidden")
+    @ZenMethod
+    @Override
+    public boolean isHidden() {
+        return super.isHidden();
+    }
+
     @Override
     public String getName() {
         return name == null ? super.getName() : name.getText();
