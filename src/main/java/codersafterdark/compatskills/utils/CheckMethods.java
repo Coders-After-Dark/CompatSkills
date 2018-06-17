@@ -73,6 +73,14 @@ public class CheckMethods {
         return true;
     }
 
+    public static boolean checkLong(long i) {
+        if (i < 0) {
+            CraftTweakerAPI.logError("Long was found to be lower than 0, this is not allowed!");
+            return false;
+        }
+        return true;
+    }
+
     public static boolean checkDouble(double i) {
         if (i < 0) {
             CraftTweakerAPI.logError("Double was found to be lower than 0, this is not allowed!");

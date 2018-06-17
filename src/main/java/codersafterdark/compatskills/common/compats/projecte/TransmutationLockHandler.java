@@ -76,7 +76,7 @@ public class TransmutationLockHandler {
         PlayerData data = info.getData();
         RequirementHolder holder = itemRequirements(info.getItem());
         if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
-            int cost = ProjectEAPI.getEMCProxy().getValue(info.getItem());
+            long cost = ProjectEAPI.getEMCProxy().getValue(info.getItem());
             RequirementHolder emcHolder = LevelLockHandler.getLockByFuzzyKey(new EMCLockKey(cost));
             if (!emcHolder.equals(LevelLockHandler.EMPTY_LOCK)) {
                 emcHolder.getRequirements().stream().map(requirement -> requirement.getToolTip(data)).forEach(toolTip::add);
@@ -94,7 +94,7 @@ public class TransmutationLockHandler {
         PlayerData data = info.getData();
         RequirementHolder holder = itemRequirements(info.getItem());
         if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
-            int cost = ProjectEAPI.getEMCProxy().getValue(info.getItem());
+            long cost = ProjectEAPI.getEMCProxy().getValue(info.getItem());
             RequirementHolder emcHolder = LevelLockHandler.getLockByFuzzyKey(new EMCLockKey(cost));
             if (!emcHolder.equals(LevelLockHandler.EMPTY_LOCK)) {
                 emcHolder.getRequirements().stream().map(requirement -> requirement.getToolTip(data)).forEach(toolTip::add);

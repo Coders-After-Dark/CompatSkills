@@ -6,9 +6,9 @@ import codersafterdark.reskillable.api.data.LockKey;
 import java.util.Objects;
 
 public class EMCLockKey implements FuzzyLockKey {
-    private final int emc;
+    private final long emc;
 
-    public EMCLockKey(int emc) {
+    public EMCLockKey(long emc) {
         this.emc = emc;
     }
 
