@@ -19,6 +19,9 @@
   - mods.compatskills.HarvestLock.addToolLevelLock("pickaxe", 1, "reskillable:mining|3");
 - Changed tinker modifier dump command to only print modifiers that get used by materials/items.
 - Allow hiding of CrTSkills and CTSkills
+- Added the ability to manually assign icon locations for the different ranks of Custom skills.
+  - *Note*: there are currently only 9 ranks, numbered 0 through 8.
+  - This also does not allow changing the icons of existing skills.
 
 
 

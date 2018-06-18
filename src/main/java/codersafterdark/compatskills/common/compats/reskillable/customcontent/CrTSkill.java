@@ -152,5 +152,15 @@ public class CrTSkill extends Skill {
         return name == null ? super.getName() : name.getText();
     }
 
-    //TODO override getSpriteFromRank when we figure out a good way to say how many pictures they provide
+    @ZenMethod
+    public void setRankIcon(int rank, String resourceLocation) {
+        if (CheckMethods.checkResourceLocation(resourceLocation)) {
+            setCustomSprite(rank, new ResourceLocation(resourceLocation));
+        }
+    }
+
+    @ZenMethod
+    public void removeRankIcon(int rank) {
+        removeCustomSprite(rank);
+    }
 }
