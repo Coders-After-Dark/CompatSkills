@@ -22,6 +22,8 @@
 - Added the ability to manually assign icon locations for the different ranks of Custom skills.
   - *Note*: there are currently only 9 ranks, numbered 0 through 8.
   - This also does not allow changing the icons of existing skills.
+- Added the ability to hide skills if requirements are not met.
+  - mods.compatskills.VisibilityLock.addVisibilityLock(CTSkill skill, String... requirements);
 
 
 
