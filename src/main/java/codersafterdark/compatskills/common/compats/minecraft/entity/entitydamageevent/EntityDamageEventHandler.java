@@ -22,7 +22,7 @@ public class EntityDamageEventHandler {
         EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
         PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new EntityDamageKey(event.getEntity()));
-        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+        if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             if (player.getEntityWorld().isRemote) {
                 TextComponentTranslation error = new TextComponentTranslation("compatskills.entity.entityDamageError");

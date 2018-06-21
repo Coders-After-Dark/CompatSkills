@@ -39,7 +39,7 @@ public class TileEntityEventHandler {
                 EntityPlayer player = event.getEntityPlayer();
                 PlayerData data = PlayerDataHandler.get(player);
                 RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new TileEntityLockKey(location.toString()));
-                if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+                if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
                     event.setCanceled(true);
                     if (player.getEntityWorld().isRemote) {
                         TextComponentTranslation error = new TextComponentTranslation("compatskills.tileentity.interactError");

@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.9.0
+
+- Modified ProjectE support to lock transmutation learning and condenser multiplication.
+  - The syntax is the same as before `mods.compatskills.EMCLock.addEMCLock(int emc, String... requirements);`
+  - Players will be able to use items that do not meet the emc lock but will not be able to learn or duplicate that item. Learning and duplication now also requires the player to meet any requirements the item has on it.
+  - *Note*: For putting items in the transmutation table you will still gain the emc but will not be able to get the item back out.
+- Bump minimum Reskillable version to 1.8.0 for use of the tooltip injection.
+- Replaced incorrect usages of `With Requirements` to `Requirements`. We also now actually use the localization string for `Requirements` for displaying them.
+- Ensures that any mods with compat support are loaded before CompatSkills.
+- Made Tinkers locking automatically pass up to the item level as well. That way the tools are still inaccessible if a friend provides a crafted version.
+- Added support for locking by an item's attack damage, and armor value.
+  - mods.compatskills.ArmorLock.addArmorLock(5, "reskillable:defense|5");
+  - mods.compatskills.DamageLock.addDamageLock(3, "reskillable:attack|5");
+- Added the ability to change CTSkill and CTUnlockable config options via CraftTweaker.
+- Added the ability to adjust level staggering. It works the same way as in the config, as a list of `integer|integer`.
+- Added a way to specify the tool type that harvest locks look for. It still works by looking generically if there is no specific tool given.
+  - mods.compatskills.HarvestLock.addToolLevelLock("pickaxe", 1, "reskillable:mining|3");
+- Changed tinker modifier dump command to only print modifiers that get used by materials/items.
+- Allow hiding of CrTSkills and CTSkills
+- Added the ability to manually assign icon locations for the different ranks of Custom skills.
+  - *Note*: there are currently only 9 ranks, numbered 0 through 8.
+  - This also does not allow changing the icons of existing skills.
+- Added the ability to hide skills if requirements are not met.
+  - mods.compatskills.VisibilityLock.addVisibilityLock(CTSkill skill, String... requirements);
+- Made it so that some listeners/lock types do not get registered if they are not used. This will provide some performance improvements.
+- Made Baubles Compat attempt to put the item back in the players inventory before resorting to throwing it on the ground.
+
+
+
 ## 1.8.0
 
 - Some internal code cleanup and small performance improvements.

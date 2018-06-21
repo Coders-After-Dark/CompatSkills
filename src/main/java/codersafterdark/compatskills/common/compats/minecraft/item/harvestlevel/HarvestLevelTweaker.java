@@ -1,9 +1,9 @@
 package codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -17,7 +17,12 @@ import java.util.stream.Collectors;
 public class HarvestLevelTweaker {
     @ZenMethod
     public static void addToolLevelLock(int level, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddToolLevelLock(level, requirements));
+        CompatSkills.LATE_ADDITIONS.add(new AddToolLevelLock(null, level, requirements));
+    }
+
+    @ZenMethod
+    public static void addToolLevelLock(String type, int level, String... requirements) {
+        CompatSkills.LATE_ADDITIONS.add(new AddToolLevelLock(type, level, requirements));
     }
 
     @ZenMethod
@@ -26,10 +31,12 @@ public class HarvestLevelTweaker {
     }
 
     private static class AddToolLevelLock implements IAction {
+        private final String type;
         private final int harvestLevel;
         private final String[] requirements;
 
-        private AddToolLevelLock(int harvestLevel, String... requirements) {
+        private AddToolLevelLock(String type, int harvestLevel, String... requirements) {
+            this.type = type;
             this.harvestLevel = harvestLevel;
             this.requirements = requirements;
         }
@@ -37,14 +44,15 @@ public class HarvestLevelTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkInt(harvestLevel) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new ToolHarvestLock(harvestLevel), RequirementHolder.fromStringList(requirements));
+                MinecraftCompatHandler.addMCLock(new ToolHarvestLock(type, harvestLevel), RequirementHolder.fromStringList(requirements));
             }
         }
 
         @Override
         public String describe() {
             String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Harvest Level Lock for tools with harvest level: " + harvestLevel + ", With Requirements: " + descString;
+            return "Added Harvest Level Lock for tools " + (type == null ? "" :  "of type: " + type) +
+                    " with harvest level: " + harvestLevel + ", With Requirements: " + descString;
         }
     }
 
@@ -60,7 +68,7 @@ public class HarvestLevelTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkInt(harvestLevel) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new BlockHarvestLock(harvestLevel), RequirementHolder.fromStringList(requirements));
+                MinecraftCompatHandler.addMCLock(new BlockHarvestLock(harvestLevel), RequirementHolder.fromStringList(requirements));
             }
         }
 

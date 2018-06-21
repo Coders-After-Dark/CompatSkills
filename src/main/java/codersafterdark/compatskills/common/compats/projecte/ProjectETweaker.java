@@ -19,22 +19,22 @@ import java.util.stream.Collectors;
 public class ProjectETweaker {
 
     @ZenMethod
-    public static void addEMCLock(int emc, String... locked) {
+    public static void addEMCLock(long emc, String... locked) {
         CompatSkills.LATE_ADDITIONS.add(new AddEMCLock(emc, locked));
     }
 
     private static class AddEMCLock implements IAction {
-        private final int emc;
+        private final long emc;
         private final String[] requirements;
 
-        private AddEMCLock(int emc, String... requirements) {
+        private AddEMCLock(long emc, String... requirements) {
             this.emc = emc;
             this.requirements = requirements;
         }
 
         @Override
         public void apply() {
-            if (CheckMethods.checkInt(emc) & CheckMethods.checkStringArray(requirements)) {
+            if (CheckMethods.checkLong(emc) & CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new EMCLockKey(emc), RequirementHolder.fromStringList(requirements));
             }
         }

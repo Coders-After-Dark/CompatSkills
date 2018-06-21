@@ -18,6 +18,6 @@ public class DimensionLockKey implements LockKey {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(dimension);
+        return Objects.hash(dimension);
     }
 }

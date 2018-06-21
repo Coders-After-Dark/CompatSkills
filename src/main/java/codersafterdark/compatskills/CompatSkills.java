@@ -66,7 +66,7 @@ public class CompatSkills {
             TOPCompatHandler.setup();
         }
         if (Loader.isModLoaded("projecte")) {
-            ProjectECompatHandler.setup();
+            ProjectECompatHandler.setup(event.getSide());
         }
         MinecraftCompatHandler.setup();
     }

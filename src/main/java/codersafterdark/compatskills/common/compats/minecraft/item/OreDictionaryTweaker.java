@@ -1,9 +1,9 @@
 package codersafterdark.compatskills.common.compats.minecraft.item;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.data.IData;
@@ -41,7 +41,7 @@ public class OreDictionaryTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkIOreDictEntry(entry) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new OreDictLock(entry.getName()), RequirementHolder.fromStringList(requirements));
+                MinecraftCompatHandler.addMCLock(new OreDictLock(entry.getName()), RequirementHolder.fromStringList(requirements));
             }
         }
 
@@ -67,7 +67,7 @@ public class OreDictionaryTweaker {
         public void apply() {
             if (CheckMethods.checkIOreDictEntry(entry) & CheckMethods.checkValidNBTTagCompound(data) & CheckMethods.checkStringArray(requirements)) {
                 RequirementHolder holder = RequirementHolder.fromStringList(requirements);
-                LevelLockHandler.addLockByKey(new OreDictLock(entry.getName(), (NBTTagCompound) NBTConverter.from(data)), holder);
+                MinecraftCompatHandler.addMCLock(new OreDictLock(entry.getName(), (NBTTagCompound) NBTConverter.from(data)), holder);
             }
         }
 

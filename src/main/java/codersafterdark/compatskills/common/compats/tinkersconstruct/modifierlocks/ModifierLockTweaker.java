@@ -1,9 +1,9 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct.modifierlocks;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
@@ -38,7 +38,7 @@ public class ModifierLockTweaker {
             if (CheckMethods.checkModifier(id)) {
                 IModifier modifier = TinkerRegistry.getModifier(id);
                 if (modifier != null) {
-                    LevelLockHandler.addLockByKey(new ModifierLockKey(modifier), RequirementHolder.fromStringList(requirements));
+                    TinkersCompatHandler.addTinkersLock(new ModifierLockKey(modifier), RequirementHolder.fromStringList(requirements));
                 }
             }
         }

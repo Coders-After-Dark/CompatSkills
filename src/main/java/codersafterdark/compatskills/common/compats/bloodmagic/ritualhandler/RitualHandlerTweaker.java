@@ -3,12 +3,12 @@ package codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler;
 import WayofTime.bloodmagic.ritual.Ritual;
 import WayofTime.bloodmagic.ritual.RitualRegistry;
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.bloodmagic.BMCompatHandler;
 import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualCostLockKey;
 import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualCrystalLockKey;
 import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualNameLockKey;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
@@ -51,7 +51,7 @@ public class RitualHandlerTweaker {
             if (CheckMethods.checkRitual(ritual) & CheckMethods.checkStringArray(requirements)) {
                 Ritual trueRitual = RitualRegistry.getRegistry().get(ritual);
                 if (trueRitual != null) {
-                    LevelLockHandler.addLockByKey(new RitualNameLockKey(trueRitual), RequirementHolder.fromStringList(requirements));
+                    BMCompatHandler.addBMLock(new RitualNameLockKey(trueRitual), RequirementHolder.fromStringList(requirements));
                 }
             }
         }
@@ -75,7 +75,7 @@ public class RitualHandlerTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkInt(activationCost) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new RitualCostLockKey(activationCost), RequirementHolder.fromStringList(requirements));
+                BMCompatHandler.addBMLock(new RitualCostLockKey(activationCost), RequirementHolder.fromStringList(requirements));
             }
         }
 
@@ -98,7 +98,7 @@ public class RitualHandlerTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkInt(crystalLevel) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new RitualCrystalLockKey(crystalLevel), RequirementHolder.fromStringList(requirements));
+                BMCompatHandler.addBMLock(new RitualCrystalLockKey(crystalLevel), RequirementHolder.fromStringList(requirements));
             }
         }
 

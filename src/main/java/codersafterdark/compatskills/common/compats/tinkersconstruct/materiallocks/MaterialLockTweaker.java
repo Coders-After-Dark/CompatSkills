@@ -1,14 +1,13 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct.materiallocks;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import slimeknights.tconstruct.library.TinkerRegistry;
-import slimeknights.tconstruct.library.materials.Material;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -36,8 +35,7 @@ public class MaterialLockTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkMaterial(id)) {
-                Material material = TinkerRegistry.getMaterial(id);
-                LevelLockHandler.addLockByKey(new MaterialLockKey(material), RequirementHolder.fromStringList(requirements));
+                TinkersCompatHandler.addTinkersLock(new MaterialLockKey(TinkerRegistry.getMaterial(id)), RequirementHolder.fromStringList(requirements));
             }
         }
 

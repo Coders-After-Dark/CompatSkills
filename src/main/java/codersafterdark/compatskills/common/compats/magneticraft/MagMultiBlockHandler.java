@@ -15,12 +15,16 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class MagMultiBlockHandler {
     @SubscribeEvent
     public void multiBlockForm(MultiBlockEvent.CheckIntegrity event) {
+        //TODO: Magneticraft compat spams requirement achieved
+        if (!event.getIntegrityErrors().isEmpty()) {//Already has issues
+            return;
+        }
         IMultiblock multiblock = event.getMultiblock();
         EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);
         MultiBlockGate gate = new MagMultiBlockGate(multiblock.getMultiblockName());
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(gate);
-        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+        if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             TextComponentString string = new TextComponentString(MessageStorage.getFailureMessage(gate) + ':');
             requirementHolder.getRequirements().stream().map(requirement -> requirement.getToolTip(data)).forEach(string::appendText);
             event.getIntegrityErrors().add(string);

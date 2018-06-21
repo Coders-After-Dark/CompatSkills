@@ -1,9 +1,9 @@
 package codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
@@ -33,7 +33,7 @@ public class EntityMountEventTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkValidIEntityDefinition(definition) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new EntityMountKey(definition.getId()), RequirementHolder.fromStringList(requirements));
+                MinecraftCompatHandler.addMCLock(new EntityMountKey(definition.getId()), RequirementHolder.fromStringList(requirements));
             }
         }
 

@@ -3,7 +3,6 @@ package codersafterdark.compatskills.utils.multiblock;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.compatskills.utils.MessageStorage;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 
 import java.util.Arrays;
@@ -21,13 +20,14 @@ public abstract class MultiBlockAction implements IAction {
     }
 
     protected abstract MultiBlockGate getGate();
+    protected abstract void addLock(MultiBlockGate gate, RequirementHolder holder);
 
     @Override
     public void apply() {
         if (CheckMethods.checkString(failureMessage) & CheckMethods.checkStringArray(defaultRequirements)) {
             MultiBlockGate gate = getGate();
             if (gate != null) {
-                LevelLockHandler.addLockByKey(gate, RequirementHolder.fromStringList(defaultRequirements));
+                addLock(gate, RequirementHolder.fromStringList(defaultRequirements));
                 MessageStorage.setFailureMessage(gate, failureMessage);
             }
         }

@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import java.util.Collection;
 
 public class VisibilityLockHandler {
-
     @SubscribeEvent
     public void onPlayerJoinHide(PlayerEvent.PlayerLoggedInEvent event) {
         EntityPlayer player = event.player;
@@ -22,7 +21,7 @@ public class VisibilityLockHandler {
         Collection<Skill> skills = ReskillableRegistries.SKILLS.getValuesCollection();
         for (Skill skill : skills) {
             RequirementHolder holder = LevelLockHandler.getLockByKey(new VisibilityLock(skill));
-            if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
+            if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
                 skill.setHidden(true);
             }
         }
@@ -35,7 +34,7 @@ public class VisibilityLockHandler {
         Collection<Skill> skills = ReskillableRegistries.SKILLS.getValuesCollection();
         for (Skill skill : skills) {
             RequirementHolder holder = LevelLockHandler.getLockByKey(new VisibilityLock(skill));
-            if (holder != null && !holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
+            if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
                 skill.setHidden(true);
             } else {
                 skill.setHidden(false);
