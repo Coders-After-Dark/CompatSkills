@@ -1,11 +1,13 @@
 package codersafterdark.compatskills.common.compats.minecraft.item.weapon;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.reskillable.api.data.FuzzyLockKey;
 import codersafterdark.reskillable.api.data.LockKey;
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.util.Collection;
@@ -23,9 +25,15 @@ public class AttackDamageLockKey implements FuzzyLockKey {
             this.attackDamage = 0;
             return;
         }
-        //TODO check if this needs to grab the base ad level from sword/tool
-        Multimap<String, AttributeModifier> attributeModifiers = stack.getItem().getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
+        Item item = stack.getItem();
+        Multimap<String, AttributeModifier> attributeModifiers = item.getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
         Collection<AttributeModifier> damage = attributeModifiers.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
+        if (damage.isEmpty() && CompatSkills.TINKERS_LOADED) {//For ranged tinker's weapons like the shuriken
+            if (item instanceof slimeknights.tconstruct.library.tools.ranged.IProjectile) {
+                attributeModifiers = ((slimeknights.tconstruct.library.tools.ranged.IProjectile) item).getProjectileAttributeModifier(stack);
+                damage = attributeModifiers.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
+            }
+        }
         if (damage.isEmpty()) {
             this.attackDamage = 0;
             return;
