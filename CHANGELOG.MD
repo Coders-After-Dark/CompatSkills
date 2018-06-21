@@ -28,6 +28,7 @@
 - Made Baubles Compat attempt to put the item back in the players inventory before resorting to throwing it on the ground.
 
 
+
 ## 1.8.0
 
 - Some internal code cleanup and small performance improvements.
