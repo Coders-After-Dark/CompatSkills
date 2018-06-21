@@ -22,7 +22,7 @@ public class EntityMountEventHandler {
         EntityPlayer player = (EntityPlayer) event.getEntityMounting();
         PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new EntityMountKey(event.getEntityBeingMounted()));
-        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+        if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             TextComponentTranslation error = new TextComponentTranslation("compatskills.entity.entityMountError");
             TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");

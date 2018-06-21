@@ -24,7 +24,8 @@
   - This also does not allow changing the icons of existing skills.
 - Added the ability to hide skills if requirements are not met.
   - mods.compatskills.VisibilityLock.addVisibilityLock(CTSkill skill, String... requirements);
-
+- Made it so that some listeners/lock types do not get registered if they are not used. This will provide some performance improvements.
+- Made Baubles Compat attempt to put the item back in the players inventory before resorting to throwing it on the ground.
 
 
 ## 1.8.0

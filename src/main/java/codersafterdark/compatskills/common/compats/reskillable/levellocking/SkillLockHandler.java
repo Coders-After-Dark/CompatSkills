@@ -28,7 +28,7 @@ public class SkillLockHandler {
         PlayerData data = PlayerDataHandler.get(player);
         Skill skill = event.getSkill();
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new SkillLock(skill, level));
-        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+        if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             TextComponentTranslation error = new TextComponentTranslation("compatskills.reskillable.addLevelLockError");
             TextComponentTranslation error2 = new TextComponentTranslation("compatskills.reskillable.addLevelLockError2");

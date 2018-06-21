@@ -23,7 +23,7 @@ public class IEMultiBlockHandler {
         PlayerData data = PlayerDataHandler.get(player);
         MultiBlockGate gate = new IEMultiBlockGate(multiblock.getUniqueName());
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(gate);
-        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+        if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             if (player.getEntityWorld().isRemote) {
                 String reqs = requirementHolder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());

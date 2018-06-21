@@ -1,9 +1,9 @@
 package codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionlocks;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -32,7 +32,7 @@ public class DimensionLockTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkValidDimension(dimension) && CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new DimensionLockKey(dimension), RequirementHolder.fromStringList(requirements));
+                MinecraftCompatHandler.addMCLock(new DimensionLockKey(dimension), RequirementHolder.fromStringList(requirements));
             }
         }
 

@@ -1,9 +1,9 @@
 package codersafterdark.compatskills.common.compats.gamestages.gamestagelocks;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
@@ -34,8 +34,7 @@ public class GameStageLockTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkString(gameStage) & CheckMethods.checkStringArray(requirements)) {
-                RequirementHolder holder = RequirementHolder.fromStringList(requirements);
-                LevelLockHandler.addLockByKey(new GameStageLock(gameStage), holder);
+                GameStageCompatHandler.addGameStageLock(new GameStageLock(gameStage), RequirementHolder.fromStringList(requirements));
             }
         }
 

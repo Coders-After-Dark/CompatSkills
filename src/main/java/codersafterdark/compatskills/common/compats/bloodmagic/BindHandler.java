@@ -21,7 +21,7 @@ public class BindHandler {
         EntityPlayer player = event.getNewOwner();
         PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder requirementHolder = LevelLockHandler.getSkillLock(stack);
-        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+        if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             TextComponentTranslation error = new TextComponentTranslation("compatskills.bloodmagic.bindingError");
             String reqs = requirementHolder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());

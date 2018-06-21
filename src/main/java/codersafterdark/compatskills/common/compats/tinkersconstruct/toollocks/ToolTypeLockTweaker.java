@@ -1,9 +1,9 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
@@ -36,7 +36,7 @@ public class ToolTypeLockTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkIItemstack(stack) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new ToolTypeLockKey(CraftTweakerMC.getItemStack(stack).getItem()), RequirementHolder.fromStringList(requirements));
+                TinkersCompatHandler.addTinkersLock(new ToolTypeLockKey(CraftTweakerMC.getItemStack(stack).getItem()), RequirementHolder.fromStringList(requirements));
             }
         }
 

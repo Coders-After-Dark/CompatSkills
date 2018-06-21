@@ -1,10 +1,10 @@
 package codersafterdark.compatskills.common.compats.reskillable.levellocking;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTSkill;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
@@ -37,8 +37,7 @@ public class SkillLocksTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkSkill(skill.getSkill()) & CheckMethods.checkInt(level) & CheckMethods.checkStringArray(requirements)) {
-                RequirementHolder holder = RequirementHolder.fromStringList(requirements);
-                LevelLockHandler.addLockByKey(new SkillLock(skill.getSkill(), level), holder);
+                ReskillableCompatHandler.addReskillableLock(new SkillLock(skill.getSkill(), level), RequirementHolder.fromStringList(requirements));
             }
         }
 

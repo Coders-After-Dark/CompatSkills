@@ -1,14 +1,16 @@
 package codersafterdark.compatskills.common.compats.minecraft;
 
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionlocks.DimensionLockHandler;
+import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionlocks.DimensionLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirement;
+import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirementHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent.AnimalTameEventHandler;
+import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent.EntityTameKey;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageEventHandler;
+import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageKey;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountEventHandler;
-import codersafterdark.compatskills.common.compats.minecraft.item.ItemChangeHandler;
-import codersafterdark.compatskills.common.compats.minecraft.item.ItemRequirement;
-import codersafterdark.compatskills.common.compats.minecraft.item.OreDictRequirement;
-import codersafterdark.compatskills.common.compats.minecraft.item.ParentOreDictLock;
+import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountKey;
+import codersafterdark.compatskills.common.compats.minecraft.item.*;
 import codersafterdark.compatskills.common.compats.minecraft.item.armor.ArmorLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.BlockHarvestLock;
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.HarvestLevelRequirement;
@@ -16,11 +18,9 @@ import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.T
 import codersafterdark.compatskills.common.compats.minecraft.item.weapon.AttackDamageLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
+import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityLockKey;
 import codersafterdark.reskillable.api.ReskillableAPI;
-import codersafterdark.reskillable.api.data.GenericNBTLockKey;
-import codersafterdark.reskillable.api.data.ItemInfo;
-import codersafterdark.reskillable.api.data.ModLockKey;
-import codersafterdark.reskillable.api.data.NBTLockKey;
+import codersafterdark.reskillable.api.data.*;
 import codersafterdark.reskillable.api.requirement.RequirementException;
 import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import codersafterdark.reskillable.base.LevelLockHandler;
@@ -33,16 +33,15 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class MinecraftCompatHandler {
-    public static void setup() {
-        //TODO: Maybe only register ones if at least one has been added via a script. This may not be a good idea if our config rewrite ends up supporting custom locks in it
-        LevelLockHandler.registerLockKey(ItemStack.class, ParentOreDictLock.class, ToolHarvestLock.class, BlockHarvestLock.class, ArmorLockKey.class, AttackDamageLockKey.class);
+import java.util.HashSet;
+import java.util.Set;
 
-        MinecraftForge.EVENT_BUS.register(new AnimalTameEventHandler());
-        MinecraftForge.EVENT_BUS.register(new EntityMountEventHandler());
-        MinecraftForge.EVENT_BUS.register(new DimensionLockHandler());
-        MinecraftForge.EVENT_BUS.register(new TileEntityEventHandler());
-        MinecraftForge.EVENT_BUS.register(new EntityDamageEventHandler());
+public class MinecraftCompatHandler {
+    private static Set<Class<? extends LockKey>> lockTypes = new HashSet<>();
+    private static boolean tile, damage, mount, tame, dimension;
+
+    public static void setup() {
+        MinecraftForge.EVENT_BUS.register(new DimensionRequirementHandler());
         MinecraftForge.EVENT_BUS.register(new ItemChangeHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("harvest", input -> {
@@ -132,5 +131,52 @@ public class MinecraftCompatHandler {
         });
 
         CTChatCommand.registerCommand(new TileEntityCommand());
+    }
+
+    public static void addMCLock(LockKey key, RequirementHolder holder) {
+        if (key instanceof OreDictLock) {
+            registerItemLock(ParentOreDictLock.class);
+        } else if (key instanceof ToolHarvestLock) {
+            registerItemLock(ToolHarvestLock.class);
+        } else if (key instanceof BlockHarvestLock) {
+            registerItemLock(BlockHarvestLock.class);
+        } else if (key instanceof ArmorLockKey) {
+            registerItemLock(ArmorLockKey.class);
+        } else if (key instanceof AttackDamageLockKey) {
+            registerItemLock(AttackDamageLockKey.class);
+        } else if (key instanceof TileEntityLockKey) {
+            if (!tile) {
+                MinecraftForge.EVENT_BUS.register(new TileEntityEventHandler());
+                tile = true;
+            }
+        } else if (key instanceof EntityDamageKey) {
+            if (!damage) {
+                MinecraftForge.EVENT_BUS.register(new EntityDamageEventHandler());
+                damage = true;
+            }
+        } else if (key instanceof EntityMountKey) {
+            if (!mount) {
+                MinecraftForge.EVENT_BUS.register(new EntityMountEventHandler());
+                mount = true;
+            }
+        } else if (key instanceof EntityTameKey) {
+            if (!tame) {
+                MinecraftForge.EVENT_BUS.register(new AnimalTameEventHandler());
+                tame = true;
+            }
+        } else if (key instanceof DimensionLockKey) {
+            if (!dimension) {
+                MinecraftForge.EVENT_BUS.register(new DimensionLockHandler());
+                dimension = true;
+            }
+        }
+        LevelLockHandler.addLockByKey(key, holder);
+    }
+
+    private static void registerItemLock(Class<? extends LockKey> itemLockType) {
+        if (!lockTypes.contains(itemLockType)) {
+            LevelLockHandler.registerLockKey(ItemStack.class, itemLockType);
+            lockTypes.add(itemLockType);
+        }
     }
 }

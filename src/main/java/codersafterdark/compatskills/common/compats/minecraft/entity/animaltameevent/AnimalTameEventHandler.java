@@ -22,7 +22,7 @@ public class AnimalTameEventHandler {
         EntityPlayer player = event.getTamer();
         PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new EntityTameKey(event.getAnimal()));
-        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+        if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             TextComponentTranslation error = new TextComponentTranslation("compatskills.entity.entityTameError");
             TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");

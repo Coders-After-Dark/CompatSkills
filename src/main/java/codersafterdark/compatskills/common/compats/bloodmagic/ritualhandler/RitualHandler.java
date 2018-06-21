@@ -20,7 +20,7 @@ public class RitualHandler {
         EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder requirementHolder = LevelLockHandler.getLocks(Ritual.class, event.getRitual());
-        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+        if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             TextComponentTranslation error = new TextComponentTranslation("compatskills.bloodmagic.ritualError");
             String reqs = requirementHolder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());

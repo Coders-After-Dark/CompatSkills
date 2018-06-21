@@ -1,10 +1,8 @@
 package codersafterdark.compatskills.common.compats.gamestages.gamestagelocks;
 
-import codersafterdark.compatskills.common.compats.gamestages.gamestagerequirement.GameStageRequirement;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.api.requirement.RequirementCache;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.darkhax.gamestages.event.GameStageEvent;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +20,7 @@ public class GameStageLockHandler {
         PlayerData data = PlayerDataHandler.get(player);
         String eventGameStage = event.getStageName();
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new GameStageLock(eventGameStage));
-        if (requirementHolder != null && !requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
+        if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             TextComponentTranslation error = new TextComponentTranslation("compatskills.gamestage.addError");
             TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");
@@ -31,15 +29,5 @@ public class GameStageLockHandler {
                     error2.getUnformattedComponentText() + ' ' + reqString);
             player.sendStatusMessage(textComponent, false);
         }
-    }
-
-    @SubscribeEvent
-    public void gameStageAdded(GameStageEvent.Added event) {
-        RequirementCache.invalidateCache(event.getEntityPlayer(), GameStageRequirement.class);
-    }
-
-    @SubscribeEvent
-    public void gameStageRemoved(GameStageEvent.Removed event) {
-        RequirementCache.invalidateCache(event.getEntityPlayer(), GameStageRequirement.class);
     }
 }

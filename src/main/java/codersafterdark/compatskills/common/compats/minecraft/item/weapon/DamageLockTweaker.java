@@ -1,9 +1,9 @@
 package codersafterdark.compatskills.common.compats.minecraft.item.weapon;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -32,7 +32,7 @@ public class DamageLockTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkDouble(damage) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new AttackDamageLockKey(damage), RequirementHolder.fromStringList(requirements));
+                MinecraftCompatHandler.addMCLock(new AttackDamageLockKey(damage), RequirementHolder.fromStringList(requirements));
             }
         }
 

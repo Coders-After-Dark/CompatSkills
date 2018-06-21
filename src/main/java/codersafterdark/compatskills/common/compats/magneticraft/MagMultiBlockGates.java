@@ -4,6 +4,7 @@ import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockAction;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
+import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -26,6 +27,11 @@ public class MagMultiBlockGates {
         @Override
         protected MultiBlockGate getGate() {
             return CheckMethods.checkValidMultiblockNameMag(multiblockName) ? new MagMultiBlockGate(multiblockName) : null;
+        }
+
+        @Override
+        protected void addLock(MultiBlockGate gate, RequirementHolder holder) {
+            MagCompatHandler.addMagLock(gate, holder);
         }
     }
 }

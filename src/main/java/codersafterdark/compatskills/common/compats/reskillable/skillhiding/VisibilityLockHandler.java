@@ -14,7 +14,6 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import java.util.Collection;
 
 public class VisibilityLockHandler {
-
     @SubscribeEvent
     public void onPlayerJoinHide(PlayerEvent.PlayerLoggedInEvent event) {
         EntityPlayer player = event.player;

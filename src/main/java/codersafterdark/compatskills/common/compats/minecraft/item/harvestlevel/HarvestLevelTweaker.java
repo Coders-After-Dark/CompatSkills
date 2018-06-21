@@ -1,9 +1,9 @@
 package codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -44,7 +44,7 @@ public class HarvestLevelTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkInt(harvestLevel) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new ToolHarvestLock(type, harvestLevel), RequirementHolder.fromStringList(requirements));
+                MinecraftCompatHandler.addMCLock(new ToolHarvestLock(type, harvestLevel), RequirementHolder.fromStringList(requirements));
             }
         }
 
@@ -68,7 +68,7 @@ public class HarvestLevelTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkInt(harvestLevel) & CheckMethods.checkStringArray(requirements)) {
-                LevelLockHandler.addLockByKey(new BlockHarvestLock(harvestLevel), RequirementHolder.fromStringList(requirements));
+                MinecraftCompatHandler.addMCLock(new BlockHarvestLock(harvestLevel), RequirementHolder.fromStringList(requirements));
             }
         }
 
