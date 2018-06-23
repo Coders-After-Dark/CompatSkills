@@ -4,6 +4,7 @@ import codersafterdark.compatskills.common.compats.reskillable.levellocking.Skil
 import codersafterdark.compatskills.common.compats.reskillable.levellocking.SkillLockHandler;
 import codersafterdark.compatskills.common.compats.reskillable.skillhiding.VisibilityLock;
 import codersafterdark.compatskills.common.compats.reskillable.skillhiding.VisibilityLockHandler;
+import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.reskillable.api.ReskillableAPI;
 import codersafterdark.reskillable.api.data.LockKey;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -11,14 +12,25 @@ import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraftforge.common.MinecraftForge;
 
-public class ReskillableCompatHandler {
+public class ReskillableCompatHandler extends CompatModuleBase {
     private static boolean visibility, skill;
 
-    public static void setup() {
+    @Override
+    public void preInit() {
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("!adv", input -> registry.getRequirement("not|adv|" + input));
         registry.addRequirementHandler("!trait", input -> registry.getRequirement("not|trait|" + input));
         registry.addRequirementHandler("!skill", input -> registry.getRequirement("not|" + input));
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void postInit() {
+
     }
 
     public static void addReskillableLock(LockKey key, RequirementHolder holder) {

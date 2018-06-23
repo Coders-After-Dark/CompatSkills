@@ -11,6 +11,7 @@ import codersafterdark.compatskills.common.compats.projecte.ProjectECompatHandle
 import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.theoneprobe.TOPCompatHandler;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
+import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
@@ -41,46 +42,22 @@ public class CompatSkills {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit(event);
-
-        if (Loader.isModLoaded("baubles")) {
-            BaublesCompatHandler.setup();
-        }
-        if (Loader.isModLoaded("bloodmagic")) {
-            BMCompatHandler.setup();
-        }
-        if (Loader.isModLoaded("gamestages")) {
-            GameStageCompatHandler.setup();
-        }
-        if (Loader.isModLoaded("immersiveengineering")) {
-            IECompatHandler.setup();
-        }
-        if (Loader.isModLoaded("magneticraft")) {
-            MagCompatHandler.setup();
-        }
-        if (Loader.isModLoaded("reskillable")) {
-            ReskillableCompatHandler.setup();
-        }
-        if (Loader.isModLoaded("tconstruct")) {
-            TINKERS_LOADED = true;
-            TinkersCompatHandler.setup();
-        }
-        if (Loader.isModLoaded("theoneprobe")) {
-            TOPCompatHandler.setup();
-        }
-        if (Loader.isModLoaded("projecte")) {
-            ProjectECompatHandler.setup(event.getSide());
-        }
-        MinecraftCompatHandler.setup();
+        CompatModuleBase.doModulesPreInit();
+        CompatModuleBase.doModulesPreInitClient();
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.Init(event);
+        CompatModuleBase.doModulesInit();
+        CompatModuleBase.doModulesInitClient();
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
+        CompatModuleBase.doModulesPostInit();
+        CompatModuleBase.doModulesPostInitClient();
         if (Loader.isModLoaded("crafttweaker")) {
             LATE_ADDITIONS.forEach(CraftTweakerAPI::apply);
         }
@@ -89,8 +66,6 @@ public class CompatSkills {
     @EventHandler
     public void serverStart(FMLServerStartingEvent event) {
         proxy.serverStart(event);
-        if (Loader.isModLoaded("tconstruct")) {
-            TinkersCompatHandler.setupServerStart();
-        }
+        CompatModuleBase.doModulesLoadComplete();
     }
 }

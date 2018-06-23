@@ -5,6 +5,7 @@ import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.Ritu
 import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualCostLockKey;
 import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualCrystalLockKey;
 import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualNameLockKey;
+import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.reskillable.api.data.LockKey;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
@@ -14,13 +15,24 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BMCompatHandler {
+public class BMCompatHandler extends CompatModuleBase {
     private static Set<Class<? extends LockKey>> lockTypes = new HashSet<>();
     private static boolean ritual;
 
-    public static void setup() {
+    @Override
+    public void preInit() {
         MinecraftForge.EVENT_BUS.register(new BindHandler());
         CTChatCommand.registerCommand(new RitualCommand());
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void postInit() {
+
     }
 
     public static void addBMLock(LockKey key, RequirementHolder holder) {

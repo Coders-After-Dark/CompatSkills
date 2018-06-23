@@ -4,6 +4,7 @@ import codersafterdark.compatskills.common.compats.tinkersconstruct.commands.Mat
 import codersafterdark.compatskills.common.compats.tinkersconstruct.commands.ModifierDumpCommand;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.materiallocks.MaterialLockKey;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.modifierlocks.ModifierLockKey;
+import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.reskillable.api.data.LockKey;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
@@ -13,14 +14,26 @@ import net.minecraftforge.common.MinecraftForge;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IToolMod;
 
-public class TinkersCompatHandler {
+public class TinkersCompatHandler extends CompatModuleBase {
     private static boolean anyRegistered;
 
-    public static void setup() {
-        //Nothing here at the moment
+    @Override
+    public void preInit() {
+
     }
 
-    public static void setupServerStart() {
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void postInit() {
+
+    }
+
+    @Override
+    public void loadComplete() {
         CTChatCommand.registerCommand(new MaterialDumpCommand());
         CTChatCommand.registerCommand(new ModifierDumpCommand());
     }

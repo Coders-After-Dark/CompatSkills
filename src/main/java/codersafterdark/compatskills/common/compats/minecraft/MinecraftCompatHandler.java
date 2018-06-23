@@ -19,6 +19,7 @@ import codersafterdark.compatskills.common.compats.minecraft.item.weapon.AttackD
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityLockKey;
+import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.reskillable.api.ReskillableAPI;
 import codersafterdark.reskillable.api.data.*;
 import codersafterdark.reskillable.api.requirement.RequirementException;
@@ -36,11 +37,12 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MinecraftCompatHandler {
+public class MinecraftCompatHandler extends CompatModuleBase {
     private static Set<Class<? extends LockKey>> lockTypes = new HashSet<>();
     private static boolean tile, damage, mount, tame, dimension;
 
-    public static void setup() {
+    @Override
+    public void preInit() {
         MinecraftForge.EVENT_BUS.register(new DimensionRequirementHandler());
         MinecraftForge.EVENT_BUS.register(new ItemChangeHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
@@ -131,6 +133,16 @@ public class MinecraftCompatHandler {
         });
 
         CTChatCommand.registerCommand(new TileEntityCommand());
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void postInit() {
+
     }
 
     public static void addMCLock(LockKey key, RequirementHolder holder) {

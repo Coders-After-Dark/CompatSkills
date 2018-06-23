@@ -22,7 +22,7 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
     public List<String> getWailaBody(ItemStack itemStack, List<String> currenttip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         RequirementHolder holder = LevelLockHandler.getSkillLock(itemStack);
         if (config.getConfig("compatskills.requirements")) {
-            if (CompatSkillsConfig.StargazerConfigs.Hwyla.HwylaShifting) {
+            if (CompatSkillsConfig.Configs.Hwyla.HwylaShifting) {
                 if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
                     if (holder.isRealLock()) {
                         EntityPlayer player = accessor.getPlayer();

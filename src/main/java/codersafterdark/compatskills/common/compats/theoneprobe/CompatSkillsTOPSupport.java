@@ -37,7 +37,7 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                 RequirementHolder holder = LevelLockHandler.getSkillLock(stack);
                 //TODO: Try to cache the requirement stuff. Also for hwyla
                 //TODO Cont: Maybe cache the last 10 blocks looked at or something
-                if (CompatSkillsConfig.StargazerConfigs.TOP.TOPShifting) {
+                if (CompatSkillsConfig.Configs.TOP.TOPShifting) {
                     if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
                         if (holder.isRealLock()) {
                             PlayerData playerData = PlayerDataHandler.get(player);

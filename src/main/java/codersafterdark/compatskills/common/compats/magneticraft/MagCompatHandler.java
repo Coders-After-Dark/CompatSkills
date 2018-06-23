@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.magneticraft;
 
+import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockCommand;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -11,10 +12,26 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MagCompatHandler {
+public class MagCompatHandler extends CompatModuleBase {
     private static boolean registered;
 
-    public static void setup() {
+    @Override
+    public void preInit() {
+
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void postInit() {
+
+    }
+
+    @Override
+    public void loadComplete() {
         CTChatCommand.registerCommand(new MultiBlockCommand("mag") {
             @Override
             public List<String> getMultiBlockNames() {

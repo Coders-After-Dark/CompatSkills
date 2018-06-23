@@ -1,6 +1,7 @@
 package codersafterdark.compatskills.common.compats.immersiveengineering;
 
 import blusunrize.immersiveengineering.api.MultiblockHandler;
+import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockCommand;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -11,10 +12,26 @@ import net.minecraftforge.common.MinecraftForge;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class IECompatHandler {
+public class IECompatHandler extends CompatModuleBase {
     private static boolean registered;
+    
+    @Override
+    public void preInit() {
 
-    public static void setup() {
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void postInit() {
+
+    }
+
+    @Override
+    public void loadComplete() {
         CTChatCommand.registerCommand(new MultiBlockCommand("ie") {
             @Override
             public List<String> getMultiBlockNames() {
