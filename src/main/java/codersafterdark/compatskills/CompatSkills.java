@@ -1,16 +1,6 @@
 package codersafterdark.compatskills;
 
 import codersafterdark.compatskills.common.CommonProxy;
-import codersafterdark.compatskills.common.compats.baubles.BaublesCompatHandler;
-import codersafterdark.compatskills.common.compats.bloodmagic.BMCompatHandler;
-import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
-import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
-import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
-import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
-import codersafterdark.compatskills.common.compats.projecte.ProjectECompatHandler;
-import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
-import codersafterdark.compatskills.common.compats.theoneprobe.TOPCompatHandler;
-import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
 import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import crafttweaker.CraftTweakerAPI;
@@ -42,6 +32,7 @@ public class CompatSkills {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit(event);
+        TINKERS_LOADED = Loader.isModLoaded("tconstruct"); //For support with AttackDamageLockKey to properly get damage of tinkers items
         CompatModuleBase.doModulesPreInit();
         CompatModuleBase.doModulesPreInitClient();
     }
