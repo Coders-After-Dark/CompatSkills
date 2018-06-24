@@ -5,12 +5,10 @@ import codersafterdark.reskillable.base.ToolTipHandler;
 import moze_intel.projecte.gameObjs.gui.GUICondenser;
 import moze_intel.projecte.gameObjs.gui.GUICondenserMK2;
 import moze_intel.projecte.gameObjs.gui.GUITransmutation;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.relauncher.Side;
 
 public class ProjectECompatHandler extends CompatModuleBase {
-    TransmutationLockHandler handler = new TransmutationLockHandler();
+    private TransmutationLockHandler handler = new TransmutationLockHandler();
 
     @Override
     public void preInit() {

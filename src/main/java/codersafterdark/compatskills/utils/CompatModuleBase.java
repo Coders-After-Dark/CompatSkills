@@ -21,9 +21,9 @@ import java.util.Map;
 import java.util.Set;
 
 public abstract class CompatModuleBase {
-    public static HashMap<String, Class<? extends CompatModuleBase>> moduleClasses = new HashMap<String, Class<? extends CompatModuleBase>>();
-    public static Set<CompatModuleBase> modules = new HashSet<CompatModuleBase>();
-    public static boolean serverStartingDone = false;
+    static HashMap<String, Class<? extends CompatModuleBase>> moduleClasses = new HashMap<>();
+    private static Set<CompatModuleBase> modules = new HashSet<>();
+    private static boolean serverStartingDone;
 
     static {
         moduleClasses.put("baubles", BaublesCompatHandler.class);
@@ -40,10 +40,10 @@ public abstract class CompatModuleBase {
 
     public static void doModulesPreInit() {
         for (Map.Entry<String, Class<? extends CompatModuleBase>> e : moduleClasses.entrySet()) {
-            if (Loader.isModLoaded(e.getKey())) {
+            if (Loader.isModLoaded(e.getKey()) || e.getKey().equals("minecraft")) {
                 try {
                     Boolean enabled = CompatSkillsConfig.Configs.Modules.compat.get(e.getKey());
-                    if (enabled == null || !enabled.booleanValue()) {
+                    if (enabled == null || !enabled) {
                         continue;
                     }
                     CompatModuleBase m = e.getValue().newInstance();
@@ -58,25 +58,17 @@ public abstract class CompatModuleBase {
 
     @SideOnly(Side.CLIENT)
     public static void doModulesPreInitClient() {
-        for (Map.Entry<String, Class<? extends CompatModuleBase>> e : moduleClasses.entrySet()) {
-            if (Loader.isModLoaded(e.getKey())) {
-                try {
-                    Boolean enabled = CompatSkillsConfig.Configs.Modules.compat.get(e.getKey());
-                    if (enabled == null || !enabled.booleanValue()) {
-                        continue;
-                    }
-                    CompatModuleBase m = e.getValue().newInstance();
-                    modules.add(m);
-                    m.clientPreInit();
-                } catch (Exception exception) {
-                    CompatSkills.logger.error("Compat module for " + e.getKey() + " could not be preInitialized. Report this!");
-                }
+        for (CompatModuleBase compat : modules) {
+            try {
+                compat.clientPreInit();
+            } catch (Exception exception) {
+                CompatSkills.logger.error("Client compat module for " + compat + " could not be preInitialized. Report this!");
             }
         }
     }
 
     public static void doModulesInit() {
-        for (CompatModuleBase compat : CompatModuleBase.modules) {
+        for (CompatModuleBase compat : modules) {
             try {
                 compat.init();
             } catch (Exception exception) {
@@ -87,17 +79,17 @@ public abstract class CompatModuleBase {
 
     @SideOnly(Side.CLIENT)
     public static void doModulesInitClient() {
-        for (CompatModuleBase compat : CompatModuleBase.modules) {
+        for (CompatModuleBase compat : modules) {
             try {
                 compat.clientInit();
             } catch (Exception exception) {
-                CompatSkills.logger.error("Compat module for " + compat + " could not be initialized");
+                CompatSkills.logger.error("Client compat module for " + compat + " could not be initialized");
             }
         }
     }
 
     public static void doModulesPostInit() {
-        for (CompatModuleBase compat : CompatModuleBase.modules) {
+        for (CompatModuleBase compat : modules) {
             try {
                 compat.postInit();
             } catch (Exception exception) {
@@ -108,11 +100,11 @@ public abstract class CompatModuleBase {
 
     @SideOnly(Side.CLIENT)
     public static void doModulesPostInitClient() {
-        for (CompatModuleBase compat : CompatModuleBase.modules) {
+        for (CompatModuleBase compat : modules) {
             try {
                 compat.clientPostInit();
             } catch (Exception exception) {
-                CompatSkills.logger.error("Compat module for " + compat + " could not be postInitialized");
+                CompatSkills.logger.error("Client compat module for " + compat + " could not be postInitialized");
             }
         }
     }
@@ -120,7 +112,7 @@ public abstract class CompatModuleBase {
     public static void doModulesLoadComplete() {
         if (!serverStartingDone) {
             serverStartingDone = true;
-            for (CompatModuleBase compat : CompatModuleBase.modules) {
+            for (CompatModuleBase compat : modules) {
                 try {
                     compat.loadComplete();
                 } catch (Exception exception) {
