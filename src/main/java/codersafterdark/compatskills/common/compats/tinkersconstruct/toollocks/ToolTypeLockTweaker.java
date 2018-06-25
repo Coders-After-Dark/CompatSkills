@@ -21,7 +21,9 @@ import java.util.stream.Collectors;
 public class ToolTypeLockTweaker {
     @ZenMethod
     public static void addToolTypeLock(IItemStack stack, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddToolTypeLock(stack, requirements));
+        if (TinkersCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddToolTypeLock(stack, requirements));
+        }
     }
 
     private static class AddToolTypeLock implements IAction {

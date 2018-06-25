@@ -17,7 +17,9 @@ import java.util.stream.Collectors;
 public class DimensionLockTweaker {
     @ZenMethod
     public static void addDimensionLock(int dimension, String... defaultRequirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddDimensionLock(dimension, defaultRequirements));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddDimensionLock(dimension, defaultRequirements));
+        }
     }
 
     private static class AddDimensionLock implements IAction {

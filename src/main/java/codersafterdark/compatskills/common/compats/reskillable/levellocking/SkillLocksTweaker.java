@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class SkillLocksTweaker {
     @ZenMethod
     public static void addLevelLock(CTSkill skill, int level, String... defaultRequirements) {
-        if (CheckMethods.checkSkill(skill.getSkill()) & CheckMethods.checkInt(level) & CheckMethods.checkStringArray(defaultRequirements)) {
+        if (ReskillableCompatHandler.ENABLED & CheckMethods.checkSkill(skill.getSkill()) & CheckMethods.checkInt(level) & CheckMethods.checkStringArray(defaultRequirements)) {
             CompatSkills.LATE_ADDITIONS.add(new AddLevelLock(skill, level, defaultRequirements));
         }
     }

@@ -8,21 +8,14 @@ import moze_intel.projecte.gameObjs.gui.GUITransmutation;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ProjectECompatHandler extends CompatModuleBase {
+    public static boolean ENABLED;
+
     private TransmutationLockHandler handler = new TransmutationLockHandler();
 
     @Override
     public void preInit() {
+        ENABLED = true;
         MinecraftForge.EVENT_BUS.register(handler);
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void postInit() {
-
     }
 
     @Override

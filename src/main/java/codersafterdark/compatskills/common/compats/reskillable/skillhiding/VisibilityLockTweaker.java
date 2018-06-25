@@ -20,7 +20,9 @@ import java.util.stream.Collectors;
 public class VisibilityLockTweaker {
     @ZenMethod
     public static void addVisibilityLock(CTSkill skill, String... defaultRequirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddVisibilityLock(skill, defaultRequirements));
+        if (ReskillableCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddVisibilityLock(skill, defaultRequirements));
+        }
     }
 
     private static class AddVisibilityLock implements IAction {

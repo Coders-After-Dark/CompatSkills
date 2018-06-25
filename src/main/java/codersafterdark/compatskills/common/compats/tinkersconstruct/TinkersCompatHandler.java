@@ -15,21 +15,13 @@ import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IToolMod;
 
 public class TinkersCompatHandler extends CompatModuleBase {
+    public static boolean ENABLED;
+
     private static boolean anyRegistered;
 
     @Override
     public void preInit() {
-
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void postInit() {
-
+        ENABLED = true;
     }
 
     @Override

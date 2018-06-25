@@ -1,6 +1,6 @@
 package codersafterdark.compatskills.common.compats.minecraft.item.weapon;
 
-import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
 import codersafterdark.reskillable.api.data.FuzzyLockKey;
 import codersafterdark.reskillable.api.data.LockKey;
 import com.google.common.collect.Multimap;
@@ -28,7 +28,7 @@ public class AttackDamageLockKey implements FuzzyLockKey {
         Item item = stack.getItem();
         Multimap<String, AttributeModifier> attributeModifiers = item.getAttributeModifiers(EntityEquipmentSlot.MAINHAND, stack);
         Collection<AttributeModifier> damage = attributeModifiers.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());
-        if (damage.isEmpty() && CompatSkills.TINKERS_LOADED) {//For ranged tinker's weapons like the shuriken
+        if (damage.isEmpty() && TinkersCompatHandler.ENABLED) {//For ranged tinker's weapons like the shuriken
             if (item instanceof slimeknights.tconstruct.library.tools.ranged.IProjectile) {
                 attributeModifiers = ((slimeknights.tconstruct.library.tools.ranged.IProjectile) item).getProjectileAttributeModifier(stack);
                 damage = attributeModifiers.get(SharedMonsterAttributes.ATTACK_DAMAGE.getName());

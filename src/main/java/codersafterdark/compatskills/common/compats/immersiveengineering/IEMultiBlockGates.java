@@ -16,7 +16,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class IEMultiBlockGates {
     @ZenMethod
     public static void addGate(String multiBlockName, String failureMessage, String... defaultRequirements) {
-        CompatSkills.LATE_ADDITIONS.add(new IEMultiBlockAction(multiBlockName, failureMessage, defaultRequirements));
+        if (IECompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new IEMultiBlockAction(multiBlockName, failureMessage, defaultRequirements));
+        }
     }
 
     private static class IEMultiBlockAction extends MultiBlockAction {

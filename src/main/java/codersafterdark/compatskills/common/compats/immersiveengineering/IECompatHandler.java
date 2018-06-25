@@ -13,21 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class IECompatHandler extends CompatModuleBase {
+    public static boolean ENABLED;
+
     private static boolean registered;
     
     @Override
     public void preInit() {
-
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void postInit() {
-
+        ENABLED = true;
     }
 
     @Override

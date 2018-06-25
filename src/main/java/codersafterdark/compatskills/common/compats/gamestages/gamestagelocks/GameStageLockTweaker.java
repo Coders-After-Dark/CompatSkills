@@ -19,7 +19,9 @@ import java.util.stream.Collectors;
 public class GameStageLockTweaker {
     @ZenMethod
     public static void addGameStageLock(String gamestage, String... defaultRequirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddGameStageLock(gamestage, defaultRequirements));
+        if (GameStageCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddGameStageLock(gamestage, defaultRequirements));
+        }
     }
 
     private static class AddGameStageLock implements IAction {

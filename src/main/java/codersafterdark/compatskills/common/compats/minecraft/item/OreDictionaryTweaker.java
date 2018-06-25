@@ -21,12 +21,16 @@ import java.util.stream.Collectors;
 public class OreDictionaryTweaker {
     @ZenMethod
     public static void addOreDictLock(IOreDictEntry entry, String... locked) {
-        CompatSkills.LATE_ADDITIONS.add(new AddOreDict(entry, locked));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddOreDict(entry, locked));
+        }
     }
 
     @ZenMethod
     public static void addNBTOreDictLock(IOreDictEntry entry, IData tag, String... locked) {
-        CompatSkills.LATE_ADDITIONS.add(new AddOreDictNBT(entry, tag, locked));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddOreDictNBT(entry, tag, locked));
+        }
     }
 
     private static class AddOreDict implements IAction {

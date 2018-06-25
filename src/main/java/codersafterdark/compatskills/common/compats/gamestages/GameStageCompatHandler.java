@@ -12,24 +12,17 @@ import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraftforge.common.MinecraftForge;
 
 public class GameStageCompatHandler extends CompatModuleBase {
+    public static boolean ENABLED;
+
     private static boolean registered;
 
     @Override
     public void preInit() {
+        ENABLED = true;
         MinecraftForge.EVENT_BUS.register(new GameStageRequirementHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("stage", GameStageRequirement::new);
         registry.addRequirementHandler("!stage", input -> registry.getRequirement("not|stage|" + input));
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void postInit() {
-
     }
 
     public static void addGameStageLock(GameStageLock key, RequirementHolder holder) {

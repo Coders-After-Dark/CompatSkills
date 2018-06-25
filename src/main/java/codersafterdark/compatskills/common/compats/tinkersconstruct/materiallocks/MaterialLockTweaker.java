@@ -20,7 +20,9 @@ import java.util.stream.Collectors;
 public class MaterialLockTweaker {
     @ZenMethod
     public static void addMaterialLock(String id, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddMaterialLock(id, requirements));
+        if (TinkersCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddMaterialLock(id, requirements));
+        }
     }
 
     private static class AddMaterialLock implements IAction {

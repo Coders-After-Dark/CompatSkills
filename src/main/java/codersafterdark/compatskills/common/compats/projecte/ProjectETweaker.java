@@ -17,10 +17,11 @@ import java.util.stream.Collectors;
 @ZenClass("mods.compatskills.EMCLock")
 @ZenRegister
 public class ProjectETweaker {
-
     @ZenMethod
     public static void addEMCLock(long emc, String... locked) {
-        CompatSkills.LATE_ADDITIONS.add(new AddEMCLock(emc, locked));
+        if (ProjectECompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddEMCLock(emc, locked));
+        }
     }
 
     private static class AddEMCLock implements IAction {

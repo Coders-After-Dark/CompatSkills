@@ -17,17 +17,23 @@ import java.util.stream.Collectors;
 public class HarvestLevelTweaker {
     @ZenMethod
     public static void addToolLevelLock(int level, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddToolLevelLock(null, level, requirements));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddToolLevelLock(null, level, requirements));
+        }
     }
 
     @ZenMethod
     public static void addToolLevelLock(String type, int level, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddToolLevelLock(type, level, requirements));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddToolLevelLock(type, level, requirements));
+        }
     }
 
     @ZenMethod
     public static void addBlockLevelLock(int level, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddBlockLevelLock(level, requirements));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddBlockLevelLock(level, requirements));
+        }
     }
 
     private static class AddToolLevelLock implements IAction {
@@ -51,8 +57,8 @@ public class HarvestLevelTweaker {
         @Override
         public String describe() {
             String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Harvest Level Lock for tools " + (type == null ? "" :  "of type: " + type) +
-                    " with harvest level: " + harvestLevel + ", With Requirements: " + descString;
+            return "Added Harvest Level Lock for tools " + (type == null ? "" :  "of type: " + type + ' ') +
+                    "with harvest level: " + harvestLevel + ", With Requirements: " + descString;
         }
     }
 

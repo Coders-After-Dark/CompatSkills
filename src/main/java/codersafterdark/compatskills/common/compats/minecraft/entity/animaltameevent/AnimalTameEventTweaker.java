@@ -18,7 +18,9 @@ import java.util.stream.Collectors;
 public class AnimalTameEventTweaker {
     @ZenMethod
     public static void addTameLock(IEntityDefinition definition, String... defaultRequirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddTameLock(definition, defaultRequirements));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddTameLock(definition, defaultRequirements));
+        }
     }
 
     private static class AddTameLock implements IAction {

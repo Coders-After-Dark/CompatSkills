@@ -21,7 +21,6 @@ import java.util.List;
 @Mod(modid = CompatSkillConstants.MOD_ID, name = CompatSkillConstants.MOD_NAME, version = CompatSkillConstants.VERSION, dependencies = CompatSkillConstants.DEPENDENCIES, acceptedMinecraftVersions = CompatSkillConstants.MCVER)
 public class CompatSkills {
     public static final List<IAction> LATE_ADDITIONS = new LinkedList<>();
-    public static boolean TINKERS_LOADED;
 
     @SidedProxy(serverSide = CompatSkillConstants.PROXY_COMMON, clientSide = CompatSkillConstants.PROXY_CLIENT)
     public static CommonProxy proxy;
@@ -32,7 +31,6 @@ public class CompatSkills {
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit(event);
-        TINKERS_LOADED = Loader.isModLoaded("tconstruct"); //For support with AttackDamageLockKey to properly get damage of tinkers items
         CompatModuleBase.doModulesPreInit();
         CompatModuleBase.doModulesPreInitClient();
     }

@@ -16,23 +16,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class BMCompatHandler extends CompatModuleBase {
+    public static boolean ENABLED;
+
     private static Set<Class<? extends LockKey>> lockTypes = new HashSet<>();
     private static boolean ritual;
 
     @Override
     public void preInit() {
+        ENABLED = true;
         MinecraftForge.EVENT_BUS.register(new BindHandler());
         CTChatCommand.registerCommand(new RitualCommand());
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void postInit() {
-
     }
 
     public static void addBMLock(LockKey key, RequirementHolder holder) {

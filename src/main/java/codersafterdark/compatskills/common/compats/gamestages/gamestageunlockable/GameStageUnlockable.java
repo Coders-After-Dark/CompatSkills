@@ -1,6 +1,7 @@
 package codersafterdark.compatskills.common.compats.gamestages.gamestageunlockable;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -78,7 +79,7 @@ public class GameStageUnlockable extends Unlockable {
 
     @ZenMethod
     public static GameStageUnlockable addGameStageUnlockable(String gameStage, String name, int x, int y, String skillName, int cost, @Optional String... requirements) {
-        if (CheckMethods.checkString(gameStage) & CheckMethods.checkString(name) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillName) & CheckMethods.checkInt(cost) & CheckMethods.checkOptionalRequirements(requirements)) {
+        if (GameStageCompatHandler.ENABLED & CheckMethods.checkString(gameStage) & CheckMethods.checkString(name) & CheckMethods.checkIntX(x) & CheckMethods.checkIntY(y) & CheckMethods.checkParentSkillsString(skillName) & CheckMethods.checkInt(cost) & CheckMethods.checkOptionalRequirements(requirements)) {
             ResourceLocation skillLoc = new ResourceLocation(skillName);
             ResourceLocation loc = new ResourceLocation(MOD_ID, name);
             if (requirements == null) {

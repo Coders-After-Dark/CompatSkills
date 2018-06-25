@@ -38,11 +38,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MinecraftCompatHandler extends CompatModuleBase {
+    public static boolean ENABLED;
+
     private static Set<Class<? extends LockKey>> lockTypes = new HashSet<>();
     private static boolean tile, damage, mount, tame, dimension;
 
     @Override
     public void preInit() {
+        ENABLED = true;
         MinecraftForge.EVENT_BUS.register(new DimensionRequirementHandler());
         MinecraftForge.EVENT_BUS.register(new ItemChangeHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
@@ -133,16 +136,6 @@ public class MinecraftCompatHandler extends CompatModuleBase {
         });
 
         CTChatCommand.registerCommand(new TileEntityCommand());
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void postInit() {
-
     }
 
     public static void addMCLock(LockKey key, RequirementHolder holder) {

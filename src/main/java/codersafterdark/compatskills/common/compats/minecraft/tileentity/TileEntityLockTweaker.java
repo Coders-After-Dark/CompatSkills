@@ -17,7 +17,9 @@ import java.util.stream.Collectors;
 public class TileEntityLockTweaker {
     @ZenMethod
     public static void addTileEntityLock(String tileName, String... locked) {
-        CompatSkills.LATE_ADDITIONS.add(new AddTileEntity(tileName, locked));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddTileEntity(tileName, locked));
+        }
     }
 
     private static class AddTileEntity implements IAction {

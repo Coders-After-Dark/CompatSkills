@@ -17,7 +17,9 @@ import java.util.stream.Collectors;
 public class ArmorLockTweaker {
     @ZenMethod
     public static void addArmorLock(double armor, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddArmorLock(armor, requirements));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddArmorLock(armor, requirements));
+        }
     }
 
     private static class AddArmorLock implements IAction {

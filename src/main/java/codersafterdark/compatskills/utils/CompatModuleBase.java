@@ -125,9 +125,11 @@ public abstract class CompatModuleBase {
 
     public abstract void preInit();
 
-    public abstract void init();
+    public void init() {
+    }
 
-    public abstract void postInit();
+    public void postInit() {
+    }
 
     public void loadComplete() {
     }

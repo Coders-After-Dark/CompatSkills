@@ -21,7 +21,9 @@ import java.util.stream.Collectors;
 public class ModifierLockTweaker {
     @ZenMethod
     public static void addModifierLock(String identifier, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddModifierLock(identifier, requirements));
+        if (TinkersCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddModifierLock(identifier, requirements));
+        }
     }
 
     private static class AddModifierLock implements IAction {

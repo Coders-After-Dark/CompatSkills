@@ -24,17 +24,23 @@ import java.util.stream.Collectors;
 public class RitualHandlerTweaker {
     @ZenMethod
     public static void addRitualLock(String ritual, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddRitualLock(ritual, requirements));
+        if (BMCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddRitualLock(ritual, requirements));
+        }
     }
 
     @ZenMethod
     public static void addRitualCostLock(int activationCost, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddRitualCostLock(activationCost, requirements));
+        if (BMCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddRitualCostLock(activationCost, requirements));
+        }
     }
 
     @ZenMethod
     public static void addRitualCrystalLock(int crystalLevel, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddRitualCrystalLock(crystalLevel, requirements));
+        if (BMCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddRitualCrystalLock(crystalLevel, requirements));
+        }
     }
 
     private static class AddRitualLock implements IAction {

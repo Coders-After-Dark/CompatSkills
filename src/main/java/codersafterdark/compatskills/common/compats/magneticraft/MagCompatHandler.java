@@ -13,21 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MagCompatHandler extends CompatModuleBase {
+    public static boolean ENABLED;
+
     private static boolean registered;
 
     @Override
     public void preInit() {
-
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void postInit() {
-
+        ENABLED = true;
     }
 
     @Override

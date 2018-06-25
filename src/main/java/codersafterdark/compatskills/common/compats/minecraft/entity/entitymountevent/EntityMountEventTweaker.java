@@ -18,7 +18,9 @@ import java.util.stream.Collectors;
 public class EntityMountEventTweaker {
     @ZenMethod
     public static void addMountLock(IEntityDefinition definition, String... defaultRequirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddMountLock(definition, defaultRequirements));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddMountLock(definition, defaultRequirements));
+        }
     }
 
     private static class AddMountLock implements IAction {

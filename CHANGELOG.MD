@@ -26,6 +26,7 @@
   - mods.compatskills.VisibilityLock.addVisibilityLock(CTSkill skill, String... requirements);
 - Made it so that some listeners/lock types do not get registered if they are not used. This will provide some performance improvements.
 - Made Baubles Compat attempt to put the item back in the players inventory before resorting to throwing it on the ground.
+- New config system that allows for disabling individual modules even if the corresponding mod is loaded.
 
 
 

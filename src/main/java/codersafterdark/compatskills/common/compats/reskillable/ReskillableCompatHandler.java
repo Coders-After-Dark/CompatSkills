@@ -13,24 +13,17 @@ import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ReskillableCompatHandler extends CompatModuleBase {
+    public static boolean ENABLED;
+
     private static boolean visibility, skill;
 
     @Override
     public void preInit() {
+        ENABLED = true;
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("!adv", input -> registry.getRequirement("not|adv|" + input));
         registry.addRequirementHandler("!trait", input -> registry.getRequirement("not|trait|" + input));
         registry.addRequirementHandler("!skill", input -> registry.getRequirement("not|" + input));
-    }
-
-    @Override
-    public void init() {
-
-    }
-
-    @Override
-    public void postInit() {
-
     }
 
     public static void addReskillableLock(LockKey key, RequirementHolder holder) {

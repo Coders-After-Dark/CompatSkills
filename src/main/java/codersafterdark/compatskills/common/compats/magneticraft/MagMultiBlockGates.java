@@ -16,7 +16,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class MagMultiBlockGates {
     @ZenMethod
     public static void addGate(String multiBlockName, String failureMessage, String... defaultRequirements) {
-        CompatSkills.LATE_ADDITIONS.add(new MagMultiBlockAction(multiBlockName, failureMessage, defaultRequirements));
+        if (MagCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new MagMultiBlockAction(multiBlockName, failureMessage, defaultRequirements));
+        }
     }
 
     private static class MagMultiBlockAction extends MultiBlockAction {

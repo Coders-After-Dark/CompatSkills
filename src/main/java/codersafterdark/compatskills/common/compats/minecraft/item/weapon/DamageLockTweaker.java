@@ -17,7 +17,9 @@ import java.util.stream.Collectors;
 public class DamageLockTweaker {
     @ZenMethod
     public static void addDamageLock(double damage, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddDamageLock(damage, requirements));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddDamageLock(damage, requirements));
+        }
     }
 
     private static class AddDamageLock implements IAction {

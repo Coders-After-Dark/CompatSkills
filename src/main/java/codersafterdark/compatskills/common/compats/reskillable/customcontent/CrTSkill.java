@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.reskillable.customcontent;
 
+import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.reskillable.api.ReskillableRegistries;
@@ -44,7 +45,7 @@ public class CrTSkill extends Skill {
 
     @ZenMethod
     public static CrTSkill createSkill(String name, String backGroundLocation) {
-        if (CheckMethods.checkString(name) & CheckMethods.checkString(backGroundLocation)) {
+        if (ReskillableCompatHandler.ENABLED & CheckMethods.checkString(name) & CheckMethods.checkString(backGroundLocation)) {
             return createSkill(new ResourceLocation(CompatSkillConstants.MOD_ID, name), new ResourceLocation(backGroundLocation));
         }
         return null;
@@ -52,7 +53,7 @@ public class CrTSkill extends Skill {
 
     @ZenMethod
     public static CrTSkill createNewSkill(String nameLocation, String backGroundLocation) {
-        if (CheckMethods.checkString(nameLocation) & CheckMethods.checkString(backGroundLocation)) {
+        if (ReskillableCompatHandler.ENABLED & CheckMethods.checkString(nameLocation) & CheckMethods.checkString(backGroundLocation)) {
             return createSkill(new ResourceLocation(nameLocation), new ResourceLocation(backGroundLocation));
         }
         return null;

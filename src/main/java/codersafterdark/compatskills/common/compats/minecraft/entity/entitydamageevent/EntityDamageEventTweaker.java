@@ -18,7 +18,9 @@ import java.util.stream.Collectors;
 public class EntityDamageEventTweaker {
     @ZenMethod
     public static void addEntityLock(IEntityDefinition definition, String... defaultRequirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddDamageLock(definition, defaultRequirements));
+        if (MinecraftCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddDamageLock(definition, defaultRequirements));
+        }
     }
 
     private static class AddDamageLock implements IAction {
