@@ -1,6 +1,5 @@
 package codersafterdark.compatskills.common.compats.reskillable.playerexpansion;
 
-import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTPlayerData;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
@@ -15,9 +14,6 @@ import stanhebben.zenscript.annotations.ZenGetter;
 public class PlayerExpansion {
     @ZenGetter("skillData")
     public static CTPlayerData getSkillData(IPlayer iPlayer) {
-        if (!ReskillableCompatHandler.ENABLED) {
-            return null;
-        }
         PlayerData playerData = PlayerDataHandler.get(CraftTweakerMC.getPlayer(iPlayer));
         return playerData == null ? null : new CTPlayerData(playerData);
     }

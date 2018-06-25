@@ -1,7 +1,6 @@
 package codersafterdark.compatskills.common.compats.reskillable.brackethandlers;
 
 import codersafterdark.compatskills.CompatSkills;
-import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.skill.Skill;
@@ -28,9 +27,6 @@ public class BracketHandlerSkill implements IBracketHandler {
     private static final IJavaMethod method = JavaMethod.get(GlobalRegistry.getTypes(), BracketHandlerSkill.class, "getSkill", String.class);
 
     public static CTSkill getSkill(String name) {
-        if (!ReskillableCompatHandler.ENABLED) {
-            return null;
-        }
         Skill skill = ReskillableRegistries.SKILLS.getValue(new ResourceLocation(name));
         CompatSkills.logger.log(Level.INFO, name);
         return skill == null ? null : new CTSkill(skill);

@@ -1,6 +1,5 @@
 package codersafterdark.compatskills.common.compats.reskillable.brackethandlers;
 
-import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTUnlockable;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.unlockable.Unlockable;
@@ -26,9 +25,6 @@ public class BracketHandlerUnlockable implements IBracketHandler {
     private static final IJavaMethod method = JavaMethod.get(GlobalRegistry.getTypes(), BracketHandlerUnlockable.class, "getUnlockable", String.class);
 
     public static CTUnlockable getUnlockable(String name) {
-        if (!ReskillableCompatHandler.ENABLED) {
-            return null;
-        }
         Unlockable unlockable = ReskillableRegistries.UNLOCKABLES.getValue(new ResourceLocation(name));
         return unlockable == null ? null : new CTUnlockable(unlockable);
     }

@@ -1,6 +1,5 @@
 package codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper;
 
-import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerSkillInfo;
 import crafttweaker.annotations.ZenRegister;
@@ -25,9 +24,6 @@ public class CTPlayerData {
 
     @ZenMethod
     public CTPlayerSkillInfo getSkillInfo(CTSkill skill) {
-        if (!ReskillableCompatHandler.ENABLED) {
-            return null;
-        }
         PlayerSkillInfo info = playerData.getSkillInfo(skill.skill);
         return info == null ? null : new CTPlayerSkillInfo(info);
     }
