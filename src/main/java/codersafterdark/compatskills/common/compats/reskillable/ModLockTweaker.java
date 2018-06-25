@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.crafttweaker;
+package codersafterdark.compatskills.common.compats.reskillable;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
@@ -19,7 +19,9 @@ import java.util.stream.Collectors;
 public class ModLockTweaker {
     @ZenMethod
     public static void addModLock(String modId, String... locked) {
-        CompatSkills.LATE_ADDITIONS.add(new Add(modId, locked));
+        if (ReskillableCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new Add(modId, locked));
+        }
     }
 
     private static class Add implements IAction {

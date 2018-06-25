@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.crafttweaker;
+package codersafterdark.compatskills.common.compats.reskillable;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
@@ -24,12 +24,16 @@ import java.util.stream.Collectors;
 public class NBTLockTweaker {
     @ZenMethod
     public static void addModNBTLock(String modId, IData tag, String... locked) {
-        CompatSkills.LATE_ADDITIONS.add(new AddModNBTLock(modId, tag, locked));
+        if (ReskillableCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddModNBTLock(modId, tag, locked));
+        }
     }
 
     @ZenMethod
     public static void addGenericNBTLock(IData tag, String... locked) {
-        CompatSkills.LATE_ADDITIONS.add(new AddGenericNBTLock(tag, locked));
+        if (ReskillableCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddGenericNBTLock(tag, locked));
+        }
     }
 
     private static class AddModNBTLock implements IAction {

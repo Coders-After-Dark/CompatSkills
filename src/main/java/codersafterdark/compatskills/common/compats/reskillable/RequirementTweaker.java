@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.crafttweaker;
+package codersafterdark.compatskills.common.compats.reskillable;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
@@ -21,7 +21,9 @@ import java.util.stream.Collectors;
 public class RequirementTweaker {
     @ZenMethod
     public static void addRequirement(IItemStack item, String... locked) {
-        CompatSkills.LATE_ADDITIONS.add(new Add(item, locked));
+        if (ReskillableCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new Add(item, locked));
+        }
     }
 
     private static class Add implements IAction {
