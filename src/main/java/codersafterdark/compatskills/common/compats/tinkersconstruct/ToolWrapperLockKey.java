@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct;
 
+import codersafterdark.compatskills.common.compats.tinkersconstruct.modifierlocks.ModifierLockKey;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks.ToolTypeLockKey;
 import codersafterdark.reskillable.api.data.ParentLockKey;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -37,6 +38,7 @@ public class ToolWrapperLockKey implements ParentLockKey {
             return toolHolder;
         }
         TinkerUtil.getMaterialsFromTagList(list).stream().map(material -> LevelLockHandler.getLocks(Material.class, material)).forEach(holders::add);
+        TinkerUtil.getTraitsOrdered(stack).stream().map(trait -> LevelLockHandler.getLockByKey(new ModifierLockKey(trait))).forEach(holders::add);
         return holders.isEmpty() ? LevelLockHandler.EMPTY_LOCK : new RequirementHolder(holders.toArray(new RequirementHolder[0]));
     }
 }
