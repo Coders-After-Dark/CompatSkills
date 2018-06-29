@@ -29,7 +29,7 @@ public class ModifierDumpCommand extends CraftTweakerCommand {
         Collection<IModifier> modifiers = TinkerRegistry.getAllModifiers();
         int size = 0;
         for (IModifier modifier : modifiers) {
-            if (modifier.hasItemsToApplyWith()) {
+            if (!modifier.isHidden()) {
                 CraftTweakerAPI.logCommand("## " + modifier.getLocalizedName());
                 CraftTweakerAPI.logCommand("#  Identifier: " + modifier.getIdentifier());
                 CraftTweakerAPI.logCommand("#  Localized:  " + modifier.getLocalizedName());
