@@ -32,21 +32,27 @@ public class CompatSkills {
         logger = event.getModLog();
         proxy.preInit(event);
         CompatModuleBase.doModulesPreInit();
-        CompatModuleBase.doModulesPreInitClient();
+        if (event.getSide().isClient()) {
+            CompatModuleBase.doModulesPreInitClient();
+        }
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.Init(event);
         CompatModuleBase.doModulesInit();
-        CompatModuleBase.doModulesInitClient();
+        if (event.getSide().isClient()) {
+            CompatModuleBase.doModulesInitClient();
+        }
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit(event);
         CompatModuleBase.doModulesPostInit();
-        CompatModuleBase.doModulesPostInitClient();
+        if (event.getSide().isClient()) {
+            CompatModuleBase.doModulesPostInitClient();
+        }
         if (Loader.isModLoaded("crafttweaker")) {
             LATE_ADDITIONS.forEach(CraftTweakerAPI::apply);
         }
