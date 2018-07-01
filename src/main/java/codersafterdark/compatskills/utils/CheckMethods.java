@@ -5,6 +5,7 @@ import blusunrize.immersiveengineering.api.MultiblockHandler;
 import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.skill.Skill;
+import codersafterdark.reskillable.api.unlockable.Unlockable;
 import com.cout970.magneticraft.api.MagneticraftApi;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.api.data.DataMap;
@@ -204,6 +205,17 @@ public class CheckMethods {
         return true;
     }
 
+    public static boolean checkParentUnlockablesString(String parent) {
+        if (parent == null || parent.isEmpty()) {
+            CraftTweakerAPI.logError("String for Parent Unlockable was found to be null or empty!");
+            return false;
+        } else if (!ReskillableRegistries.UNLOCKABLES.containsKey(new ResourceLocation(parent))) {
+            CraftTweakerAPI.logError("String Resource Location is not a Valid Unlockable!");
+            return false;
+        }
+        return true;
+    }
+
     public static boolean checkCrTSkillParent(CrTSkill parent) {
         if (parent == null) {
             CraftTweakerAPI.logError("CrTSkill Parent is found to be Null!");
@@ -228,6 +240,19 @@ public class CheckMethods {
             return false;
         }
         return checkParentSkillsString(registryName.toString());
+    }
+
+    public static boolean checkUnlockable(Unlockable unlockable) {
+        if (unlockable == null) {
+            CraftTweakerAPI.logError("Unlockable is found to be Null!");
+            return false;
+        }
+        ResourceLocation registryName = unlockable.getRegistryName();
+        if (registryName == null) {
+            CraftTweakerAPI.logError("Unlockable registry found to be Null!");
+            return false;
+        }
+        return checkParentUnlockablesString(registryName.toString());
     }
 
     ////////////////////////////////

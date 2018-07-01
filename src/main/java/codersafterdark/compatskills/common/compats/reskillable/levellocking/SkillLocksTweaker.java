@@ -44,7 +44,7 @@ public class SkillLocksTweaker {
         @Override
         public String describe() {
             String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Level-Lock " + (skill == null ? "null" : skill.getName()) + ": " + level + " With Requirements: " + descString;
+            return "Added Level-Lock " + skill.getName() + ": " + level + " With Requirements: " + descString;
         }
     }
 }

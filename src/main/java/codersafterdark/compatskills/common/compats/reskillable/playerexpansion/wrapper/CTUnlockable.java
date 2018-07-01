@@ -59,4 +59,8 @@ public class CTUnlockable {
     public void setEnabled(boolean enabled) {
         unlockable.getUnlockableConfig().setEnabled(enabled);
     }
+
+    public Unlockable getUnlockable() {
+        return unlockable;
+    }
 }

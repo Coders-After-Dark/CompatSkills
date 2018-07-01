@@ -27,7 +27,11 @@
 - Made it so that some listeners/lock types do not get registered if they are not used. This will provide some performance improvements.
 - Made Baubles Compat attempt to put the item back in the players inventory before resorting to throwing it on the ground.
 - New config system that allows for disabling individual modules even if the corresponding mod is loaded.
-
+- Added the ability to have commands fired when a player reaches a certain level or if they lock/unlock a trait.
+  - mods.compatskills.SkillChange.addLevelUpCommands(CTSkill skill, int level, String... commands);
+  - mods.compatskills.SkillChange.addUnlockableLockCommands(CTUnlockable unlockable, String... commands);
+  - mods.compatskills.SkillChange.addUnlockableUnlockCommands(CTUnlockable unlockable, String... commands);
+  - *Note*: Commands are of the format `give @p minecraft:diamond 1` in other words leave the slash out.
 
 
 ## 1.8.0
