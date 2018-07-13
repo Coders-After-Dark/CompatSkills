@@ -15,8 +15,6 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +55,6 @@ public class TransmutationLockHandler {
         }
     }
 
-    @SideOnly(Side.CLIENT)
     private RequirementHolder itemRequirements(ItemStack stack) {
         EMCLockKey lockKey = new EMCLockKey(ProjectEAPI.getEMCProxy().getValue(stack));
         RequirementHolder emcHolder = LevelLockHandler.getLockByFuzzyKey(lockKey);

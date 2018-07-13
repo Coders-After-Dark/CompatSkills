@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.9.1
+- Fixed ProjectE EMC locks now working at all on servers.
+
+
 ## 1.9.0
 
 - Modified ProjectE support to lock transmutation learning and condenser multiplication.
