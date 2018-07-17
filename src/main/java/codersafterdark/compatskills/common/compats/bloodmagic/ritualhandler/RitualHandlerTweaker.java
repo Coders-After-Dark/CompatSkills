@@ -1,7 +1,7 @@
 package codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler;
 
+import WayofTime.bloodmagic.BloodMagic;
 import WayofTime.bloodmagic.ritual.Ritual;
-import WayofTime.bloodmagic.ritual.RitualRegistry;
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.bloodmagic.BMCompatHandler;
 import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualCostLockKey;
@@ -55,7 +55,7 @@ public class RitualHandlerTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkRitual(ritual) & CheckMethods.checkStringArray(requirements)) {
-                Ritual trueRitual = RitualRegistry.getRegistry().get(ritual);
+                Ritual trueRitual = BloodMagic.RITUAL_MANAGER.getRitual(ritual);
                 if (trueRitual != null) {
                     BMCompatHandler.addBMLock(new RitualNameLockKey(trueRitual), RequirementHolder.fromStringList(requirements));
                 }

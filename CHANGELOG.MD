@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.9.2
+- Updated Blood Magic ritual integration to work with the changes in Blood Magic 1.12.2-2.3.0-98
+
+
 ## 1.9.1
 - Fixed ProjectE EMC locks now working at all on servers.
 

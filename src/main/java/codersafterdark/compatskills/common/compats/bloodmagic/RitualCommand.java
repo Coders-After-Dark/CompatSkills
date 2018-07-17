@@ -1,13 +1,14 @@
 package codersafterdark.compatskills.common.compats.bloodmagic;
 
-import WayofTime.bloodmagic.ritual.RitualRegistry;
+import WayofTime.bloodmagic.BloodMagic;
+import WayofTime.bloodmagic.ritual.Ritual;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.commands.CraftTweakerCommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextFormatting;
 
-import java.util.List;
+import java.util.Collection;
 
 import static crafttweaker.mc1120.commands.SpecialMessagesChat.*;
 
@@ -25,9 +26,9 @@ public class RitualCommand extends CraftTweakerCommand {
     @Override
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
         CraftTweakerAPI.logCommand("Ritual Dump: ");
-        List<String> ritualList = RitualRegistry.getIds();
-        ritualList.forEach(CraftTweakerAPI::logCommand);
+        Collection<Ritual> rituals = BloodMagic.RITUAL_MANAGER.getRituals();
+        rituals.forEach(ritual -> CraftTweakerAPI.logCommand(BloodMagic.RITUAL_MANAGER.getId(ritual)));
         sender.sendMessage(getNormalMessage("List of Rituals generated;"));
-        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + ritualList.size() + " Entries;", sender));
+        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + rituals.size() + " Entries;", sender));
     }
 }

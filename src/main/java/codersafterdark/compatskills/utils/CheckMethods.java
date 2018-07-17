@@ -1,6 +1,6 @@
 package codersafterdark.compatskills.utils;
 
-import WayofTime.bloodmagic.ritual.RitualRegistry;
+import WayofTime.bloodmagic.BloodMagic;
 import blusunrize.immersiveengineering.api.MultiblockHandler;
 import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
 import codersafterdark.reskillable.api.ReskillableRegistries;
@@ -167,7 +167,7 @@ public class CheckMethods {
         if (ritual == null || ritual.isEmpty()) {
             CraftTweakerAPI.logError("String Ritual was Null or Empty!");
             return false;
-        } else if (!RitualRegistry.getRegistry().containsKey(ritual)) {
+        } else if (BloodMagic.RITUAL_MANAGER.getRitual(ritual) == null) {
             CraftTweakerAPI.logError("Invalid Ritual");
             return false;
         }
