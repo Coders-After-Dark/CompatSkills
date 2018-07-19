@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.9.3
+- Made the ritual dump command also show the cost and crystal level required for the ritual.
+
+
 ## 1.9.2
 - Updated Blood Magic ritual integration to work with the changes in Blood Magic 1.12.2-2.3.0-98
 

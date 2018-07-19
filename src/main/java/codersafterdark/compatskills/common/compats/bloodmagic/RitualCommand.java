@@ -27,7 +27,13 @@ public class RitualCommand extends CraftTweakerCommand {
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
         CraftTweakerAPI.logCommand("Ritual Dump: ");
         Collection<Ritual> rituals = BloodMagic.RITUAL_MANAGER.getRituals();
-        rituals.forEach(ritual -> CraftTweakerAPI.logCommand(BloodMagic.RITUAL_MANAGER.getId(ritual)));
+        for (Ritual ritual : rituals) {
+            CraftTweakerAPI.logCommand("##");
+            CraftTweakerAPI.logCommand("Ritual ID: " + BloodMagic.RITUAL_MANAGER.getId(ritual));
+            CraftTweakerAPI.logCommand("Ritual Cost: " + ritual.getActivationCost());
+            CraftTweakerAPI.logCommand("Ritual Crystal Level: " + ritual.getCrystalLevel());
+            CraftTweakerAPI.logCommand("##");
+        }
         sender.sendMessage(getNormalMessage("List of Rituals generated;"));
         sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + rituals.size() + " Entries;", sender));
     }
