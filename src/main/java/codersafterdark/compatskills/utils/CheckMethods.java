@@ -13,6 +13,9 @@ import crafttweaker.api.data.IData;
 import crafttweaker.api.entity.IEntityDefinition;
 import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.oredict.IOreDictEntry;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DimensionManager;
@@ -309,5 +312,18 @@ public class CheckMethods {
             return false;
         }
         return true;
+    }
+
+
+    ////////////////////
+    // Utility Method //
+    ////////////////////
+
+    public static IBlockState convertItemStackToIBlockState(ItemStack stack) {
+        if (stack.getItem() instanceof ItemBlock) {
+            return ((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
+        }
+        CraftTweakerAPI.logError("ItemStack: " + stack.getDisplayName() + " is not an instanceof ItemBlock!");
+        return null;
     }
 }
