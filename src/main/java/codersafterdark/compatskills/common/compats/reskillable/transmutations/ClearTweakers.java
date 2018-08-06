@@ -10,6 +10,7 @@ import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import scala.reflect.internal.Trees;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -33,7 +34,9 @@ public class ClearTweakers {
 
     @ZenMethod
     public static void clearReagentMap() {
-        TransmutationRegistry.clearReagentMap();
+        if (ReskillableCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new clearReagentMap());
+        }
     }
 
     private static class clearMapOfReagent implements IAction {
@@ -69,6 +72,19 @@ public class ClearTweakers {
         @Override
         public String describe() {
             return "Clearing Reagent: " + reagent.getItemStackDisplayName(new ItemStack(reagent)) + " Of Entries!";
+        }
+    }
+
+    private static class clearReagentMap implements IAction {
+
+        @Override
+        public void apply() {
+            TransmutationRegistry.clearReagentMap();
+        }
+
+        @Override
+        public String describe() {
+            return "Clearing Transmutation Map";
         }
     }
 }
