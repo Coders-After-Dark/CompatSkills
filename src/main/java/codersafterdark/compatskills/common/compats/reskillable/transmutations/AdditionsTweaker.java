@@ -23,45 +23,44 @@ public class AdditionsTweaker {
     @ZenMethod
     public static void addEntryToReagent(IItemStack reagent, IItemStack startState, IItemStack endState){
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new addEntryToReagent(CraftTweakerMC.getItemStack(reagent).getItem(), startState, endState));
+            CompatSkills.LATE_ADDITIONS.add(new AddEntryToReagent(CraftTweakerMC.getItemStack(reagent).getItem(), startState, endState));
         }
     }
 
     @ZenMethod
     public static void addEntryToReagent(IItemStack reagent, crafttweaker.api.block.IBlockState state1, crafttweaker.api.block.IBlockState state2) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new addEntryToReagent(CraftTweakerMC.getItemStack(reagent).getItem(), CraftTweakerMC.getBlockState(state1), CraftTweakerMC.getBlockState(state2)));
+            CompatSkills.LATE_ADDITIONS.add(new AddEntryToReagent(CraftTweakerMC.getItemStack(reagent).getItem(), CraftTweakerMC.getBlockState(state1), CraftTweakerMC.getBlockState(state2)));
         }
     }
-
 
     /// addEntryToReagentAgnostic
     @ZenMethod
     public static void addEntryToReagentAgnostic(IItemStack startState, IItemStack endState) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new addEntryToAgnosticReagent(startState, endState));
+            CompatSkills.LATE_ADDITIONS.add(new AddEntryToAgnosticReagent(startState, endState));
         }
     }
 
     @ZenMethod
     public static void addEntryToReagentAgnostic(crafttweaker.api.block.IBlockState state1, crafttweaker.api.block.IBlockState state2) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new addEntryToAgnosticReagent(CraftTweakerMC.getBlockState(state1), CraftTweakerMC.getBlockState(state2)));
+            CompatSkills.LATE_ADDITIONS.add(new AddEntryToAgnosticReagent(CraftTweakerMC.getBlockState(state1), CraftTweakerMC.getBlockState(state2)));
         }
     }
 
-    private static class addEntryToReagent implements IAction {
+    private static class AddEntryToReagent implements IAction {
         private final Item reagent;
         private final IBlockState state1;
         private final IBlockState state2;
 
-        addEntryToReagent(Item reagent, IBlockState state1, IBlockState state2) {
+        private AddEntryToReagent(Item reagent, IBlockState state1, IBlockState state2) {
             this.reagent = reagent;
             this.state1 = state1;
             this.state2 = state2;
         }
 
-        addEntryToReagent(Item reagent, IItemStack state1, IItemStack state2) {
+        private AddEntryToReagent(Item reagent, IItemStack state1, IItemStack state2) {
             this.reagent = reagent;
             this.state1 = CheckMethods.convertItemStackToIBlockState(CraftTweakerMC.getItemStack(state1));
             this.state2 = CheckMethods.convertItemStackToIBlockState(CraftTweakerMC.getItemStack(state2));
@@ -78,16 +77,16 @@ public class AdditionsTweaker {
         }
     }
 
-    private static class addEntryToAgnosticReagent implements IAction {
-        IBlockState state1;
-        IBlockState state2;
+    private static class AddEntryToAgnosticReagent implements IAction {
+        private final IBlockState state1;
+        private final IBlockState state2;
 
-        addEntryToAgnosticReagent(IBlockState state1, IBlockState state2) {
+        private AddEntryToAgnosticReagent(IBlockState state1, IBlockState state2) {
             this.state1 = state1;
             this.state2 = state2;
         }
 
-        addEntryToAgnosticReagent(IItemStack state1, IItemStack state2) {
+        private AddEntryToAgnosticReagent(IItemStack state1, IItemStack state2) {
             this.state1 = CheckMethods.convertItemStackToIBlockState(CraftTweakerMC.getItemStack(state1));
             this.state2 = CheckMethods.convertItemStackToIBlockState(CraftTweakerMC.getItemStack(state2));
         }

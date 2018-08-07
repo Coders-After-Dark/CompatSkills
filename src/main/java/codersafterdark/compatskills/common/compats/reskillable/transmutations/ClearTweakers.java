@@ -20,28 +20,28 @@ public class ClearTweakers {
     @ZenMethod
     public static void clearMapOfReagent(IItemStack stack) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new clearMapOfReagent(stack));
+            CompatSkills.LATE_ADDITIONS.add(new ClearMapOfReagent(stack));
         }
     }
 
     @ZenMethod
     public static void clearReagentOfEntries(IItemStack stack) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new clearReagentOfEntries(stack));
+            CompatSkills.LATE_ADDITIONS.add(new ClearReagentOfEntries(stack));
         }
     }
 
     @ZenMethod
     public static void clearReagentMap() {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new clearReagentMap());
+            CompatSkills.LATE_ADDITIONS.add(new ClearReagentMap());
         }
     }
 
-    private static class clearMapOfReagent implements IAction {
-        Item reagent;
+    private static class ClearMapOfReagent implements IAction {
+        private final Item reagent;
 
-        clearMapOfReagent(IItemStack stack) {
+        private ClearMapOfReagent(IItemStack stack) {
             this.reagent = CraftTweakerMC.getItemStack(stack).getItem();
         }
 
@@ -56,10 +56,10 @@ public class ClearTweakers {
         }
     }
 
-    private static class clearReagentOfEntries implements IAction {
-        Item reagent;
+    private static class ClearReagentOfEntries implements IAction {
+        private final Item reagent;
 
-        clearReagentOfEntries(IItemStack stack) {
+        private ClearReagentOfEntries(IItemStack stack) {
             this.reagent = CraftTweakerMC.getItemStack(stack).getItem();
         }
 
@@ -74,8 +74,7 @@ public class ClearTweakers {
         }
     }
 
-    private static class clearReagentMap implements IAction {
-
+    private static class ClearReagentMap implements IAction {
         @Override
         public void apply() {
             TransmutationRegistry.clearReagentMap();

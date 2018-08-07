@@ -24,14 +24,14 @@ public class RemovalTweakers {
     @ZenMethod
     public static void removeStartStateFromReagent(IItemStack reagent, IItemStack startState) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new removeStartStateFromReagent(reagent, startState));
+            CompatSkills.LATE_ADDITIONS.add(new RemoveStartStateFromReagent(reagent, startState));
         }
     }
 
     @ZenMethod
     public static void removeStartStateFromReagent(IItemStack reagent, crafttweaker.api.block.IBlockState state) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new removeStartStateFromReagent(reagent, state));
+            CompatSkills.LATE_ADDITIONS.add(new RemoveStartStateFromReagent(reagent, state));
         }
     }
 
@@ -39,14 +39,14 @@ public class RemovalTweakers {
     @ZenMethod
     public static void removeStartStateReagentAgnostic(IItemStack state) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new removeStartStateReagentAgnostic(state));
+            CompatSkills.LATE_ADDITIONS.add(new RemoveStartStateReagentAgnostic(state));
         }
     }
 
     @ZenMethod
     public static void removeStartStateReagentAgnostic(crafttweaker.api.block.IBlockState state) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new removeStartStateReagentAgnostic(state));
+            CompatSkills.LATE_ADDITIONS.add(new RemoveStartStateReagentAgnostic(state));
         }
     }
 
@@ -54,14 +54,14 @@ public class RemovalTweakers {
     @ZenMethod
     public static void removeEndStateFromReagent(IItemStack reagent, IItemStack state) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new removeEndStateFromReagent(reagent, state));
+            CompatSkills.LATE_ADDITIONS.add(new RemoveEndStateFromReagent(reagent, state));
         }
     }
 
     @ZenMethod
     public static void removeEndStateFromReagent(IItemStack reagent, crafttweaker.api.block.IBlockState state) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new removeEndStateFromReagent(reagent, state));
+            CompatSkills.LATE_ADDITIONS.add(new RemoveEndStateFromReagent(reagent, state));
         }
     }
 
@@ -69,27 +69,27 @@ public class RemovalTweakers {
     @ZenMethod
     public static void removeEndStateReagentAgnostic(IItemStack state) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new removeEndStateReagentAgnostic(state));
+            CompatSkills.LATE_ADDITIONS.add(new RemoveEndStateReagentAgnostic(state));
         }
     }
 
     @ZenMethod
     public static void removeEndStateReagentAgnostic(crafttweaker.api.block.IBlockState state) {
         if (ReskillableCompatHandler.ENABLED) {
-            CompatSkills.LATE_ADDITIONS.add(new removeEndStateReagentAgnostic(state));
+            CompatSkills.LATE_ADDITIONS.add(new RemoveEndStateReagentAgnostic(state));
         }
     }
 
-    private static class removeStartStateFromReagent implements IAction {
-        Item reagent;
-        IBlockState state;
+    private static class RemoveStartStateFromReagent implements IAction {
+        private final Item reagent;
+        private final IBlockState state;
 
-        removeStartStateFromReagent(IItemStack reagent, IItemStack state) {
+        private RemoveStartStateFromReagent(IItemStack reagent, IItemStack state) {
             this.reagent = CraftTweakerMC.getItemStack(reagent).getItem();
             this.state = CheckMethods.convertItemStackToIBlockState(CraftTweakerMC.getItemStack(state));
         }
 
-        removeStartStateFromReagent(IItemStack reagent, crafttweaker.api.block.IBlockState state) {
+        private RemoveStartStateFromReagent(IItemStack reagent, crafttweaker.api.block.IBlockState state) {
             this.reagent = CraftTweakerMC.getItemStack(reagent).getItem();
             this.state = CraftTweakerMC.getBlockState(state);
         }
@@ -105,14 +105,14 @@ public class RemovalTweakers {
         }
     }
 
-    private static class removeStartStateReagentAgnostic implements IAction {
-        IBlockState state;
+    private static class RemoveStartStateReagentAgnostic implements IAction {
+        private final IBlockState state;
 
-        removeStartStateReagentAgnostic(IItemStack state) {
+        private RemoveStartStateReagentAgnostic(IItemStack state) {
             this.state = CheckMethods.convertItemStackToIBlockState(CraftTweakerMC.getItemStack(state));
         }
 
-        removeStartStateReagentAgnostic(crafttweaker.api.block.IBlockState state) {
+        private RemoveStartStateReagentAgnostic(crafttweaker.api.block.IBlockState state) {
             this.state = CraftTweakerMC.getBlockState(state);
         }
 
@@ -127,16 +127,16 @@ public class RemovalTweakers {
         }
     }
 
-    private static class removeEndStateFromReagent implements IAction {
-        Item reagent;
-        IBlockState state;
+    private static class RemoveEndStateFromReagent implements IAction {
+        private final Item reagent;
+        private final IBlockState state;
 
-        removeEndStateFromReagent(IItemStack reagent, IItemStack state) {
+        private RemoveEndStateFromReagent(IItemStack reagent, IItemStack state) {
             this.reagent = CraftTweakerMC.getItemStack(reagent).getItem();
             this.state = CheckMethods.convertItemStackToIBlockState(CraftTweakerMC.getItemStack(state));
         }
 
-        removeEndStateFromReagent(IItemStack reagent, crafttweaker.api.block.IBlockState state) {
+        private RemoveEndStateFromReagent(IItemStack reagent, crafttweaker.api.block.IBlockState state) {
             this.reagent = CraftTweakerMC.getItemStack(reagent).getItem();
             this.state = CraftTweakerMC.getBlockState(state);
         }
@@ -152,14 +152,14 @@ public class RemovalTweakers {
         }
     }
 
-    private static class removeEndStateReagentAgnostic implements IAction {
-        IBlockState state;
+    private static class RemoveEndStateReagentAgnostic implements IAction {
+        private final IBlockState state;
 
-        removeEndStateReagentAgnostic(IItemStack state) {
+        private RemoveEndStateReagentAgnostic(IItemStack state) {
             this.state = CheckMethods.convertItemStackToIBlockState(CraftTweakerMC.getItemStack(state));
         }
 
-        removeEndStateReagentAgnostic(crafttweaker.api.block.IBlockState state) {
+        private RemoveEndStateReagentAgnostic(crafttweaker.api.block.IBlockState state) {
             this.state = CraftTweakerMC.getBlockState(state);
         }
 
