@@ -24,6 +24,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
+import thaumcraft.api.capabilities.IPlayerKnowledge;
+import thaumcraft.api.research.ResearchCategories;
 
 public class CheckMethods {
     public static boolean checkIItemstack(IItemStack stack) {
@@ -41,7 +43,7 @@ public class CheckMethods {
         } else {
             for (String string : strings) {
                 if (string == null || string.isEmpty()) {
-                    CraftTweakerAPI.logError("String: " + string + " was found to be either null or empty!");
+                    CraftTweakerAPI.logError("String was found to be either null or empty!");
                     return false;
                 }
             }
@@ -53,7 +55,7 @@ public class CheckMethods {
         if (strings != null && strings.length > 0) {
             for (String string : strings) {
                 if (string == null || string.isEmpty()) {
-                    CraftTweakerAPI.logError("String: " + string + " was found to be either null or empty!");
+                    CraftTweakerAPI.logError("String was found to be either null or empty!");
                     return false;
                 }
             }
@@ -71,7 +73,7 @@ public class CheckMethods {
 
     public static boolean checkInt(int i) {
         if (i < 0) {
-            CraftTweakerAPI.logError("Integer was found to be lower than 0, this is not allowed!");
+            CraftTweakerAPI.logError("Integer, " + i + ", was found to be lower than 0, this is not allowed!");
             return false;
         }
         return true;
@@ -79,7 +81,7 @@ public class CheckMethods {
 
     public static boolean checkLong(long i) {
         if (i < 0) {
-            CraftTweakerAPI.logError("Long was found to be lower than 0, this is not allowed!");
+            CraftTweakerAPI.logError("Long, " + i + ", was found to be lower than 0, this is not allowed!");
             return false;
         }
         return true;
@@ -87,7 +89,7 @@ public class CheckMethods {
 
     public static boolean checkDouble(double i) {
         if (i < 0) {
-            CraftTweakerAPI.logError("Double was found to be lower than 0, this is not allowed!");
+            CraftTweakerAPI.logError("Double, " + i + ", was found to be lower than 0, this is not allowed!");
             return false;
         }
         return true;
@@ -157,7 +159,7 @@ public class CheckMethods {
             return false;
         }
         if (!message.contains(":")) {
-            CraftTweakerAPI.logError("'String' Param is not a valid resource location!");
+            CraftTweakerAPI.logError("'String' Param, " + message + ", is not a valid resource location!");
             return false;
         }
         return true;
@@ -171,10 +173,39 @@ public class CheckMethods {
             CraftTweakerAPI.logError("String Ritual was Null or Empty!");
             return false;
         } else if (BloodMagic.RITUAL_MANAGER.getRitual(ritual) == null) {
-            CraftTweakerAPI.logError("Invalid Ritual");
+            CraftTweakerAPI.logError("Invalid Ritual: " + ritual);
             return false;
         }
         return true;
+    }
+
+    /////////////////
+    // Thaumcraft  //
+    /////////////////
+    public static boolean checkCategory(String categoryName) {
+        if (categoryName == null || categoryName.isEmpty()) {
+            CraftTweakerAPI.logError("String Category was Null or Empty!");
+            return false;
+        } else if (ResearchCategories.getResearchCategory(categoryName) == null) {
+            CraftTweakerAPI.logError("Invalid category: " + categoryName);
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkKnowledgeType(String knowledgeType) {
+        if (knowledgeType == null || knowledgeType.isEmpty()) {
+            CraftTweakerAPI.logError("String Knowledge Type was Null or Empty!");
+            return false;
+        }
+        IPlayerKnowledge.EnumKnowledgeType[] knowledgeTypes = IPlayerKnowledge.EnumKnowledgeType.values();
+        for (IPlayerKnowledge.EnumKnowledgeType type : knowledgeTypes) {
+            if (knowledgeType.equals(type.getAbbreviation())) {
+                return true;
+            }
+        }
+        CraftTweakerAPI.logError("Invalid Knowledge Type: " + knowledgeType);
+        return false;
     }
 
     /////////////////
@@ -183,7 +214,7 @@ public class CheckMethods {
 
     public static boolean checkIntX(int x) {
         if (x < 0 || x > 4) {
-            CraftTweakerAPI.logError("X-Pos needs to be between 0 and 4");
+            CraftTweakerAPI.logError("X-Pos needs to be between 0 and 4, found: " + x);
             return false;
         }
         return true;
@@ -191,7 +222,7 @@ public class CheckMethods {
 
     public static boolean checkIntY(int y) {
         if (y < 0 || y > 3) {
-            CraftTweakerAPI.logError("Y-Pos needs to be between 0 and 3");
+            CraftTweakerAPI.logError("Y-Pos needs to be between 0 and 3, found: " + y);
             return false;
         }
         return true;
@@ -202,7 +233,7 @@ public class CheckMethods {
             CraftTweakerAPI.logError("String for Parent Skill was found to be null or empty!");
             return false;
         } else if (!ReskillableRegistries.SKILLS.containsKey(new ResourceLocation(parent))) {
-            CraftTweakerAPI.logError("String Resource Location is not a Valid Skill!");
+            CraftTweakerAPI.logError("String Resource Location, " + parent + ", is not a Valid Skill!");
             return false;
         }
         return true;
@@ -213,7 +244,7 @@ public class CheckMethods {
             CraftTweakerAPI.logError("String for Parent Unlockable was found to be null or empty!");
             return false;
         } else if (!ReskillableRegistries.UNLOCKABLES.containsKey(new ResourceLocation(parent))) {
-            CraftTweakerAPI.logError("String Resource Location is not a Valid Unlockable!");
+            CraftTweakerAPI.logError("String Resource Location, " + parent + ", is not a Valid Unlockable!");
             return false;
         }
         return true;

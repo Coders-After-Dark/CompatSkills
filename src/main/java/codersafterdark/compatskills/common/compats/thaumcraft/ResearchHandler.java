@@ -15,13 +15,11 @@ import thaumcraft.api.research.ResearchEvent;
 import java.util.stream.Collectors;
 
 public class ResearchHandler {
-
     @SubscribeEvent
     public void onResearchEvent(ResearchEvent.Research event) {
-        String researchKey = event.getResearchKey();
         EntityPlayer player = event.getPlayer();
         PlayerData data = PlayerDataHandler.get(player);
-        RequirementHolder holder = LevelLockHandler.getLockByKey(new ResearchKey(researchKey));
+        RequirementHolder holder = LevelLockHandler.getLockByKey(new ResearchKey(event.getResearchKey()));
         if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
             event.setCanceled(true);
             TextComponentTranslation error = new TextComponentTranslation("compatskills.thaumcraft.researchError");

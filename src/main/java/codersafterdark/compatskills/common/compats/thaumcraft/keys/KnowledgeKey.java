@@ -1,21 +1,36 @@
 package codersafterdark.compatskills.common.compats.thaumcraft.keys;
 
 import codersafterdark.reskillable.api.data.LockKey;
-import thaumcraft.api.capabilities.IPlayerKnowledge;
-import thaumcraft.api.capabilities.IPlayerKnowledge.EnumKnowledgeType;
 import thaumcraft.api.research.ResearchCategory;
 
-public class KnowledgeKey implements LockKey {
-    private final String categoryName;
-    private final String knowledgeEnumType;
+import java.util.Objects;
 
-    public KnowledgeKey(String categoryName, String knowledgeEnumType) {
-        this.categoryName = categoryName;
-        this.knowledgeEnumType = knowledgeEnumType;
+public class KnowledgeKey implements LockKey {
+    private final ResearchCategory category;
+    private final String knowledgeType;
+
+    public KnowledgeKey(ResearchCategory category, String knowledgeType) {
+        this.category = category;
+        this.knowledgeType = knowledgeType == null ? "" : knowledgeType;
     }
 
-    public KnowledgeKey(EnumKnowledgeType knowledgeType, ResearchCategory category) {
-        this.categoryName = category.key;
-        this.knowledgeEnumType = knowledgeType.getAbbreviation();
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof KnowledgeKey) {
+            KnowledgeKey other = (KnowledgeKey) o;
+            if (category == null) {
+                return other.category == null && knowledgeType.equals(other.knowledgeType);
+            }
+            return category.equals(other.category) && knowledgeType.equals(other.knowledgeType);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(category, knowledgeType);
     }
 }

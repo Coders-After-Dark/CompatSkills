@@ -1,7 +1,32 @@
 # Changelog
 
-## 1.9.3
+## 1.10.0
 - Made the ritual dump command also show the cost and crystal level required for the ritual.
+- Added locking support for Thaumcraft research and knowledge events. Requires Thaumcraft 6.1 Beta 20 or higher.
+  - `mods.compatskills.Thaumcraft.addResearchLock(String researchKey, String... requirements);`
+  - `mods.compatskills.Thaumcraft.addKnowledgeLock(String categoryName, String knowledgeType, String... requirements);`
+  - Current knowledge types are `O` for Observation and `T` for Theory.
+- Added the ability to modify the map for the Transmutation Trait from Reskillable.
+  - Adding:
+    - `mods.compatskills.transmutations.additions.addEntryToReagent(IItemstack reagent, IItemstack state1, IItemstack state2);`
+    - `mods.compatskills.transmutations.additions.addEntryToReagent(IItemstack reagent, IBlockstate state1, IBlockstate state2);`
+    - `mods.compatskills.transmutations.additions.addEntryToReagentAgnostic(IItemstack state1, IItemstack state2);`
+    - `mods.compatskills.transmutations.additions.addEntryToReagentAgnostic(IBlockstate state1, IBlockstate state2);`
+  - Removing by starting reagent:
+    - `mods.compatskills.transmutations.removals.removeStartStateFromReagent(IItemstack reagent, IItemstack state);`
+    - `mods.compatskills.transmutations.removals.removeStartStateFromReagent(IItemstack reagent, IBlockstate state);`
+    - `mods.compatskills.transmutations.removals.removeStartStateReagentAgnostic(IItemstack state);`
+    - `mods.compatskills.transmutations.removals.removeStartStateReagentAgnostic(IBlockstate state);`
+  - Removing by ending reagent:
+    - `mods.compatskills.transmutations.removals.removeEndStateFromReagent(IItemstack reagent, IItemstack state);`
+    - `mods.compatskills.transmutations.removals.removeEndStateFromReagent(IItemstack reagent, IBlockstate state);`
+    - `mods.compatskills.transmutations.removals.removeEndStateReagentAgnostic(IItemstack state);`
+    - `mods.compatskills.transmutations.removals.removeEndStateReagentAgnostic(IBlockstate state);`
+  - Mass removal/clearing:
+    - `mods.compatskills.transmutations.clears.clearMapOfReagent(IItemstack state);`
+    - `mods.compatskills.transmutations.clears.clearReagentOfEntries(IItemstack state);`
+    - `mods.compatskills.transmutations.clears.clearReagentMap();`
+
 
 
 ## 1.9.2

@@ -46,6 +46,10 @@ compatskills.entity.entityDamageError=Your attacks are unable to harm the beast.
 ### Tile-Entities
 compatskills.tileentity.interactError=Even after countless hours you cannot figure out how the device works.
 
+### Thaumcraft
+compatskills.thaumcraft.knowledgeError=No matter how hard you try you are unable to understand:
+compatskills.thaumcraft.researchError=As you get close to finishing your research, you discover it is more complex than you first thought.
+
 ## Misc:
 compatskills.misc.Requirements=Requirements:
 compatskills.misc.Shift=Press Shift to See Requirements

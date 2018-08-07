@@ -6,7 +6,7 @@ public class ResearchKey implements LockKey {
     private final String researchKey;
 
     public ResearchKey(String researchKey) {
-        this.researchKey = researchKey;
+        this.researchKey = researchKey == null ? "" : researchKey;
     }
 
     @Override

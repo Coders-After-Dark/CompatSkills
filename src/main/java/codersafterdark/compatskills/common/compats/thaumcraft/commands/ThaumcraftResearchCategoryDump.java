@@ -15,7 +15,7 @@ import static crafttweaker.mc1120.commands.SpecialMessagesChat.getClickableComma
 import static crafttweaker.mc1120.commands.SpecialMessagesChat.getNormalMessage;
 
 public class ThaumcraftResearchCategoryDump extends CraftTweakerCommand {
-    LinkedHashMap<String, ResearchCategory> categoryMap = ResearchCategories.researchCategories;
+    private LinkedHashMap<String, ResearchCategory> categoryMap = ResearchCategories.researchCategories;
 
     public ThaumcraftResearchCategoryDump() {
         super("TCResearchDump");
@@ -31,9 +31,7 @@ public class ThaumcraftResearchCategoryDump extends CraftTweakerCommand {
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
         CraftTweakerAPI.logCommand("#### ");
         CraftTweakerAPI.logCommand("### " + this.subCommandName);
-        for (String key : categoryMap.keySet()) {
-            CraftTweakerAPI.logCommand("## " + key + " : " + categoryMap.get(key).researchKey);
-        }
+        categoryMap.forEach((key, value) -> CraftTweakerAPI.logCommand("## " + key + " : " + value.researchKey));
         CraftTweakerAPI.logCommand("####");
         sender.sendMessage(SpecialMessagesChat.getLinkToCraftTweakerLog("Entries Generated in Crafttweaker.log", sender));
     }
