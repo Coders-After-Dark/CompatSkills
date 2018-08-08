@@ -80,6 +80,7 @@ dependencies {
     deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.22-13"
     compileOnly "thaumcraft:Thaumcraft:1.12.2:6.1.BETA20"
+    compileOnly "dynamic-sword-skills:1.12.2:DynamicSwordSkills:6.0.1"
     compileOnly "magneticraft:Magneticraft_1.12:2.4.0:dev"
     compileOnly "projecte:ProjectE:1.12:PE1.3.1B"
     deobfCompile "cofh:RedstoneFlux:1.12-2.0.2.3:universal"

@@ -10,6 +10,9 @@ compatskills.misc.requirements.itemRequirementFormat=Item: %s%s
 compatskills.misc.requirements.oreDictRequirementFormat=Ore Dictionary Entry: %s%s
 compatskills.misc.requirements.harvestLevelRequirementFormat=Harvest Level: %s%s
 
+## Dynamic Sword Skills
+compatskills.misc.requirements.dssRequirementFormat=Sword Skill: %s%s %s
+
 
 # Error Messages
 ## Game Stages
@@ -34,6 +37,10 @@ compatskills.projecte.learnError=You manage to break the object down but fail to
 compatskills.projecte.transmutationWarning=WARNING: You are unable to understand this material. However, you will still be able to consume it for EMC.
 compatskills.projecte.condenserWarning=WARNING: You cannot figure out how to replicate this material.
 
+### Thaumcraft
+compatskills.thaumcraft.knowledgeError=No matter how hard you try you are unable to understand:
+compatskills.thaumcraft.researchError=As you get close to finishing your research, you discover it is more complex than you first thought.
+
 ## Minecraft
 ### Dimension
 compatskills.dimension.travelError=A strange power is stopping you from reaching your destination
@@ -45,10 +52,6 @@ compatskills.entity.entityDamageError=Your attacks are unable to harm the beast.
 
 ### Tile-Entities
 compatskills.tileentity.interactError=Even after countless hours you cannot figure out how the device works.
-
-### Thaumcraft
-compatskills.thaumcraft.knowledgeError=No matter how hard you try you are unable to understand:
-compatskills.thaumcraft.researchError=As you get close to finishing your research, you discover it is more complex than you first thought.
 
 ## Misc:
 compatskills.misc.Requirements=Requirements:
