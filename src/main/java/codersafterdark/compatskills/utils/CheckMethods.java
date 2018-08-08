@@ -95,6 +95,14 @@ public class CheckMethods {
         return true;
     }
 
+    public static boolean checkFloat(float i) {
+        if (i < 0) {
+            CraftTweakerAPI.logError("Float, " + i + ", was found to be lower than 0, this is not allowed!");
+            return false;
+        }
+        return true;
+    }
+
     public static boolean checkModLoaded(String modid) {
         if (modid == null || modid.isEmpty()) {
             CraftTweakerAPI.logError("String Mod ID was Null or Empty!");

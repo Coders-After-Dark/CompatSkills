@@ -26,6 +26,9 @@
     - `mods.compatskills.transmutations.clears.clearMapOfReagent(IItemstack state);`
     - `mods.compatskills.transmutations.clears.clearReagentOfEntries(IItemstack state);`
     - `mods.compatskills.transmutations.clears.clearReagentMap();`
+- Added the ability to lock foods based on their hunger and saturation levels
+  - `mods.compatskills.FoodTweaker.addHungerLock(int level, String... requirements);`
+  - `mods.compatskills.FoodTweaker.addSaturationLock(float level, String... requirements);`
 
 
 

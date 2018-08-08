@@ -12,6 +12,8 @@ import codersafterdark.compatskills.common.compats.minecraft.entity.entitymounte
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountKey;
 import codersafterdark.compatskills.common.compats.minecraft.item.*;
 import codersafterdark.compatskills.common.compats.minecraft.item.armor.ArmorLockKey;
+import codersafterdark.compatskills.common.compats.minecraft.item.food.HungerLockKey;
+import codersafterdark.compatskills.common.compats.minecraft.item.food.SaturationLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.BlockHarvestLock;
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.HarvestLevelRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.ToolHarvestLock;
@@ -149,6 +151,10 @@ public class MinecraftCompatHandler extends CompatModuleBase {
             registerItemLock(ArmorLockKey.class);
         } else if (key instanceof AttackDamageLockKey) {
             registerItemLock(AttackDamageLockKey.class);
+        } else if (key instanceof HungerLockKey) {
+            registerItemLock(HungerLockKey.class);
+        } else if (key instanceof SaturationLockKey) {
+            registerItemLock(SaturationLockKey.class);
         } else if (key instanceof TileEntityLockKey) {
             if (!tile) {
                 MinecraftForge.EVENT_BUS.register(new TileEntityEventHandler());
