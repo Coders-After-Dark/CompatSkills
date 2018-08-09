@@ -19,6 +19,9 @@ import net.minecraft.util.text.TextComponentString;
 import org.apache.logging.log4j.Level;
 import stanhebben.zenscript.annotations.*;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import static codersafterdark.compatskills.utils.CompatSkillConstants.MOD_ID;
 
 @ModOnly("gamestages")
@@ -112,19 +115,16 @@ public class GameStageUnlockable extends Unlockable {
                         dummyTrait.unlockableConfig.setCost(cost);
                         updated += " - Updated Cost: " + cost;
                     }
-                    StringBuilder reqBuilder = new StringBuilder();
-                    for (String string : requirements) {
-                        reqBuilder.append(string);
-                    }
+                    String reqs = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
                     RequirementHolder holder = RequirementHolder.fromStringList(requirements);
                     if (!holder.equals(dummyTrait.getRequirements())) {
                         dummyTrait.unlockableConfig.setRequirementHolder(holder);
-                        updated += " - Updated Requirements: " + reqBuilder;
+                        updated += " - Updated Requirements: " + reqs;
                     }
                     if (!updated.isEmpty()) {
                         CraftTweakerAPI.logInfo("Loaded Dummy Trait: " + loc + updated);
                     } else {
-                        CraftTweakerAPI.logInfo("Created or Loaded Dummy Trait: " + loc + " - for GameStage: " + gameStage + " - With Pos: " + x + ", " + y + " -  With Cost: " + cost + " - Requirements: " + reqBuilder);
+                        CraftTweakerAPI.logInfo("Created or Loaded Dummy Trait: " + loc + " - for GameStage: " + gameStage + " - With Pos: " + x + ", " + y + " -  With Cost: " + cost + " - Requirements: " + reqs);
                     }
                 }
             }

@@ -24,6 +24,9 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import stanhebben.zenscript.annotations.*;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 @ZenRegister
 @ZenClass("mods.compatskills.TraitCreator")
 public class CrTTrait extends Trait {
@@ -91,19 +94,16 @@ public class CrTTrait extends Trait {
                     customTrait.unlockableConfig.setCost(cost);
                     updated += " - Updated Cost: " + cost;
                 }
-                StringBuilder reqBuilder = new StringBuilder();
-                for (String string : requirements) {
-                    reqBuilder.append(string);
-                }
+                String reqs = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
                 RequirementHolder holder = RequirementHolder.fromStringList(requirements);
                 if (!holder.equals(customTrait.getRequirements())) {
                     customTrait.unlockableConfig.setRequirementHolder(holder);
-                    updated += " - Updated Requirements: " + reqBuilder;
+                    updated += " - Updated Requirements: " + reqs;
                 }
                 if (!updated.isEmpty()) {
                     CraftTweakerAPI.logInfo("Loaded Trait: " + name + updated);
                 } else {
-                    CraftTweakerAPI.logInfo("Created or Loaded Trait: " + name + " -" + " With Pos: " + x + ", " + y + " - " + " With Cost: " + cost + " - Requirements: " + reqBuilder);
+                    CraftTweakerAPI.logInfo("Created or Loaded Trait: " + name + " -" + " With Pos: " + x + ", " + y + " - " + " With Cost: " + cost + " - Requirements: " + reqs);
                 }
             }
         }
