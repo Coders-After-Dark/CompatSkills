@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.reskillable;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
@@ -11,9 +12,6 @@ import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("crafttweaker")
 @ZenClass("mods.compatskills.Requirement")
@@ -45,8 +43,7 @@ public class RequirementTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(s -> s + ", ").collect(Collectors.joining());
-            return "Setting the requirement of: " + (stack == null ? "null" : stack.getDisplayName()) + " to Requirements: " + descString;
+            return "Setting the requirement of: " + (stack == null ? "null" : stack.getDisplayName()) + " to Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

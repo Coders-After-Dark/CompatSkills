@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks;
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
@@ -11,9 +12,6 @@ import crafttweaker.api.item.IItemStack;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("tconstruct")
 @ZenClass("mods.compatskills.ToolTypeLock")
@@ -44,8 +42,7 @@ public class ToolTypeLockTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Tool-Type Lock for Tool-Type: " + (stack == null ? "null" : stack.getDisplayName()) + " With Requirements: " + descString;
+            return "Added Tool-Type Lock for Tool-Type: " + (stack == null ? "null" : stack.getDisplayName()) + " With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

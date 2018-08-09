@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.reskillable.customcontent;
 import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.unlockable.Trait;
@@ -23,9 +24,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import stanhebben.zenscript.annotations.*;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ZenRegister
 @ZenClass("mods.compatskills.TraitCreator")
@@ -94,7 +92,7 @@ public class CrTTrait extends Trait {
                     customTrait.unlockableConfig.setCost(cost);
                     updated += " - Updated Cost: " + cost;
                 }
-                String reqs = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+                String reqs = Utils.formatRequirements(requirements);
                 RequirementHolder holder = RequirementHolder.fromStringList(requirements);
                 if (!holder.equals(customTrait.getRequirements())) {
                     customTrait.unlockableConfig.setRequirementHolder(holder);

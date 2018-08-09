@@ -3,15 +3,13 @@ package codersafterdark.compatskills.common.compats.minecraft.entity.entitymount
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.entity.IEntityDefinition;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ZenClass("mods.compatskills.EntityMountLock")
 @ZenRegister
@@ -41,8 +39,7 @@ public class EntityMountEventTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Entity Mount Lock for Entity: " + (definition == null ? "null" : definition.getName()) + ", With Requirements: " + descString;
+            return "Added Entity Mount Lock for Entity: " + (definition == null ? "null" : definition.getName()) + ", With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

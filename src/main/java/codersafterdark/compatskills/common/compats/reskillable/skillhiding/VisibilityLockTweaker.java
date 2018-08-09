@@ -4,15 +4,13 @@ import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper.CTSkill;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("crafttweaker")
 @ZenClass("mods.compatskills.VisibilityLock")
@@ -43,8 +41,7 @@ public class VisibilityLockTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Skill " + (skill == null ? "null" : skill.getName()) + " visibility lock. With Requirements: " + descString;
+            return "Added Skill " + (skill == null ? "null" : skill.getName()) + " visibility lock. With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

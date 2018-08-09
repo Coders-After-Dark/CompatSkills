@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.minecraft.item;
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
@@ -12,9 +13,6 @@ import crafttweaker.mc1120.data.NBTConverter;
 import net.minecraft.nbt.NBTTagCompound;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ZenClass("mods.compatskills.OreDictLock")
 @ZenRegister
@@ -51,8 +49,7 @@ public class OreDictionaryTweaker {
 
         @Override
         public String describe() {
-            return "Setting the requirement of Ore Dictionary Entry: " + entry + " to: " +
-                    Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Setting the requirement of Ore Dictionary Entry: " + entry + " to: " + Utils.formatRequirements(requirements);
         }
     }
 
@@ -77,8 +74,7 @@ public class OreDictionaryTweaker {
 
         @Override
         public String describe() {
-            return "Adding NBT lock: " + data + " for Ore Dictionary Entry: " + entry + " with Requirements: " +
-                    Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+            return "Adding NBT lock: " + data + " for Ore Dictionary Entry: " + entry + " with Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

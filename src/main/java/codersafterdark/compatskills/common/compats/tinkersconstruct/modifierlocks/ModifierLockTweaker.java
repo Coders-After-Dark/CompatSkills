@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.tinkersconstruct.modifierloc
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
@@ -11,9 +12,6 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.modifiers.IModifier;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("tconstruct")
 @ZenClass("mods.compatskills.ModifierLock")
@@ -47,8 +45,7 @@ public class ModifierLockTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Modifier Lock for Modifier: " + id + " With Requirements: " + descString;
+            return "Added Modifier Lock for Modifier: " + id + " With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

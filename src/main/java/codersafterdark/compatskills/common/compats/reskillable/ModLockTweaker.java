@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.reskillable;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
@@ -9,9 +10,6 @@ import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("crafttweaker")
 @ZenClass("mods.compatskills.ModLock")
@@ -43,8 +41,7 @@ public class ModLockTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Setting the requirement of Mod: " + modID + " to Requirements: " + descString;
+            return "Setting the requirement of Mod: " + modID + " to Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

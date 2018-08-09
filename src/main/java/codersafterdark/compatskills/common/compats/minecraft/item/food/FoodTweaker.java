@@ -3,14 +3,12 @@ package codersafterdark.compatskills.common.compats.minecraft.item.food;
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ZenClass("mods.compatskills.FoodTweaker")
 @ZenRegister
@@ -47,8 +45,7 @@ public class FoodTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Food Lock for items of saturation level: " + level + ", With Requirements: " + descString;
+            return "Added Food Lock for items of saturation level: " + level + ", With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 
@@ -70,8 +67,7 @@ public class FoodTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Food Lock for items of hunger level: " + level + ", With Requirements: " + descString;
+            return "Added Food Lock for items of hunger level: " + level + ", With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

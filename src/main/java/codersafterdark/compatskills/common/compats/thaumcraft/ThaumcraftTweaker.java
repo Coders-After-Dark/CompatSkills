@@ -4,6 +4,7 @@ import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.thaumcraft.keys.KnowledgeKey;
 import codersafterdark.compatskills.common.compats.thaumcraft.keys.ResearchKey;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
@@ -12,9 +13,6 @@ import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchCategory;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("thaumcraft")
 @ZenClass("mods.compatskills.Thaumcraft")
@@ -52,8 +50,7 @@ public class ThaumcraftTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Research Lock for: " + researchKey + " With Requirements: " + descString;
+            return "Added Research Lock for: " + researchKey + " With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 
@@ -79,8 +76,7 @@ public class ThaumcraftTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Knowledge Lock for category: + " + categoryName + " of knowledge type: " + knowledgeType + " With Requirements: " + descString;
+            return "Added Knowledge Lock for category: + " + categoryName + " of knowledge type: " + knowledgeType + " With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

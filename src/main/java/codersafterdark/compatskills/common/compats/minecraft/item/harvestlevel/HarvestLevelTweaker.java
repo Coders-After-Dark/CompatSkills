@@ -3,14 +3,12 @@ package codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel;
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ZenClass("mods.compatskills.HarvestLock")
 @ZenRegister
@@ -56,9 +54,8 @@ public class HarvestLevelTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
             return "Added Harvest Level Lock for tools " + (type == null ? "" :  "of type: " + type + ' ') +
-                    "with harvest level: " + harvestLevel + ", With Requirements: " + descString;
+                    "with harvest level: " + harvestLevel + ", With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 
@@ -80,8 +77,7 @@ public class HarvestLevelTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Harvest Level Lock for blocks of harvest level: " + harvestLevel + ", With Requirements: " + descString;
+            return "Added Harvest Level Lock for blocks of harvest level: " + harvestLevel + ", With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

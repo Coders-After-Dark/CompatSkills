@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.tinkersconstruct.materialloc
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
@@ -10,9 +11,6 @@ import crafttweaker.annotations.ZenRegister;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("tconstruct")
 @ZenClass("mods.compatskills.MaterialLock")
@@ -43,8 +41,7 @@ public class MaterialLockTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Material Lock for Material: " + id + " With Requirements: " + descString;
+            return "Added Material Lock for Material: " + id + " With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

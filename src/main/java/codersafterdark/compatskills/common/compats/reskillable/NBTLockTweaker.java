@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.reskillable;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.GenericNBTLockKey;
 import codersafterdark.reskillable.api.data.ModLockKey;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -14,9 +15,6 @@ import crafttweaker.mc1120.data.NBTConverter;
 import net.minecraft.nbt.NBTTagCompound;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("crafttweaker")
 @ZenClass("mods.compatskills.NBTLock")
@@ -57,8 +55,7 @@ public class NBTLockTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Adding NBT lock: " + data + " for Mod: " + modID + " to Requirements: " + descString;
+            return "Adding NBT lock: " + data + " for Mod: " + modID + " to Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 
@@ -81,8 +78,7 @@ public class NBTLockTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Adding Generic NBT lock: " + data + " to Requirements: " + descString;
+            return "Adding Generic NBT lock: " + data + " to Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

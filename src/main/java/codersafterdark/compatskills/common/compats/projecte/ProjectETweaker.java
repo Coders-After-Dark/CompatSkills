@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.projecte;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.IAction;
@@ -9,9 +10,6 @@ import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("projecte")
 @ZenClass("mods.compatskills.EMCLock")
@@ -42,8 +40,7 @@ public class ProjectETweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Setting the requirement of items with emc value: " + emc + " or higher to Requirements: " + descString;
+            return "Setting the requirement of items with emc value: " + emc + " or higher to Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

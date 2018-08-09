@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.gamestages.gamestageunlockab
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.unlockable.Unlockable;
@@ -18,9 +19,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentString;
 import org.apache.logging.log4j.Level;
 import stanhebben.zenscript.annotations.*;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import static codersafterdark.compatskills.utils.CompatSkillConstants.MOD_ID;
 
@@ -115,7 +113,7 @@ public class GameStageUnlockable extends Unlockable {
                         dummyTrait.unlockableConfig.setCost(cost);
                         updated += " - Updated Cost: " + cost;
                     }
-                    String reqs = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
+                    String reqs =Utils.formatRequirements(requirements);
                     RequirementHolder holder = RequirementHolder.fromStringList(requirements);
                     if (!holder.equals(dummyTrait.getRequirements())) {
                         dummyTrait.unlockableConfig.setRequirementHolder(holder);

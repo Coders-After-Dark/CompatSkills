@@ -8,15 +8,13 @@ import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys
 import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualCrystalLockKey;
 import codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler.keys.RitualNameLockKey;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("bloodmagic")
 @ZenClass("mods.compatskills.RitualHandler")
@@ -64,8 +62,7 @@ public class RitualHandlerTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Ritual Lock for Ritual: " + ritual + " With Requirements: " + descString;
+            return "Added Ritual Lock for Ritual: " + ritual + " With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 
@@ -87,8 +84,7 @@ public class RitualHandlerTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Ritual Lock for rituals with a costs equal to " + activationCost + " With Requirements: " + descString;
+            return "Added Ritual Lock for rituals with a costs equal to " + activationCost + " With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 
@@ -110,8 +106,7 @@ public class RitualHandlerTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added Ritual Lock for rituals with a crystal requirement of level: " + crystalLevel + " With Requirements: " + descString;
+            return "Added Ritual Lock for rituals with a crystal requirement of level: " + crystalLevel + " With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }

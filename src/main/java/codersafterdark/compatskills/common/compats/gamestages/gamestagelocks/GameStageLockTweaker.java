@@ -3,15 +3,13 @@ package codersafterdark.compatskills.common.compats.gamestages.gamestagelocks;
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import crafttweaker.IAction;
 import crafttweaker.annotations.ModOnly;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @ModOnly("gamestages")
 @ZenClass("mods.compatskills.GameStageLocks")
@@ -42,8 +40,7 @@ public class GameStageLockTweaker {
 
         @Override
         public String describe() {
-            String descString = Arrays.stream(requirements).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added GameStage Lock: " + gameStage + ", With Requirements: " + descString;
+            return "Added GameStage Lock: " + gameStage + ", With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
 }
