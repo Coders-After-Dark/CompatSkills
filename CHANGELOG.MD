@@ -31,6 +31,7 @@
   - `mods.compatskills.FoodTweaker.addSaturationLock(float level, String... requirements);`
 - Added requirement support for Dynamic Sword Skills.
   - Format: `dss|skillName|level` 
+- Fixed a rare/potential crash when requirements are somehow null
 
 
 
