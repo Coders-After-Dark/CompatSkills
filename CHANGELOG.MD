@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.11.0
+- Added two new requirements for basing things to require Thaumcraft research or minimum warp.
+  - Research: `research|researchString`
+  - Warp: `warp|level`
+
+
 ## 1.10.0
 - Made the ritual dump command also show the cost and crystal level required for the ritual.
 - Added locking support for Thaumcraft research and knowledge events. Requires Thaumcraft 6.1 Beta 20 or higher.

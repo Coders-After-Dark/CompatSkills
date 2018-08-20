@@ -13,6 +13,10 @@ compatskills.misc.requirements.harvestLevelRequirementFormat=Harvest Level: %s%s
 ## Dynamic Sword Skills
 compatskills.misc.requirements.dssRequirementFormat=Sword Skill: %s%s %s
 
+## Thaumcraft
+compatskills.misc.requirements.warpRequirement=Warp: %s%s
+compatskills.misc.requirements.researchRequirement=Research: %s%s
+
 
 # Error Messages
 ## Game Stages
