@@ -1,12 +1,12 @@
 package codersafterdark.compatskills.common.compats.magneticraft;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockCommand;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import com.cout970.magneticraft.api.MagneticraftApi;
-import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraftforge.common.MinecraftForge;
 
 import java.util.ArrayList;
@@ -24,12 +24,14 @@ public class MagCompatHandler extends CompatModuleBase {
 
     @Override
     public void loadComplete() {
-        CTChatCommand.registerCommand(new MultiBlockCommand("mag") {
-            @Override
-            public List<String> getMultiBlockNames() {
-                return new ArrayList<>(MagneticraftApi.getMultiblockManager().getRegisteredMultiblocks().keySet());
-            }
-        });
+        if (CompatSkills.craftweakerLoaded) {
+            CompatSkills.registerCommand(new MultiBlockCommand("mag") {
+                @Override
+                public List<String> getMultiBlockNames() {
+                    return new ArrayList<>(MagneticraftApi.getMultiblockManager().getRegisteredMultiblocks().keySet());
+                }
+            });
+        }
     }
 
     public static void addMagLock(MultiBlockGate key, RequirementHolder holder) {

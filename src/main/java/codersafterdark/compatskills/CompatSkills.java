@@ -5,6 +5,7 @@ import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.IAction;
+import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -27,10 +28,13 @@ public class CompatSkills {
 
     public static Logger logger;
 
+    public static boolean craftweakerLoaded;
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         proxy.preInit(event);
+        craftweakerLoaded = Loader.isModLoaded("crafttweaker");
         CompatModuleBase.doModulesPreInit();
         if (event.getSide().isClient()) {
             CompatModuleBase.doModulesPreInitClient();
@@ -53,7 +57,7 @@ public class CompatSkills {
         if (event.getSide().isClient()) {
             CompatModuleBase.doModulesPostInitClient();
         }
-        if (Loader.isModLoaded("crafttweaker")) {
+        if (craftweakerLoaded) {
             LATE_ADDITIONS.forEach(CraftTweakerAPI::apply);
         }
     }
@@ -62,5 +66,12 @@ public class CompatSkills {
     public void serverStart(FMLServerStartingEvent event) {
         proxy.serverStart(event);
         CompatModuleBase.doModulesLoadComplete();
+    }
+
+    //Ugly way of doing it, but it kept crashing when trying to parse the signature
+    public static void registerCommand(Object command) {
+        if (command instanceof crafttweaker.mc1120.commands.CraftTweakerCommand) {
+            CTChatCommand.registerCommand((crafttweaker.mc1120.commands.CraftTweakerCommand) command);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.commands.MaterialDumpCommand;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.commands.ModifierDumpCommand;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.materiallocks.MaterialLockKey;
@@ -8,7 +9,6 @@ import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.reskillable.api.data.LockKey;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
-import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import slimeknights.tconstruct.library.materials.Material;
@@ -26,8 +26,10 @@ public class TinkersCompatHandler extends CompatModuleBase {
 
     @Override
     public void loadComplete() {
-        CTChatCommand.registerCommand(new MaterialDumpCommand());
-        CTChatCommand.registerCommand(new ModifierDumpCommand());
+        if (CompatSkills.craftweakerLoaded) {
+            CompatSkills.registerCommand(new MaterialDumpCommand());
+            CompatSkills.registerCommand(new ModifierDumpCommand());
+        }
     }
 
     public static void addTinkersLock(LockKey key, RequirementHolder holder) {

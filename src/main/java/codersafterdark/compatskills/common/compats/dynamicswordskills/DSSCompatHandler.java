@@ -1,10 +1,10 @@
 package codersafterdark.compatskills.common.compats.dynamicswordskills;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.reskillable.api.ReskillableAPI;
 import codersafterdark.reskillable.api.requirement.RequirementException;
 import codersafterdark.reskillable.api.requirement.RequirementRegistry;
-import crafttweaker.mc1120.commands.CTChatCommand;
 import dynamicswordskills.skills.SkillBase;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -15,7 +15,9 @@ public class DSSCompatHandler extends CompatModuleBase {
     public void preInit() {
         ENABLED = true;
         MinecraftForge.EVENT_BUS.register(new DSSEventHandler());
-        CTChatCommand.registerCommand(new DSSDumpCommand());
+        if (CompatSkills.craftweakerLoaded) {
+            CompatSkills.registerCommand(new DSSDumpCommand());
+        }
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("dss", input -> {
             String[] parts = input.split("\\|");

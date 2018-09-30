@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.thaumcraft;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.thaumcraft.commands.ThaumcraftFullDump;
 import codersafterdark.compatskills.common.compats.thaumcraft.commands.ThaumcraftResearchCategoryDump;
 import codersafterdark.compatskills.common.compats.thaumcraft.commands.ThaumcraftResearchEntryDump;
@@ -15,7 +16,6 @@ import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.requirement.RequirementException;
 import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import codersafterdark.reskillable.base.LevelLockHandler;
-import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraftforge.common.MinecraftForge;
 import thaumcraft.api.research.ResearchCategories;
 import thaumcraft.api.research.ResearchEntry;
@@ -52,9 +52,11 @@ public class ThaumcraftCompatHandler extends CompatModuleBase {
 
     @Override
     public void loadComplete() {
-        CTChatCommand.registerCommand(new ThaumcraftFullDump());
-        CTChatCommand.registerCommand(new ThaumcraftResearchCategoryDump());
-        CTChatCommand.registerCommand(new ThaumcraftResearchEntryDump());
+        if (CompatSkills.craftweakerLoaded) {
+            CompatSkills.registerCommand(new ThaumcraftFullDump());
+            CompatSkills.registerCommand(new ThaumcraftResearchCategoryDump());
+            CompatSkills.registerCommand(new ThaumcraftResearchEntryDump());
+        }
     }
 
     public static void addThaumcraftLock(LockKey key, RequirementHolder holder) {

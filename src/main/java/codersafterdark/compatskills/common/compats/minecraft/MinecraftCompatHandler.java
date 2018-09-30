@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.minecraft;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionlocks.DimensionLockHandler;
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionlocks.DimensionLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirement;
@@ -27,7 +28,6 @@ import codersafterdark.reskillable.api.data.*;
 import codersafterdark.reskillable.api.requirement.RequirementException;
 import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import codersafterdark.reskillable.base.LevelLockHandler;
-import crafttweaker.mc1120.commands.CTChatCommand;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
@@ -136,8 +136,9 @@ public class MinecraftCompatHandler extends CompatModuleBase {
             }
             return new ItemRequirement(key);
         });
-
-        CTChatCommand.registerCommand(new TileEntityCommand());
+        if (CompatSkills.craftweakerLoaded) {
+            CompatSkills.registerCommand(new TileEntityCommand());
+        }
     }
 
     public static void addMCLock(LockKey key, RequirementHolder holder) {
