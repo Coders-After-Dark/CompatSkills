@@ -2,12 +2,13 @@ package codersafterdark.compatskills.common.compats.thaumcraft.requirements;
 
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
+import codersafterdark.reskillable.api.requirement.UncacheableRequirement;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import thaumcraft.api.ThaumcraftApi;
 
-public class WarpRequirement extends Requirement {
+public class WarpRequirement extends Requirement implements UncacheableRequirement {
     private final int warp;
 
     public WarpRequirement(int warp) {

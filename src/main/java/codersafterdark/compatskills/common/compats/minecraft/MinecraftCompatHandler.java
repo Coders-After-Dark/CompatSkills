@@ -51,6 +51,7 @@ public class MinecraftCompatHandler extends CompatModuleBase {
         MinecraftForge.EVENT_BUS.register(new DimensionRequirementHandler());
         MinecraftForge.EVENT_BUS.register(new ItemChangeHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
+        registry.addRequirementHandler("sneaking", input -> new SneakRequirement());
         registry.addRequirementHandler("harvest", input -> {
             try {
                 return new HarvestLevelRequirement(Integer.parseInt(input));

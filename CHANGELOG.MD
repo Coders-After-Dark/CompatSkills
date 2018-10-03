@@ -4,6 +4,10 @@
 - Added two new requirements for basing things to require Thaumcraft research or minimum warp.
   - Research: `research|researchString`
   - Warp: `warp|level`
+- Removed crash when loaded without CraftTweaker. (If the only part you want to use is the new requirements)
+- Added a sneaking requirement that is true if the player is sneaking, false otherwise.
+  - `sneaking`
+
 
 
 ## 1.10.0

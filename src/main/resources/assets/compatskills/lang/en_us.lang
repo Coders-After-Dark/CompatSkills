@@ -5,6 +5,7 @@ compatskills.misc.gamestageFormat=GameStage: %s%s
 ## Minecraft
 compatskills.misc.dimensionFormat=Dimension: %s%s
 compatskills.misc.requirements.itemRequirementFormat=Item: %s%s
+compatskills.misc.sneakFormat=%sSneaking
 
 ## Forge
 compatskills.misc.requirements.oreDictRequirementFormat=Ore Dictionary Entry: %s%s
