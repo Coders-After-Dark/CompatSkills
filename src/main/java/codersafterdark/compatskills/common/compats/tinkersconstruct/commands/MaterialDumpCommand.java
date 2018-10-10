@@ -1,5 +1,7 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct.commands;
 
+import codersafterdark.compatskills.common.compats.tinkersconstruct.materiallocks.MaterialLockKey;
+import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.commands.CraftTweakerCommand;
 import net.minecraft.command.ICommandSender;
@@ -26,9 +28,14 @@ public class MaterialDumpCommand extends CraftTweakerCommand {
 
     @Override
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
+        boolean filterLocked = args.length == 1 && args[0].equalsIgnoreCase("skipLocked");
         CraftTweakerAPI.logCommand("######### Tinker's Construct Material Dump #########");
         Collection<Material> materials = TinkerRegistry.getAllMaterials();
+        int size = 0;
         for (Material material : materials) {
+            if (filterLocked && !LevelLockHandler.getLockByKey(new MaterialLockKey(material)).equals(LevelLockHandler.EMPTY_LOCK)) {
+                continue;
+            }
             CraftTweakerAPI.logCommand("##### " + material.getLocalizedName() + " #####");
             CraftTweakerAPI.logCommand("# Identifier: " + material.getIdentifier());
             CraftTweakerAPI.logCommand("# Localized: " + material.getLocalizedName());
@@ -37,9 +44,10 @@ public class MaterialDumpCommand extends CraftTweakerCommand {
                 CraftTweakerAPI.logCommand("## " + trait.getLocalizedName());
             }
             CraftTweakerAPI.logCommand("#####");
+            size++;
         }
         CraftTweakerAPI.logCommand("#########");
         sender.sendMessage(getNormalMessage("List of Tinker's Materials Generated;"));
-        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + materials.size() + " Entries;", sender));
+        sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + size + " Entries;", sender));
     }
 }

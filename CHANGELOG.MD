@@ -7,7 +7,7 @@
 - Removed crash when loaded without CraftTweaker. (If the only part you want to use is the new requirements)
 - Added a sneaking requirement that is true if the player is sneaking, false otherwise.
   - `sneaking`
-
+- Added an extra parameter `skipLocked` to the Tinkers Material and Modifier dump commands. Simply add `skipLocked` to the command after a space, this will hide all entries that are already locked.
 
 
 ## 1.10.0

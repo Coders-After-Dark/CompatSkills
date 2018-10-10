@@ -1,5 +1,7 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct.commands;
 
+import codersafterdark.compatskills.common.compats.tinkersconstruct.modifierlocks.ModifierLockKey;
+import codersafterdark.reskillable.base.LevelLockHandler;
 import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.commands.CraftTweakerCommand;
 import net.minecraft.command.ICommandSender;
@@ -25,11 +27,15 @@ public class ModifierDumpCommand extends CraftTweakerCommand {
 
     @Override
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
+        boolean filterLocked = args.length == 1 && args[0].equalsIgnoreCase("skipLocked");
         CraftTweakerAPI.logCommand("##### Tinker's Construct Modifier Dump #####");
         Collection<IModifier> modifiers = TinkerRegistry.getAllModifiers();
         int size = 0;
         for (IModifier modifier : modifiers) {
             if (!modifier.isHidden()) {
+                if (filterLocked && !LevelLockHandler.getLockByKey(new ModifierLockKey(modifier)).equals(LevelLockHandler.EMPTY_LOCK)) {
+                    continue;
+                }
                 CraftTweakerAPI.logCommand("## " + modifier.getLocalizedName());
                 CraftTweakerAPI.logCommand("#  Identifier: " + modifier.getIdentifier());
                 CraftTweakerAPI.logCommand("#  Localized:  " + modifier.getLocalizedName());
