@@ -34,7 +34,7 @@ public class TileEntityEventHandler {
             return;
         }
         EntityPlayer player = event.getEntityPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         TileEntity entity = event.getWorld().getTileEntity(event.getPos());

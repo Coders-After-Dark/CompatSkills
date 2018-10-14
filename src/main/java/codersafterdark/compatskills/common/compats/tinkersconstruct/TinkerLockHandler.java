@@ -24,7 +24,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event) {
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);
@@ -38,7 +38,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onCraftingMaterial(TinkerCraftingEvent.ToolPartCraftingEvent event) {
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);
@@ -52,7 +52,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onPartReplaced(TinkerCraftingEvent.ToolPartReplaceEvent event) {
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);
@@ -65,7 +65,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onToolCrafted(TinkerCraftingEvent.ToolCraftingEvent event) {
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player != null && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player != null && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);

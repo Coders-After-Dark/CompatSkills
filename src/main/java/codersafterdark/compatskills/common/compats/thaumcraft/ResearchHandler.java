@@ -19,7 +19,7 @@ public class ResearchHandler {
     @SubscribeEvent
     public void onResearchEvent(ResearchEvent.Research event) {
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);

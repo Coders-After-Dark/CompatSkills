@@ -21,7 +21,7 @@ public class EntityDamageEventHandler {
             return;
         }
         EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);

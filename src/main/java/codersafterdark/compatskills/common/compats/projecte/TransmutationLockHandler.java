@@ -26,7 +26,7 @@ public class TransmutationLockHandler {
     public void onAttemptCondenserSet(PlayerAttemptCondenserSetEvent event) {
         if (!event.isCanceled()) {
             EntityPlayer player = event.getPlayer();
-            if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
                 return;
             }
             PlayerData data = PlayerDataHandler.get(player);
@@ -46,7 +46,7 @@ public class TransmutationLockHandler {
     public void onAttemptLearnEvent(PlayerAttemptLearnEvent event) {
         if (!event.isCanceled()) {
             EntityPlayer player = event.getPlayer();
-            if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
                 return;
             }
             PlayerData data = PlayerDataHandler.get(player);

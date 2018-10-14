@@ -19,7 +19,7 @@ public class BindHandler {
     @SubscribeEvent
     public void bindEvent(ItemBindEvent event) {
         EntityPlayer player = event.getNewOwner();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         ItemStack stack = event.getBindingStack();

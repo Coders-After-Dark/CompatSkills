@@ -18,7 +18,7 @@ public class GameStageLockHandler {
     @SubscribeEvent
     public void gameStageAdded(GameStageEvent.Add event) {
         EntityPlayer player = event.getEntityPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);

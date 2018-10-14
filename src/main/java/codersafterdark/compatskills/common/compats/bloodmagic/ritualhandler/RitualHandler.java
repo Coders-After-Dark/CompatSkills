@@ -19,7 +19,7 @@ public class RitualHandler {
     @SubscribeEvent
     public void ritualEvent(RitualActivatedEvent event) {
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);

@@ -20,7 +20,7 @@ public class IEMultiBlockHandler {
     @SubscribeEvent
     public void multiBlockForm(MultiblockFormEvent event) {
         EntityPlayer player = event.getEntityPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         IMultiblock multiblock = event.getMultiblock();

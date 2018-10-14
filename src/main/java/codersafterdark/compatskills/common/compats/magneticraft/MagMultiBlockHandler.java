@@ -21,7 +21,7 @@ public class MagMultiBlockHandler {
             return;
         }
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         IMultiblock multiblock = event.getMultiblock();

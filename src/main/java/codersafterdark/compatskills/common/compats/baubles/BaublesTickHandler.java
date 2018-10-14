@@ -14,17 +14,18 @@ public class BaublesTickHandler {
     @SubscribeEvent
     public void tickHandler(PlayerTickEvent event) {
         EntityPlayer player = event.player;
-        if (ConfigHandler.enforceOnCreative || !player.isCreative() && !LevelLockHandler.isFake(player)) {
-            IBaublesItemHandler baublesHandler = BaublesApi.getBaublesHandler(player);
-            for (int i = 0; i < baublesHandler.getSlots(); i++) {
-                ItemStack stack = baublesHandler.getStackInSlot(i);
-                if (!LevelLockHandler.canPlayerUseItem(player, stack)) {
-                    if (!player.inventory.addItemStackToInventory(stack)) {
-                        player.dropItem(stack, false);
-                    }
-                    baublesHandler.setStackInSlot(i, ItemStack.EMPTY);
-                    LevelLockHandler.tellPlayer(player, stack, MessageLockedItem.MSG_ARMOR_EQUIP_LOCKED);
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+            return;
+        }
+        IBaublesItemHandler baublesHandler = BaublesApi.getBaublesHandler(player);
+        for (int i = 0; i < baublesHandler.getSlots(); i++) {
+            ItemStack stack = baublesHandler.getStackInSlot(i);
+            if (!LevelLockHandler.canPlayerUseItem(player, stack)) {
+                if (!player.inventory.addItemStackToInventory(stack)) {
+                    player.dropItem(stack, false);
                 }
+                baublesHandler.setStackInSlot(i, ItemStack.EMPTY);
+                LevelLockHandler.tellPlayer(player, stack, MessageLockedItem.MSG_ARMOR_EQUIP_LOCKED);
             }
         }
     }

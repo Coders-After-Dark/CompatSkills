@@ -19,7 +19,7 @@ public class SkillLockHandler {
     @SubscribeEvent
     public void levelUpEvent(LevelUpEvent.Pre event) {
         EntityPlayer player = event.getEntityPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
         int level = event.getLevel();
