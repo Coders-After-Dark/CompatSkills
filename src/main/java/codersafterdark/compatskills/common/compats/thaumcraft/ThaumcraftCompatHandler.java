@@ -17,8 +17,6 @@ import codersafterdark.reskillable.api.requirement.RequirementException;
 import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraftforge.common.MinecraftForge;
-import thaumcraft.api.research.ResearchCategories;
-import thaumcraft.api.research.ResearchEntry;
 
 public class ThaumcraftCompatHandler extends CompatModuleBase {
     public static boolean ENABLED;
@@ -42,9 +40,8 @@ public class ThaumcraftCompatHandler extends CompatModuleBase {
             }
         });
         registry.addRequirementHandler("research", input -> {
-            ResearchEntry research = ResearchCategories.getResearch(input);
-            if (research == null) {
-                throw new RequirementException("Invalid research string '" + input + "'.");
+            if (input == null) {
+                throw new RequirementException("No research key given.");
             }
             return new ResearchRequirement(input);
         });
