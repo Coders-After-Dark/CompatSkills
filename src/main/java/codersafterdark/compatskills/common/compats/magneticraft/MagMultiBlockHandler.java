@@ -5,6 +5,7 @@ import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import com.cout970.magneticraft.api.multiblock.IMultiblock;
 import com.cout970.magneticraft.api.multiblock.MultiBlockEvent;
@@ -19,8 +20,11 @@ public class MagMultiBlockHandler {
         if (!event.getIntegrityErrors().isEmpty()) {//Already has issues
             return;
         }
-        IMultiblock multiblock = event.getMultiblock();
         EntityPlayer player = event.getPlayer();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
+        IMultiblock multiblock = event.getMultiblock();
         PlayerData data = PlayerDataHandler.get(player);
         MultiBlockGate gate = new MagMultiBlockGate(multiblock.getMultiblockName());
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(gate);

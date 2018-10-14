@@ -5,6 +5,7 @@ import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -17,8 +18,11 @@ import java.util.stream.Collectors;
 public class BindHandler {
     @SubscribeEvent
     public void bindEvent(ItemBindEvent event) {
-        ItemStack stack = event.getBindingStack();
         EntityPlayer player = event.getNewOwner();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
+        ItemStack stack = event.getBindingStack();
         PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder requirementHolder = LevelLockHandler.getSkillLock(stack);
         if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {

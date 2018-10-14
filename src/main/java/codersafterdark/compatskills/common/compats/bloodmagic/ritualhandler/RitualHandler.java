@@ -6,6 +6,7 @@ import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
@@ -18,6 +19,9 @@ public class RitualHandler {
     @SubscribeEvent
     public void ritualEvent(RitualActivatedEvent event) {
         EntityPlayer player = event.getPlayer();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
         PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder requirementHolder = LevelLockHandler.getLocks(Ritual.class, event.getRitual());
         if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {

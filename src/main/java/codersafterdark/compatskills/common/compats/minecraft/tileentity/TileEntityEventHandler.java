@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.minecraft.tileentity;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -32,11 +33,14 @@ public class TileEntityEventHandler {
         if (event.isCanceled()) {
             return;
         }
+        EntityPlayer player = event.getEntityPlayer();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
         TileEntity entity = event.getWorld().getTileEntity(event.getPos());
         if (entity != null) {
             ResourceLocation location = TileEntity.getKey(entity.getClass());
             if (location != null) {
-                EntityPlayer player = event.getEntityPlayer();
                 PlayerData data = PlayerDataHandler.get(player);
                 RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new TileEntityLockKey(location.toString()));
                 if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {

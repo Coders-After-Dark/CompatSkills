@@ -8,6 +8,8 @@
 - Added a sneaking requirement that is true if the player is sneaking, false otherwise.
   - `sneaking`
 - Added an extra parameter `skipLocked` to the Tinkers Material and Modifier dump commands. Simply add `skipLocked` to the command after a space, this will hide all entries that are already locked.
+- Obey the enforce locks on creative config option in Reskillable.
+
 
 
 ## 1.10.0

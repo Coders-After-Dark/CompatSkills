@@ -4,6 +4,7 @@ import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import codersafterdark.reskillable.base.ToolTipHandler;
 import moze_intel.projecte.api.ProjectEAPI;
@@ -25,6 +26,9 @@ public class TransmutationLockHandler {
     public void onAttemptCondenserSet(PlayerAttemptCondenserSetEvent event) {
         if (!event.isCanceled()) {
             EntityPlayer player = event.getPlayer();
+            if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+                return;
+            }
             PlayerData data = PlayerDataHandler.get(player);
             RequirementHolder holder = itemRequirements(event.getStack());
             if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
@@ -42,6 +46,9 @@ public class TransmutationLockHandler {
     public void onAttemptLearnEvent(PlayerAttemptLearnEvent event) {
         if (!event.isCanceled()) {
             EntityPlayer player = event.getPlayer();
+            if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+                return;
+            }
             PlayerData data = PlayerDataHandler.get(player);
             RequirementHolder holder = itemRequirements(event.getStack());
             if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {

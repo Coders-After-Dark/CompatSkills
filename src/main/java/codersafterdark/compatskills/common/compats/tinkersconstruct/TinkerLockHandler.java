@@ -4,7 +4,9 @@ import codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks.To
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -21,7 +23,11 @@ import java.util.stream.Collectors;
 public class TinkerLockHandler {
     @SubscribeEvent
     public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event) {
-        PlayerData data = PlayerDataHandler.get(event.getPlayer());
+        EntityPlayer player = event.getPlayer();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
+        PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder holder = LevelLockHandler.getLocks(IToolMod.class, event.getModifiers().toArray(new IToolMod[0]));
         String canceledMessage = getCanceledMessage(data, holder, new TextComponentTranslation("compatskills.tconstruct.modifierError").getUnformattedComponentText());
         if (canceledMessage != null) {
@@ -31,7 +37,11 @@ public class TinkerLockHandler {
 
     @SubscribeEvent
     public void onCraftingMaterial(TinkerCraftingEvent.ToolPartCraftingEvent event) {
-        PlayerData data = PlayerDataHandler.get(event.getPlayer());
+        EntityPlayer player = event.getPlayer();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
+        PlayerData data = PlayerDataHandler.get(player);
         List<RequirementHolder> holders = getMaterialRequirements(Collections.singletonList(event.getItemStack()));
         String canceledMessage = getCanceledMessage(data, holders, new TextComponentTranslation("compatskills.tconstruct.materialError").getUnformattedComponentText());
         if (canceledMessage != null) {
@@ -41,7 +51,11 @@ public class TinkerLockHandler {
 
     @SubscribeEvent
     public void onPartReplaced(TinkerCraftingEvent.ToolPartReplaceEvent event) {
-        PlayerData data = PlayerDataHandler.get(event.getPlayer());
+        EntityPlayer player = event.getPlayer();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
+        PlayerData data = PlayerDataHandler.get(player);
         String canceledMessage = getCanceledMessage(data, getMaterialRequirements(event.getToolParts()), new TextComponentTranslation("compatskills.tconstruct.materialError").getUnformattedComponentText());
         if (canceledMessage != null) {
             event.setCanceled(canceledMessage);
@@ -50,7 +64,11 @@ public class TinkerLockHandler {
 
     @SubscribeEvent
     public void onToolCrafted(TinkerCraftingEvent.ToolCraftingEvent event) {
-        PlayerData data = PlayerDataHandler.get(event.getPlayer());
+        EntityPlayer player = event.getPlayer();
+        if (!ConfigHandler.enforceOnCreative && player != null && player.isCreative()) {
+            return;
+        }
+        PlayerData data = PlayerDataHandler.get(player);
         if (data == null) {
             event.setCanceled(true);//Support for canceling if old tinkers so that they cant create dupes
             return;

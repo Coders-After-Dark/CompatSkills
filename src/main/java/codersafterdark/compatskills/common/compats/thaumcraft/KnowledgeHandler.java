@@ -5,6 +5,7 @@ import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
@@ -19,6 +20,9 @@ public class KnowledgeHandler {
     @SubscribeEvent
     public void onKnowledgeEvent(ResearchEvent.Knowledge event) {
         EntityPlayer player = event.getPlayer();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
         PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder holder = LevelLockHandler.getLockByKey(new KnowledgeKey(event.getCategory(), event.getType().getAbbreviation()));
         if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {

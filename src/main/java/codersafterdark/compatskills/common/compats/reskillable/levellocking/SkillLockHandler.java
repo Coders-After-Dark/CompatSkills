@@ -5,6 +5,7 @@ import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.event.LevelUpEvent;
 import codersafterdark.reskillable.api.skill.Skill;
+import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
@@ -17,6 +18,10 @@ import java.util.stream.Collectors;
 public class SkillLockHandler {
     @SubscribeEvent
     public void levelUpEvent(LevelUpEvent.Pre event) {
+        EntityPlayer player = event.getEntityPlayer();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
         int level = event.getLevel();
         int oldLevel = event.getOldLevel();
         if (level < oldLevel || level > oldLevel + 1) {
@@ -24,7 +29,6 @@ public class SkillLockHandler {
             //If their level changed by more than one it was by command and is ignoring locks
             return;
         }
-        EntityPlayer player = event.getEntityPlayer();
         PlayerData data = PlayerDataHandler.get(player);
         Skill skill = event.getSkill();
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new SkillLock(skill, level));

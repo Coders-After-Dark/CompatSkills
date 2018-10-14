@@ -8,6 +8,7 @@ import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
@@ -18,8 +19,11 @@ import java.util.stream.Collectors;
 public class IEMultiBlockHandler {
     @SubscribeEvent
     public void multiBlockForm(MultiblockFormEvent event) {
-        IMultiblock multiblock = event.getMultiblock();
         EntityPlayer player = event.getEntityPlayer();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
+        IMultiblock multiblock = event.getMultiblock();
         PlayerData data = PlayerDataHandler.get(player);
         MultiBlockGate gate = new IEMultiBlockGate(multiblock.getUniqueName());
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(gate);

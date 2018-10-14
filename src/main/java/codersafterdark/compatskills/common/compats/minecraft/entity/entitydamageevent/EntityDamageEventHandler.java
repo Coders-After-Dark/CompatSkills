@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.minecraft.entity.entitydamag
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
@@ -20,6 +21,9 @@ public class EntityDamageEventHandler {
             return;
         }
         EntityPlayer player = (EntityPlayer) event.getSource().getTrueSource();
+        if (!ConfigHandler.enforceOnCreative && player.isCreative()) {
+            return;
+        }
         PlayerData data = PlayerDataHandler.get(player);
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new EntityDamageKey(event.getEntity()));
         if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
