@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.0
+- Fixed Commands not being able to be run if player is not OP
+- Added compat for BetterQuesting and using Requirements as tasks
+
+
+
 ## 1.11.0
 - Added two new requirements for basing things to require Thaumcraft research or minimum warp.
   - Research: `research|researchString`

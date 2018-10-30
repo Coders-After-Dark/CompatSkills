@@ -83,6 +83,7 @@ dependencies {
     compileOnly "dynamic-sword-skills:1.12.2:DynamicSwordSkills:6.0.1"
     compileOnly "magneticraft:Magneticraft_1.12:2.4.0:dev"
     compileOnly "projecte:ProjectE:1.12:PE1.3.1B"
+    compileOnly "better-questing:BetterQuesting:3.5.273"
     deobfCompile "cofh:RedstoneFlux:1.12-2.0.2.3:universal"
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tinkers_version}"
     deobfCompile "slimeknights.mantle:Mantle:${mantle_minecraft_version}-${mantle_version}"

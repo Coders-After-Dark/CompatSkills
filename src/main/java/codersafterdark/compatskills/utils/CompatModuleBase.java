@@ -2,6 +2,7 @@ package codersafterdark.compatskills.utils;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.baubles.BaublesCompatHandler;
+import codersafterdark.compatskills.common.compats.betterquesting.BetterQuestingHandler;
 import codersafterdark.compatskills.common.compats.bloodmagic.BMCompatHandler;
 import codersafterdark.compatskills.common.compats.dynamicswordskills.DSSCompatHandler;
 import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
@@ -29,6 +30,7 @@ public abstract class CompatModuleBase {
 
     static {
         moduleClasses.put("baubles", BaublesCompatHandler.class);
+        moduleClasses.put("betterquesting", BetterQuestingHandler.class);
         moduleClasses.put("bloodmagic", BMCompatHandler.class);
         moduleClasses.put("dynamicswordskills", DSSCompatHandler.class);
         moduleClasses.put("gamestages", GameStageCompatHandler.class);
