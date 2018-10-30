@@ -44,8 +44,7 @@ public class SkillChangeHandler {
         String[] commands = skillChangeMap.get(change);
         if (commands != null) {
             for (String command : commands) {
-                //TODO: Is player the correct command sender and way to replace @p or does it need to be done manually
-                commandManager.executeCommand(player, command);
+                commandManager.executeCommand(player.getServer(), command);
             }
         }
     }
