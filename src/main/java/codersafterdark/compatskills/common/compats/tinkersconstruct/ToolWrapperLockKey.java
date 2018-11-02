@@ -34,7 +34,7 @@ public class ToolWrapperLockKey implements ParentLockKey {
             holders.add(toolHolder);
         }
         NBTTagList list = TagUtil.getBaseMaterialsTagList(stack);
-        if (list.hasNoTags()) {
+        if (list.isEmpty()) {
             return toolHolder;
         }
         TinkerUtil.getMaterialsFromTagList(list).stream().map(material -> LevelLockHandler.getLocks(Material.class, material)).forEach(holders::add);

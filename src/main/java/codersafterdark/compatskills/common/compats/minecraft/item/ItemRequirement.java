@@ -56,7 +56,7 @@ public class ItemRequirement extends Requirement {
                         }
                     } else if (other.key instanceof ModLockKey) {
                         ResourceLocation registryName = ((ItemInfo) key).getItem().getRegistryName();
-                        if (registryName != null && registryName.getResourceDomain().equals(((ModLockKey) other.key).getModName()) && key.fuzzyEquals(other.key)) {
+                        if (registryName != null && registryName.getNamespace().equals(((ModLockKey) other.key).getModName()) && key.fuzzyEquals(other.key)) {
                             //Does not need to check for LESS_THAN because we are at an item level lock compared to a mod level one
                             return RequirementComparision.GREATER_THAN;
                         }
@@ -66,7 +66,7 @@ public class ItemRequirement extends Requirement {
                 } else if (key instanceof ModLockKey) {
                     if (other.key instanceof ItemInfo) {
                         ResourceLocation registryName = ((ItemInfo) other.key).getItem().getRegistryName();
-                        if (registryName != null && ((ModLockKey) key).getModName().equals(registryName.getResourceDomain()) && key.fuzzyEquals(other.key)) {
+                        if (registryName != null && ((ModLockKey) key).getModName().equals(registryName.getNamespace()) && key.fuzzyEquals(other.key)) {
                             //Does not need to check for GREATER_THAN because we are at a mod level lock compared to an item one
                             return RequirementComparision.LESS_THAN;
                         }
