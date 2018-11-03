@@ -2,7 +2,12 @@
 
 ## 1.12.0
 - Fixed Commands not being able to be run if player is not OP
-- Added compat for BetterQuesting and using Requirements as tasks
+- Added Compat for BetterQuesting and using Requirements as tasks
+- Added Scavenge support that supports all Reskillable Requirements
+  - Example:
+    - "type": "reskillable_requirement"
+    - "requirement": "reskillable:attack|10"
+  - Supports any other reskillable requirement also.
 
 
 
