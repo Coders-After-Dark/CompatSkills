@@ -8,6 +8,11 @@
     - "type": "reskillable_requirement"
     - "requirement": "reskillable:attack|10"
   - Supports any other reskillable requirement also.
+- Added two new requirements based on player health.
+  - Percent health: `health|double`
+    - Has to have at least `x` percent hp.
+  - Number of hearts: `hearts|int`
+    - Has to have at least x half hearts. Uses half hearts because this is the way Minecraft counts health.
 
 
 

@@ -11,6 +11,9 @@ import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamage
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageKey;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountKey;
+import codersafterdark.compatskills.common.compats.minecraft.heatlh.HealthChangeHandler;
+import codersafterdark.compatskills.common.compats.minecraft.heatlh.HealthRequirement;
+import codersafterdark.compatskills.common.compats.minecraft.heatlh.HeartRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.*;
 import codersafterdark.compatskills.common.compats.minecraft.item.armor.ArmorLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.item.food.HungerLockKey;
@@ -50,8 +53,23 @@ public class MinecraftCompatHandler extends CompatModuleBase {
         ENABLED = true;
         MinecraftForge.EVENT_BUS.register(new DimensionRequirementHandler());
         MinecraftForge.EVENT_BUS.register(new ItemChangeHandler());
+        MinecraftForge.EVENT_BUS.register(new HealthChangeHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("sneaking", input -> new SneakRequirement());
+        registry.addRequirementHandler("hearts", input -> {
+            try {
+                return new HeartRequirement(Integer.parseInt(input));
+            } catch (NumberFormatException e) {
+                throw new RequirementException("Invalid number of hearts '" + input + "'.");
+            }
+        });
+        registry.addRequirementHandler("health", input -> {
+            try {
+                return new HealthRequirement(Double.parseDouble(input));
+            } catch (NumberFormatException e) {
+                throw new RequirementException("Invalid health percentage '" + input + "'.");
+            }
+        });
         registry.addRequirementHandler("harvest", input -> {
             try {
                 return new HarvestLevelRequirement(Integer.parseInt(input));
