@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.13.0
+- Updated BetterQuesting integration so that it works with newer versions
+
+
+
 ## 1.12.0
 - Fixed Commands not being able to be run if player is not OP
 - Added Compat for BetterQuesting and using Requirements as tasks

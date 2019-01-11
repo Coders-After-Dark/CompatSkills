@@ -1,14 +1,11 @@
 package codersafterdark.compatskills.common.compats.betterquesting;
 
-import betterquesting.api.api.ApiReference;
 import betterquesting.api.api.QuestingAPI;
-import betterquesting.api.client.gui.misc.IGuiEmbedded;
-import betterquesting.api.enums.EnumSaveType;
 import betterquesting.api.jdoc.IJsonDoc;
-import betterquesting.api.properties.NativeProps;
 import betterquesting.api.questing.IQuest;
 import betterquesting.api.questing.tasks.ITask;
-import betterquesting.api.questing.tasks.ITickableTask;
+import betterquesting.api2.client.gui.misc.IGuiRect;
+import betterquesting.api2.client.gui.panels.IGuiPanel;
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.reskillable.api.ReskillableAPI;
 import codersafterdark.reskillable.api.data.PlayerData;
@@ -24,6 +21,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Level;
 
 import javax.annotation.Nullable;
@@ -31,8 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class TaskRequirement implements ITask, ITickableTask {
-    private List<UUID> completeUsers = new ArrayList<>();
+public class TaskRequirement implements ITask {
+    private final List<UUID> completeUsers = new ArrayList<>();
     private List<String> requirements = new ArrayList<>();
     private RequirementHolder holder;
     private boolean hasUncacheable;
@@ -108,23 +107,20 @@ public class TaskRequirement implements ITask, ITickableTask {
     }
 
     @Override
-    public IGuiEmbedded getTaskGui(int posX, int posY, int sizeX, int sizeY, IQuest quest) {
-        return new GuiTaskRequirement(this, posX, posY, sizeX, sizeY);
+    @SideOnly(Side.CLIENT)
+    public IGuiPanel getTaskGui(IGuiRect rect, IQuest quest) {
+        return new PanelTaskRequirement(rect, quest, this);
     }
 
     @Nullable
     @Override
     public GuiScreen getTaskEditor(GuiScreen parent, IQuest quest) {
+        //TODO
         return null;
     }
 
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound json, EnumSaveType saveType) {
-        if (saveType == EnumSaveType.PROGRESS) {
-            return this.writeProgressToJson(json);
-        } else if (saveType != EnumSaveType.CONFIG) {
-            return json;
-        }
+    public NBTTagCompound writeToNBT(NBTTagCompound json) {
         NBTTagList reqs = new NBTTagList();
         for (String req : requirements) {
             reqs.appendTag(new NBTTagString(req));
@@ -134,23 +130,20 @@ public class TaskRequirement implements ITask, ITickableTask {
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound json, EnumSaveType saveType) {
-        if (saveType == EnumSaveType.PROGRESS) {
-            this.readProgressFromJson(json);
-            return;
-        } else if (saveType != EnumSaveType.CONFIG) {
-            return;
-        }
+    public void readFromNBT(NBTTagCompound json) {
+        requirements.clear();
         NBTTagList reqs = json.getTagList("requirements", Constants.NBT.TAG_STRING);
         for (NBTBase req : reqs) {
             if (req instanceof NBTTagString) {
                 requirements.add(((NBTTagString) req).getString());
             }
         }
+        //TODO should this set holder as null to ensure it rechecks about cacheable requirements?
         setHolder();
     }
 
-    private NBTTagCompound writeProgressToJson(NBTTagCompound json) {
+    @Override
+    public NBTTagCompound writeProgressToNBT(NBTTagCompound json, List<UUID> users) {
         NBTTagList jArray = new NBTTagList();
         for (UUID uuid : completeUsers) {
             jArray.appendTag(new NBTTagString(uuid.toString()));
@@ -159,31 +152,25 @@ public class TaskRequirement implements ITask, ITickableTask {
         return json;
     }
 
-    private void readProgressFromJson(NBTTagCompound json) {
-        completeUsers = new ArrayList<>();
+    @Override
+    public void readProgressFromNBT(NBTTagCompound json, boolean merge) {
+        completeUsers.clear();
         NBTTagList cList = json.getTagList("completeUsers", 8);
         for (int i = 0; i < cList.tagCount(); i++) {
-            NBTBase entry = cList.get(i);
-            if (entry.getId() == 8) {
-                try {
-                    completeUsers.add(UUID.fromString(((NBTTagString) entry).getString()));
-                } catch (Exception e) {
-                    CompatSkills.logger.log(Level.ERROR, "Unable to load UUID for task", e);
-                }
+            try {
+                completeUsers.add(UUID.fromString(cList.getStringTagAt(i)));
+            } catch (Exception e) {
+                CompatSkills.logger.log(Level.ERROR, "Unable to load UUID for task", e);
             }
-        }
-    }
-
-    @Override
-    public void updateTask(EntityPlayer player, IQuest quest) {
-        //Recheck every 5 seconds if the requirement is not cacheable
-        if (hasUncacheable && player.ticksExisted % 100 == 0 && !QuestingAPI.getAPI(ApiReference.SETTINGS).getProperty(NativeProps.EDIT_MODE)) {
-            detect(player, quest);
         }
     }
 
     public RequirementHolder getRequirementHolder() {
         setHolder();
         return holder;
+    }
+
+    public boolean hasUncacheable() {
+        return hasUncacheable;
     }
 }

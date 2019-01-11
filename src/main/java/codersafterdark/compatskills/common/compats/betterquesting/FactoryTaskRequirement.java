@@ -1,6 +1,5 @@
 package codersafterdark.compatskills.common.compats.betterquesting;
 
-import betterquesting.api.enums.EnumSaveType;
 import betterquesting.api.misc.IFactory;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,7 +21,7 @@ public class FactoryTaskRequirement implements IFactory<TaskRequirement> {
     @Override
     public TaskRequirement loadFromNBT(NBTTagCompound json) {
         TaskRequirement task = createNew();
-        task.readFromNBT(json, EnumSaveType.CONFIG);
+        task.readFromNBT(json);
         return task;
     }
 }
