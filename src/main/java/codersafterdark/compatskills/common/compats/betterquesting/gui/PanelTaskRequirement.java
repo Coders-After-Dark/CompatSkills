@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.betterquesting;
+package codersafterdark.compatskills.common.compats.betterquesting.gui;
 
 import betterquesting.api.questing.IQuest;
 import betterquesting.api2.client.gui.misc.GuiAlign;
@@ -7,6 +7,7 @@ import betterquesting.api2.client.gui.misc.GuiTransform;
 import betterquesting.api2.client.gui.misc.IGuiRect;
 import betterquesting.api2.client.gui.panels.CanvasEmpty;
 import betterquesting.api2.client.gui.panels.content.PanelTextBox;
+import codersafterdark.compatskills.common.compats.betterquesting.TaskRequirement;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import net.minecraft.client.Minecraft;
 

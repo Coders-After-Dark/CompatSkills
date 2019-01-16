@@ -7,6 +7,8 @@ import betterquesting.api.questing.tasks.ITask;
 import betterquesting.api2.client.gui.misc.IGuiRect;
 import betterquesting.api2.client.gui.panels.IGuiPanel;
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.betterquesting.gui.GuiTaskRequirementEditor;
+import codersafterdark.compatskills.common.compats.betterquesting.gui.PanelTaskRequirement;
 import codersafterdark.reskillable.api.ReskillableAPI;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
@@ -115,8 +117,7 @@ public class TaskRequirement implements ITask {
     @Nullable
     @Override
     public GuiScreen getTaskEditor(GuiScreen parent, IQuest quest) {
-        //TODO
-        return null;
+        return new GuiTaskRequirementEditor(parent, requirements);
     }
 
     @Override
