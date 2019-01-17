@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.minecraft.heatlh;
+package codersafterdark.compatskills.common.compats.minecraft.health;
 
 import codersafterdark.reskillable.api.requirement.RequirementCache;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,4 +1,4 @@
-package codersafterdark.compatskills.common.compats.minecraft.heatlh;
+package codersafterdark.compatskills.common.compats.minecraft.health;
 
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
@@ -8,17 +8,17 @@ import net.minecraft.util.text.TextFormatting;
 
 import java.util.Objects;
 
-public class HealthRequirement extends Requirement {
-    private final double percent;
+public class HeartRequirement extends Requirement {
+    private final int hearts;
 
-    public HealthRequirement(double percent) {
-        this.percent = percent;
-        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.DARK_GREEN + new TextComponentTranslation("compatskills.misc.healthFormat", "%s", percent).getUnformattedComponentText();
+    public HeartRequirement(int hearts) {
+        this.hearts = hearts;
+        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.YELLOW + new TextComponentTranslation("compatskills.misc.heartsFormat", "%s", hearts).getUnformattedComponentText();
     }
 
     @Override
     public boolean achievedByPlayer(EntityPlayer entityPlayerMP) {
-        return entityPlayerMP.getHealth() / entityPlayerMP.getMaxHealth() >= percent;
+        return entityPlayerMP.getHealth() >= hearts;
     }
 
     @Override
@@ -26,13 +26,13 @@ public class HealthRequirement extends Requirement {
         if (o == this) {
             return RequirementComparision.EQUAL_TO;
         }
-        if (o instanceof HealthRequirement) {
-            HealthRequirement other = (HealthRequirement) o;
-            if (percent == other.percent) {
+        if (o instanceof HeartRequirement) {
+            HeartRequirement other = (HeartRequirement) o;
+            if (hearts == other.hearts) {
                 return RequirementComparision.EQUAL_TO;
-            } else if (percent > other.percent) {
+            } else if (hearts > other.hearts) {
                 return RequirementComparision.GREATER_THAN;
-            } else if (percent < other.percent) {
+            } else if (hearts < other.hearts) {
                 return RequirementComparision.LESS_THAN;
             }
         }
@@ -41,11 +41,11 @@ public class HealthRequirement extends Requirement {
 
     @Override
     public boolean equals(Object o) {
-        return o == this || o instanceof HealthRequirement && percent == ((HealthRequirement) o).percent;
+        return o == this || o instanceof HeartRequirement && hearts == ((HeartRequirement) o).hearts;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(percent);
+        return Objects.hash(hearts);
     }
 }
