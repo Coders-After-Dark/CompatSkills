@@ -3,7 +3,25 @@
 ## 1.13.0
 - Updated BetterQuesting integration so that it works with newer versions
 - Added a custom task editor for the requirement task type to simplify the process of setting multiple requirements.
-
+- Added Block Drops Locking:
+	- This means that you can now lock individual drops from blocks
+	- mods.compatskills.BlockDropsLock.addBlockDropLock(IItemStack stack, String... requirements);
+	- mods.compatskills.BlockDropsLock.addBlockDropLock(<minecraft:cobblestone>, "reskillable:mining|16");
+		- This example would make it so cobblestone would never drop on a block break unless the player has a mining level of 16!
+- Added Ore Excavation Support
+	- The support works like this:
+		- It first checks if you meet the requirements for the general "Excavation Lock".
+			- If you do it passed onward and if you don't it cancels the event.
+		- Then it checks if you meet the requirements for the designated Excavation Shape.
+			- If you do it passes onward and if you don't it cancels the event.
+		- Lastly it applies a IExcavationFilter which will check each broken block if you have the requirements for breaking said block.
+			- If you do not meet the requirement for a certain block, then Ore Excavator won't break that block.
+	- Excavation Lock:
+		- mods.compatskills.Excavation.addExcavationLock(String... requirements);
+	- Excavation Shape Lock:
+		- mods.compatskills.Excavation.addShapeLock(String name, String... requirements);
+	- We also added a command for dumping the name of all Shapes:
+		- /ct OEShapeDump
 
 
 ## 1.12.0
