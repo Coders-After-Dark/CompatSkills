@@ -16,6 +16,7 @@ public class CompatSkillsConfig {
         public static Modules modules;
         public static Hwyla hwyla;
         public static TOP top;
+        public static Minecraft minecraft;
 
         public static class Modules {
             @Config.Comment({"A list of all mods that CompatSkills has integrated compatability with.", "Setting any of these to false disables the respective compat:"})
@@ -30,6 +31,11 @@ public class CompatSkillsConfig {
         public static class TOP {
             @Comment("Should TOP Requirements Support require Shifting?")
             public static boolean TOPShifting;
+        }
+
+        public static class Minecraft {
+            @Comment("Should locked Block Drops post their requirements?")
+            public static boolean BlockDropsError;
         }
     }
 }

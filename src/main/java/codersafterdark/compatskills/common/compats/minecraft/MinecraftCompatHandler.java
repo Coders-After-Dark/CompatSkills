@@ -5,6 +5,8 @@ import codersafterdark.compatskills.common.compats.minecraft.dimension.dimension
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionlocks.DimensionLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.dimension.dimensionrequirement.DimensionRequirementHandler;
+import codersafterdark.compatskills.common.compats.minecraft.drops.BlockDropsHandler;
+import codersafterdark.compatskills.common.compats.minecraft.drops.ItemStackDropKey;
 import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent.AnimalTameEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.animaltameevent.EntityTameKey;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageEventHandler;
@@ -54,6 +56,7 @@ public class MinecraftCompatHandler extends CompatModuleBase {
         MinecraftForge.EVENT_BUS.register(new DimensionRequirementHandler());
         MinecraftForge.EVENT_BUS.register(new ItemChangeHandler());
         MinecraftForge.EVENT_BUS.register(new HealthChangeHandler());
+        MinecraftForge.EVENT_BUS.register(new BlockDropsHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("sneaking", input -> new SneakRequirement());
         registry.addRequirementHandler("hearts", input -> {
@@ -161,7 +164,9 @@ public class MinecraftCompatHandler extends CompatModuleBase {
     }
 
     public static void addMCLock(LockKey key, RequirementHolder holder) {
-        if (key instanceof OreDictLock) {
+        if (key instanceof ItemStackDropKey) {
+            registerItemLock(ItemStackDropKey.class);
+        } else if (key instanceof OreDictLock) {
             registerItemLock(ParentOreDictLock.class);
         } else if (key instanceof ToolHarvestLock) {
             registerItemLock(ToolHarvestLock.class);
