@@ -63,6 +63,11 @@ compatskills.tileentity.interactError=Even after countless hours you cannot figu
 ### Block Drops
 compatskills.drops.error=As you hammer away at the block, you realize you might be losing out on precious resources...
 
+### Ore Excavation
+compatskills.excavation.general.error=As you excavate you start feeling a lack of control.
+compatskills.excavation.shape.error=Couldn't excavate using shape:
+
+
 ## Misc:
 compatskills.misc.Requirements=Requirements:
 compatskills.misc.Shift=Press Shift to See Requirements

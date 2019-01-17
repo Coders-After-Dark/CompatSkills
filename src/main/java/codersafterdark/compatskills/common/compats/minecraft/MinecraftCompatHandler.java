@@ -13,9 +13,9 @@ import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamage
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageKey;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.entity.entitymountevent.EntityMountKey;
-import codersafterdark.compatskills.common.compats.minecraft.heatlh.HealthChangeHandler;
-import codersafterdark.compatskills.common.compats.minecraft.heatlh.HealthRequirement;
-import codersafterdark.compatskills.common.compats.minecraft.heatlh.HeartRequirement;
+import codersafterdark.compatskills.common.compats.minecraft.health.HealthChangeHandler;
+import codersafterdark.compatskills.common.compats.minecraft.health.HealthRequirement;
+import codersafterdark.compatskills.common.compats.minecraft.health.HeartRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.*;
 import codersafterdark.compatskills.common.compats.minecraft.item.armor.ArmorLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.item.food.HungerLockKey;
