@@ -116,6 +116,7 @@ public class TaskRequirement implements ITask {
 
     @Nullable
     @Override
+    @SideOnly(Side.CLIENT)
     public GuiScreen getTaskEditor(GuiScreen parent, IQuest quest) {
         return new GuiTaskRequirementEditor(parent, quest, this);
     }
