@@ -37,7 +37,7 @@ public class PanelScrollingStrings extends CanvasScrolling implements IPEventLis
         this.btnNew = btnNew;
         this.btnRemove = btnRemove;
 
-        PEventBroadcaster.INSTANCE.register(this, PEventButton.class);//TODO: Unregister
+        PEventBroadcaster.INSTANCE.register(this, PEventButton.class);
         Keyboard.enableRepeatEvents(true);
 
         for (String req : requirements) {
