@@ -1,6 +1,7 @@
 package codersafterdark.compatskills.common.compats.minecraft.drops;
 
 import codersafterdark.compatskills.utils.CompatSkillsConfig;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -16,7 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class BlockDropsHandler {
     @SubscribeEvent
@@ -49,10 +49,7 @@ public class BlockDropsHandler {
                 event.getDrops().remove(entry.getValue());
                 if (CompatSkillsConfig.Configs.Minecraft.BlockDropsError) {
                     TextComponentTranslation error = new TextComponentTranslation("compatskills.drops.error");
-                    TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");
-                    String reqString = holder.getRequirements().stream().map(requirement -> "\n " + requirement.getToolTip(data) + ' ').collect(Collectors.joining());
-                    ITextComponent textComponent = new TextComponentString(error.getUnformattedComponentText() + ' ' + error2.getUnformattedComponentText() + ' ' + reqString);
-                    player.sendStatusMessage(textComponent, false);
+                    player.sendStatusMessage(Utils.getError(holder, data, error), false);
                 }
             }
         }
