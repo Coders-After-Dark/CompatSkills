@@ -111,13 +111,13 @@ public class TaskRequirement implements ITask {
     @Override
     @SideOnly(Side.CLIENT)
     public IGuiPanel getTaskGui(IGuiRect rect, IQuest quest) {
-        return new PanelTaskRequirement(rect, quest, this);
+        return new PanelTaskRequirement(rect, this);
     }
 
     @Nullable
     @Override
     public GuiScreen getTaskEditor(GuiScreen parent, IQuest quest) {
-        return new GuiTaskRequirementEditor(parent, requirements);
+        return new GuiTaskRequirementEditor(parent, quest, this);
     }
 
     @Override
@@ -139,7 +139,12 @@ public class TaskRequirement implements ITask {
                 requirements.add(((NBTTagString) req).getString());
             }
         }
-        //TODO should this set holder as null to ensure it rechecks about cacheable requirements?
+        resetHolder();
+    }
+
+    private void resetHolder() {
+        holder = null;
+        hasUncacheable = false;
         setHolder();
     }
 
@@ -169,6 +174,15 @@ public class TaskRequirement implements ITask {
     public RequirementHolder getRequirementHolder() {
         setHolder();
         return holder;
+    }
+
+    public List<String> getRequirements() {
+        return requirements;
+    }
+
+    public void updateRequirements(List<String> requirements) {
+        this.requirements = requirements;
+        resetHolder();
     }
 
     public boolean hasUncacheable() {

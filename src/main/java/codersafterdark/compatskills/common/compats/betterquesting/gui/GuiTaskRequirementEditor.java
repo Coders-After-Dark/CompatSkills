@@ -1,6 +1,11 @@
 package codersafterdark.compatskills.common.compats.betterquesting.gui;
 
+import betterquesting.api.api.ApiReference;
+import betterquesting.api.api.QuestingAPI;
 import betterquesting.api.client.gui.misc.IVolatileScreen;
+import betterquesting.api.enums.EnumPacketAction;
+import betterquesting.api.network.QuestingPacket;
+import betterquesting.api.questing.IQuest;
 import betterquesting.api2.client.gui.GuiScreenCanvas;
 import betterquesting.api2.client.gui.controls.PanelButton;
 import betterquesting.api2.client.gui.events.IPEventListener;
@@ -19,16 +24,20 @@ import betterquesting.api2.client.gui.themes.presets.PresetColor;
 import betterquesting.api2.client.gui.themes.presets.PresetLine;
 import betterquesting.api2.client.gui.themes.presets.PresetTexture;
 import betterquesting.api2.utils.QuestTranslation;
+import codersafterdark.compatskills.common.compats.betterquesting.TaskRequirement;
 import net.minecraft.client.gui.GuiScreen;
-
-import java.util.List;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiTaskRequirementEditor extends GuiScreenCanvas implements IPEventListener, IVolatileScreen {
-    private List<String> requirements;
+    private PanelScrollingStrings requirementEdit;
+    private TaskRequirement task;
+    private IQuest quest;
 
-    public GuiTaskRequirementEditor(GuiScreen parent, List<String> requirements) {
+    public GuiTaskRequirementEditor(GuiScreen parent, IQuest quest, TaskRequirement task) {
         super(parent);
-        this.requirements = requirements;
+        this.quest = quest;
+        this.task = task;
     }
 
     public void initPanel() {
@@ -46,12 +55,12 @@ public class GuiTaskRequirementEditor extends GuiScreenCanvas implements IPEvent
         txTitle.setColor(PresetColor.TEXT_HEADER.getColor());
         cvBackground.addPanel(txTitle);
 
-        PanelScrollingStrings pnEdit = new PanelScrollingStrings(new GuiTransform(GuiAlign.FULL_BOX, new GuiPadding(16, 32, 24, 32), 0), requirements, 1, 2);
-        cvBackground.addPanel(pnEdit);
+        requirementEdit = new PanelScrollingStrings(new GuiTransform(GuiAlign.FULL_BOX, new GuiPadding(16, 32, 24, 32), 0), task.getRequirements(), 1, 2);
+        cvBackground.addPanel(requirementEdit);
 
         PanelVScrollBar scEdit = new PanelVScrollBar(new GuiTransform(GuiAlign.RIGHT_EDGE, new GuiPadding(-24, 32, 16, 32), 0));
         cvBackground.addPanel(scEdit);
-        pnEdit.setScrollDriverY(scEdit);
+        requirementEdit.setScrollDriverY(scEdit);
 
         // === DECORATIVE LINES ===
 
@@ -81,6 +90,18 @@ public class GuiTaskRequirementEditor extends GuiScreenCanvas implements IPEvent
     private void onButtonPress(PEventButton event) {
         if (event.getButton().getButtonID() == 0) { // Exit
             mc.displayGuiScreen(this.parent);
+            if (requirementEdit != null) {
+                task.updateRequirements(requirementEdit.getRequirements());
+
+                NBTTagCompound base = new NBTTagCompound();
+                base.setTag("config", quest.writeToNBT(new NBTTagCompound()));
+                base.setTag("progress", quest.writeProgressToNBT(new NBTTagCompound(), null));
+                NBTTagCompound tags = new NBTTagCompound();
+                tags.setInteger("action", EnumPacketAction.EDIT.ordinal()); // Action: Update data
+                tags.setInteger("questID", QuestingAPI.getAPI(ApiReference.QUEST_DB).getID(quest));
+                tags.setTag("data", base);
+                QuestingAPI.getAPI(ApiReference.PACKET_SENDER).sendToServer(new QuestingPacket(new ResourceLocation("betterquesting:quest_edit"), tags));
+            }
         }
     }
 }

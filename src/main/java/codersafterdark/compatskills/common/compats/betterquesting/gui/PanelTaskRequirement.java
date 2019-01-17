@@ -1,6 +1,5 @@
 package codersafterdark.compatskills.common.compats.betterquesting.gui;
 
-import betterquesting.api.questing.IQuest;
 import betterquesting.api2.client.gui.misc.GuiAlign;
 import betterquesting.api2.client.gui.misc.GuiPadding;
 import betterquesting.api2.client.gui.misc.GuiTransform;
@@ -16,11 +15,9 @@ import java.util.List;
 
 public class PanelTaskRequirement extends CanvasEmpty {
     private final TaskRequirement task;
-    private final IQuest quest;
 
-    public PanelTaskRequirement(IGuiRect rect, IQuest quest, TaskRequirement task) {
+    public PanelTaskRequirement(IGuiRect rect, TaskRequirement task) {
         super(rect);
-        this.quest = quest;
         this.task = task;
     }
 

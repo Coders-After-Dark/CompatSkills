@@ -2,6 +2,7 @@
 
 ## 1.13.0
 - Updated BetterQuesting integration so that it works with newer versions
+- Added a custom task editor for the requirement task type to simplify the process of setting multiple requirements.
 
 
 

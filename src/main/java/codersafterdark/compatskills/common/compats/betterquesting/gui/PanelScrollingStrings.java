@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//TODO: The sync/update to file/NBT
-//TODO: On save remove all blank entries
 public class PanelScrollingStrings extends CanvasScrolling implements IPEventListener {
     private final GuiColorStatic red = new GuiColorStatic(255, 0, 0, 255);
     private final GuiColorStatic green = new GuiColorStatic(0, 255, 0, 255);
@@ -48,6 +46,17 @@ public class PanelScrollingStrings extends CanvasScrolling implements IPEventLis
             }
         }
         this.initialRequirements.add("");
+    }
+
+    public List<String> getRequirements() {
+        List<String> reqs = new ArrayList<>();
+        for (Row row : this.requirements.values()) {
+            String req = row.textBox.getValue();
+            if (!req.isEmpty()) {
+                reqs.add(req);
+            }
+        }
+        return reqs;
     }
 
     @Override
@@ -78,7 +87,6 @@ public class PanelScrollingStrings extends CanvasScrolling implements IPEventLis
         int key = this.index++;
 
         PanelTextField<String> text = new PanelTextField<>(new GuiRectangle(0, i * 16, this.width - 32, 16), line, FieldFilterString.INSTANCE);
-        //TODO: Figure out what callback does and add one if needed
         this.addPanel(text);
 
         PanelButtonStorage<Integer> remove = new PanelButtonStorage<>(new GuiRectangle(this.width - 16, i * 16, 16, 16), this.btnRemove, "x", key);
