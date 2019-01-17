@@ -37,6 +37,7 @@ public class ExcavationShapeLockTweaker {
         public void apply() {
             if (CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new ExcavationShapeKey(name), RequirementHolder.fromStringList(requirements));
+                OreExcavatorCompatHandler.registerListener();
             }
         }
 

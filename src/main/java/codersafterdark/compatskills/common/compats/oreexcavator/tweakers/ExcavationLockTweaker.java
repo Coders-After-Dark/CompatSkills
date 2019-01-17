@@ -1,7 +1,6 @@
 package codersafterdark.compatskills.common.compats.oreexcavator.tweakers;
 
 import codersafterdark.compatskills.CompatSkills;
-import codersafterdark.compatskills.common.compats.oreexcavator.ExcavationLockHandler;
 import codersafterdark.compatskills.common.compats.oreexcavator.OreExcavatorCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.compatskills.utils.Utils;
@@ -33,7 +32,7 @@ public class ExcavationLockTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkStringArray(requirements)) {
-                ExcavationLockHandler.addRequirements(RequirementHolder.fromStringList(requirements));
+                OreExcavatorCompatHandler.addOERequirements(RequirementHolder.fromStringList(requirements));
             }
         }
 

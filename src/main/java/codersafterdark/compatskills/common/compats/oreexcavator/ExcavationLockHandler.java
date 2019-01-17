@@ -16,23 +16,19 @@ import oreexcavation.handlers.MiningAgent;
 import java.util.stream.Collectors;
 
 public class ExcavationLockHandler {
-    private static RequirementHolder holder = null;
-
     @SubscribeEvent
     public void onExcavation(EventExcavate.Pre event) {
-        if (holder == null) {
-            return;
-        }
         MiningAgent agent = event.getAgent();
         EntityPlayer player = agent.player;
         PlayerData data = PlayerDataHandler.get(player);
 
-        if (!data.matchStats(holder)) {
+        RequirementHolder holder = OreExcavatorCompatHandler.getHolder();
+        if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
             TextComponentTranslation error = new TextComponentTranslation("compatskills.excavation.general.error");
             player.sendStatusMessage(getError(error, data, holder), true);
         } else {
             RequirementHolder shapeHolder = LevelLockHandler.getLockByKey(new ExcavationShapeKey(agent.shape.getName()));
-            if (!data.matchStats(shapeHolder)) {
+            if (!shapeHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(shapeHolder)) {
                 event.setCanceled(true);
                 TextComponentTranslation error = new TextComponentTranslation("compatskills.excavatation.shape.error");
                 player.sendStatusMessage(getError(error, data, holder), true);
@@ -45,9 +41,5 @@ public class ExcavationLockHandler {
         TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");
         String reqString = holder.getRequirements().stream().map(requirement -> "\n " + requirement.getToolTip(data) + ' ').collect(Collectors.joining());
         return new TextComponentString(error.getUnformattedComponentText() + ' ' + error2.getUnformattedComponentText() + ' ' + reqString);
-    }
-
-    public static void addRequirements(RequirementHolder requirementHolder) {
-        holder = holder == null ? requirementHolder : new RequirementHolder(holder, requirementHolder);
     }
 }
