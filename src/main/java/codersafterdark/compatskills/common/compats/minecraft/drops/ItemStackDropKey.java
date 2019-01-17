@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 public class ItemStackDropKey implements LockKey {
     private final ItemStack stack;
 
-    protected ItemStackDropKey(ItemStack stack) {
+    public ItemStackDropKey(ItemStack stack) {
         this.stack = stack;
     }
 

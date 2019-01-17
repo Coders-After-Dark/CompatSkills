@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 public class BlockDropsHandler {
     @SubscribeEvent
     public void onBlockDrops(BlockEvent.HarvestDropsEvent event) {
-        boolean errored = false;
-
         if (event.isCanceled()) {
             return;
         }
@@ -42,10 +40,13 @@ public class BlockDropsHandler {
             }
         }
 
-        for (RequirementHolder holder : stackMap.keySet()) {
+
+        boolean errored = false;
+        for (Map.Entry<RequirementHolder, ItemStack> entry : stackMap.entrySet()) {
+            RequirementHolder holder = entry.getKey();
             if (!data.matchStats(holder)) {
                 errored = true;
-                event.getDrops().remove(stackMap.get(holder));
+                event.getDrops().remove(entry.getValue());
                 if (CompatSkillsConfig.Configs.Minecraft.BlockDropsError) {
                     TextComponentTranslation error = new TextComponentTranslation("compatskills.drops.error");
                     TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");
