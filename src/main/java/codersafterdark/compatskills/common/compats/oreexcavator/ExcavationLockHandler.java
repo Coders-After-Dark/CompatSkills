@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import oreexcavation.events.EventExcavate;
 import oreexcavation.handlers.MiningAgent;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class ExcavationLockHandler {

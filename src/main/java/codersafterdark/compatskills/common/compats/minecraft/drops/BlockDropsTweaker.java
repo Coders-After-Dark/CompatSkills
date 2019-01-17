@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.minecraft.drops;
 
+import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.compatskills.utils.Utils;
@@ -15,7 +16,7 @@ public class BlockDropsTweaker {
     @ZenMethod
     public static void addBlockDropLock(IItemStack stack, String... requirements) {
         if (MinecraftCompatHandler.ENABLED) {
-
+            CompatSkills.LATE_ADDITIONS.add(new AddBlockDropLock(stack, requirements));
         }
     }
 
