@@ -48,7 +48,7 @@ public class MinecraftCompatHandler extends CompatModuleBase {
     public static boolean ENABLED;
 
     private static Set<Class<? extends LockKey>> lockTypes = new HashSet<>();
-    private static boolean tile, damage, mount, tame, dimension;
+    private static boolean tile, damage, mount, tame, dimension, drops;
 
     @Override
     public void preInit() {
@@ -56,7 +56,6 @@ public class MinecraftCompatHandler extends CompatModuleBase {
         MinecraftForge.EVENT_BUS.register(new DimensionRequirementHandler());
         MinecraftForge.EVENT_BUS.register(new ItemChangeHandler());
         MinecraftForge.EVENT_BUS.register(new HealthChangeHandler());
-        MinecraftForge.EVENT_BUS.register(new BlockDropsHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("sneaking", input -> new SneakRequirement());
         registry.addRequirementHandler("hearts", input -> {
@@ -166,6 +165,10 @@ public class MinecraftCompatHandler extends CompatModuleBase {
     public static void addMCLock(LockKey key, RequirementHolder holder) {
         if (key instanceof ItemStackDropKey) {
             registerItemLock(ItemStackDropKey.class);
+            if (!drops) {
+                MinecraftForge.EVENT_BUS.register(new BlockDropsHandler());
+                drops = true;
+            }
         } else if (key instanceof OreDictLock) {
             registerItemLock(ParentOreDictLock.class);
         } else if (key instanceof ToolHarvestLock) {
