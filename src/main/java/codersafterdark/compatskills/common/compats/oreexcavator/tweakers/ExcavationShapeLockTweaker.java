@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.oreexcavator.tweakers;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.oreexcavator.ExcavationShapeKey;
+import codersafterdark.compatskills.common.compats.oreexcavator.OreExcavatorCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -18,7 +19,9 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class ExcavationShapeLockTweaker {
     @ZenMethod
     public static void addShapeLock(String name, String... requirements) {
-        CompatSkills.LATE_ADDITIONS.add(new AddShapeLock(name, requirements));
+        if (OreExcavatorCompatHandler.ENABLED) {
+            CompatSkills.LATE_ADDITIONS.add(new AddShapeLock(name, requirements));
+        }
     }
 
     private static class AddShapeLock implements IAction {
