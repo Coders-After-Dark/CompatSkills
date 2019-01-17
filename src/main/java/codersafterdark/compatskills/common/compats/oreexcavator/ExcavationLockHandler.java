@@ -16,32 +16,38 @@ import oreexcavation.handlers.MiningAgent;
 import java.util.stream.Collectors;
 
 public class ExcavationLockHandler {
-
-    public static String[] requirements;
+    private static RequirementHolder holder = null;
 
     @SubscribeEvent
     public void onExcavation(EventExcavate.Pre event) {
+        if (holder == null) {
+            return;
+        }
         MiningAgent agent = event.getAgent();
         EntityPlayer player = agent.player;
         PlayerData data = PlayerDataHandler.get(player);
-        RequirementHolder holder = RequirementHolder.fromStringList(requirements);
+
         if (!data.matchStats(holder)) {
             TextComponentTranslation error = new TextComponentTranslation("compatskills.excavation.general.error");
-            TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");
-            String reqString = holder.getRequirements().stream().map(requirement -> "\n " + requirement.getToolTip(data) + ' ').collect(Collectors.joining());
-            ITextComponent component = new TextComponentString(error.getUnformattedComponentText() + ' ' + error2.getUnformattedComponentText() + ' ' + reqString);
-            player.sendStatusMessage(component, true);
+            player.sendStatusMessage(getError(error, data, holder), true);
         } else {
             RequirementHolder shapeHolder = LevelLockHandler.getLockByKey(new ExcavationShapeKey(agent.shape.getName()));
             if (!data.matchStats(shapeHolder)) {
                 event.setCanceled(true);
                 TextComponentTranslation error = new TextComponentTranslation("compatskills.excavatation.shape.error");
-                TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");
-                String reqString = holder.getRequirements().stream().map(requirement -> "\n " + requirement.getToolTip(data) + ' ').collect(Collectors.joining());
-                ITextComponent component = new TextComponentString(error.getUnformattedComponentText() + ' ' + error2.getUnformattedComponentText() + ' ' + reqString);
-                player.sendStatusMessage(component, true);
+                player.sendStatusMessage(getError(error, data, holder), true);
             }
             agent.addFilter(new ExcavateRequirementFilter());
         }
+    }
+
+    private ITextComponent getError(TextComponentTranslation error, PlayerData data, RequirementHolder holder) {
+        TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");
+        String reqString = holder.getRequirements().stream().map(requirement -> "\n " + requirement.getToolTip(data) + ' ').collect(Collectors.joining());
+        return new TextComponentString(error.getUnformattedComponentText() + ' ' + error2.getUnformattedComponentText() + ' ' + reqString);
+    }
+
+    public static void addRequirements(RequirementHolder requirementHolder) {
+        holder = holder == null ? requirementHolder : new RequirementHolder(holder, requirementHolder);
     }
 }

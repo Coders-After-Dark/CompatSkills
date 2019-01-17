@@ -1,17 +1,16 @@
 package codersafterdark.compatskills.common.compats.oreexcavator;
 
-import codersafterdark.compatskills.common.compats.minecraft.drops.ItemStackDropKey;
 import codersafterdark.reskillable.api.data.LockKey;
 
 public class ExcavationShapeKey implements LockKey {
     private final String name;
 
     public ExcavationShapeKey(String name) {
-        this.name = name;
+        this.name = name == null ? "" : name;
     }
 
     @Override
     public boolean equals(Object obj) {
-        return obj == this || obj instanceof ItemStackDropKey && name.equals(((ExcavationShapeKey) obj).name);
+        return obj == this || obj instanceof ExcavationShapeKey && name.equals(((ExcavationShapeKey) obj).name);
     }
 }

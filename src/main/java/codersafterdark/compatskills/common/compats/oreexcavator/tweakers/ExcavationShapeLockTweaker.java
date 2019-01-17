@@ -22,10 +22,10 @@ public class ExcavationShapeLockTweaker {
     }
 
     private static class AddShapeLock implements IAction {
-        String name;
-        String[] requirements;
+        private final String name;
+        private final String[] requirements;
 
-        AddShapeLock(String name, String... requirements) {
+        private AddShapeLock(String name, String... requirements) {
             this.name = name;
             this.requirements = requirements;
         }

@@ -15,8 +15,6 @@ import static crafttweaker.mc1120.commands.SpecialMessagesChat.getClickableComma
 import static crafttweaker.mc1120.commands.SpecialMessagesChat.getNormalMessage;
 
 public class ShapeDumpCommand extends CraftTweakerCommand {
-    List<ExcavateShape> shapes;
-
     public ShapeDumpCommand() {
         super("OEShapeDump");
     }
@@ -29,13 +27,13 @@ public class ShapeDumpCommand extends CraftTweakerCommand {
 
     @Override
     public void executeCommand(MinecraftServer server, ICommandSender sender, String[] args) {
-        shapes = ShapeRegistry.INSTANCE.getShapeList();
+        List<ExcavateShape> shapes = ShapeRegistry.INSTANCE.getShapeList();
         CraftTweakerAPI.logCommand("#### ");
         CraftTweakerAPI.logCommand("### " + this.subCommandName);
         for (ExcavateShape shape : shapes) {
             CraftTweakerAPI.logCommand("## " + shape.getName());
         }
         CraftTweakerAPI.logCommand("####");
-        sender.sendMessage(SpecialMessagesChat.getLinkToCraftTweakerLog("Entries Generated in Crafttweaker.log", sender));
+        sender.sendMessage(SpecialMessagesChat.getLinkToCraftTweakerLog(shapes.size() + " Entries Generated in Crafttweaker.log", sender));
     }
 }
