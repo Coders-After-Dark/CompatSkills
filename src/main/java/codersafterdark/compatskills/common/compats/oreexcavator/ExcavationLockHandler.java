@@ -11,7 +11,6 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import oreexcavation.events.EventExcavate;
 import oreexcavation.handlers.MiningAgent;
-import oreexcavation.shapes.ExcavateShape;
 
 public class ExcavationLockHandler {
     @SubscribeEvent
@@ -26,17 +25,9 @@ public class ExcavationLockHandler {
             player.sendStatusMessage(Utils.getError(holder, data, error), false);
             event.setCanceled(true);
         } else {
-            ExcavateShape shape = agent.shape;
-            RequirementHolder shapeHolder = shape == null ? LevelLockHandler.EMPTY_LOCK : LevelLockHandler.getLockByKey(new ExcavationShapeKey(shape.getName()));
-            if (!shapeHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(shapeHolder)) {
-                event.setCanceled(true);
-                TextComponentTranslation error = new TextComponentTranslation("compatskills.excavatation.shape.error");
-                player.sendStatusMessage(Utils.getError(holder, data, error), false);
-            } else {
-                // Even though we cancel on interact we should add this filter in-case a dev adds several things to
-                // tiers so they don't mine a lower requirement ore and end-up mining higher requirement ores.
-                agent.addFilter(new ExcavateRequirementFilter());
-            }
+            // Even though we cancel on interact we should add this filter in-case a dev adds several things to
+            // tiers so they don't mine a lower requirement ore and end-up mining higher requirement ores.
+            agent.addFilter(new ExcavateRequirementFilter());
         }
     }
 }
