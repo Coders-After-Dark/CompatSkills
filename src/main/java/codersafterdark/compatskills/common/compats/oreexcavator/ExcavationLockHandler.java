@@ -31,23 +31,26 @@ public class ExcavationLockHandler {
         if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
             TextComponentTranslation error = new TextComponentTranslation("compatskills.excavation.general.error");
             player.sendStatusMessage(Utils.getError(holder, data, error), true);
+            event.setCanceled(true);
         } else {
             RequirementHolder shapeHolder = LevelLockHandler.getLockByKey(new ExcavationShapeKey(agent.shape.getName()));
             if (!shapeHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(shapeHolder)) {
                 event.setCanceled(true);
                 TextComponentTranslation error = new TextComponentTranslation("compatskills.excavatation.shape.error");
                 player.sendStatusMessage(Utils.getError(holder, data, error), true);
+            } else {
+                IBlockState state = player.getEntityWorld().getBlockState(agent.origin);
+                ItemStack stack = new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
+                if (!LevelLockHandler.canPlayerUseItem(player, stack)) {
+                    event.setCanceled(true);
+                    TextComponentTranslation error = new TextComponentTranslation("compatskills.excavation.block.error");
+                    player.sendStatusMessage(Utils.getError(holder, data, error), false);
+                } else {
+                    // Even though we are cancelling the event if the initial mined block can't be harvested due to requirements
+                    // We should add this filter in-case a dev adds several things to tiers so they don't mine a lower requirement ore and end-up mining higher requirement ores.
+                    agent.addFilter(new ExcavateRequirementFilter());
+                }
             }
-            IBlockState state = player.getEntityWorld().getBlockState(agent.origin);
-            ItemStack stack = new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
-            if (!LevelLockHandler.canPlayerUseItem(player, stack)) {
-                event.setCanceled(true);
-                TextComponentTranslation error = new TextComponentTranslation("compatskills.excavation.block.error");
-                player.sendStatusMessage(Utils.getError(holder, data, error), false);
-            }
-            // Even though we are cancelling the event if the initial mined block can't be harvested due to requirements
-            // We should add this filter in-case a dev adds several things to tiers so they don't mine a lower requirement ore and end-up mining higher requirement ores.
-            agent.addFilter(new ExcavateRequirementFilter());
         }
     }
 }
