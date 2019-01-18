@@ -43,9 +43,7 @@ public class ExcavationLockHandler {
             if (!LevelLockHandler.canPlayerUseItem(player, stack)) {
                 event.setCanceled(true);
                 TextComponentTranslation error = new TextComponentTranslation("compatskills.excavation.block.error");
-                String requirements = LevelLockHandler.getSkillLock(stack).getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
-                ITextComponent component = new TextComponentString(Utils.getError(holder, data, error) + " " + CompatSkillConstants.REQUIREMENT_STRING + " " + requirements);
-                player.sendStatusMessage(component, false);
+                player.sendStatusMessage(Utils.getError(holder, data, error), false);
             }
             // Even though we are cancelling the event if the initial mined block can't be harvested due to requirements
             // We should add this filter in-case a dev adds several things to tiers so they don't mine a lower requirement ore and end-up mining higher requirement ores.
