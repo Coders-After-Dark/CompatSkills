@@ -1,7 +1,9 @@
 package codersafterdark.compatskills.common.compats.oreexcavator;
 
 import codersafterdark.compatskills.common.compats.oreexcavator.filter.ExcavateRequirementFilter;
+import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.compatskills.utils.Utils;
+import codersafterdark.reskillable.api.data.LockKey;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -9,10 +11,14 @@ import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import oreexcavation.events.EventExcavate;
 import oreexcavation.handlers.MiningAgent;
+
+import java.util.stream.Collectors;
 
 public class ExcavationLockHandler {
     @SubscribeEvent
@@ -33,10 +39,13 @@ public class ExcavationLockHandler {
                 player.sendStatusMessage(Utils.getError(holder, data, error), true);
             }
             IBlockState state = player.getEntityWorld().getBlockState(agent.origin);
-            if (!LevelLockHandler.canPlayerUseItem(player, new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)))) {
+            ItemStack stack = new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state));
+            if (!LevelLockHandler.canPlayerUseItem(player, stack)) {
                 event.setCanceled(true);
                 TextComponentTranslation error = new TextComponentTranslation("compatskills.excavation.block.error");
-                player.sendStatusMessage(Utils.getError(holder, data, error), false);
+                String requirements = LevelLockHandler.getSkillLock(stack).getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
+                ITextComponent component = new TextComponentString(Utils.getError(holder, data, error) + " " + CompatSkillConstants.REQUIREMENT_STRING + " " + requirements);
+                player.sendStatusMessage(component, false);
             }
             // Even though we are cancelling the event if the initial mined block can't be harvested due to requirements
             // We should add this filter in-case a dev adds several things to tiers so they don't mine a lower requirement ore and end-up mining higher requirement ores.

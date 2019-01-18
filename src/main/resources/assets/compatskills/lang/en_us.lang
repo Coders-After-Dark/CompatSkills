@@ -66,6 +66,7 @@ compatskills.drops.error=As you hammer away at the block, you realize you might 
 ### Ore Excavation
 compatskills.excavation.general.error=As you excavate you start feeling a lack of control.
 compatskills.excavation.shape.error=Couldn't excavate using shape:
+compatskills.excavation.block.error=Couldn't mine the origin block.
 
 
 ## Misc:
