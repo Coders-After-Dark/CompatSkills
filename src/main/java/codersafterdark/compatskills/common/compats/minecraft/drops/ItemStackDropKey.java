@@ -12,11 +12,11 @@ public class ItemStackDropKey implements LockKey {
 
     @Override
     public boolean equals(Object obj) {
-        return obj == this || obj instanceof ItemStackDropKey && stack.equals(((ItemStackDropKey) obj).stack);
+        return obj == this || obj instanceof ItemStackDropKey && ItemStack.areItemStacksEqual(stack, ((ItemStackDropKey) obj).stack);
     }
 
     @Override
     public int hashCode() {
-        return stack.hashCode();
+        return stack.getItem().hashCode();
     }
 }

@@ -26,7 +26,7 @@ public class BlockDropsHandler {
         }
 
         EntityPlayer player = event.getHarvester();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+        if (player == null || !ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }
 
