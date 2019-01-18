@@ -6,7 +6,9 @@ import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import oreexcavation.events.EventExcavate;
@@ -30,6 +32,14 @@ public class ExcavationLockHandler {
                 TextComponentTranslation error = new TextComponentTranslation("compatskills.excavatation.shape.error");
                 player.sendStatusMessage(Utils.getError(holder, data, error), true);
             }
+            IBlockState state = player.getEntityWorld().getBlockState(agent.origin);
+            if (!LevelLockHandler.canPlayerUseItem(player, new ItemStack(state.getBlock(), 1, state.getBlock().getMetaFromState(state)))) {
+                event.setCanceled(true);
+                TextComponentTranslation error = new TextComponentTranslation("compatskills.excavation.block.error");
+                player.sendStatusMessage(Utils.getError(holder, data, error), false);
+            }
+            // Even though we are cancelling the event if the initial mined block can't be harvested due to requirements
+            // We should add this filter in-case a dev adds several things to tiers so they don't mine a lower requirement ore and end-up mining higher requirement ores.
             agent.addFilter(new ExcavateRequirementFilter());
         }
     }
