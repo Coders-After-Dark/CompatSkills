@@ -6,7 +6,7 @@ import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraftforge.common.MinecraftForge;
 
-public class OreExcavatorCompatHandler extends CompatModuleBase {
+public class OreExcavationCompatHandler extends CompatModuleBase {
     private static RequirementHolder holder = LevelLockHandler.EMPTY_LOCK;
     public static boolean ENABLED;
     private static boolean hasLocks;

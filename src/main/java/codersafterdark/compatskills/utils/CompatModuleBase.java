@@ -9,7 +9,7 @@ import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHan
 import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
 import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
 import codersafterdark.compatskills.common.compats.minecraft.MinecraftCompatHandler;
-import codersafterdark.compatskills.common.compats.oreexcavator.OreExcavatorCompatHandler;
+import codersafterdark.compatskills.common.compats.oreexcavator.OreExcavationCompatHandler;
 import codersafterdark.compatskills.common.compats.projecte.ProjectECompatHandler;
 import codersafterdark.compatskills.common.compats.reskillable.ReskillableCompatHandler;
 import codersafterdark.compatskills.common.compats.scavenge.ScavengeHandler;
@@ -39,7 +39,7 @@ public abstract class CompatModuleBase {
         moduleClasses.put("immersiveengineering", IECompatHandler.class);
         moduleClasses.put("magneticraft", MagCompatHandler.class);
         moduleClasses.put("minecraft", MinecraftCompatHandler.class);
-        moduleClasses.put("oreexcavator", OreExcavatorCompatHandler.class);
+        moduleClasses.put("oreexcavation", OreExcavationCompatHandler.class);
         moduleClasses.put("projecte", ProjectECompatHandler.class);
         moduleClasses.put("reskillable", ReskillableCompatHandler.class);
         moduleClasses.put("scavenge", ScavengeHandler.class);

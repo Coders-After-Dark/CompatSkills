@@ -2,7 +2,7 @@ package codersafterdark.compatskills.common.compats.oreexcavator.tweakers;
 
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.oreexcavator.ExcavationShapeKey;
-import codersafterdark.compatskills.common.compats.oreexcavator.OreExcavatorCompatHandler;
+import codersafterdark.compatskills.common.compats.oreexcavator.OreExcavationCompatHandler;
 import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -19,14 +19,14 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class ExcavationLockTweaker {
     @ZenMethod
     public static void addExcavationLock(String... requirements) {
-        if (OreExcavatorCompatHandler.ENABLED) {
+        if (OreExcavationCompatHandler.ENABLED) {
             CompatSkills.LATE_ADDITIONS.add(new AddExcavationLock(requirements));
         }
     }
 
     @ZenMethod
     public static void addShapeLock(String name, String... requirements) {
-        if (OreExcavatorCompatHandler.ENABLED) {
+        if (OreExcavationCompatHandler.ENABLED) {
             CompatSkills.LATE_ADDITIONS.add(new AddShapeLock(name, requirements));
         }
     }
@@ -44,7 +44,7 @@ public class ExcavationLockTweaker {
         public void apply() {
             if (CheckMethods.checkStringArray(requirements)) {
                 LevelLockHandler.addLockByKey(new ExcavationShapeKey(name), RequirementHolder.fromStringList(requirements));
-                OreExcavatorCompatHandler.registerListener();
+                OreExcavationCompatHandler.registerListener();
             }
         }
 
@@ -64,7 +64,7 @@ public class ExcavationLockTweaker {
         @Override
         public void apply() {
             if (CheckMethods.checkStringArray(requirements)) {
-                OreExcavatorCompatHandler.addOERequirements(RequirementHolder.fromStringList(requirements));
+                OreExcavationCompatHandler.addOERequirements(RequirementHolder.fromStringList(requirements));
             }
         }
 
