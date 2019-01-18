@@ -9,7 +9,6 @@ import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.event.world.BlockEvent;
@@ -56,8 +55,7 @@ public class BlockDropsHandler {
 
         if (!CompatSkillsConfig.Configs.Minecraft.BlockDropsError && errored) {
             TextComponentTranslation error = new TextComponentTranslation("compatskills.drops.error");
-            ITextComponent textComponent = new TextComponentString(error.getUnformattedComponentText());
-            player.sendStatusMessage(textComponent, true);
+            player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText()), true);
         }
     }
 }

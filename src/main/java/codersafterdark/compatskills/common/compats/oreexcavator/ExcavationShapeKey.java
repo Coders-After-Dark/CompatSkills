@@ -13,4 +13,9 @@ public class ExcavationShapeKey implements LockKey {
     public boolean equals(Object obj) {
         return obj == this || obj instanceof ExcavationShapeKey && name.equals(((ExcavationShapeKey) obj).name);
     }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }
