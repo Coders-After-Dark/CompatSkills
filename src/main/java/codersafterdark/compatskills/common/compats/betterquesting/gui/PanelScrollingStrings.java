@@ -87,6 +87,7 @@ public class PanelScrollingStrings extends CanvasScrolling implements IPEventLis
         int key = this.index++;
 
         PanelTextField<String> text = new PanelTextField<>(new GuiRectangle(0, i * 16, this.width - 32, 16), line, FieldFilterString.INSTANCE);
+        text.setMaxLength(Integer.MAX_VALUE);
         this.addPanel(text);
 
         PanelButtonStorage<Integer> remove = new PanelButtonStorage<>(new GuiRectangle(this.width - 16, i * 16, 16, 16), this.btnRemove, "x", key);
