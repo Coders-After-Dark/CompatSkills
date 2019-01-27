@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.13.2
+- Fix Better Questing Task Requirement logic being backwards
+
+
 ## 1.13.1
 - Fix Task Requirements having a max length of 32
 

@@ -14,7 +14,6 @@ import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.requirement.Requirement;
-import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
@@ -60,7 +59,7 @@ public class TaskRequirement implements ITask {
         }
         setHolder();
 
-        if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
+        if (data.matchStats(holder)) {
             setComplete(QuestingAPI.getQuestingUUID(player));
         }
     }
