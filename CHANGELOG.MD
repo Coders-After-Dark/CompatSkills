@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.13.3
+- Added support for the EMC warning message in Project EX's Personal Link.
+
+
 ## 1.13.2
 - Fix Better Questing Task Requirement logic being backwards
 

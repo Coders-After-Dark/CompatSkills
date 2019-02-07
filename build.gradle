@@ -87,6 +87,7 @@ dependencies {
     deobfCompile "shadowfacts-forgelin:Forgelin:1.8.2"
     deobfCompile "modelloader:modelloader:1.1.5"
     deobfCompile "projecte:ProjectE:1.12:PE1.3.1B"
+    deobfCompile "project-ex:ProjectEX:1.0.0.13"
     deobfCompile "better-questing:BetterQuesting:api:3.5.282"
     deobfCompile "ore-excavation:OreExcavation:deobf:1.4.133"
     deobfCompile "cofh:RedstoneFlux:1.12-2.1.0.6:universal"
