@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.13.4
+- Fixed Russian lang file using wrong capitalization for resource pack format
+- (Internal) Change how a couple cache invalidate calls are called to be consistent with the other calls.
+
+
 ## 1.13.3
 - Added support for the EMC warning message in Project EX's Personal Link.
 

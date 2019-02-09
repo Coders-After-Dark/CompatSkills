@@ -20,7 +20,7 @@ public class ItemChangeHandler {
     @SubscribeEvent
     public void interactEvent(PlayerInteractEvent event) {
         //Invalidate ItemRequirements when interacting because it is possible that the durability changed for example
-        RequirementCache.invalidateCache(event.getEntityPlayer().getUniqueID(), ItemRequirement.class);
+        RequirementCache.invalidateCache(event.getEntityPlayer(), ItemRequirement.class);
         //TODO: keep track of the held and offhand item of the player as copies? Then it can see if they changed.
         //TODO Cont: Probably is not actually needed because of the performance improvements with the caching elsewhere
     }

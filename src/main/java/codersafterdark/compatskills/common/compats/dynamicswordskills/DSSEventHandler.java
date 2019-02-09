@@ -7,11 +7,11 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class DSSEventHandler {
     @SubscribeEvent
     public void interactEvent(PlayerInteractEvent.RightClickItem event) {
-        RequirementCache.invalidateCache(event.getEntityPlayer().getUniqueID(), DSSkillRequirement.class);
+        RequirementCache.invalidateCache(event.getEntityPlayer(), DSSkillRequirement.class);
     }
 
     @SubscribeEvent
     public void interactEvent(PlayerInteractEvent.RightClickBlock event) {
-        RequirementCache.invalidateCache(event.getEntityPlayer().getUniqueID(), DSSkillRequirement.class);
+        RequirementCache.invalidateCache(event.getEntityPlayer(), DSSkillRequirement.class);
     }
 }
