@@ -26,7 +26,7 @@ public class EntityDamageEventHandler {
         if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
             if (player.getEntityWorld().isRemote) {
-                TextComponentTranslation error = new TextComponentTranslation("compatskills.entity.entityDamageError");
+                TextComponentTranslation error = new TextComponentTranslation("compatskills.error.entity.damage");
                 player.sendStatusMessage(Utils.getError(requirementHolder, data, error), false);
             }
         }

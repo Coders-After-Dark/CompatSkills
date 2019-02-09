@@ -39,7 +39,7 @@ public class TaskRequirement implements ITask {
 
     @Override
     public String getUnlocalisedName() {
-        return "compatskills.betterquesting.requirementtask";
+        return "compatskills.misc.betterquesting.requirement_task";
     }
 
     @Override

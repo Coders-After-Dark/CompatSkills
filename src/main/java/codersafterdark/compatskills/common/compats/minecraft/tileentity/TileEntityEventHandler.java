@@ -43,7 +43,7 @@ public class TileEntityEventHandler {
                 if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
                     event.setCanceled(true);
                     if (player.getEntityWorld().isRemote) {
-                        TextComponentTranslation error = new TextComponentTranslation("compatskills.tileentity.interactError");
+                        TextComponentTranslation error = new TextComponentTranslation("compatskills.error.tile_entity.interact");
                         player.sendStatusMessage(Utils.getError(requirementHolder, data, error), false);
                     }
                 }

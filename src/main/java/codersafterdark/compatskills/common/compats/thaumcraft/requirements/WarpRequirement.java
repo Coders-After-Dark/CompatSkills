@@ -12,7 +12,7 @@ public class WarpRequirement extends Requirement {
 
     public WarpRequirement(int warp) {
         this.warp = warp;
-        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.DARK_PURPLE + new TextComponentTranslation("compatskills.misc.requirements.warpRequirement", "%s", warp).getUnformattedComponentText();
+        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.DARK_PURPLE + new TextComponentTranslation("compatskills.requirements.format.warp", "%s", warp).getUnformattedComponentText();
     }
 
     @Override

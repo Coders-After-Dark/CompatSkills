@@ -1,8 +1,9 @@
 # Changelog
 
 ## 1.13.4
-- Fixed Russian lang file using wrong capitalization for resource pack format
+- Fixed Russian lang file using wrong capitalization for resource pack format.
 - (Internal) Change how a couple cache invalidate calls are called to be consistent with the other calls.
+- Made the Language file keys a lot more unified naming scheme, as well as made them all lowercase.
 
 
 ## 1.13.3

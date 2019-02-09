@@ -34,9 +34,9 @@ public class SkillLockHandler {
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new SkillLock(skill, level));
         if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
-            TextComponentTranslation error = new TextComponentTranslation("compatskills.reskillable.addLevelLockError");
-            TextComponentTranslation error2 = new TextComponentTranslation("compatskills.reskillable.addLevelLockError2");
-            TextComponentTranslation error3 = new TextComponentTranslation("compatskills.misc.Requirements");
+            TextComponentTranslation error = new TextComponentTranslation("compatskills.error.reskillable.level_lock");
+            TextComponentTranslation error2 = new TextComponentTranslation("compatskills.error.reskillable.level_lock_2");
+            TextComponentTranslation error3 = new TextComponentTranslation("compatskills.misc.requirements");
             String reqString = requirementHolder.getRequirements().stream().map(requirement -> "\n " + requirement.getToolTip(data) + ' ').collect(Collectors.joining());
             ITextComponent textComponent = new TextComponentString(error.getUnformattedComponentText() + '\n' + error2.getUnformattedComponentText() + '\n' +
                     error3.getUnformattedComponentText() + ' ' + reqString);

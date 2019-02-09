@@ -26,7 +26,7 @@ public class RitualHandler {
         RequirementHolder requirementHolder = LevelLockHandler.getLocks(Ritual.class, event.getRitual());
         if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
-            TextComponentTranslation error = new TextComponentTranslation("compatskills.bloodmagic.ritualError");
+            TextComponentTranslation error = new TextComponentTranslation("compatskills.error.bloodmagic.ritual");
             String reqs = requirementHolder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
             player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + CompatSkillConstants.REQUIREMENT_STRING + reqs), false);
         }

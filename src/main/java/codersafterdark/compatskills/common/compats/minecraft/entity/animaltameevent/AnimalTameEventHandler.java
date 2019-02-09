@@ -25,7 +25,7 @@ public class AnimalTameEventHandler {
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new EntityTameKey(event.getAnimal()));
         if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
-            TextComponentTranslation error = new TextComponentTranslation("compatskills.entity.entityTameError");
+            TextComponentTranslation error = new TextComponentTranslation("compatskills.error.entity.tame");
             player.sendStatusMessage(Utils.getError(requirementHolder, data, error), false);
         }
     }

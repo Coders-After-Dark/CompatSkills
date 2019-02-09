@@ -17,7 +17,7 @@ public class DSSkillRequirement extends Requirement {
     public DSSkillRequirement(SkillBase skill, int level) {
         this.skill = skill;
         this.level = level;
-        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.GOLD +  new TextComponentTranslation("compatskills.misc.requirements.dssRequirementFormat", "%s", skill.getDisplayName(),
+        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.GOLD +  new TextComponentTranslation("compatskills.requirements.format.dss", "%s", skill.getDisplayName(),
                 level).getUnformattedComponentText();
     }
 

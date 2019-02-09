@@ -25,7 +25,7 @@ public class DimensionLockHandler {
         RequirementHolder requirementHolder = LevelLockHandler.getLockByKey(new DimensionLockKey(event.getDimension()));
         if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
-            TextComponentTranslation error = new TextComponentTranslation("compatskills.dimension.travelError");
+            TextComponentTranslation error = new TextComponentTranslation("compatskills.error.dimension.travel");
             player.sendStatusMessage(Utils.getError(requirementHolder, data, error), false);
         }
     }

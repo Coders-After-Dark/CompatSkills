@@ -27,7 +27,7 @@ public class BindHandler {
         RequirementHolder requirementHolder = LevelLockHandler.getSkillLock(stack);
         if (!requirementHolder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(requirementHolder)) {
             event.setCanceled(true);
-            TextComponentTranslation error = new TextComponentTranslation("compatskills.bloodmagic.bindingError");
+            TextComponentTranslation error = new TextComponentTranslation("compatskills.error.bloodmagic.binding");
             String reqs = requirementHolder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
             player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + CompatSkillConstants.REQUIREMENT_STRING + reqs), false);
         }

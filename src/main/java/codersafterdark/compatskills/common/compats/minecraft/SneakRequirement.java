@@ -8,7 +8,7 @@ import net.minecraft.util.text.TextFormatting;
 
 public class SneakRequirement extends Requirement {
     public SneakRequirement() {
-        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.sneakFormat", "%s").getUnformattedComponentText();
+        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.requirements.format.sneak", "%s").getUnformattedComponentText();
     }
 
     @Override

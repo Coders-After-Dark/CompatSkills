@@ -30,7 +30,7 @@ public class ItemRequirement extends Requirement {
         if (key.getTag() != null) {
             displayName += " With NBT Tag: " + key.getTag().toString();//Maybe format NBT slightly better
         }
-        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.itemRequirementFormat", "%s", displayName.trim()).getUnformattedComponentText();
+        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.requirements.format.item", "%s", displayName.trim()).getUnformattedComponentText();
     }
 
     @Override

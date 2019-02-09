@@ -41,7 +41,7 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                     if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
                         if (holder.isRealLock()) {
                             PlayerData playerData = PlayerDataHandler.get(player);
-                            TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
+                            TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.requirements");
                             probeInfo.text(TextFormatting.GRAY + error.getUnformattedComponentText());
                             holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(probeInfo::text);
                         }
@@ -53,7 +53,7 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                     }
                 } else if (holder.isRealLock()) {
                     PlayerData playerData = PlayerDataHandler.get(player);
-                    TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
+                    TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.requirements");
                     probeInfo.text(TextFormatting.GRAY + error.getUnformattedComponentText());
                     holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(probeInfo::text);
                 }

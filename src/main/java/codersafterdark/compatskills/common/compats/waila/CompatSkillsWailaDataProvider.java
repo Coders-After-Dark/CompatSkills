@@ -27,20 +27,20 @@ public class CompatSkillsWailaDataProvider implements IWailaDataProvider {
                     if (holder.isRealLock()) {
                         EntityPlayer player = accessor.getPlayer();
                         PlayerData playerData = PlayerDataHandler.get(player);
-                        TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
+                        TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.requirements");
                         currenttip.add(error.getUnformattedComponentText());
                         holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(currenttip::add);
                     }
                 } else {
                     if (holder.isRealLock()) {
-                        TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Shift");
+                        TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.shift");
                         currenttip.add(error.getUnformattedComponentText());
                     }
                 }
             } else if (holder.isRealLock()) {
                 EntityPlayer player = accessor.getPlayer();
                 PlayerData playerData = PlayerDataHandler.get(player);
-                TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Requirements");
+                TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.requirements");
                 currenttip.add(error.getUnformattedComponentText());
                 holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(currenttip::add);
             }

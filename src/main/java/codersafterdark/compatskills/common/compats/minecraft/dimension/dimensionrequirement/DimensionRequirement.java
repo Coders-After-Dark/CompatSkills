@@ -13,7 +13,7 @@ public class DimensionRequirement extends Requirement {
 
     public DimensionRequirement(int dimension) {
         this.dimension = dimension;
-        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.misc.dimensionFormat", "%s", dimension).getUnformattedComponentText();
+        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.requirements.format.dimension", "%s", dimension).getUnformattedComponentText();
     }
 
     @Override

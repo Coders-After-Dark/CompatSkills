@@ -35,7 +35,7 @@ public class TransmutationLockHandler {
                 event.setCanceled(true);
                 if (player.getEntityWorld().isRemote) {
                     String reqs = holder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
-                    TextComponentTranslation error = new TextComponentTranslation("compatskills.projecte.condenserError");
+                    TextComponentTranslation error = new TextComponentTranslation("compatskills.error.projecte.condenser");
                     player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + CompatSkillConstants.REQUIREMENT_STRING + reqs), false);
                 }
             }
@@ -55,7 +55,7 @@ public class TransmutationLockHandler {
                 event.setCanceled(true);
                 if (player.getEntityWorld().isRemote) {
                     String reqs = holder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
-                    TextComponentTranslation error = new TextComponentTranslation("compatskills.projecte.learnError");
+                    TextComponentTranslation error = new TextComponentTranslation("compatskills.error.projecte.learn");
                     player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + CompatSkillConstants.REQUIREMENT_STRING + reqs), false);
                 }
             }
@@ -76,12 +76,12 @@ public class TransmutationLockHandler {
 
     //TODO should this have sideonly annotation
     public List<String> transmutationTooltip(ToolTipHandler.ToolTipInfo info) {
-        return emcTooltip(info, TextFormatting.DARK_RED + new TextComponentTranslation("compatskills.projecte.transmutationWarning").getUnformattedComponentText());
+        return emcTooltip(info, TextFormatting.DARK_RED + new TextComponentTranslation("compatskills.warn.projecte.transmutation").getUnformattedComponentText());
     }
 
     //TODO should this have sideonly annotation
     public List<String> condenserTooltip(ToolTipHandler.ToolTipInfo info) {
-        return emcTooltip(info, TextFormatting.YELLOW + new TextComponentTranslation("compatskills.projecte.condenserWarning").getUnformattedComponentText());
+        return emcTooltip(info, TextFormatting.YELLOW + new TextComponentTranslation("compatskills.warn.projecte.condenser").getUnformattedComponentText());
     }
 
     private List<String> emcTooltip(ToolTipHandler.ToolTipInfo info, String message) {

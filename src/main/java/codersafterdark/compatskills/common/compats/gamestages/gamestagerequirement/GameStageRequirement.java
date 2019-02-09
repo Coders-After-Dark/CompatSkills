@@ -12,7 +12,7 @@ public class GameStageRequirement extends Requirement {
 
     public GameStageRequirement(String gamestage) {
         this.gamestage = gamestage;
-        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.BLUE + new TextComponentTranslation("compatskills.misc.gamestageFormat", "%s", gamestage).getUnformattedComponentText();;
+        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.BLUE + new TextComponentTranslation("compatskills.requirements.format.gamestage", "%s", gamestage).getUnformattedComponentText();;
     }
 
     @Override

@@ -26,7 +26,7 @@ public class ResearchHandler {
         RequirementHolder holder = LevelLockHandler.getLockByKey(new ResearchKey(event.getResearchKey()));
         if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
             event.setCanceled(true);
-            TextComponentTranslation error = new TextComponentTranslation("compatskills.thaumcraft.researchError");
+            TextComponentTranslation error = new TextComponentTranslation("compatskills.error.thaumcraft.research");
             String reqs = holder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
             player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + CompatSkillConstants.REQUIREMENT_STRING + reqs), false);
         }

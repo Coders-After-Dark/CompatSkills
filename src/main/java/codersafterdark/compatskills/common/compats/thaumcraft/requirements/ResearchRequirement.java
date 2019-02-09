@@ -12,7 +12,7 @@ public class ResearchRequirement extends Requirement {
 
     public ResearchRequirement(String researchKey) {
         this.researchKey = researchKey;
-        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.GOLD + new TextComponentTranslation("compatskills.misc.requirements.researchRequirement", "%s", researchKey).getUnformattedComponentText();
+        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.GOLD + new TextComponentTranslation("compatskills.requirements.format.research", "%s", researchKey).getUnformattedComponentText();
     }
 
     @Override

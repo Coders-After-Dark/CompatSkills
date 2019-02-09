@@ -24,7 +24,7 @@ public class OreDictRequirement extends Requirement {
         if (tag != null) {
             name += " With NBT Tag: " + tag;//Maybe format NBT slightly better
         }
-        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.oreDictRequirementFormat", "%s", name).getUnformattedComponentText();
+        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.requirements.format.ore_dict", "%s", name).getUnformattedComponentText();
     }
 
     @Override

@@ -13,7 +13,7 @@ public class HealthRequirement extends Requirement {
 
     public HealthRequirement(double percent) {
         this.percent = percent;
-        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.DARK_GREEN + new TextComponentTranslation("compatskills.misc.healthFormat", "%s", percent).getUnformattedComponentText();
+        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.DARK_GREEN + new TextComponentTranslation("compatskills.requirements.format.health", "%s", percent).getUnformattedComponentText();
     }
 
     @Override

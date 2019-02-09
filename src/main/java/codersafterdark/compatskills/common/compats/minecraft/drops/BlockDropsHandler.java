@@ -47,14 +47,14 @@ public class BlockDropsHandler {
                 errored = true;
                 event.getDrops().remove(entry.getValue());
                 if (CompatSkillsConfig.Configs.Minecraft.BlockDropsError) {
-                    TextComponentTranslation error = new TextComponentTranslation("compatskills.drops.error");
+                    TextComponentTranslation error = new TextComponentTranslation("compatskills.error.drops");
                     player.sendStatusMessage(Utils.getError(holder, data, error), false);
                 }
             }
         }
 
         if (!CompatSkillsConfig.Configs.Minecraft.BlockDropsError && errored) {
-            TextComponentTranslation error = new TextComponentTranslation("compatskills.drops.error");
+            TextComponentTranslation error = new TextComponentTranslation("compatskills.error.drops");
             player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText()), true);
         }
     }

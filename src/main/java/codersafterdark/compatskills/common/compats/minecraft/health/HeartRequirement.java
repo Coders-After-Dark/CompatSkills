@@ -13,7 +13,7 @@ public class HeartRequirement extends Requirement {
 
     public HeartRequirement(int hearts) {
         this.hearts = hearts;
-        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.YELLOW + new TextComponentTranslation("compatskills.misc.heartsFormat", "%s", hearts).getUnformattedComponentText();
+        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.YELLOW + new TextComponentTranslation("compatskills.requirements.format.hearts", "%s", hearts).getUnformattedComponentText();
     }
 
     @Override

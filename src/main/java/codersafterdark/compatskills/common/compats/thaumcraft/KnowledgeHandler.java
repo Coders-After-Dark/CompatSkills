@@ -27,7 +27,7 @@ public class KnowledgeHandler {
         RequirementHolder holder = LevelLockHandler.getLockByKey(new KnowledgeKey(event.getCategory(), event.getType().getAbbreviation()));
         if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
             event.setCanceled(true);
-            TextComponentTranslation error = new TextComponentTranslation("compatskills.thaumcraft.knowledgeError");
+            TextComponentTranslation error = new TextComponentTranslation("compatskills.error.thaumcraft.knowledge");
             String reqs = holder.getRequirements().stream().map(req -> '\n' + req.getToolTip(data)).collect(Collectors.joining());
             player.sendStatusMessage(new TextComponentString(error.getUnformattedComponentText() + ' ' +
                     ResearchCategories.getCategoryName(event.getCategory().key) + " (" + event.getType() + ")." +

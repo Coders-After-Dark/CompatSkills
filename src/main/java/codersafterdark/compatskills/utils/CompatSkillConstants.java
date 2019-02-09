@@ -14,5 +14,5 @@ public class CompatSkillConstants {
     public static final String PROXY_COMMON = "codersafterdark.compatskills.common.CommonProxy";
     public static final String PROXY_CLIENT = "codersafterdark.compatskills.client.ClientProxy";
 
-    public static final String REQUIREMENT_STRING = '\n' + new TextComponentTranslation("compatskills.misc.Requirements").getUnformattedComponentText() + ' ';
+    public static final String REQUIREMENT_STRING = '\n' + new TextComponentTranslation("compatskills.misc.requirements").getUnformattedComponentText() + ' ';
 }

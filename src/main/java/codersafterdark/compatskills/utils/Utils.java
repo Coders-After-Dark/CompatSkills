@@ -22,7 +22,7 @@ public class Utils {
     }
 
     public static ITextComponent getError(RequirementHolder holder, PlayerData data, TextComponentTranslation error) {
-        TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.Requirements");
+        TextComponentTranslation error2 = new TextComponentTranslation("compatskills.misc.requirements");
         String reqString = holder.getRequirements().stream().map(requirement -> "\n " + requirement.getToolTip(data) + ' ').collect(Collectors.joining());
         return new TextComponentString(error.getUnformattedComponentText() + ' ' + error2.getUnformattedComponentText() + ' ' + reqString);
     }

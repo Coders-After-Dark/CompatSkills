@@ -21,7 +21,7 @@ public class ExcavationLockHandler {
 
         RequirementHolder holder = OreExcavationCompatHandler.getHolder();
         if (!holder.equals(LevelLockHandler.EMPTY_LOCK) && !data.matchStats(holder)) {
-            TextComponentTranslation error = new TextComponentTranslation("compatskills.excavation.general.error");
+            TextComponentTranslation error = new TextComponentTranslation("compatskills.error.ore_excavation");
             player.sendStatusMessage(Utils.getError(holder, data, error), false);
             event.setCanceled(true);
         } else {

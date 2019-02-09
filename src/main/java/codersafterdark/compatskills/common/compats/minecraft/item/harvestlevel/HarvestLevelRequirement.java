@@ -15,7 +15,7 @@ public class HarvestLevelRequirement extends Requirement { //TODO support option
 
     public HarvestLevelRequirement(int level) {
         this.harvestLevel = level;
-        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.misc.requirements.harvestLevelRequirementFormat", "%s", harvestLevel).getUnformattedComponentText();
+        this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.requirements.format.harvest_level", "%s", harvestLevel).getUnformattedComponentText();
     }
 
     @Override
