@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.14.0
+- Added a "looking at" requirement.
+  - `looking_at|block|optional properties`
+    - `block` is the block's registry name, and if properties are given they are in the json form for properties.
+
+
 ## 1.13.4
 - Fixed Russian lang file using wrong capitalization for resource pack format.
 - (Internal) Change how a couple cache invalidate calls are called to be consistent with the other calls.

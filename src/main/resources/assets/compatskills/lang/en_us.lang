@@ -8,6 +8,7 @@ compatskills.requirements.format.item=Item: %s%s
 compatskills.requirements.format.sneak=%sSneaking
 compatskills.requirements.format.health=Percent Health: %s%s
 compatskills.requirements.format.hearts=Half Hearts: %s%s
+compatskills.requirements.format.looking_at=Looking at: %s%s
 
 ## Forge
 compatskills.requirements.format.ore_dict=Ore Dictionary Entry: %s%s

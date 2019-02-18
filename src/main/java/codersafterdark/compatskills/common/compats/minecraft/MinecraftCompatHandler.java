@@ -24,6 +24,7 @@ import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.B
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.HarvestLevelRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.ToolHarvestLock;
 import codersafterdark.compatskills.common.compats.minecraft.item.weapon.AttackDamageLockKey;
+import codersafterdark.compatskills.common.compats.minecraft.looking.LookingAtBlockRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityLockKey;
@@ -89,21 +90,20 @@ public class MinecraftCompatHandler extends CompatModuleBase {
         registry.addRequirementHandler("!dim", input -> registry.getRequirement("not|dim|" + input));
         registry.addRequirementHandler("ore", input -> {
             String[] inputInfo = input.split("\\|");
-            //(modid,empty, or modid:item:optional metadata)|nbt as json
-            String type = inputInfo[0]; //mod, generic, or item
+            //oredict entry|nbt as json
+            String ore = inputInfo[0];
+            if (!OreDictionary.doesOreNameExist(ore)) {
+                throw new RequirementException("Ore dictionary entry '" + ore + "' not found.");
+            }
             NBTTagCompound nbt = null;
             if (inputInfo.length > 1) {
-                String nbtString = input.substring(type.length() + 1).trim();
+                String nbtString = input.substring(ore.length() + 1).trim();
                 try {
                     nbt = JsonToNBT.getTagFromJson(nbtString);
                 } catch (NBTException e) {
                     //Invalid NBT
                     throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
                 }
-            }
-            String ore = inputInfo[0];
-            if (!OreDictionary.doesOreNameExist(ore)) {
-                throw new RequirementException("Ore dictionary entry '" + ore + "' not found.");
             }
             return new OreDictRequirement(ore, nbt);
         });
@@ -157,6 +157,10 @@ public class MinecraftCompatHandler extends CompatModuleBase {
             }
             return new ItemRequirement(key);
         });
+
+        registry.addRequirementHandler("looking_at", LookingAtBlockRequirement::fromString);
+        //TODO: Implement a way to check what entity the player is looking at then uncomment this line
+        //registry.addRequirementHandler("looking_at_entity", LookingAtEntityRequirement::fromString);
         if (CompatSkills.craftweakerLoaded) {
             CompatSkills.registerCommand(new TileEntityCommand());
         }
