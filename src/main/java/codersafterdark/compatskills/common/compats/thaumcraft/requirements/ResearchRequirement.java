@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.thaumcraft.requirements;
 
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
+import codersafterdark.reskillable.api.requirement.RequirementException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -33,5 +34,12 @@ public class ResearchRequirement extends Requirement {
     @Override
     public int hashCode() {
         return researchKey.hashCode();
+    }
+
+    public static ResearchRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No research key given.");
+        }
+        return new ResearchRequirement(input);
     }
 }

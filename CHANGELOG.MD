@@ -4,6 +4,7 @@
 - Added a "looking at" requirement.
   - `looking_at|block|optional properties`
     - `block` is the block's registry name, and if properties are given they are in the json form for properties.
+- Made the code for registering requirements easier to read.
 
 
 ## 1.13.4

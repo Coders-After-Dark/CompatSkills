@@ -13,7 +13,6 @@ import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.reskillable.api.ReskillableAPI;
 import codersafterdark.reskillable.api.data.LockKey;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.api.requirement.RequirementException;
 import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraftforge.common.MinecraftForge;
@@ -27,24 +26,8 @@ public class ThaumcraftCompatHandler extends CompatModuleBase {
         ENABLED = true;
         MinecraftForge.EVENT_BUS.register(new TCInvalidateHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
-        registry.addRequirementHandler("warp", input -> {
-            try {
-                int warp = Integer.parseInt(input);
-                if (warp >= 0) {
-                    return new WarpRequirement(warp);
-                } else {
-                    throw new RequirementException("Warp level must be positive, received: '" + input + "'.");
-                }
-            } catch (NumberFormatException e) {
-                throw new RequirementException("Invalid warp level '" + input + "'.");
-            }
-        });
-        registry.addRequirementHandler("research", input -> {
-            if (input == null) {
-                throw new RequirementException("No research key given.");
-            }
-            return new ResearchRequirement(input);
-        });
+        registry.addRequirementHandler("warp", WarpRequirement::fromString);
+        registry.addRequirementHandler("research", ResearchRequirement::fromString);
     }
 
     @Override

@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.minecraft.health;
 
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
+import codersafterdark.reskillable.api.requirement.RequirementException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -47,5 +48,16 @@ public class HeartRequirement extends Requirement {
     @Override
     public int hashCode() {
         return Objects.hash(hearts);
+    }
+
+    public static HeartRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No heart number given.");
+        }
+        try {
+            return new HeartRequirement(Integer.parseInt(input));
+        } catch (NumberFormatException e) {
+            throw new RequirementException("Invalid number of hearts '" + input + "'.");
+        }
     }
 }

@@ -30,17 +30,12 @@ import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEnti
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityLockKey;
 import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.reskillable.api.ReskillableAPI;
-import codersafterdark.reskillable.api.data.*;
-import codersafterdark.reskillable.api.requirement.RequirementException;
+import codersafterdark.reskillable.api.data.LockKey;
+import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.requirement.RequirementRegistry;
 import codersafterdark.reskillable.base.LevelLockHandler;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.nbt.NBTException;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -59,105 +54,13 @@ public class MinecraftCompatHandler extends CompatModuleBase {
         MinecraftForge.EVENT_BUS.register(new HealthChangeHandler());
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("sneaking", input -> new SneakRequirement());
-        registry.addRequirementHandler("hearts", input -> {
-            try {
-                return new HeartRequirement(Integer.parseInt(input));
-            } catch (NumberFormatException e) {
-                throw new RequirementException("Invalid number of hearts '" + input + "'.");
-            }
-        });
-        registry.addRequirementHandler("health", input -> {
-            try {
-                return new HealthRequirement(Double.parseDouble(input));
-            } catch (NumberFormatException e) {
-                throw new RequirementException("Invalid health percentage '" + input + "'.");
-            }
-        });
-        registry.addRequirementHandler("harvest", input -> {
-            try {
-                return new HarvestLevelRequirement(Integer.parseInt(input));
-            } catch (NumberFormatException e) {
-                throw new RequirementException("Invalid harvest level '" + input + "'.");
-            }
-        });
-        registry.addRequirementHandler("dim", input -> {
-            try {
-                return new DimensionRequirement(Integer.parseInt(input));
-            } catch (NumberFormatException e) {
-                throw new RequirementException("Invalid dimension id '" + input + "'.");
-            }
-        });
+        registry.addRequirementHandler("hearts", HeartRequirement::fromString);
+        registry.addRequirementHandler("health", HealthRequirement::fromString);
+        registry.addRequirementHandler("harvest", HarvestLevelRequirement::fromString);
+        registry.addRequirementHandler("dim", DimensionRequirement::fromString);
         registry.addRequirementHandler("!dim", input -> registry.getRequirement("not|dim|" + input));
-        registry.addRequirementHandler("ore", input -> {
-            String[] inputInfo = input.split("\\|");
-            //oredict entry|nbt as json
-            String ore = inputInfo[0];
-            if (!OreDictionary.doesOreNameExist(ore)) {
-                throw new RequirementException("Ore dictionary entry '" + ore + "' not found.");
-            }
-            NBTTagCompound nbt = null;
-            if (inputInfo.length > 1) {
-                String nbtString = input.substring(ore.length() + 1).trim();
-                try {
-                    nbt = JsonToNBT.getTagFromJson(nbtString);
-                } catch (NBTException e) {
-                    //Invalid NBT
-                    throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
-                }
-            }
-            return new OreDictRequirement(ore, nbt);
-        });
-        registry.addRequirementHandler("stack", input -> {
-            String[] inputInfo = input.split("\\|");
-            //(modid,empty, or modid:item:optional metadata)|nbt as json
-            String type = inputInfo[0]; //mod, generic, or item
-            NBTTagCompound nbt = null;
-            if (inputInfo.length > 1) {
-                String nbtString = input.substring(type.length() + 1).trim();
-                try {
-                    nbt = JsonToNBT.getTagFromJson(nbtString);
-                } catch (NBTException e) {
-                    //Invalid NBT
-                    throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
-                }
-            }
-            NBTLockKey key;
-            type = type.trim();
-            if (type.isEmpty()) {
-                if (nbt == null) {
-                    throw new RequirementException("Invalid Item Requirement format. No input data found.");
-                }
-                key = new GenericNBTLockKey(nbt);
-            } else {
-                String[] itemParts = type.split(":");
-                if (itemParts.length == 1) {//is a modid
-                    //TODO should it check if a mod is loaded, and would this cause issues in when requirements are read from config
-                    key = new ModLockKey(type, nbt);
-                } else {
-                    int metadata = 0;
-                    if (itemParts.length > 2) {
-                        String meta = itemParts[2];
-                        try {
-                            if (meta.equals("*")) {
-                                metadata = OreDictionary.WILDCARD_VALUE;
-                            } else {
-                                metadata = Integer.parseInt(meta);
-                            }
-                            type = itemParts[0] + ':' + itemParts[1];
-                        } catch (NumberFormatException ignored) {
-                            //Do nothing if the meta is not a valid number or wildcard (Maybe it somehow is part of the item name)
-                        }
-                    }
-                    Item item = Item.getByNameOrId(type);
-                    if (item == null) {
-                        throw new RequirementException("No Item found matching: '" + type + "'.");
-                    }
-                    key = new ItemInfo(item, metadata, nbt);
-                }
-            }
-            return new ItemRequirement(key);
-        });
-
+        registry.addRequirementHandler("ore", OreDictRequirement::fromString);
+        registry.addRequirementHandler("stack", ItemRequirement::fromString);
         registry.addRequirementHandler("looking_at", LookingAtBlockRequirement::fromString);
         //TODO: Implement a way to check what entity the player is looking at then uncomment this line
         //registry.addRequirementHandler("looking_at_entity", LookingAtEntityRequirement::fromString);

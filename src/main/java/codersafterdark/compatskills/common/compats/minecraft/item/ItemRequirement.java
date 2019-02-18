@@ -3,11 +3,17 @@ package codersafterdark.compatskills.common.compats.minecraft.item;
 import codersafterdark.reskillable.api.data.*;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
+import codersafterdark.reskillable.api.requirement.RequirementException;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.JsonToNBT;
+import net.minecraft.nbt.NBTException;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemRequirement extends Requirement {
     //TODO: maybe make an API endpoint in Reskillable to somehow access the types of things that can be created from ItemStack
@@ -129,5 +135,59 @@ public class ItemRequirement extends Requirement {
     @Override
     public int hashCode() {
         return key.hashCode();
+    }
+
+    public static ItemRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No Item given.");
+        }
+        String[] inputInfo = input.split("\\|");
+        //(modid,empty, or modid:item:optional metadata)|nbt as json
+        String type = inputInfo[0]; //mod, generic, or item
+        NBTTagCompound nbt = null;
+        if (inputInfo.length > 1) {
+            String nbtString = input.substring(type.length() + 1).trim();
+            try {
+                nbt = JsonToNBT.getTagFromJson(nbtString);
+            } catch (NBTException e) {
+                //Invalid NBT
+                throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
+            }
+        }
+        NBTLockKey key;
+        type = type.trim();
+        if (type.isEmpty()) {
+            if (nbt == null) {
+                throw new RequirementException("Invalid Item Requirement format. No input data found.");
+            }
+            key = new GenericNBTLockKey(nbt);
+        } else {
+            String[] itemParts = type.split(":");
+            if (itemParts.length == 1) {//is a modid
+                //TODO should it check if a mod is loaded, and would this cause issues in when requirements are read from config
+                key = new ModLockKey(type, nbt);
+            } else {
+                int metadata = 0;
+                if (itemParts.length > 2) {
+                    String meta = itemParts[2];
+                    try {
+                        if (meta.equals("*")) {
+                            metadata = OreDictionary.WILDCARD_VALUE;
+                        } else {
+                            metadata = Integer.parseInt(meta);
+                        }
+                        type = itemParts[0] + ':' + itemParts[1];
+                    } catch (NumberFormatException ignored) {
+                        //Do nothing if the meta is not a valid number or wildcard (Maybe it somehow is part of the item name)
+                    }
+                }
+                Item item = Item.getByNameOrId(type);
+                if (item == null) {
+                    throw new RequirementException("No Item found matching: '" + type + "'.");
+                }
+                key = new ItemInfo(item, metadata, nbt);
+            }
+        }
+        return new ItemRequirement(key);
     }
 }

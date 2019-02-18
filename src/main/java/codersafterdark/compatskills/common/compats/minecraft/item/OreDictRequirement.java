@@ -3,8 +3,11 @@ package codersafterdark.compatskills.common.compats.minecraft.item;
 import codersafterdark.reskillable.api.data.GenericNBTLockKey;
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
+import codersafterdark.reskillable.api.requirement.RequirementException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.JsonToNBT;
+import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -76,5 +79,28 @@ public class OreDictRequirement extends Requirement {
     @Override
     public int hashCode() {
         return Objects.hash(oreEntry, tag);
+    }
+
+    public static OreDictRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No Ore dictionary entry given.");
+        }
+        String[] inputInfo = input.split("\\|");
+        //oredict entry|nbt as json
+        String ore = inputInfo[0];
+        if (!OreDictionary.doesOreNameExist(ore)) {
+            throw new RequirementException("Ore dictionary entry '" + ore + "' not found.");
+        }
+        NBTTagCompound nbt = null;
+        if (inputInfo.length > 1) {
+            String nbtString = input.substring(ore.length() + 1).trim();
+            try {
+                nbt = JsonToNBT.getTagFromJson(nbtString);
+            } catch (NBTException e) {
+                //Invalid NBT
+                throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
+            }
+        }
+        return new OreDictRequirement(ore, nbt);
     }
 }

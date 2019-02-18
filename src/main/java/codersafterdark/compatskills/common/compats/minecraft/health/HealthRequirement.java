@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.minecraft.health;
 
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
+import codersafterdark.reskillable.api.requirement.RequirementException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -47,5 +48,16 @@ public class HealthRequirement extends Requirement {
     @Override
     public int hashCode() {
         return Objects.hash(percent);
+    }
+
+    public static HealthRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No health percentage given.");
+        }
+        try {
+            return new HealthRequirement(Double.parseDouble(input));
+        } catch (NumberFormatException e) {
+            throw new RequirementException("Invalid health percentage '" + input + "'.");
+        }
     }
 }

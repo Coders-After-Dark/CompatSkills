@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.thaumcraft.requirements;
 
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
+import codersafterdark.reskillable.api.requirement.RequirementException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
@@ -45,5 +46,21 @@ public class WarpRequirement extends Requirement {
     @Override
     public boolean isCacheable() {
         return false;
+    }
+
+    public static WarpRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No warp value given.");
+        }
+        int warp;
+        try {
+            warp = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new RequirementException("Invalid warp level '" + input + "'.");
+        }
+        if (warp >= 0) {
+            return new WarpRequirement(warp);
+        }
+        throw new RequirementException("Warp level must be positive, received: '" + input + "'.");
     }
 }

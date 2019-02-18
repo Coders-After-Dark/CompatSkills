@@ -2,12 +2,14 @@ package codersafterdark.compatskills.common.compats.minecraft.dimension.dimensio
 
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
+import codersafterdark.reskillable.api.requirement.RequirementException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 
 import java.util.Objects;
 
+//TODO: Transition this over to using dimension names
 public class DimensionRequirement extends Requirement {
     private final int dimension;
 
@@ -33,5 +35,16 @@ public class DimensionRequirement extends Requirement {
     @Override
     public int hashCode() {
         return Objects.hash(dimension);
+    }
+
+    public static DimensionRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No dimension id given.");
+        }
+        try {
+            return new DimensionRequirement(Integer.parseInt(input));
+        } catch (NumberFormatException e) {
+            throw new RequirementException("Invalid dimension id '" + input + "'.");
+        }
     }
 }

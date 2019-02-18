@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel;
 
 import codersafterdark.reskillable.api.requirement.Requirement;
 import codersafterdark.reskillable.api.requirement.RequirementComparision;
+import codersafterdark.reskillable.api.requirement.RequirementException;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -51,5 +52,16 @@ public class HarvestLevelRequirement extends Requirement { //TODO support option
     @Override
     public int hashCode() {
         return Objects.hash(harvestLevel);
+    }
+
+    public static HarvestLevelRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No harvest level given.");
+        }
+        try {
+            return new HarvestLevelRequirement(Integer.parseInt(input));
+        } catch (NumberFormatException e) {
+            throw new RequirementException("Invalid harvest level '" + input + "'.");
+        }
     }
 }
