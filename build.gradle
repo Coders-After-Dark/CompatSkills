@@ -91,6 +91,7 @@ dependencies {
     deobfCompile "better-questing:BetterQuesting:api:3.5.282"
     deobfCompile "ore-excavation:OreExcavation:deobf:1.4.133"
     deobfCompile "cofh:RedstoneFlux:1.12-2.1.0.6:universal"
+    deobfCompile "astral-sorcery:astralsorcery:1.12.2:1.10.11"
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tinkers_version}"
     deobfCompile "slimeknights.mantle:Mantle:${mantle_minecraft_version}-${mantle_version}"
     deobfCompile("blusunrize:ImmersiveEngineering:${ieVersion}") {

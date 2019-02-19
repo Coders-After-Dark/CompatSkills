@@ -1,6 +1,7 @@
 package codersafterdark.compatskills.utils;
 
 import codersafterdark.compatskills.CompatSkills;
+import codersafterdark.compatskills.common.compats.astralsorcery.AstralCompatHandler;
 import codersafterdark.compatskills.common.compats.baubles.BaublesCompatHandler;
 import codersafterdark.compatskills.common.compats.betterquesting.BetterQuestingHandler;
 import codersafterdark.compatskills.common.compats.bloodmagic.BMCompatHandler;
@@ -31,6 +32,7 @@ public abstract class CompatModuleBase {
     private static boolean serverStartingDone;
 
     static {
+        moduleClasses.put("astralsorcery", AstralCompatHandler.class);
         moduleClasses.put("baubles", BaublesCompatHandler.class);
         moduleClasses.put("betterquesting", BetterQuestingHandler.class);
         moduleClasses.put("bloodmagic", BMCompatHandler.class);

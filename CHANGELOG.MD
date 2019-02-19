@@ -5,6 +5,20 @@
   - `looking_at|block|optional properties`
     - `block` is the block's registry name, and if properties are given they are in the json form for properties.
 - Made the code for registering requirements easier to read.
+- Added some requirements based on Astral Sorcery data states. The Constellation name is the unlocalized name given by `/ct astralConstellations`.
+  - `constellation|constellation_name|<seen:known>`
+    - Last parameter defaults to seen if not given.
+    - Seen means that you have found the constellation via Constellation papers, and known means you have found it in the sky with a telescope. 
+  - `attuned|constellation_name`
+    - Must be a Major Constellation
+  - `astral_tier|tier`
+    - Current Valid tiers are:
+      - DISCOVERY
+      - BASIC_CRAFT
+      - ATTUNEMENT
+      - CONSTELLATION_CRAFT
+      - TRAIT_CRAFT
+      - BRILLIANCE
 
 
 ## 1.13.4

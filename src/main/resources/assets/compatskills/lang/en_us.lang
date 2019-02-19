@@ -1,4 +1,10 @@
 # FORMATS
+## Astral Sorcery
+compatskills.requirements.format.constellation.seen=Constellation Seen: %s%s
+compatskills.requirements.format.constellation.known=Constellation Discovered: %s%s
+compatskills.requirements.format.attuned=Attuned: %s%s
+compatskills.requirements.format.astral_tier=Tier: %s%s
+
 ## GameStages
 compatskills.requirements.format.gamestage=GameStage: %s%s
 
