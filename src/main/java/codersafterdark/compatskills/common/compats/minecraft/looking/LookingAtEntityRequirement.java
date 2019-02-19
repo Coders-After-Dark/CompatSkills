@@ -32,8 +32,8 @@ public class LookingAtEntityRequirement extends Requirement {
     }
 
     @Override
-    public RequirementComparision matches(Requirement o) {
-        return o instanceof LookingAtEntityRequirement && entityID.equals(((LookingAtEntityRequirement) o).entityID) ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
+    public RequirementComparision matches(Requirement other) {
+        return equals(other) ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
     }
 
     @Override
