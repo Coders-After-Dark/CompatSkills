@@ -4,6 +4,8 @@
 - Added a "looking at" requirement.
   - `looking_at|block|optional properties`
     - `block` is the block's registry name, and if properties are given they are in the json form for properties.
+  - `looking_at_entity|entity`
+    - `entity` is the entity's registry name
 - Made the code for registering requirements easier to read.
 - Added some requirements based on Astral Sorcery data states. The Constellation name is the unlocalized name given by `/ct astralConstellations`.
   - `constellation|constellation_name|<seen:known>`

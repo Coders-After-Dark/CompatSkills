@@ -24,10 +24,7 @@ public class LookingAtEntityRequirement extends Requirement {
         if (player == null) {
             return false;
         }
-        Entity entity = null;
-        //TODO: Calculate the entity the player is looking at
-
-
+        Entity entity = Utils.lookingAt(player);
         if (entity != null) {
             return entityID.equals(Utils.getEntityID(entity));
         }

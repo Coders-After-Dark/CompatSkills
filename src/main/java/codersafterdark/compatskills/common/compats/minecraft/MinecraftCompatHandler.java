@@ -25,6 +25,7 @@ import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.H
 import codersafterdark.compatskills.common.compats.minecraft.item.harvestlevel.ToolHarvestLock;
 import codersafterdark.compatskills.common.compats.minecraft.item.weapon.AttackDamageLockKey;
 import codersafterdark.compatskills.common.compats.minecraft.looking.LookingAtBlockRequirement;
+import codersafterdark.compatskills.common.compats.minecraft.looking.LookingAtEntityRequirement;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityCommand;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityEventHandler;
 import codersafterdark.compatskills.common.compats.minecraft.tileentity.TileEntityLockKey;
@@ -62,8 +63,7 @@ public class MinecraftCompatHandler extends CompatModuleBase {
         registry.addRequirementHandler("ore", OreDictRequirement::fromString);
         registry.addRequirementHandler("stack", ItemRequirement::fromString);
         registry.addRequirementHandler("looking_at", LookingAtBlockRequirement::fromString);
-        //TODO: Implement a way to check what entity the player is looking at then uncomment this line
-        //registry.addRequirementHandler("looking_at_entity", LookingAtEntityRequirement::fromString);
+        registry.addRequirementHandler("looking_at_entity", LookingAtEntityRequirement::fromString);
         if (CompatSkills.craftweakerLoaded) {
             CompatSkills.registerCommand(new TileEntityCommand());
         }
