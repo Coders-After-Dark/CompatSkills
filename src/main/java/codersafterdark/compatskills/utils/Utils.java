@@ -2,6 +2,8 @@ package codersafterdark.compatskills.utils;
 
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.RequirementHolder;
+import codersafterdark.reskillable.base.ConfigHandler;
+import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -107,5 +109,9 @@ public class Utils {
             }
         }
         return "no_registry_name";
+    }
+
+    public static boolean skipPlayer(EntityPlayer player) {
+        return player == null || !ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player);
     }
 }

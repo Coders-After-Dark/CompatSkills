@@ -1,6 +1,7 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct;
 
 import codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks.ToolTypeLockKey;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
@@ -24,7 +25,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event) {
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+        if (Utils.skipPlayer(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);
@@ -38,7 +39,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onCraftingMaterial(TinkerCraftingEvent.ToolPartCraftingEvent event) {
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+        if (Utils.skipPlayer(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);
@@ -52,7 +53,7 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onPartReplaced(TinkerCraftingEvent.ToolPartReplaceEvent event) {
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+        if (Utils.skipPlayer(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);
@@ -65,6 +66,8 @@ public class TinkerLockHandler {
     @SubscribeEvent
     public void onToolCrafted(TinkerCraftingEvent.ToolCraftingEvent event) {
         EntityPlayer player = event.getPlayer();
+        //TODO: At some point make this use Utils.skipPlayer
+        //TODO Cont: Below code already has handling for if the player is null, which maybe should stay
         if (!ConfigHandler.enforceOnCreative && player != null && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
             return;
         }

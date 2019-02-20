@@ -4,7 +4,6 @@ import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -31,7 +30,7 @@ public class TileEntityEventHandler {
             return;
         }
         EntityPlayer player = event.getEntityPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+        if (Utils.skipPlayer(player)) {
             return;
         }
         TileEntity entity = event.getWorld().getTileEntity(event.getPos());

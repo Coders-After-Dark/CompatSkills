@@ -4,11 +4,11 @@ import blusunrize.immersiveengineering.api.MultiblockHandler.IMultiblock;
 import blusunrize.immersiveengineering.api.MultiblockHandler.MultiblockFormEvent;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.compatskills.utils.MessageStorage;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.compatskills.utils.multiblock.MultiBlockGate;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
@@ -20,7 +20,7 @@ public class IEMultiBlockHandler {
     @SubscribeEvent
     public void multiBlockForm(MultiblockFormEvent event) {
         EntityPlayer player = event.getEntityPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+        if (Utils.skipPlayer(player)) {
             return;
         }
         IMultiblock multiblock = event.getMultiblock();

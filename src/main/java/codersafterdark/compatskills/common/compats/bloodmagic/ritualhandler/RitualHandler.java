@@ -3,10 +3,10 @@ package codersafterdark.compatskills.common.compats.bloodmagic.ritualhandler;
 import WayofTime.bloodmagic.event.RitualEvent.RitualActivatedEvent;
 import WayofTime.bloodmagic.ritual.Ritual;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
@@ -19,7 +19,7 @@ public class RitualHandler {
     @SubscribeEvent
     public void ritualEvent(RitualActivatedEvent event) {
         EntityPlayer player = event.getPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+        if (Utils.skipPlayer(player)) {
             return;
         }
         PlayerData data = PlayerDataHandler.get(player);

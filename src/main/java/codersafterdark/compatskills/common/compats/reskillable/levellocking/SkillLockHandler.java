@@ -1,11 +1,11 @@
 package codersafterdark.compatskills.common.compats.reskillable.levellocking;
 
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.event.LevelUpEvent;
 import codersafterdark.reskillable.api.skill.Skill;
-import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
@@ -19,7 +19,7 @@ public class SkillLockHandler {
     @SubscribeEvent
     public void levelUpEvent(LevelUpEvent.Pre event) {
         EntityPlayer player = event.getEntityPlayer();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+        if (Utils.skipPlayer(player)) {
             return;
         }
         int level = event.getLevel();

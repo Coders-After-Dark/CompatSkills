@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.14.1
+- Added some safety checks so that if events give a null player, we don't crash with a Null Pointer, instead we just don't attempt to restrict that event.
+
+
+
 ## 1.14.0
 - Added a "looking at" requirement.
   - `looking_at|block|optional properties`

@@ -2,10 +2,10 @@ package codersafterdark.compatskills.common.compats.bloodmagic;
 
 import WayofTime.bloodmagic.event.ItemBindEvent;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
-import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,7 @@ public class BindHandler {
     @SubscribeEvent
     public void bindEvent(ItemBindEvent event) {
         EntityPlayer player = event.getNewOwner();
-        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+        if (Utils.skipPlayer(player)) {
             return;
         }
         ItemStack stack = event.getBindingStack();

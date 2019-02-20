@@ -2,7 +2,7 @@ package codersafterdark.compatskills.common.compats.baubles;
 
 import baubles.api.BaublesApi;
 import baubles.api.cap.IBaublesItemHandler;
-import codersafterdark.reskillable.base.ConfigHandler;
+import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import codersafterdark.reskillable.network.MessageLockedItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +14,7 @@ public class BaublesTickHandler {
     @SubscribeEvent
     public void tickHandler(PlayerTickEvent event) {
         EntityPlayer player = event.player;
-        if (!ConfigHandler.enforceOnCreative && player.isCreative() || !ConfigHandler.enforceFakePlayers && LevelLockHandler.isFake(player)) {
+        if (Utils.skipPlayer(player)) {
             return;
         }
         IBaublesItemHandler baublesHandler = BaublesApi.getBaublesHandler(player);
