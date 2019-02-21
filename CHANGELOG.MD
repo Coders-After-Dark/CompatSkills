@@ -2,7 +2,9 @@
 
 ## 1.14.1
 - Added some safety checks so that if events give a null player, we don't crash with a Null Pointer, instead we just don't attempt to restrict that event.
-
+- Added support for changing the config values of the built in traits via the bracket handlers.
+  - NOTE: This also slightly changes how you get the current values from them. (Adding parenthesis after your get statements should fix it)
+  - Though not really, because apparently unlockable bracket handlers were broken. They now work.
 
 
 ## 1.14.0

@@ -1,5 +1,7 @@
 package codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper;
 
+import codersafterdark.compatskills.utils.CheckMethods;
+import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.unlockable.Unlockable;
 import crafttweaker.annotations.ZenRegister;
 import stanhebben.zenscript.annotations.ZenClass;
@@ -18,34 +20,84 @@ public class CTUnlockable {
         this.unlockable = unlockable;
     }
 
-    @ZenGetter
+    @ZenGetter("parent")
+    @ZenMethod
     public String getParent() {
         return unlockable.getParentSkill().getName();
     }
 
-    @ZenGetter("getRequirements")
+    @ZenGetter("requirements")
+    @ZenMethod
     public String getRequirements() {
         return Arrays.toString(unlockable.getRequirements().getRequirements().toArray());
     }
 
-    @ZenGetter("getName")
+    @ZenSetter("requirements")
+    @ZenMethod
+    public void setRequirements(String... requirements) {
+        if (CheckMethods.checkOptionalRequirements(requirements)) {
+            unlockable.getUnlockableConfig().setRequirementHolder(RequirementHolder.fromStringList(requirements));
+        }
+    }
+
+    @ZenGetter("name")
+    @ZenMethod
     public String getName() {
         return unlockable.getName();
     }
 
     @ZenGetter("getDescription")
+    @ZenMethod
     public String getDescription() {
         return unlockable.getDescription();
     }
 
-    @ZenGetter("hasSpikes")
+    @ZenGetter("spikes")
+    @ZenMethod
     public boolean hasSpikes() {
         return unlockable.hasSpikes();
     }
 
-    @ZenGetter("getCost")
+    @ZenGetter("cost")
+    @ZenMethod
     public int getCost() {
         return unlockable.getCost();
+    }
+
+    @ZenSetter("cost")
+    @ZenMethod
+    public void setCost(int cost) {
+        unlockable.getUnlockableConfig().setCost(cost);
+    }
+
+    @ZenGetter("icon")
+    @ZenMethod
+    public String retrieveIcon() {
+        return unlockable.getIcon().toString();
+    }
+
+    @ZenGetter("x")
+    @ZenMethod
+    public int getX() {
+        return unlockable.getX();
+    }
+
+    @ZenSetter("x")
+    @ZenMethod
+    public void setX(int x) {
+        unlockable.getUnlockableConfig().setX(x);
+    }
+
+    @ZenGetter("y")
+    @ZenMethod
+    public int getY() {
+        return unlockable.getY();
+    }
+
+    @ZenSetter("y")
+    @ZenMethod
+    public void setY(int y) {
+        unlockable.getUnlockableConfig().setY(y);
     }
 
     @ZenGetter("enabled")
