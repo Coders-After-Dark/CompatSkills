@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.15.0
+- Added tab complete for the `skipLocked` param of the tinker commands
+- Fixed a improper return type of parent in CTUnlockable.
+- Removed getRequirements in CTUnlockable, as there is no easy way to actually convert the Requirement Object back to a String.
+
+
 ## 1.14.1
 - Added some safety checks so that if events give a null player, we don't crash with a Null Pointer, instead we just don't attempt to restrict that event.
 - Added support for changing the config values of the built in traits via the bracket handlers.

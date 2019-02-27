@@ -6,12 +6,16 @@ import crafttweaker.CraftTweakerAPI;
 import crafttweaker.mc1120.commands.CraftTweakerCommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.traits.ITrait;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import static crafttweaker.mc1120.commands.SpecialMessagesChat.*;
 
@@ -49,5 +53,10 @@ public class MaterialDumpCommand extends CraftTweakerCommand {
         CraftTweakerAPI.logCommand("#########");
         sender.sendMessage(getNormalMessage("List of Tinker's Materials Generated;"));
         sender.sendMessage(getLinkToCraftTweakerLog("List Size: " + size + " Entries;", sender));
+    }
+
+    @Override
+    public List<String> getSubSubCommand(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
+        return Collections.singletonList("skipLocked");
     }
 }

@@ -9,8 +9,6 @@ import stanhebben.zenscript.annotations.ZenGetter;
 import stanhebben.zenscript.annotations.ZenMethod;
 import stanhebben.zenscript.annotations.ZenSetter;
 
-import java.util.Arrays;
-
 @ZenClass("mods.compatskills.Unlockable")
 @ZenRegister
 public class CTUnlockable {
@@ -22,14 +20,8 @@ public class CTUnlockable {
 
     @ZenGetter("parent")
     @ZenMethod
-    public String getParent() {
-        return unlockable.getParentSkill().getName();
-    }
-
-    @ZenGetter("requirements")
-    @ZenMethod
-    public String getRequirements() {
-        return Arrays.toString(unlockable.getRequirements().getRequirements().toArray());
+    public CTSkill getParent() {
+        return new CTSkill(unlockable.getParentSkill());
     }
 
     @ZenSetter("requirements")
