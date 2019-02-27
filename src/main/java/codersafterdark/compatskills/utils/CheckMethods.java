@@ -3,6 +3,7 @@ package codersafterdark.compatskills.utils;
 import WayofTime.bloodmagic.BloodMagic;
 import blusunrize.immersiveengineering.api.MultiblockHandler;
 import codersafterdark.compatskills.common.compats.reskillable.customcontent.CrTSkill;
+import codersafterdark.compatskills.common.compats.reskillable.skillchange.IChangeHandler;
 import codersafterdark.reskillable.api.ReskillableRegistries;
 import codersafterdark.reskillable.api.skill.Skill;
 import codersafterdark.reskillable.api.unlockable.Unlockable;
@@ -31,6 +32,14 @@ public class CheckMethods {
     public static boolean checkIItemstack(IItemStack stack) {
         if (stack == null || stack.isEmpty()) {
             CraftTweakerAPI.logError("Itemstack: " + stack + " was found to be either null or empty!");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean checkChangeHandler(IChangeHandler handler) {
+        if (handler == null) {
+            CraftTweakerAPI.logError("IChangeHandler was found to be null!");
             return false;
         }
         return true;
