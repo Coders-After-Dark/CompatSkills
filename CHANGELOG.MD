@@ -5,6 +5,7 @@
 - Fixed a improper return type of parent in CTUnlockable.
 - Removed getRequirements in CTUnlockable, as there is no easy way to actually convert the Requirement Object back to a String.
 - Added support for using zenscript functions to handle what to do to the player after their level/unlockable changes.
+- Fixed mcmod.info having the wrong version number.
 
 
 ## 1.14.1
