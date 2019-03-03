@@ -1,7 +1,6 @@
 package codersafterdark.compatskills.common.compats.betterquesting;
 
 import betterquesting.api.api.QuestingAPI;
-import betterquesting.api.jdoc.IJsonDoc;
 import betterquesting.api.questing.IQuest;
 import betterquesting.api.questing.tasks.ITask;
 import betterquesting.api2.client.gui.misc.IGuiRect;
@@ -100,11 +99,6 @@ public class TaskRequirement implements ITask {
     @Override
     public void resetAll() {
         completeUsers.clear();
-    }
-
-    @Override
-    public IJsonDoc getDocumentation() {
-        return null;
     }
 
     @Override
