@@ -6,6 +6,7 @@
 - Removed getRequirements in CTUnlockable, as there is no easy way to actually convert the Requirement Object back to a String.
 - Added support for using zenscript functions to handle what to do to the player after their level/unlockable changes.
 - Fixed mcmod.info having the wrong version number.
+- Prepare for a change in ProjectE so that the warning tooltip won't be displayed twice in the MK2 Condenser.
 
 
 ## 1.14.1
