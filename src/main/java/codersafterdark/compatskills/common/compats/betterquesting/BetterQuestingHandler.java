@@ -14,9 +14,8 @@ public class BetterQuestingHandler extends CompatModuleBase {
         MinecraftForge.EVENT_BUS.register(new BQTaskHandler());
     }
 
-    public static void registerExpansion() {
-        if (ENABLED) {
-            QuestingAPI.getAPI(ApiReference.TASK_REG).registerTask(FactoryTaskRequirement.INSTANCE);
-        }
+    @Override
+    public void postInit() {
+        QuestingAPI.getAPI(ApiReference.TASK_REG).register(FactoryTaskRequirement.INSTANCE);
     }
 }

@@ -1,11 +1,12 @@
 package codersafterdark.compatskills.common.compats.betterquesting;
 
-import betterquesting.api.misc.IFactory;
+import betterquesting.api.questing.tasks.ITask;
+import betterquesting.api2.registry.IFactoryData;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 
-public class FactoryTaskRequirement implements IFactory<TaskRequirement> {
+public class FactoryTaskRequirement implements IFactoryData<ITask, NBTTagCompound> {
     public static final FactoryTaskRequirement INSTANCE = new FactoryTaskRequirement();
 
     @Override
@@ -19,7 +20,7 @@ public class FactoryTaskRequirement implements IFactory<TaskRequirement> {
     }
 
     @Override
-    public TaskRequirement loadFromNBT(NBTTagCompound json) {
+    public TaskRequirement loadFromData(NBTTagCompound json) {
         TaskRequirement task = createNew();
         task.readFromNBT(json);
         return task;

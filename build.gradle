@@ -85,7 +85,7 @@ dependencies {
     deobfCompile "modelloader:modelloader:1.1.5"
     deobfCompile "projecte:ProjectE:1.12.2:PE1.4.0"
     deobfCompile "project-ex:ProjectEX:1.0.0.13"
-    deobfCompile "better-questing:BetterQuesting:api:3.5.291"
+    deobfCompile "better-questing:BetterQuesting:api:3.5.292"
     deobfCompile "ore-excavation:OreExcavation:deobf:1.4.137"
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tinkers_version}"
     deobfCompile "slimeknights.mantle:Mantle:${mantle_minecraft_version}-${mantle_version}"

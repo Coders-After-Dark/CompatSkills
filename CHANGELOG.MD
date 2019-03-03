@@ -7,6 +7,7 @@
 - Added support for using zenscript functions to handle what to do to the player after their level/unlockable changes.
 - Fixed mcmod.info having the wrong version number.
 - Prepare for a change in ProjectE so that the warning tooltip won't be displayed twice in the MK2 Condenser.
+- Updated better questing compat to support 3.5.292
 
 
 ## 1.14.1
