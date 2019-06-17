@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.16.0
+- Added Tinker's Construct respecting Item Damage Locks & Harvest Level Locks!
+
 ## 1.15.0
 - Added tab complete for the `skipLocked` param of the tinker commands
 - Fixed a improper return type of parent in CTUnlockable.
