@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.tinkersconstruct;
 
+import codersafterdark.compatskills.common.compats.minecraft.item.weapon.AttackDamageLockKey;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.toollocks.ToolTypeLockKey;
 import codersafterdark.compatskills.utils.Utils;
 import codersafterdark.reskillable.api.data.PlayerData;
@@ -7,7 +8,13 @@ import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.ConfigHandler;
 import codersafterdark.reskillable.base.LevelLockHandler;
+import com.google.common.collect.Multimap;
+import mezz.jei.collect.MultiMap;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -17,8 +24,10 @@ import slimeknights.tconstruct.library.modifiers.IToolMod;
 import slimeknights.tconstruct.library.utils.TinkerUtil;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 public class TinkerLockHandler {
@@ -100,11 +109,11 @@ public class TinkerLockHandler {
     //TODO: Potentially try to make an error message that says what lock types there are OR remove errorType and just have a generic tinker's error
     //This is because material locks could also be just because the material has a modifier that cannot be used
     //Or with full tool creation it could be any of the lock types
-    private String getCanceledMessage(PlayerData data, List<RequirementHolder> holders, String errorType) {
+    public static String getCanceledMessage(PlayerData data, List<RequirementHolder> holders, String errorType) {
         return holders.isEmpty() ? null : getCanceledMessage(data, new RequirementHolder(holders.toArray(new RequirementHolder[0])), errorType);
     }
 
-    private String getCanceledMessage(PlayerData data, RequirementHolder holder, String errorType) {
+    public static String getCanceledMessage(PlayerData data, RequirementHolder holder, String errorType) {
         if (data == null || holder.equals(LevelLockHandler.EMPTY_LOCK) || data.matchStats(holder)) {
             return null;
         }

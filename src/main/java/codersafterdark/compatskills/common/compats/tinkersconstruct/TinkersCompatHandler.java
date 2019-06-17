@@ -29,6 +29,7 @@ public class TinkersCompatHandler extends CompatModuleBase {
         if (CompatSkills.craftweakerLoaded) {
             CompatSkills.registerCommand(new MaterialDumpCommand());
             CompatSkills.registerCommand(new ModifierDumpCommand());
+            MinecraftForge.EVENT_BUS.register(new TinkerMCHandler());
         }
     }
 
