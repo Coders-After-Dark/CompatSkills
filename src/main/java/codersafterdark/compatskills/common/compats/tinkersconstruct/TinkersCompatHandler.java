@@ -19,6 +19,17 @@ public class TinkersCompatHandler extends CompatModuleBase {
 
     private static boolean anyRegistered;
 
+    public static void addTinkersLock(LockKey key, RequirementHolder holder) {
+        if (!anyRegistered) {
+            LevelLockHandler.registerLockKey(Material.class, MaterialLockKey.class);
+            LevelLockHandler.registerLockKey(IToolMod.class, ModifierLockKey.class);
+            LevelLockHandler.registerLockKey(ItemStack.class, ToolWrapperLockKey.class);
+            MinecraftForge.EVENT_BUS.register(new TinkerLockHandler());
+            anyRegistered = true;
+        }
+        LevelLockHandler.addLockByKey(key, holder);
+    }
+
     @Override
     public void preInit() {
         ENABLED = true;
@@ -31,16 +42,5 @@ public class TinkersCompatHandler extends CompatModuleBase {
             CompatSkills.registerCommand(new ModifierDumpCommand());
             MinecraftForge.EVENT_BUS.register(new TinkerMCHandler());
         }
-    }
-
-    public static void addTinkersLock(LockKey key, RequirementHolder holder) {
-        if (!anyRegistered) {
-            LevelLockHandler.registerLockKey(Material.class, MaterialLockKey.class);
-            LevelLockHandler.registerLockKey(IToolMod.class, ModifierLockKey.class);
-            LevelLockHandler.registerLockKey(ItemStack.class, ToolWrapperLockKey.class);
-            MinecraftForge.EVENT_BUS.register(new TinkerLockHandler());
-            anyRegistered = true;
-        }
-        LevelLockHandler.addLockByKey(key, holder);
     }
 }
