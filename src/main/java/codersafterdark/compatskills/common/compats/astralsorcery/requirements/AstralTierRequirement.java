@@ -19,6 +19,17 @@ public class AstralTierRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.AQUA + new TextComponentTranslation("compatskills.requirements.format.astral_tier", "%s", tier).getUnformattedComponentText();
     }
 
+    public static AstralTierRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No progression tier given.");
+        }
+        try {
+            return new AstralTierRequirement(ProgressionTier.valueOf(input.toUpperCase()));
+        } catch (IllegalArgumentException e) {
+            throw new RequirementException("Invalid progression tier: '" + input + "'.");
+        }
+    }
+
     @Override
     public boolean achievedByPlayer(EntityPlayer player) {
         PlayerProgress progress = player instanceof EntityPlayerMP ? ResearchManager.getProgress((EntityPlayerMP) player) : ResearchManager.clientProgress;
@@ -36,7 +47,7 @@ public class AstralTierRequirement extends Requirement {
             return true;
         }
         if (o instanceof AstralTierRequirement) {
-            AstralTierRequirement other  = (AstralTierRequirement) o;
+            AstralTierRequirement other = (AstralTierRequirement) o;
             return tier.equals(other.tier);
         }
         return false;
@@ -50,16 +61,5 @@ public class AstralTierRequirement extends Requirement {
     @Override
     public boolean isCacheable() {
         return false;
-    }
-
-    public static AstralTierRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No progression tier given.");
-        }
-        try {
-            return new AstralTierRequirement(ProgressionTier.valueOf(input.toUpperCase()));
-        } catch (IllegalArgumentException e) {
-            throw new RequirementException("Invalid progression tier: '" + input + "'.");
-        }
     }
 }

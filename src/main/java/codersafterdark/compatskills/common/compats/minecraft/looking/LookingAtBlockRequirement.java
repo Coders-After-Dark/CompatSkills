@@ -45,43 +45,6 @@ public class LookingAtBlockRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.DARK_GREEN + new TextComponentTranslation("compatskills.requirements.format.looking_at", "%s", displayInfo.toString()).getUnformattedComponentText();
     }
 
-    @Override
-    public boolean achievedByPlayer(EntityPlayer player) {
-        RayTraceResult rayTrace = Utils.getLookingAt(player);
-        if (rayTrace != null && rayTrace.typeOfHit == RayTraceResult.Type.BLOCK) {
-            IBlockState lookingAt = player.getEntityWorld().getBlockState(rayTrace.getBlockPos());
-            if (state == lookingAt) {
-                return true;
-            }
-            if (defaultState != lookingAt.getBlock().getDefaultState()) {
-                return false;
-            }
-            return watchedProperties.stream().allMatch(property -> state.getValue(property).equals(lookingAt.getValue(property)));
-        }
-        return false;
-    }
-
-    @Override
-    public RequirementComparision matches(Requirement o) {
-        //TODO: Add support for requirement comparision for partial states. Works fine without it, but may have duplicated messages
-        return o instanceof LookingAtBlockRequirement && state == ((LookingAtBlockRequirement) o).state ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj == this || obj instanceof LookingAtBlockRequirement && state == ((LookingAtBlockRequirement) obj).state;
-    }
-
-    @Override
-    public int hashCode() {
-        return state.hashCode();
-    }
-
-    @Override
-    public boolean isCacheable() {
-        return false;
-    }
-
     public static LookingAtBlockRequirement fromString(String input) throws RequirementException {
         if (input.isEmpty()) {
             throw new RequirementException("No Block given.");
@@ -120,5 +83,42 @@ public class LookingAtBlockRequirement extends Requirement {
     private static <T extends Comparable<T>> IBlockState setValueHelper(IBlockState blockState, IProperty<T> property, String stringValue) throws RequirementException {
         return property.parseValue(stringValue).toJavaUtil().map(propertyValue -> blockState.withProperty(property, propertyValue)).orElseThrow(() ->
                 new RequirementException("Failed to find value " + stringValue + " for property " + property.getName()));
+    }
+
+    @Override
+    public boolean achievedByPlayer(EntityPlayer player) {
+        RayTraceResult rayTrace = Utils.getLookingAt(player);
+        if (rayTrace != null && rayTrace.typeOfHit == RayTraceResult.Type.BLOCK) {
+            IBlockState lookingAt = player.getEntityWorld().getBlockState(rayTrace.getBlockPos());
+            if (state == lookingAt) {
+                return true;
+            }
+            if (defaultState != lookingAt.getBlock().getDefaultState()) {
+                return false;
+            }
+            return watchedProperties.stream().allMatch(property -> state.getValue(property).equals(lookingAt.getValue(property)));
+        }
+        return false;
+    }
+
+    @Override
+    public RequirementComparision matches(Requirement o) {
+        //TODO: Add support for requirement comparision for partial states. Works fine without it, but may have duplicated messages
+        return o instanceof LookingAtBlockRequirement && state == ((LookingAtBlockRequirement) o).state ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj == this || obj instanceof LookingAtBlockRequirement && state == ((LookingAtBlockRequirement) obj).state;
+    }
+
+    @Override
+    public int hashCode() {
+        return state.hashCode();
+    }
+
+    @Override
+    public boolean isCacheable() {
+        return false;
     }
 }

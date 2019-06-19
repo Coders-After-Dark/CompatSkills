@@ -30,6 +30,29 @@ public class OreDictRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.requirements.format.ore_dict", "%s", name).getUnformattedComponentText();
     }
 
+    public static OreDictRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No Ore dictionary entry given.");
+        }
+        String[] inputInfo = input.split("\\|");
+        //oredict entry|nbt as json
+        String ore = inputInfo[0];
+        if (!OreDictionary.doesOreNameExist(ore)) {
+            throw new RequirementException("Ore dictionary entry '" + ore + "' not found.");
+        }
+        NBTTagCompound nbt = null;
+        if (inputInfo.length > 1) {
+            String nbtString = input.substring(ore.length() + 1).trim();
+            try {
+                nbt = JsonToNBT.getTagFromJson(nbtString);
+            } catch (NBTException e) {
+                //Invalid NBT
+                throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
+            }
+        }
+        return new OreDictRequirement(ore, nbt);
+    }
+
     @Override
     public boolean achievedByPlayer(EntityPlayer player) {
         return hasOreDict(player.getHeldItemMainhand()) || hasOreDict(player.getHeldItemOffhand());
@@ -79,28 +102,5 @@ public class OreDictRequirement extends Requirement {
     @Override
     public int hashCode() {
         return Objects.hash(oreEntry, tag);
-    }
-
-    public static OreDictRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No Ore dictionary entry given.");
-        }
-        String[] inputInfo = input.split("\\|");
-        //oredict entry|nbt as json
-        String ore = inputInfo[0];
-        if (!OreDictionary.doesOreNameExist(ore)) {
-            throw new RequirementException("Ore dictionary entry '" + ore + "' not found.");
-        }
-        NBTTagCompound nbt = null;
-        if (inputInfo.length > 1) {
-            String nbtString = input.substring(ore.length() + 1).trim();
-            try {
-                nbt = JsonToNBT.getTagFromJson(nbtString);
-            } catch (NBTException e) {
-                //Invalid NBT
-                throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
-            }
-        }
-        return new OreDictRequirement(ore, nbt);
     }
 }

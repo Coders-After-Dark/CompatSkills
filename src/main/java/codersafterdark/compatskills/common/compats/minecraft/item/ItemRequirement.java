@@ -39,6 +39,60 @@ public class ItemRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.requirements.format.item", "%s", displayName.trim()).getUnformattedComponentText();
     }
 
+    public static ItemRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No Item given.");
+        }
+        String[] inputInfo = input.split("\\|");
+        //(modid,empty, or modid:item:optional metadata)|nbt as json
+        String type = inputInfo[0]; //mod, generic, or item
+        NBTTagCompound nbt = null;
+        if (inputInfo.length > 1) {
+            String nbtString = input.substring(type.length() + 1).trim();
+            try {
+                nbt = JsonToNBT.getTagFromJson(nbtString);
+            } catch (NBTException e) {
+                //Invalid NBT
+                throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
+            }
+        }
+        NBTLockKey key;
+        type = type.trim();
+        if (type.isEmpty()) {
+            if (nbt == null) {
+                throw new RequirementException("Invalid Item Requirement format. No input data found.");
+            }
+            key = new GenericNBTLockKey(nbt);
+        } else {
+            String[] itemParts = type.split(":");
+            if (itemParts.length == 1) {//is a modid
+                //TODO should it check if a mod is loaded, and would this cause issues in when requirements are read from config
+                key = new ModLockKey(type, nbt);
+            } else {
+                int metadata = 0;
+                if (itemParts.length > 2) {
+                    String meta = itemParts[2];
+                    try {
+                        if (meta.equals("*")) {
+                            metadata = OreDictionary.WILDCARD_VALUE;
+                        } else {
+                            metadata = Integer.parseInt(meta);
+                        }
+                        type = itemParts[0] + ':' + itemParts[1];
+                    } catch (NumberFormatException ignored) {
+                        //Do nothing if the meta is not a valid number or wildcard (Maybe it somehow is part of the item name)
+                    }
+                }
+                Item item = Item.getByNameOrId(type);
+                if (item == null) {
+                    throw new RequirementException("No Item found matching: '" + type + "'.");
+                }
+                key = new ItemInfo(item, metadata, nbt);
+            }
+        }
+        return new ItemRequirement(key);
+    }
+
     @Override
     public boolean achievedByPlayer(EntityPlayer player) {
         return itemMatches(player.getHeldItemMainhand()) || itemMatches(player.getHeldItemOffhand());
@@ -135,59 +189,5 @@ public class ItemRequirement extends Requirement {
     @Override
     public int hashCode() {
         return key.hashCode();
-    }
-
-    public static ItemRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No Item given.");
-        }
-        String[] inputInfo = input.split("\\|");
-        //(modid,empty, or modid:item:optional metadata)|nbt as json
-        String type = inputInfo[0]; //mod, generic, or item
-        NBTTagCompound nbt = null;
-        if (inputInfo.length > 1) {
-            String nbtString = input.substring(type.length() + 1).trim();
-            try {
-                nbt = JsonToNBT.getTagFromJson(nbtString);
-            } catch (NBTException e) {
-                //Invalid NBT
-                throw new RequirementException("Invalid NBT JSON '" + nbtString + "'.");
-            }
-        }
-        NBTLockKey key;
-        type = type.trim();
-        if (type.isEmpty()) {
-            if (nbt == null) {
-                throw new RequirementException("Invalid Item Requirement format. No input data found.");
-            }
-            key = new GenericNBTLockKey(nbt);
-        } else {
-            String[] itemParts = type.split(":");
-            if (itemParts.length == 1) {//is a modid
-                //TODO should it check if a mod is loaded, and would this cause issues in when requirements are read from config
-                key = new ModLockKey(type, nbt);
-            } else {
-                int metadata = 0;
-                if (itemParts.length > 2) {
-                    String meta = itemParts[2];
-                    try {
-                        if (meta.equals("*")) {
-                            metadata = OreDictionary.WILDCARD_VALUE;
-                        } else {
-                            metadata = Integer.parseInt(meta);
-                        }
-                        type = itemParts[0] + ':' + itemParts[1];
-                    } catch (NumberFormatException ignored) {
-                        //Do nothing if the meta is not a valid number or wildcard (Maybe it somehow is part of the item name)
-                    }
-                }
-                Item item = Item.getByNameOrId(type);
-                if (item == null) {
-                    throw new RequirementException("No Item found matching: '" + type + "'.");
-                }
-                key = new ItemInfo(item, metadata, nbt);
-            }
-        }
-        return new ItemRequirement(key);
     }
 }

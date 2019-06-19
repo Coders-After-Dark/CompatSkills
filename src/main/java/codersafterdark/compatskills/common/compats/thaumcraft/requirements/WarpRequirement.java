@@ -16,6 +16,22 @@ public class WarpRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.DARK_PURPLE + new TextComponentTranslation("compatskills.requirements.format.warp", "%s", warp).getUnformattedComponentText();
     }
 
+    public static WarpRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No warp value given.");
+        }
+        int warp;
+        try {
+            warp = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new RequirementException("Invalid warp level '" + input + "'.");
+        }
+        if (warp >= 0) {
+            return new WarpRequirement(warp);
+        }
+        throw new RequirementException("Warp level must be positive, received: '" + input + "'.");
+    }
+
     @Override
     public boolean achievedByPlayer(EntityPlayer entityPlayerMP) {
         return ThaumcraftApi.internalMethods.getActualWarp(entityPlayerMP) >= warp;
@@ -46,21 +62,5 @@ public class WarpRequirement extends Requirement {
     @Override
     public boolean isCacheable() {
         return false;
-    }
-
-    public static WarpRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No warp value given.");
-        }
-        int warp;
-        try {
-            warp = Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new RequirementException("Invalid warp level '" + input + "'.");
-        }
-        if (warp >= 0) {
-            return new WarpRequirement(warp);
-        }
-        throw new RequirementException("Warp level must be positive, received: '" + input + "'.");
     }
 }

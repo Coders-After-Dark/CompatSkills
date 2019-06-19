@@ -20,6 +20,17 @@ public class AttunedRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.YELLOW + new TextComponentTranslation("compatskills.requirements.format.attuned", "%s", constellation.getSimpleName()).getUnformattedComponentText();
     }
 
+    public static AttunedRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No major constellation given.");
+        }
+        IMajorConstellation constellation = ConstellationRegistry.getMajorConstellationByName(input);
+        if (constellation == null) {
+            throw new RequirementException("Could not find major constellation: '" + input + "'.");
+        }
+        return new AttunedRequirement(constellation);
+    }
+
     @Override
     public boolean achievedByPlayer(EntityPlayer player) {
         PlayerProgress progress = player instanceof EntityPlayerMP ? ResearchManager.getProgress((EntityPlayerMP) player) : ResearchManager.clientProgress;
@@ -44,16 +55,5 @@ public class AttunedRequirement extends Requirement {
     @Override
     public boolean isCacheable() {
         return false;
-    }
-
-    public static AttunedRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No major constellation given.");
-        }
-        IMajorConstellation constellation = ConstellationRegistry.getMajorConstellationByName(input);
-        if (constellation == null) {
-            throw new RequirementException("Could not find major constellation: '" + input+ "'.");
-        }
-        return new AttunedRequirement(constellation);
     }
 }

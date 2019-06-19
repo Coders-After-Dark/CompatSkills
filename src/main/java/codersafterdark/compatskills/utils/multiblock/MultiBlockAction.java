@@ -20,6 +20,7 @@ public abstract class MultiBlockAction implements IAction {
     }
 
     protected abstract MultiBlockGate getGate();
+
     protected abstract void addLock(MultiBlockGate gate, RequirementHolder holder);
 
     @Override

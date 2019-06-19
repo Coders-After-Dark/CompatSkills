@@ -21,15 +21,6 @@ public class BMCompatHandler extends CompatModuleBase {
     private static Set<Class<? extends LockKey>> lockTypes = new HashSet<>();
     private static boolean ritual;
 
-    @Override
-    public void preInit() {
-        ENABLED = true;
-        MinecraftForge.EVENT_BUS.register(new BindHandler());
-        if (CompatSkills.craftweakerLoaded) {
-            CompatSkills.registerCommand(new RitualCommand());
-        }
-    }
-
     public static void addBMLock(LockKey key, RequirementHolder holder) {
         if (key instanceof RitualNameLockKey) {
             registerRitualLock(RitualNameLockKey.class);
@@ -55,6 +46,15 @@ public class BMCompatHandler extends CompatModuleBase {
         if (!lockTypes.contains(ritualLockType)) {
             LevelLockHandler.registerLockKey(Ritual.class, ritualLockType);
             lockTypes.add(ritualLockType);
+        }
+    }
+
+    @Override
+    public void preInit() {
+        ENABLED = true;
+        MinecraftForge.EVENT_BUS.register(new BindHandler());
+        if (CompatSkills.craftweakerLoaded) {
+            CompatSkills.registerCommand(new RitualCommand());
         }
     }
 }

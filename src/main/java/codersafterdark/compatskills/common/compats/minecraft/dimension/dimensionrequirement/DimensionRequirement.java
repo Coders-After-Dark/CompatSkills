@@ -18,10 +18,22 @@ public class DimensionRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.LIGHT_PURPLE + new TextComponentTranslation("compatskills.requirements.format.dimension", "%s", dimension).getUnformattedComponentText();
     }
 
+    public static DimensionRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No dimension id given.");
+        }
+        try {
+            return new DimensionRequirement(Integer.parseInt(input));
+        } catch (NumberFormatException e) {
+            throw new RequirementException("Invalid dimension id '" + input + "'.");
+        }
+    }
+
     @Override
     public boolean achievedByPlayer(EntityPlayer entityPlayerMP) {
         return entityPlayerMP.dimension == dimension;
     }
+
     @Override
     public RequirementComparision matches(Requirement other) {
         return equals(other) ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
@@ -35,16 +47,5 @@ public class DimensionRequirement extends Requirement {
     @Override
     public int hashCode() {
         return Objects.hash(dimension);
-    }
-
-    public static DimensionRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No dimension id given.");
-        }
-        try {
-            return new DimensionRequirement(Integer.parseInt(input));
-        } catch (NumberFormatException e) {
-            throw new RequirementException("Invalid dimension id '" + input + "'.");
-        }
     }
 }

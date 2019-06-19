@@ -19,6 +19,17 @@ public class LookingAtEntityRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.DARK_GREEN + new TextComponentTranslation("compatskills.requirements.format.looking_at", "%s", name).getUnformattedComponentText();
     }
 
+    public static LookingAtEntityRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No Entity given.");
+        }
+        String translationName = EntityList.getTranslationName(new ResourceLocation(input));
+        if (translationName == null) {
+            throw new RequirementException("Unable to find entity: '" + input + "'.");
+        }
+        return new LookingAtEntityRequirement(input, new TextComponentTranslation(translationName).getUnformattedComponentText());
+    }
+
     @Override
     public boolean achievedByPlayer(EntityPlayer player) {
         if (player == null) {
@@ -49,16 +60,5 @@ public class LookingAtEntityRequirement extends Requirement {
     @Override
     public boolean isCacheable() {
         return false;
-    }
-
-    public static LookingAtEntityRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No Entity given.");
-        }
-        String translationName = EntityList.getTranslationName(new ResourceLocation(input));
-        if (translationName == null) {
-            throw new RequirementException("Unable to find entity: '" + input + "'.");
-        }
-        return new LookingAtEntityRequirement(input, new TextComponentTranslation(translationName).getUnformattedComponentText());
     }
 }

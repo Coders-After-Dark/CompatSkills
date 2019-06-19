@@ -21,6 +21,21 @@ public class ThaumcraftCompatHandler extends CompatModuleBase {
     public static boolean ENABLED;
     private static boolean knowledge, research;
 
+    public static void addThaumcraftLock(LockKey key, RequirementHolder holder) {
+        if (key instanceof KnowledgeKey) {
+            if (!knowledge) {
+                MinecraftForge.EVENT_BUS.register(new KnowledgeHandler());
+                knowledge = true;
+            }
+        } else if (key instanceof ResearchKey) {
+            if (!research) {
+                MinecraftForge.EVENT_BUS.register(new ResearchHandler());
+                research = true;
+            }
+        }
+        LevelLockHandler.addLockByKey(key, holder);
+    }
+
     @Override
     public void preInit() {
         ENABLED = true;
@@ -37,20 +52,5 @@ public class ThaumcraftCompatHandler extends CompatModuleBase {
             CompatSkills.registerCommand(new ThaumcraftResearchCategoryDump());
             CompatSkills.registerCommand(new ThaumcraftResearchEntryDump());
         }
-    }
-
-    public static void addThaumcraftLock(LockKey key, RequirementHolder holder) {
-        if (key instanceof KnowledgeKey) {
-            if (!knowledge) {
-                MinecraftForge.EVENT_BUS.register(new KnowledgeHandler());
-                knowledge = true;
-            }
-        } else if (key instanceof ResearchKey) {
-            if (!research) {
-                MinecraftForge.EVENT_BUS.register(new ResearchHandler());
-                research = true;
-            }
-        }
-        LevelLockHandler.addLockByKey(key, holder);
     }
 }

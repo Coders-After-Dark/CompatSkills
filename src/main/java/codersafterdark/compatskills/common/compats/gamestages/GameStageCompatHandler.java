@@ -16,6 +16,14 @@ public class GameStageCompatHandler extends CompatModuleBase {
 
     private static boolean registered;
 
+    public static void addGameStageLock(GameStageLock key, RequirementHolder holder) {
+        if (!registered) {
+            MinecraftForge.EVENT_BUS.register(new GameStageLockHandler());
+            registered = true;
+        }
+        LevelLockHandler.addLockByKey(key, holder);
+    }
+
     @Override
     public void preInit() {
         ENABLED = true;
@@ -23,13 +31,5 @@ public class GameStageCompatHandler extends CompatModuleBase {
         RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
         registry.addRequirementHandler("stage", GameStageRequirement::new);
         registry.addRequirementHandler("!stage", input -> registry.getRequirement("not|stage|" + input));
-    }
-
-    public static void addGameStageLock(GameStageLock key, RequirementHolder holder) {
-        if (!registered) {
-            MinecraftForge.EVENT_BUS.register(new GameStageLockHandler());
-            registered = true;
-        }
-        LevelLockHandler.addLockByKey(key, holder);
     }
 }

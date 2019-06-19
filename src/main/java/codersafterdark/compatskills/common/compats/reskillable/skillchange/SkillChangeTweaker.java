@@ -16,6 +16,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.compatskills.SkillChange")
 @ZenRegister
 public class SkillChangeTweaker {//TODO: add a check to see if valid command format?
+
     @ZenMethod
     public static void addLevelUpCommands(CTSkill skill, int level, String... commands) {
         if (ReskillableCompatHandler.ENABLED & CheckMethods.checkSkill(skill.getSkill()) & CheckMethods.checkInt(level) & CheckMethods.checkStringArray(commands)) {

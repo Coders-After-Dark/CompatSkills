@@ -30,6 +30,13 @@ public class CompatSkills {
 
     public static boolean craftweakerLoaded;
 
+    //Ugly way of doing it, but it kept crashing when trying to parse the signature
+    public static void registerCommand(Object command) {
+        if (command instanceof crafttweaker.mc1120.commands.CraftTweakerCommand) {
+            CTChatCommand.registerCommand((crafttweaker.mc1120.commands.CraftTweakerCommand) command);
+        }
+    }
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
@@ -66,12 +73,5 @@ public class CompatSkills {
     public void serverStart(FMLServerStartingEvent event) {
         proxy.serverStart(event);
         CompatModuleBase.doModulesLoadComplete();
-    }
-
-    //Ugly way of doing it, but it kept crashing when trying to parse the signature
-    public static void registerCommand(Object command) {
-        if (command instanceof crafttweaker.mc1120.commands.CraftTweakerCommand) {
-            CTChatCommand.registerCommand((crafttweaker.mc1120.commands.CraftTweakerCommand) command);
-        }
     }
 }

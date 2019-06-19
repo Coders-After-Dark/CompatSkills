@@ -6,13 +6,8 @@ import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraftforge.common.MinecraftForge;
 
 public class OreExcavationCompatHandler extends CompatModuleBase {
-    private static RequirementHolder holder = LevelLockHandler.EMPTY_LOCK;
     public static boolean ENABLED;
-
-    @Override
-    public void preInit() {
-        ENABLED = true;
-    }
+    private static RequirementHolder holder = LevelLockHandler.EMPTY_LOCK;
 
     public static void addOERequirements(RequirementHolder requirementHolder) {
         if (holder.equals(LevelLockHandler.EMPTY_LOCK)) {
@@ -25,5 +20,10 @@ public class OreExcavationCompatHandler extends CompatModuleBase {
 
     public static RequirementHolder getHolder() {
         return holder;
+    }
+
+    @Override
+    public void preInit() {
+        ENABLED = true;
     }
 }

@@ -21,7 +21,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 public class AdditionsTweaker {
     /// addEntryToReagent
     @ZenMethod
-    public static void addEntryToReagent(IItemStack reagent, IItemStack startState, IItemStack endState){
+    public static void addEntryToReagent(IItemStack reagent, IItemStack startState, IItemStack endState) {
         if (ReskillableCompatHandler.ENABLED) {
             CompatSkills.LATE_ADDITIONS.add(new AddEntryToReagent(CraftTweakerMC.getItemStack(reagent).getItem(), startState, endState));
         }

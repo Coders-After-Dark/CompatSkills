@@ -36,7 +36,7 @@ public abstract class UnlockableAction implements IAction {
         @Override
         public String describe() {
             String descString = Arrays.stream(commands).map(string -> string + ", ").collect(Collectors.joining());
-            return "Added commands to fire when " + unlockable.getName() + " is " +  (unlock ? "unlocked" : "locked") + ". Commands: " + descString;
+            return "Added commands to fire when " + unlockable.getName() + " is " + (unlock ? "unlocked" : "locked") + ". Commands: " + descString;
         }
     }
 
@@ -55,7 +55,7 @@ public abstract class UnlockableAction implements IAction {
 
         @Override
         public String describe() {
-            return "Added handler to fire when " + unlockable.getName() + " is " +  (unlock ? "unlocked" : "locked") + ".";
+            return "Added handler to fire when " + unlockable.getName() + " is " + (unlock ? "unlocked" : "locked") + ".";
         }
     }
 }

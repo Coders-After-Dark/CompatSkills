@@ -79,6 +79,20 @@ public class CrTSkill extends Skill {
 
     //TODO levelStaggering use a list of strings as input and then parse it like
 
+    @ZenSetter("enabled")
+    @ZenMethod
+    public void setEnabled(boolean enabled) {
+        skillConfig.setEnabled(enabled);
+    }
+
+    @ZenGetter("levelStaggering")
+    @ZenMethod
+    public String[] getLevelStaggering() {
+        List<String> stagger = new ArrayList<>();
+        skillConfig.getLevelStaggering().forEach((key, value) -> stagger.add(key + "|" + value));
+        return stagger.toArray(new String[0]);
+    }
+
     @ZenSetter("levelStaggering")
     @ZenMethod
     public void setLevelStaggering(String[] stagger) {
@@ -102,20 +116,6 @@ public class CrTSkill extends Skill {
         skillConfig.setLevelStaggering(levelStaggering);
     }
 
-    @ZenGetter("levelStaggering")
-    @ZenMethod
-    public String[] getLevelStaggering() {
-        List<String> stagger = new ArrayList<>();
-        skillConfig.getLevelStaggering().forEach((key, value) -> stagger.add(key + "|" + value));
-        return stagger.toArray(new String[0]);
-    }
-
-    @ZenSetter("enabled")
-    @ZenMethod
-    public void setEnabled(boolean enabled) {
-        skillConfig.setEnabled(enabled);
-    }
-
     @ZenSetter("skillPointInterval")
     @ZenMethod
     public void setSkillPointInterval(int amount) {
@@ -134,18 +134,18 @@ public class CrTSkill extends Skill {
         skillConfig.setBaseLevelCost(cost);
     }
 
-    @ZenSetter("hidden")
-    @ZenMethod
-    @Override
-    public void setHidden(boolean hidden) {
-        super.setHidden(hidden);
-    }
-
     @ZenGetter("hidden")
     @ZenMethod
     @Override
     public boolean isHidden() {
         return super.isHidden();
+    }
+
+    @ZenSetter("hidden")
+    @ZenMethod
+    @Override
+    public void setHidden(boolean hidden) {
+        super.setHidden(hidden);
     }
 
     @Override

@@ -17,15 +17,6 @@ public class ReskillableCompatHandler extends CompatModuleBase {
 
     private static boolean visibility, skill;
 
-    @Override
-    public void preInit() {
-        ENABLED = true;
-        RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
-        registry.addRequirementHandler("!adv", input -> registry.getRequirement("not|adv|" + input));
-        registry.addRequirementHandler("!trait", input -> registry.getRequirement("not|trait|" + input));
-        registry.addRequirementHandler("!skill", input -> registry.getRequirement("not|" + input));
-    }
-
     public static void addReskillableLock(LockKey key, RequirementHolder holder) {
         if (key instanceof SkillLock) {
             if (!skill) {
@@ -39,5 +30,14 @@ public class ReskillableCompatHandler extends CompatModuleBase {
             }
         }
         LevelLockHandler.addLockByKey(key, holder);
+    }
+
+    @Override
+    public void preInit() {
+        ENABLED = true;
+        RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
+        registry.addRequirementHandler("!adv", input -> registry.getRequirement("not|adv|" + input));
+        registry.addRequirementHandler("!trait", input -> registry.getRequirement("not|trait|" + input));
+        registry.addRequirementHandler("!skill", input -> registry.getRequirement("not|" + input));
     }
 }

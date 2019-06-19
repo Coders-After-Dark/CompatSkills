@@ -47,28 +47,6 @@ public class MinecraftCompatHandler extends CompatModuleBase {
     private static Set<Class<? extends LockKey>> lockTypes = new HashSet<>();
     private static boolean tile, damage, mount, tame, dimension, drops;
 
-    @Override
-    public void preInit() {
-        ENABLED = true;
-        MinecraftForge.EVENT_BUS.register(new DimensionRequirementHandler());
-        MinecraftForge.EVENT_BUS.register(new ItemChangeHandler());
-        MinecraftForge.EVENT_BUS.register(new HealthChangeHandler());
-        RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
-        registry.addRequirementHandler("sneaking", input -> new SneakRequirement());
-        registry.addRequirementHandler("hearts", HeartRequirement::fromString);
-        registry.addRequirementHandler("health", HealthRequirement::fromString);
-        registry.addRequirementHandler("harvest", HarvestLevelRequirement::fromString);
-        registry.addRequirementHandler("dim", DimensionRequirement::fromString);
-        registry.addRequirementHandler("!dim", input -> registry.getRequirement("not|dim|" + input));
-        registry.addRequirementHandler("ore", OreDictRequirement::fromString);
-        registry.addRequirementHandler("stack", ItemRequirement::fromString);
-        registry.addRequirementHandler("looking_at", LookingAtBlockRequirement::fromString);
-        registry.addRequirementHandler("looking_at_entity", LookingAtEntityRequirement::fromString);
-        if (CompatSkills.craftweakerLoaded) {
-            CompatSkills.registerCommand(new TileEntityCommand());
-        }
-    }
-
     public static void addMCLock(LockKey key, RequirementHolder holder) {
         if (key instanceof ItemStackDropKey) {
             registerItemLock(ItemStackDropKey.class);
@@ -123,6 +101,28 @@ public class MinecraftCompatHandler extends CompatModuleBase {
         if (!lockTypes.contains(itemLockType)) {
             LevelLockHandler.registerLockKey(ItemStack.class, itemLockType);
             lockTypes.add(itemLockType);
+        }
+    }
+
+    @Override
+    public void preInit() {
+        ENABLED = true;
+        MinecraftForge.EVENT_BUS.register(new DimensionRequirementHandler());
+        MinecraftForge.EVENT_BUS.register(new ItemChangeHandler());
+        MinecraftForge.EVENT_BUS.register(new HealthChangeHandler());
+        RequirementRegistry registry = ReskillableAPI.getInstance().getRequirementRegistry();
+        registry.addRequirementHandler("sneaking", input -> new SneakRequirement());
+        registry.addRequirementHandler("hearts", HeartRequirement::fromString);
+        registry.addRequirementHandler("health", HealthRequirement::fromString);
+        registry.addRequirementHandler("harvest", HarvestLevelRequirement::fromString);
+        registry.addRequirementHandler("dim", DimensionRequirement::fromString);
+        registry.addRequirementHandler("!dim", input -> registry.getRequirement("not|dim|" + input));
+        registry.addRequirementHandler("ore", OreDictRequirement::fromString);
+        registry.addRequirementHandler("stack", ItemRequirement::fromString);
+        registry.addRequirementHandler("looking_at", LookingAtBlockRequirement::fromString);
+        registry.addRequirementHandler("looking_at_entity", LookingAtEntityRequirement::fromString);
+        if (CompatSkills.craftweakerLoaded) {
+            CompatSkills.registerCommand(new TileEntityCommand());
         }
     }
 }

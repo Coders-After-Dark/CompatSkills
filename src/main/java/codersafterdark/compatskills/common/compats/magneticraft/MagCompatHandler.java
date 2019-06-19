@@ -17,6 +17,14 @@ public class MagCompatHandler extends CompatModuleBase {
 
     private static boolean registered;
 
+    public static void addMagLock(MultiBlockGate key, RequirementHolder holder) {
+        if (!registered) {
+            MinecraftForge.EVENT_BUS.register(new MagMultiBlockHandler());
+            registered = true;
+        }
+        LevelLockHandler.addLockByKey(key, holder);
+    }
+
     @Override
     public void preInit() {
         ENABLED = true;
@@ -32,13 +40,5 @@ public class MagCompatHandler extends CompatModuleBase {
                 }
             });
         }
-    }
-
-    public static void addMagLock(MultiBlockGate key, RequirementHolder holder) {
-        if (!registered) {
-            MinecraftForge.EVENT_BUS.register(new MagMultiBlockHandler());
-            registered = true;
-        }
-        LevelLockHandler.addLockByKey(key, holder);
     }
 }

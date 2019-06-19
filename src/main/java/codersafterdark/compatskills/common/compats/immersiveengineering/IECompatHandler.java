@@ -16,7 +16,15 @@ public class IECompatHandler extends CompatModuleBase {
     public static boolean ENABLED;
 
     private static boolean registered;
-    
+
+    public static void addIELock(MultiBlockGate key, RequirementHolder holder) {
+        if (!registered) {
+            MinecraftForge.EVENT_BUS.register(new IEMultiBlockHandler());
+            registered = true;
+        }
+        LevelLockHandler.addLockByKey(key, holder);
+    }
+
     @Override
     public void preInit() {
         ENABLED = true;
@@ -32,13 +40,5 @@ public class IECompatHandler extends CompatModuleBase {
                 }
             });
         }
-    }
-
-    public static void addIELock(MultiBlockGate key, RequirementHolder holder) {
-        if (!registered) {
-            MinecraftForge.EVENT_BUS.register(new IEMultiBlockHandler());
-            registered = true;
-        }
-        LevelLockHandler.addLockByKey(key, holder);
     }
 }

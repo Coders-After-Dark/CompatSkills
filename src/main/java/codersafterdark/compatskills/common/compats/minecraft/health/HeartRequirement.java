@@ -17,6 +17,17 @@ public class HeartRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.YELLOW + new TextComponentTranslation("compatskills.requirements.format.hearts", "%s", hearts).getUnformattedComponentText();
     }
 
+    public static HeartRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No heart number given.");
+        }
+        try {
+            return new HeartRequirement(Integer.parseInt(input));
+        } catch (NumberFormatException e) {
+            throw new RequirementException("Invalid number of hearts '" + input + "'.");
+        }
+    }
+
     @Override
     public boolean achievedByPlayer(EntityPlayer entityPlayerMP) {
         return entityPlayerMP.getHealth() >= hearts;
@@ -48,16 +59,5 @@ public class HeartRequirement extends Requirement {
     @Override
     public int hashCode() {
         return Objects.hash(hearts);
-    }
-
-    public static HeartRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No heart number given.");
-        }
-        try {
-            return new HeartRequirement(Integer.parseInt(input));
-        } catch (NumberFormatException e) {
-            throw new RequirementException("Invalid number of hearts '" + input + "'.");
-        }
     }
 }

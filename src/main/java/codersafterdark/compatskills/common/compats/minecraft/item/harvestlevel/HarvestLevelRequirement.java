@@ -19,6 +19,17 @@ public class HarvestLevelRequirement extends Requirement { //TODO support option
         this.tooltip = TextFormatting.GRAY + " - " + new TextComponentTranslation("compatskills.requirements.format.harvest_level", "%s", harvestLevel).getUnformattedComponentText();
     }
 
+    public static HarvestLevelRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No harvest level given.");
+        }
+        try {
+            return new HarvestLevelRequirement(Integer.parseInt(input));
+        } catch (NumberFormatException e) {
+            throw new RequirementException("Invalid harvest level '" + input + "'.");
+        }
+    }
+
     @Override
     public boolean achievedByPlayer(EntityPlayer player) {
         return hasHarvestLevel(player.getHeldItemMainhand()) || hasHarvestLevel(player.getHeldItemOffhand());
@@ -52,16 +63,5 @@ public class HarvestLevelRequirement extends Requirement { //TODO support option
     @Override
     public int hashCode() {
         return Objects.hash(harvestLevel);
-    }
-
-    public static HarvestLevelRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No harvest level given.");
-        }
-        try {
-            return new HarvestLevelRequirement(Integer.parseInt(input));
-        } catch (NumberFormatException e) {
-            throw new RequirementException("Invalid harvest level '" + input + "'.");
-        }
     }
 }

@@ -18,8 +18,27 @@ public class DSSkillRequirement extends Requirement {
     public DSSkillRequirement(SkillBase skill, int level) {
         this.skill = skill;
         this.level = level;
-        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.GOLD +  new TextComponentTranslation("compatskills.requirements.format.dss", "%s", skill.getDisplayName(),
+        this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.GOLD + new TextComponentTranslation("compatskills.requirements.format.dss", "%s", skill.getDisplayName(),
                 level).getUnformattedComponentText();
+    }
+
+    public static DSSkillRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No Skill given.");
+        }
+        String[] parts = input.split("\\|");
+        SkillBase skill = SkillBase.getSkillByName(parts[0]);
+        if (skill == null) {
+            throw new RequirementException("Invalid skill '" + parts[0] + "'.");
+        }
+        if (parts.length == 1) {
+            throw new RequirementException("No level given for skill '" + skill.getDisplayName() + "'.");
+        }
+        try {
+            return new DSSkillRequirement(skill, Integer.parseInt(parts[1]));
+        } catch (NumberFormatException e) {
+            throw new RequirementException("Invalid level '" + parts[1] + "' for skill: '" + skill.getDisplayName() + "'.");
+        }
     }
 
     @Override
@@ -56,24 +75,5 @@ public class DSSkillRequirement extends Requirement {
     @Override
     public int hashCode() {
         return Objects.hash(skill, level);
-    }
-
-    public static DSSkillRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No Skill given.");
-        }
-        String[] parts = input.split("\\|");
-        SkillBase skill = SkillBase.getSkillByName(parts[0]);
-        if (skill == null) {
-            throw new RequirementException("Invalid skill '" + parts[0] + "'.");
-        }
-        if (parts.length == 1) {
-            throw new RequirementException("No level given for skill '" + skill.getDisplayName() + "'.");
-        }
-        try {
-            return new DSSkillRequirement(skill, Integer.parseInt(parts[1]));
-        } catch (NumberFormatException e) {
-            throw new RequirementException("Invalid level '" + parts[1] + "' for skill: '" + skill.getDisplayName() + "'.");
-        }
     }
 }

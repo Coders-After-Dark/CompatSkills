@@ -16,6 +16,13 @@ public class ResearchRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.GOLD + new TextComponentTranslation("compatskills.requirements.format.research", "%s", researchKey).getUnformattedComponentText();
     }
 
+    public static ResearchRequirement fromString(String input) throws RequirementException {
+        if (input.isEmpty()) {
+            throw new RequirementException("No research key given.");
+        }
+        return new ResearchRequirement(input);
+    }
+
     @Override
     public boolean achievedByPlayer(EntityPlayer entityPlayer) {
         return ThaumcraftApi.internalMethods.doesPlayerHaveRequisites(entityPlayer, researchKey);
@@ -34,12 +41,5 @@ public class ResearchRequirement extends Requirement {
     @Override
     public int hashCode() {
         return researchKey.hashCode();
-    }
-
-    public static ResearchRequirement fromString(String input) throws RequirementException {
-        if (input.isEmpty()) {
-            throw new RequirementException("No research key given.");
-        }
-        return new ResearchRequirement(input);
     }
 }

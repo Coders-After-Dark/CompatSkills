@@ -25,39 +25,6 @@ public class ConstellationRequirement extends Requirement {
         this.tooltip = TextFormatting.GRAY + " - " + TextFormatting.WHITE + new TextComponentTranslation(translationKey, "%s", constellation.getSimpleName()).getUnformattedComponentText();
     }
 
-    @Override
-    public boolean achievedByPlayer(EntityPlayer player) {
-        PlayerProgress progress = player instanceof EntityPlayerMP ? ResearchManager.getProgress((EntityPlayerMP) player) : ResearchManager.clientProgress;
-        return (seen ? progress.getSeenConstellations() : progress.getKnownConstellations()).contains(constellation.getUnlocalizedName());
-    }
-
-    @Override
-    public RequirementComparision matches(Requirement other) {
-        return equals(other) ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o instanceof ConstellationRequirement) {
-            ConstellationRequirement other  = (ConstellationRequirement) o;
-            return seen == other.seen && constellation.equals(other.constellation);
-        }
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(seen, constellation);
-    }
-
-    @Override
-    public boolean isCacheable() {
-        return false;
-    }
-
     public static ConstellationRequirement fromString(String input) throws RequirementException {
         if (input.isEmpty()) {
             throw new RequirementException("No constellation given.");
@@ -81,5 +48,38 @@ public class ConstellationRequirement extends Requirement {
             }
         }
         return new ConstellationRequirement(constellation, seen);
+    }
+
+    @Override
+    public boolean achievedByPlayer(EntityPlayer player) {
+        PlayerProgress progress = player instanceof EntityPlayerMP ? ResearchManager.getProgress((EntityPlayerMP) player) : ResearchManager.clientProgress;
+        return (seen ? progress.getSeenConstellations() : progress.getKnownConstellations()).contains(constellation.getUnlocalizedName());
+    }
+
+    @Override
+    public RequirementComparision matches(Requirement other) {
+        return equals(other) ? RequirementComparision.EQUAL_TO : RequirementComparision.NOT_EQUAL;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (o instanceof ConstellationRequirement) {
+            ConstellationRequirement other = (ConstellationRequirement) o;
+            return seen == other.seen && constellation.equals(other.constellation);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(seen, constellation);
+    }
+
+    @Override
+    public boolean isCacheable() {
+        return false;
     }
 }

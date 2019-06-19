@@ -53,10 +53,10 @@ public class CTSkill {
         return skill.isEnabled();
     }
 
-    @ZenSetter("hidden")
+    @ZenSetter("enabled")
     @ZenMethod
-    public void setHidden(boolean hidden) {
-        skill.setHidden(hidden);
+    public void setEnabled(boolean enabled) {
+        skill.getSkillConfig().setEnabled(enabled);
     }
 
     @ZenGetter("hidden")
@@ -65,10 +65,10 @@ public class CTSkill {
         return skill.isHidden();
     }
 
-    @ZenSetter("enabled")
+    @ZenSetter("hidden")
     @ZenMethod
-    public void setEnabled(boolean enabled) {
-        skill.getSkillConfig().setEnabled(enabled);
+    public void setHidden(boolean hidden) {
+        skill.setHidden(hidden);
     }
 
     @ZenOperator(OperatorType.COMPARE)
@@ -109,6 +109,14 @@ public class CTSkill {
         skill.getSkillConfig().setBaseLevelCost(cost);
     }
 
+    @ZenGetter("levelStaggering")
+    @ZenMethod
+    public String[] getLevelStaggering() {
+        List<String> stagger = new ArrayList<>();
+        skill.getSkillConfig().getLevelStaggering().forEach((key, value) -> stagger.add(key + "|" + value));
+        return stagger.toArray(new String[0]);
+    }
+
     @ZenSetter("levelStaggering")
     @ZenMethod
     public void setLevelStaggering(String[] stagger) {
@@ -130,13 +138,5 @@ public class CTSkill {
         }
 
         skill.getSkillConfig().setLevelStaggering(levelStaggering);
-    }
-
-    @ZenGetter("levelStaggering")
-    @ZenMethod
-    public String[] getLevelStaggering() {
-        List<String> stagger = new ArrayList<>();
-        skill.getSkillConfig().getLevelStaggering().forEach((key, value) -> stagger.add(key + "|" + value));
-        return stagger.toArray(new String[0]);
     }
 }

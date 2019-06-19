@@ -5,7 +5,9 @@ import codersafterdark.reskillable.api.data.LockKey;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class ToolHarvestLock implements FuzzyLockKey {
     private final Map<String, Integer> typeLevels = new HashMap<>();

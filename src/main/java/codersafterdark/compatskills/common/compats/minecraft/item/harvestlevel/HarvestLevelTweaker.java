@@ -54,7 +54,7 @@ public class HarvestLevelTweaker {
 
         @Override
         public String describe() {
-            return "Added Harvest Level Lock for tools " + (type == null ? "" :  "of type: " + type + ' ') +
+            return "Added Harvest Level Lock for tools " + (type == null ? "" : "of type: " + type + ' ') +
                     "with harvest level: " + harvestLevel + ", With Requirements: " + Utils.formatRequirements(requirements);
         }
     }
