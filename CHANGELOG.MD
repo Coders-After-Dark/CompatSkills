@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.16.1
+- Implemented optimizations to previously implemented Tinker's Construct lock support.
+
 ## 1.16.0
 - Added Tinker's Construct respecting Item Damage Locks & Harvest Level Locks!
 
