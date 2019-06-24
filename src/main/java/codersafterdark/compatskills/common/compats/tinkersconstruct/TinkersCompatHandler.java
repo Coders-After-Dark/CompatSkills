@@ -24,7 +24,6 @@ public class TinkersCompatHandler extends CompatModuleBase {
             LevelLockHandler.registerLockKey(Material.class, MaterialLockKey.class);
             LevelLockHandler.registerLockKey(IToolMod.class, ModifierLockKey.class);
             LevelLockHandler.registerLockKey(ItemStack.class, ToolWrapperLockKey.class);
-            MinecraftForge.EVENT_BUS.register(new TinkerLockHandler());
             anyRegistered = true;
         }
         LevelLockHandler.addLockByKey(key, holder);
@@ -40,7 +39,7 @@ public class TinkersCompatHandler extends CompatModuleBase {
         if (CompatSkills.craftweakerLoaded) {
             CompatSkills.registerCommand(new MaterialDumpCommand());
             CompatSkills.registerCommand(new ModifierDumpCommand());
-            MinecraftForge.EVENT_BUS.register(new TinkerMCHandler());
         }
+        MinecraftForge.EVENT_BUS.register(new TinkerLockHandler());
     }
 }

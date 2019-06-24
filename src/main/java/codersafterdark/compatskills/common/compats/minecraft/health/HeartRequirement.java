@@ -44,7 +44,7 @@ public class HeartRequirement extends Requirement {
                 return RequirementComparision.EQUAL_TO;
             } else if (hearts > other.hearts) {
                 return RequirementComparision.GREATER_THAN;
-            } else if (hearts < other.hearts) {
+            } else { //if (hearts < other.hearts)
                 return RequirementComparision.LESS_THAN;
             }
         }

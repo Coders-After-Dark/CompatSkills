@@ -2,6 +2,7 @@ package codersafterdark.compatskills.common.compats.reskillable.skillhiding;
 
 import codersafterdark.reskillable.api.data.LockKey;
 import codersafterdark.reskillable.api.skill.Skill;
+import java.util.Objects;
 
 public class VisibilityLock implements LockKey {
     private final Skill skill;
@@ -15,16 +16,8 @@ public class VisibilityLock implements LockKey {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-
-        if (obj instanceof VisibilityLock) {
-            VisibilityLock other = (VisibilityLock) obj;
-            return skill == null ? other.skill == null : skill.equals(other.skill);
-        }
-        return false;
+    public boolean equals(Object o) {
+        return o == this || o instanceof VisibilityLock && Objects.equals(skill, ((VisibilityLock) o).skill);
     }
 
     @Override

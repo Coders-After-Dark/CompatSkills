@@ -23,9 +23,9 @@ compatskills.error.bloodmagic.binding=Безмолвные Темные Мате
 compatskills.error.bloodmagic.ritual=Ритуал не принёс Вам ожидаемого результата
 
 ## Tinker's Construct
-compatskills.error.tconstruct.material=Чем больше молот ударяет, тем больше материал сопротивляется.
-compatskills.error.tconstruct.modifier=После бесчисленных попыток, Вы всё еще не можете понять, как модифицировать инструмент.
-compatskills.error.tconstruct.tool_type=Неважно, какими будут инструкции, новичок не может создать шедевр
+compatskills.error.tconstruct.craft.part=Чем больше молот ударяет, тем больше материал сопротивляется.
+compatskills.error.tconstruct.modify=После бесчисленных попыток, Вы всё еще не можете понять, как модифицировать инструмент.
+compatskills.error.tconstruct.craft.tool=Неважно, какими будут инструкции, новичок не может создать шедевр
 
 ## Minecraft
 ### Dimension

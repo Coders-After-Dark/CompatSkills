@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.tinkersconstruct.materialloc
 import codersafterdark.reskillable.api.data.ParentLockKey;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
+import java.util.Objects;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IToolMod;
 
@@ -15,14 +16,7 @@ public class MaterialLockKey implements ParentLockKey {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o instanceof MaterialLockKey) {
-            MaterialLockKey other = (MaterialLockKey) o;
-            return material == null ? other.material == null : material.equals(other.material);
-        }
-        return false;
+        return o == this || o instanceof MaterialLockKey && Objects.equals(material, ((MaterialLockKey) o).material);
     }
 
     @Override
