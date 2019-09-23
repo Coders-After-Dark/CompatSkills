@@ -1,6 +1,10 @@
 # Changelog
 
 ## 1.16.2
+- Fix crash with latest better questing version.
+
+
+## 1.16.2
 - Cleanup Tinker's construct event handling to have less duplicate code and always check against all other locks that may be on the tool.
 
 

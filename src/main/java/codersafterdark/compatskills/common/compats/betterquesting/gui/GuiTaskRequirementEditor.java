@@ -23,6 +23,7 @@ import betterquesting.api2.client.gui.panels.content.PanelTextBox;
 import betterquesting.api2.client.gui.themes.presets.PresetColor;
 import betterquesting.api2.client.gui.themes.presets.PresetLine;
 import betterquesting.api2.client.gui.themes.presets.PresetTexture;
+import betterquesting.api2.storage.DBEntry;
 import betterquesting.api2.utils.QuestTranslation;
 import codersafterdark.compatskills.common.compats.betterquesting.TaskRequirement;
 import net.minecraft.client.gui.GuiScreen;
@@ -32,9 +33,9 @@ import net.minecraft.util.ResourceLocation;
 public class GuiTaskRequirementEditor extends GuiScreenCanvas implements IPEventListener, IVolatileScreen {
     private PanelScrollingStrings requirementEdit;
     private TaskRequirement task;
-    private IQuest quest;
+    private DBEntry<IQuest> quest;
 
-    public GuiTaskRequirementEditor(GuiScreen parent, IQuest quest, TaskRequirement task) {
+    public GuiTaskRequirementEditor(GuiScreen parent, DBEntry<IQuest> quest, TaskRequirement task) {
         super(parent);
         this.quest = quest;
         this.task = task;
@@ -94,11 +95,11 @@ public class GuiTaskRequirementEditor extends GuiScreenCanvas implements IPEvent
                 task.updateRequirements(requirementEdit.getRequirements());
 
                 NBTTagCompound base = new NBTTagCompound();
-                base.setTag("config", quest.writeToNBT(new NBTTagCompound()));
-                base.setTag("progress", quest.writeProgressToNBT(new NBTTagCompound(), null));
+                base.setTag("config", quest.getValue().writeToNBT(new NBTTagCompound()));
+                base.setTag("progress", quest.getValue().writeProgressToNBT(new NBTTagCompound(), null));
                 NBTTagCompound tags = new NBTTagCompound();
                 tags.setInteger("action", EnumPacketAction.EDIT.ordinal()); // Action: Update data
-                tags.setInteger("questID", QuestingAPI.getAPI(ApiReference.QUEST_DB).getID(quest));
+                tags.setInteger("questID", quest.getID());
                 tags.setTag("data", base);
                 QuestingAPI.getAPI(ApiReference.PACKET_SENDER).sendToServer(new QuestingPacket(new ResourceLocation("betterquesting:quest_edit"), tags));
             }

@@ -42,12 +42,8 @@ repositories{
         url 'https://maven.blamejared.com'
     }
     maven {
-        name = 'Waila'
+        name = 'Waila/Blood Magic'
         url 'https://tehnut.info/maven'
-    }
-    maven {
-        name = 'Blood Magic'
-        url "https://tehnut.info/maven/"
     }
     maven {
     	name = 'Baubles'
@@ -65,15 +61,15 @@ repositories{
 
 dependencies {
     deobfCompile "net.darkhax.gamestages:GameStages-1.12.2:2.0.114"
-    deobfCompile "mezz.jei:jei_1.12.2:4.14.4.267"
+    deobfCompile "mezz.jei:jei_1.12.2:4.15.0.289"
     deobfCompile "net.darkhax.bookshelf:Bookshelf-1.12.2:2.3.576"
-    deobfCompile "hellfirepvp.astralsorcery:astralsorcery:1.12.2-1.10.19-v142"
+    deobfCompile "hellfirepvp.astralsorcery:astralsorcery:1.12.2-1.10.20-v152"
     deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${crafttweaker_version}"
     deobfCompile "CraftTweaker2:CraftTweaker2-API:1.12-${crafttweaker_version}"
     deobfCompile "CraftTweaker2:ZenScript:1.12-${crafttweaker_version}"
     deobfCompile "codersafterdark.reskillable:Reskillable:1.12.2-1.12.5-SNAPSHOT.126"
-    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.4.0-102"
+    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.4.2-104"
     deobfCompile "info.amerifrance.guideapi:Guide-API:1.12-2.1.8-63"
     deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.28-17"
@@ -83,9 +79,9 @@ dependencies {
     deobfCompile "magneticraft:Magneticraft_1.12:2.5.2:dev"
     deobfCompile "shadowfacts-forgelin:Forgelin:1.8.2"
     deobfCompile "modelloader:modelloader:1.1.5"
-    deobfCompile "projecte:ProjectE:1.12.2:PE1.4.0"
+    deobfCompile "projecte:ProjectE:1.12.2:PE1.4.1"
     deobfCompile "project-ex:ProjectEX:1.0.0.13"
-    deobfCompile "better-questing:BetterQuesting:api:3.5.292"
+    deobfCompile "better-questing:BetterQuesting:api:3.5.311"
     deobfCompile "ore-excavation:OreExcavation:deobf:1.4.137"
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tinkers_version}"
     deobfCompile "slimeknights.mantle:Mantle:${mantle_minecraft_version}-${mantle_version}"

@@ -1,10 +1,11 @@
 package codersafterdark.compatskills.common.compats.betterquesting;
 
-import betterquesting.api.api.QuestingAPI;
 import betterquesting.api.questing.IQuest;
 import betterquesting.api.questing.tasks.ITask;
 import betterquesting.api2.client.gui.misc.IGuiRect;
 import betterquesting.api2.client.gui.panels.IGuiPanel;
+import betterquesting.api2.storage.DBEntry;
+import betterquesting.api2.utils.ParticipantInfo;
 import codersafterdark.compatskills.CompatSkills;
 import codersafterdark.compatskills.common.compats.betterquesting.gui.GuiTaskRequirementEditor;
 import codersafterdark.compatskills.common.compats.betterquesting.gui.PanelTaskRequirement;
@@ -13,8 +14,14 @@ import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.requirement.Requirement;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.UUID;
+import javax.annotation.Nullable;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -25,13 +32,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Level;
 
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 public class TaskRequirement implements ITask {
-    private final List<UUID> completeUsers = new ArrayList<>();
+
+    private final Set<UUID> completeUsers = new TreeSet<>();
     private List<String> requirements = new ArrayList<>();
     private RequirementHolder holder;
     private boolean hasUncacheable;
@@ -47,20 +50,21 @@ public class TaskRequirement implements ITask {
     }
 
     @Override
-    public void detect(EntityPlayer player, IQuest quest) {
-        if (isComplete(QuestingAPI.getQuestingUUID(player))) {
+    public void detect(ParticipantInfo participant, DBEntry<IQuest> quest) {
+        if (isComplete(participant.UUID)) {
             return;
         }
 
-        PlayerData data = PlayerDataHandler.get(player);
+        PlayerData data = PlayerDataHandler.get(participant.PLAYER);
         if (data == null) {
             return;
         }
         setHolder();
 
         if (data.matchStats(holder)) {
-            setComplete(QuestingAPI.getQuestingUUID(player));
+            setComplete(participant.UUID);
         }
+        participant.markDirty(Collections.singletonList(quest.getID()));
     }
 
     private void setHolder() {
@@ -86,31 +90,28 @@ public class TaskRequirement implements ITask {
 
     @Override
     public void setComplete(UUID uuid) {
-        if (!completeUsers.contains(uuid)) {
-            completeUsers.add(uuid);
+        completeUsers.add(uuid);
+    }
+
+    @Override
+    public void resetUser(@Nullable UUID uuid) {
+        if (uuid == null) {
+            completeUsers.clear();
+        } else {
+            completeUsers.remove(uuid);
         }
     }
 
     @Override
-    public void resetUser(UUID uuid) {
-        completeUsers.remove(uuid);
-    }
-
-    @Override
-    public void resetAll() {
-        completeUsers.clear();
-    }
-
-    @Override
     @SideOnly(Side.CLIENT)
-    public IGuiPanel getTaskGui(IGuiRect rect, IQuest quest) {
+    public IGuiPanel getTaskGui(IGuiRect rect, DBEntry<IQuest> quest) {
         return new PanelTaskRequirement(rect, this);
     }
 
     @Nullable
     @Override
     @SideOnly(Side.CLIENT)
-    public GuiScreen getTaskEditor(GuiScreen parent, IQuest quest) {
+    public GuiScreen getTaskEditor(GuiScreen parent, DBEntry<IQuest> quest) {
         return new GuiTaskRequirementEditor(parent, quest, this);
     }
 
@@ -143,18 +144,19 @@ public class TaskRequirement implements ITask {
     }
 
     @Override
-    public NBTTagCompound writeProgressToNBT(NBTTagCompound json, List<UUID> users) {
+    public NBTTagCompound writeProgressToNBT(NBTTagCompound json, @Nullable List<UUID> users) {
         NBTTagList jArray = new NBTTagList();
-        for (UUID uuid : completeUsers) {
-            jArray.appendTag(new NBTTagString(uuid.toString()));
-        }
+        completeUsers.stream().filter(completeUser -> users == null || users.contains(completeUser)).map(completeUser -> new NBTTagString(completeUser.toString()))
+              .forEach(jArray::appendTag);
         json.setTag("completeUsers", jArray);
         return json;
     }
 
     @Override
     public void readProgressFromNBT(NBTTagCompound json, boolean merge) {
-        completeUsers.clear();
+        if (!merge) {
+            completeUsers.clear();
+        }
         NBTTagList cList = json.getTagList("completeUsers", 8);
         for (int i = 0; i < cList.tagCount(); i++) {
             try {
