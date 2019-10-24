@@ -8,10 +8,11 @@ import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.event.entity.living.AnimalTameEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class AnimalTameEventHandler {
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void onTame(AnimalTameEvent event) {
         if (event.isCanceled()) {
             return;

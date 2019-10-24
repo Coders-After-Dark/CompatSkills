@@ -11,12 +11,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.stream.Collectors;
 
 public class BindHandler {
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void bindEvent(ItemBindEvent event) {
         EntityPlayer player = event.getNewOwner();
         if (Utils.skipPlayer(player)) {

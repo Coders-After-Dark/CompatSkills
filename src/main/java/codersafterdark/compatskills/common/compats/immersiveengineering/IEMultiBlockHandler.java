@@ -10,15 +10,15 @@ import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
+import java.util.stream.Collectors;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.stream.Collectors;
-
 public class IEMultiBlockHandler {
-    @SubscribeEvent
-    public void multiBlockForm(MultiblockFormEvent event) {
+    @SubscribeEvent(priority =  EventPriority.HIGH)
+    public void multiBlockForm(MultiblockFormEvent.Pre event) {
         EntityPlayer player = event.getEntityPlayer();
         if (Utils.skipPlayer(player)) {
             return;

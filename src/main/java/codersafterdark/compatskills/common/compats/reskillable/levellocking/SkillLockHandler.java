@@ -7,16 +7,16 @@ import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.api.event.LevelUpEvent;
 import codersafterdark.reskillable.api.skill.Skill;
 import codersafterdark.reskillable.base.LevelLockHandler;
+import java.util.stream.Collectors;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.stream.Collectors;
-
 public class SkillLockHandler {
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void levelUpEvent(LevelUpEvent.Pre event) {
         EntityPlayer player = event.getEntityPlayer();
         if (Utils.skipPlayer(player)) {

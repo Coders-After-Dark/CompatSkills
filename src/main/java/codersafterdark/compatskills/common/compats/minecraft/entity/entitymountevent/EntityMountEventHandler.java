@@ -8,10 +8,11 @@ import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.event.entity.EntityMountEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityMountEventHandler {
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void onMount(EntityMountEvent event) {
         if (event.isCanceled() || event.isDismounting() || !(event.getEntityMounting() instanceof EntityPlayer)) {
             return;

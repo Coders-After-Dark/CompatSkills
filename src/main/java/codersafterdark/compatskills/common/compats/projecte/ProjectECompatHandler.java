@@ -2,12 +2,10 @@ package codersafterdark.compatskills.common.compats.projecte;
 
 import codersafterdark.compatskills.utils.CompatModuleBase;
 import codersafterdark.reskillable.base.ToolTipHandler;
-import com.latmod.mods.projectex.gui.GuiLink;
 import moze_intel.projecte.gameObjs.gui.GUICondenser;
 import moze_intel.projecte.gameObjs.gui.GUICondenserMK2;
 import moze_intel.projecte.gameObjs.gui.GUITransmutation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
 
 public class ProjectECompatHandler extends CompatModuleBase {
     public static boolean ENABLED;
@@ -29,10 +27,6 @@ public class ProjectECompatHandler extends CompatModuleBase {
             //Versions > PE 1.4.0 have GUICondenserMK2 extend GUICondenser.
             //This prevents the double tooltip
             ToolTipHandler.addTooltipInjector(GUICondenserMK2.class, handler::condenserTooltip);
-        }
-
-        if (Loader.isModLoaded("projectex")) {
-            ToolTipHandler.addTooltipInjector(GuiLink.class, handler::condenserTooltip);
         }
     }
 }

@@ -5,7 +5,9 @@ import codersafterdark.compatskills.common.compats.astralsorcery.AstralCompatHan
 import codersafterdark.compatskills.common.compats.baubles.BaublesCompatHandler;
 import codersafterdark.compatskills.common.compats.betterquesting.BetterQuestingHandler;
 import codersafterdark.compatskills.common.compats.bloodmagic.BMCompatHandler;
+import codersafterdark.compatskills.common.compats.cyberware.CyberwareCompatHandler;
 import codersafterdark.compatskills.common.compats.dynamicswordskills.DSSCompatHandler;
+import codersafterdark.compatskills.common.compats.electroblob.WizardryCompatHandler;
 import codersafterdark.compatskills.common.compats.gamestages.GameStageCompatHandler;
 import codersafterdark.compatskills.common.compats.immersiveengineering.IECompatHandler;
 import codersafterdark.compatskills.common.compats.magneticraft.MagCompatHandler;
@@ -17,14 +19,13 @@ import codersafterdark.compatskills.common.compats.scavenge.ScavengeHandler;
 import codersafterdark.compatskills.common.compats.thaumcraft.ThaumcraftCompatHandler;
 import codersafterdark.compatskills.common.compats.theoneprobe.TOPCompatHandler;
 import codersafterdark.compatskills.common.compats.tinkersconstruct.TinkersCompatHandler;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class CompatModuleBase {
     static HashMap<String, Class<? extends CompatModuleBase>> moduleClasses = new HashMap<>();
@@ -36,7 +37,9 @@ public abstract class CompatModuleBase {
         moduleClasses.put("baubles", BaublesCompatHandler.class);
         moduleClasses.put("betterquesting", BetterQuestingHandler.class);
         moduleClasses.put("bloodmagic", BMCompatHandler.class);
+        moduleClasses.put("cyberware", CyberwareCompatHandler.class);
         moduleClasses.put("dynamicswordskills", DSSCompatHandler.class);
+        moduleClasses.put("ebwizardry", WizardryCompatHandler.class);
         moduleClasses.put("gamestages", GameStageCompatHandler.class);
         moduleClasses.put("immersiveengineering", IECompatHandler.class);
         moduleClasses.put("magneticraft", MagCompatHandler.class);

@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.17.0
+- Added support for changing background of built in skills. For example:
+  - `<skill:reskillable:attack>.setBackgroundLocation("minecraft:textures/blocks/iron_block");`
+- Added support for changing the new Reskillable config for level up button per skill to CTSkill.
+  - `<skill:reskillable:magic>.setLevelButton(false);`
+- Added support for Robotic Parts to check the requirements on the items trying to be installed. [#90](https://github.com/Coders-After-Dark/CompatSkills/issues/90)
+- Added support for Electroblob's Wizardry's arcane workbench. If the player does not have the requirements to the items they are attempting to combine they are not able to combine them. [#105](https://github.com/Coders-After-Dark/CompatSkills/issues/105)
+- Made TOP and WAILA compat support showing the damage lock requirements on entities.
+- Updated Immersive Engineering Integration to take advantage of the new event.
+
+
+
 ## 1.16.3
 - Fix crash with latest better questing version.
 

@@ -148,6 +148,19 @@ public class CrTSkill extends Skill {
         super.setHidden(hidden);
     }
 
+    @ZenGetter("levelButton")
+    @ZenMethod
+    @Override
+    public boolean hasLevelButton() {
+        return super.hasLevelButton();
+    }
+
+    @ZenSetter("levelButton")
+    @ZenMethod
+    public void setLevelButton(boolean button) {
+        skillConfig.setLevelButton(button);
+    }
+
     @Override
     public String getName() {
         return name == null ? super.getName() : name.getText();

@@ -1,12 +1,22 @@
 package codersafterdark.compatskills.common.compats.reskillable.playerexpansion.wrapper;
 
+import codersafterdark.compatskills.utils.CheckMethods;
 import codersafterdark.reskillable.api.skill.Skill;
 import crafttweaker.annotations.ZenRegister;
-import org.apache.commons.lang3.tuple.Pair;
-import stanhebben.zenscript.annotations.*;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import net.minecraft.util.ResourceLocation;
+import org.apache.commons.lang3.tuple.Pair;
+import stanhebben.zenscript.annotations.OperatorType;
+import stanhebben.zenscript.annotations.ZenClass;
+import stanhebben.zenscript.annotations.ZenGetter;
+import stanhebben.zenscript.annotations.ZenMethod;
+import stanhebben.zenscript.annotations.ZenOperator;
+import stanhebben.zenscript.annotations.ZenSetter;
 
 @ZenClass("mods.compatskills.Skill")
 @ZenRegister
@@ -33,6 +43,14 @@ public class CTSkill {
     @ZenMethod
     public String getBackgroundLocation() {
         return skill.getBackground().toString();
+    }
+
+    @ZenSetter("backgroundLocation")
+    @ZenMethod
+    public void setBackgroundLocation(String resourceLocation) {
+        if (CheckMethods.checkResourceLocation(resourceLocation)) {
+            skill.setBackground(new ResourceLocation(resourceLocation));
+        }
     }
 
     @ZenGetter("cap")
@@ -69,6 +87,18 @@ public class CTSkill {
     @ZenMethod
     public void setHidden(boolean hidden) {
         skill.setHidden(hidden);
+    }
+
+    @ZenGetter("levelButton")
+    @ZenMethod
+    public boolean hasLevelButton() {
+        return skill.hasLevelButton();
+    }
+
+    @ZenSetter("levelButton")
+    @ZenMethod
+    public void setLevelButton(boolean button) {
+        skill.getSkillConfig().setLevelButton(button);
     }
 
     @ZenOperator(OperatorType.COMPARE)

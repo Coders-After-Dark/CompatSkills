@@ -11,10 +11,11 @@ import com.cout970.magneticraft.api.multiblock.IMultiblock;
 import com.cout970.magneticraft.api.multiblock.MultiBlockEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class MagMultiBlockHandler {
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void multiBlockForm(MultiBlockEvent.CheckIntegrity event) {
         //TODO: Magneticraft compat spams requirement achieved
         if (!event.getIntegrityErrors().isEmpty()) {//Already has issues

@@ -8,15 +8,15 @@ import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
+import java.util.stream.Collectors;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.stream.Collectors;
-
 public class RitualHandler {
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void ritualEvent(RitualActivatedEvent event) {
         EntityPlayer player = event.getPlayer();
         if (Utils.skipPlayer(player)) {

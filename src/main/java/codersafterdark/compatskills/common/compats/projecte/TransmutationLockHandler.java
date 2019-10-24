@@ -7,6 +7,9 @@ import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import codersafterdark.reskillable.base.ToolTipHandler;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import moze_intel.projecte.api.ProjectEAPI;
 import moze_intel.projecte.api.event.PlayerAttemptCondenserSetEvent;
 import moze_intel.projecte.api.event.PlayerAttemptLearnEvent;
@@ -15,14 +18,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public class TransmutationLockHandler {
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void onAttemptCondenserSet(PlayerAttemptCondenserSetEvent event) {
         if (!event.isCanceled()) {
             EntityPlayer player = event.getPlayer();
@@ -42,7 +42,7 @@ public class TransmutationLockHandler {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void onAttemptLearnEvent(PlayerAttemptLearnEvent event) {
         if (!event.isCanceled()) {
             EntityPlayer player = event.getPlayer();

@@ -7,27 +7,28 @@ import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import slimeknights.tconstruct.library.events.TinkerCraftingEvent;
 
 public class TinkerLockHandler {
 
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void onCraftingMaterial(TinkerCraftingEvent.ToolPartCraftingEvent event) {
         handleTinkerEvent(event, "compatskills.error.tconstruct.craft.part");
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void onModifierAttached(TinkerCraftingEvent.ToolModifyEvent event) {
         handleTinkerEvent(event, "compatskills.error.tconstruct.modify");
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void onPartReplaced(TinkerCraftingEvent.ToolPartReplaceEvent event) {
         handleTinkerEvent(event, "compatskills.error.tconstruct.modify");
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void onToolCrafted(TinkerCraftingEvent.ToolCraftingEvent event) {
         if (event.getPlayer() == null) {
             //Legacy support for older versions of tinkers where player could be null when first opening the table.

@@ -8,10 +8,11 @@ import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class EntityDamageEventHandler {
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void onAttack(LivingAttackEvent event) {
         if (event.isCanceled() || !(event.getSource().getTrueSource() instanceof EntityPlayer)) {
             return;

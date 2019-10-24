@@ -1,5 +1,6 @@
 package codersafterdark.compatskills.common.compats.theoneprobe;
 
+import codersafterdark.compatskills.common.compats.minecraft.entity.entitydamageevent.EntityDamageKey;
 import codersafterdark.compatskills.utils.CompatSkillConstants;
 import codersafterdark.compatskills.utils.CompatSkillsConfig;
 import codersafterdark.reskillable.api.data.PlayerData;
@@ -8,6 +9,7 @@ import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import mcjty.theoneprobe.api.*;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -28,7 +30,7 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
         probe.registerProvider(new IProbeInfoProvider() {
             @Override
             public String getID() {
-                return CompatSkillConstants.MOD_ID;
+                return CompatSkillConstants.MOD_ID + "-block";
             }
 
             @Override
@@ -37,28 +39,44 @@ public class CompatSkillsTOPSupport implements Function<ITheOneProbe, Void> {
                 RequirementHolder holder = LevelLockHandler.getSkillLock(stack);
                 //TODO: Try to cache the requirement stuff. Also for hwyla
                 //TODO Cont: Maybe cache the last 10 blocks looked at or something
-                if (CompatSkillsConfig.Configs.TOP.TOPShifting) {
-                    if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
-                        if (holder.isRealLock()) {
-                            PlayerData playerData = PlayerDataHandler.get(player);
-                            TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.requirements");
-                            probeInfo.text(TextFormatting.GRAY + error.getUnformattedComponentText());
-                            holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(probeInfo::text);
-                        }
-                    } else {
-                        if (holder.isRealLock()) {
-                            TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Hwyla.Shift");
-                            probeInfo.text(error.getUnformattedComponentText());
-                        }
-                    }
-                } else if (holder.isRealLock()) {
+                addInfoToProbe(probeInfo, player, holder);
+            }
+        });
+        probe.registerEntityProvider(new IProbeInfoEntityProvider() {
+            @Override
+            public String getID() {
+                return CompatSkillConstants.MOD_ID + "-entity";
+            }
+
+            @Override
+            public void addProbeEntityInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, Entity entity, IProbeHitEntityData data) {
+                RequirementHolder holder = LevelLockHandler.getLockByKey(new EntityDamageKey(entity));
+                //TODO: Try to cache the requirement stuff. Also for hwyla
+                //TODO Cont: Maybe cache the last 10 blocks looked at or something
+                addInfoToProbe(probeInfo, player, holder);
+            }
+        });
+        return null;
+    }
+
+    private void addInfoToProbe(IProbeInfo probeInfo, EntityPlayer player, RequirementHolder holder) {
+        if (CompatSkillsConfig.Configs.TOP.TOPShifting) {
+            if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)) {
+                if (holder.isRealLock()) {
                     PlayerData playerData = PlayerDataHandler.get(player);
                     TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.requirements");
                     probeInfo.text(TextFormatting.GRAY + error.getUnformattedComponentText());
                     holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(probeInfo::text);
                 }
+            } else if (holder.isRealLock()) {
+                TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.Hwyla.Shift");
+                probeInfo.text(error.getUnformattedComponentText());
             }
-        });
-        return null;
+        } else if (holder.isRealLock()) {
+            PlayerData playerData = PlayerDataHandler.get(player);
+            TextComponentTranslation error = new TextComponentTranslation("compatskills.misc.requirements");
+            probeInfo.text(TextFormatting.GRAY + error.getUnformattedComponentText());
+            holder.getRequirements().stream().map(req -> req.getToolTip(playerData)).forEach(probeInfo::text);
+        }
     }
 }

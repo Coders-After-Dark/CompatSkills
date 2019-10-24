@@ -55,6 +55,18 @@ compatskills.warn.projecte.condenser=WARNING: You cannot figure out how to repli
 compatskills.error.thaumcraft.knowledge=No matter how hard you try you are unable to understand:
 compatskills.error.thaumcraft.research=As you get close to finishing your research, you discover it is more complex than you first thought.
 
+
+### Cyberware
+compatskills.error.cyberware.install=At least one of the components you are trying to install is beyond your comprehension.
+
+
+### Wizardry
+compatskills.error.wizardry.crystal=You do not meet the requirements for the crystal you are trying to use.
+compatskills.error.wizardry.center=You do not meet the requirements for the item you are trying to upgrade.
+compatskills.error.wizardry.upgrade=You do not meet the requirements for the upgrade you are trying to use.
+compatskills.error.wizardry.spell=You do not meet the requirements for the spell you are trying to install.
+
+
 ## Minecraft
 ### Dimension
 compatskills.error.dimension.travel=A strange power is stopping you from reaching your destination

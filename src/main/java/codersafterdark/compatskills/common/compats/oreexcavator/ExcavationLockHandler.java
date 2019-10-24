@@ -8,12 +8,13 @@ import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import oreexcavation.events.EventExcavate;
 import oreexcavation.handlers.MiningAgent;
 
 public class ExcavationLockHandler {
-    @SubscribeEvent
+    @SubscribeEvent(priority =  EventPriority.HIGH)
     public void onExcavation(EventExcavate.Pre event) {
         MiningAgent agent = event.getAgent();
         EntityPlayer player = agent.player;
