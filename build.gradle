@@ -42,10 +42,6 @@ repositories{
         url 'https://maven.blamejared.com'
     }
     maven {
-        name = 'Waila/Blood Magic'
-        url 'https://tehnut.info/maven'
-    }
-    maven {
     	name = 'Baubles'
     	url "https://maven.thiakil.com"
     }
@@ -57,6 +53,10 @@ repositories{
         name = 'Astral Sorcery'
         url "https://maven.hellfiredev.net/"
     }
+    maven{
+        name = 'Curse Maven'
+        url = "https://cursemaven.com"
+    }
 }
 
 dependencies {
@@ -64,13 +64,13 @@ dependencies {
     deobfCompile "mezz.jei:jei_1.12.2:4.16.1.302"
     deobfCompile "net.darkhax.bookshelf:Bookshelf-1.12.2:2.3.590"
     deobfCompile "hellfirepvp.astralsorcery:astralsorcery:1.12.2-1.10.25-v167"
-    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
+    deobfCompile "curse.maven:project-253449:2568751-sources-api"
     deobfCompile "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-${crafttweaker_version}"
     deobfCompile "CraftTweaker2:CraftTweaker2-API:1.12-${crafttweaker_version}"
     deobfCompile "CraftTweaker2:ZenScript:1.12-${crafttweaker_version}"
     deobfCompile "codersafterdark.reskillable:Reskillable:1.12.2-1.13.0-SNAPSHOT.128"
-    deobfCompile "com.wayoftime.bloodmagic:BloodMagic:1.12.2-2.4.3-105"
-    deobfCompile "info.amerifrance.guideapi:Guide-API:1.12-2.1.8-63"
+    deobfCompile "curse.maven:project-224791:2822288-javadoc-sources-api"
+    deobfCompile "curse.maven:project-228832:2645992-sources"
     deobfCompile "com.azanor.baubles:Baubles:1.12-1.5.2"
     deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.28-17"
     deobfCompile "thaumcraft:Thaumcraft:1.12.2:6.1.BETA26"
@@ -81,7 +81,7 @@ dependencies {
     deobfCompile "modelloader:modelloader:1.1.7"
     deobfCompile "projecte:ProjectE:1.12.2:PE1.4.1"
     deobfCompile "better-questing:BetterQuesting:api:3.5.327"
-    deobfCompile "ore-excavation:OreExcavation:deobf:1.4.137"
+    deobfCompile "curse.maven:project-250898:2611347-deobf-sources"
     deobfCompile "electroblobs-wizardry:ElectroblobsWizardry:4.3.1:MC1.12.2"
     deobfCompile "roboticparts:cyberware:1.12.2:0.2.11.26"
     deobfCompile "slimeknights:TConstruct:${minecraft_version}-${tinkers_version}"
