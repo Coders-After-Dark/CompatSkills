@@ -38,7 +38,7 @@ public class ToolWrapperLockKey implements ParentLockKey {
             return toolHolder;
         }
         TinkerUtil.getMaterialsFromTagList(list).stream().map(material -> LevelLockHandler.getLocks(Material.class, material)).forEach(holders::add);
-        TinkerUtil.getTraitsOrdered(stack).stream().map(trait -> LevelLockHandler.getLockByKey(new ModifierLockKey(trait))).forEach(holders::add);
+        TinkerUtil.getModifiers(stack).stream().map(trait -> LevelLockHandler.getLockByKey(new ModifierLockKey(trait))).forEach(holders::add);
         return holders.isEmpty() ? LevelLockHandler.EMPTY_LOCK : new RequirementHolder(holders.toArray(new RequirementHolder[0]));
     }
 }
