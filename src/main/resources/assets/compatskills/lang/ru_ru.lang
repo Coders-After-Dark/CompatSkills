@@ -1,44 +1,88 @@
 # FORMATS
+## Astral Sorcery
+compatskills.requirements.format.constellation.seen=Увидено созвездие: %s%s
+compatskills.requirements.format.constellation.known=Открыто созвездие: %s%s
+compatskills.requirements.format.attuned=Настроено: %s%s
+compatskills.requirements.format.astral_tier=Уровень: %s%s
+
 ## GameStages
 compatskills.requirements.format.gamestage=GameStage: %s%s
 
 ## Minecraft
-compatskills.requirements.format.dimension=Dimension: %s%s
-compatskills.requirements.format.item=Item: %s%s
+compatskills.requirements.format.dimension=Измерение: %s%s
+compatskills.requirements.format.item=Предмет: %s%s
+compatskills.requirements.format.sneak=%sПриседание
+compatskills.requirements.format.health=Здоровье в процентах: %s%s
+compatskills.requirements.format.hearts=Половина сердец: %s%s
+compatskills.requirements.format.looking_at=Смотрит на: %s%s
 
 ## Forge
-compatskills.requirements.format.ore_dict=Ore Dictionary Entry: %s%s
+compatskills.requirements.format.ore_dict=Запись в словаре руд: %s%s
+compatskills.requirements.format.harvest_level=Уровень добычи: %s%s
 
+## Dynamic Sword Skills
+compatskills.requirements.format.dss=Навык в мече: %s%s %s
+
+## Thaumcraft
+compatskills.requirements.format.warp=Искажение: %s%s
+compatskills.requirements.format.research=Исследование: %s%s
 
 # Error Messages
 ## Game Stages
-compatskills.error.gamestage=Требования для разблокирования этой Стадии не достигнуты!
+compatskills.error.gamestage=Требования для открытия этой Стадии не удовлетворены!
 
 ## Reskillable
-compatskills.error.reskillable.level_lock=Чтобы получить этот Уровень:
-compatskills.error.reskillable.level_lock_2=Пожалуйста, достигните следующих требований!
+compatskills.error.reskillable.level_lock=Для получение этого уровня:
+compatskills.error.reskillable.level_lock_2=Выполните следующие требования!
 
 ## Blood Magic
-compatskills.error.bloodmagic.binding=Безмолвные Темные Материи кружат вокруг Вас и затем исчезают
-compatskills.error.bloodmagic.ritual=Ритуал не принёс Вам ожидаемого результата
+compatskills.error.bloodmagic.binding=Нераскрытая тёмная энергия вращается рядом с Вами, а затем слабеет.
+compatskills.error.bloodmagic.ritual=Хоть ритуал активировался, Вы не достигли желаемого результата.
 
 ## Tinker's Construct
-compatskills.error.tconstruct.craft.part=Чем больше молот ударяет, тем больше материал сопротивляется.
-compatskills.error.tconstruct.modify=После бесчисленных попыток, Вы всё еще не можете понять, как модифицировать инструмент.
-compatskills.error.tconstruct.craft.tool=Неважно, какими будут инструкции, новичок не может создать шедевр
+compatskills.error.tconstruct.craft.part=С каждым ударом молотом материал сопротивляется сильнее.
+compatskills.error.tconstruct.modify=После многих неисчислимых моментов, Вы не смогли разобраться, как модифицировать инструмент по своему желанию.
+compatskills.error.tconstruct.craft.tool=Неважно какие инструкции, новичок не создаст деталь мастера.
+
+## ProjectE
+compatskills.error.projecte.condenser=Вы не способны понять, как воспроизвести объект.
+compatskills.error.projecte.learn=Вы смогли разрушить объект, но не знаете, как создать ещё.
+compatskills.warn.projecte.transmutation=ВНИМАНИЕ: Вы не способны понять этот материал. Правда, Вы по-прежнему сможете израсходовать его на EMC.
+compatskills.warn.projecte.condenser=ВНИМАНИЕ: Вы не можете разобраться, как воспроизвести этот материал.
+
+### Thaumcraft
+compatskills.error.thaumcraft.knowledge=Сколь усердно ни старайся, Вы не сможете понять:
+compatskills.error.thaumcraft.research=Поскольку Вы близко полошли к завершению исследования, Вы выяснили, что оно сложнее, чем казалось.
+
+### Cyberware
+compatskills.error.cyberware.install=Минимум один из компонентов, которые Вы пытаетесь установить, вне всякого Вашего понимания.
+
+### Wizardry
+compatskills.error.wizardry.crystal=Вы не удовлетворили требования для кристалла, который Вы пытаетесь использовать.
+compatskills.error.wizardry.center=Вы не удовлетворили требования для предмета, который Вы пытаетесь улучшить.
+compatskills.error.wizardry.upgrade=Вы не удовлетворили требования для улучшения, которое Вы пытаетесь использовать.
+compatskills.error.wizardry.spell=Вы не удовлетворили требования для заклинания, которое Вы пытаетесь установить.
 
 ## Minecraft
-### Dimension
-compatskills.error.dimension.travel=Неведомая сила не даёт Вам достичь Вашего места назначения
+### Измерение
+compatskills.error.dimension.travel=Необычная сила мешает Вам достигнуть своего место назначения.
 
 ### Entity
-compatskills.error.entity.mount=Как сильно Вы не стараетесь, Вам не удается найти баланс и Вы падаете.
-compatskills.error.entity.tame=Существо противится Вашим попыткам приручения.
-compatskills.error.entity.damage=Ваши атаки не могут причинить урон зверю.
+compatskills.error.entity.mount=Сколь усердно ни старайтесь, Вы не сможете обрести равновесие, и падёте.
+compatskills.error.entity.tame=Как Вы ни пытались приручить существо, оно сопротивляется Вам.
+compatskills.error.entity.damage=Ваши атаки не способны наврадеть животному.
 
 ### Tile-Entities
-compatskills.error.tile_entity.interact=Даже после бесчисленных часов Вы не можете сообразить, как работает это устройство.
+compatskills.error.tile_entity.interact=Даже после бесчисленных часов, Вы не можете понять, как работает устройство.
+
+### Block Drops
+compatskills.error.drops=Когда Вы долбите по блоку, Вы понимаете, что может быть потеряете драгоценные ресурсы...
+
+### Ore Excavation
+compatskills.error.ore_excavation=Хоть Вы и занимаетесь раскопкой, Вы начинаете чуствовать бесконтрольность.
 
 ## Misc:
 compatskills.misc.requirements=Требования:
-compatskills.misc.shift=Нажмите Shift для отображения Требований
+compatskills.misc.shift=Нажмите Shift для просмотра Требований.
+
+compatskills.misc.betterquesting.requirement_task=Требования
