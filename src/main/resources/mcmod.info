@@ -3,9 +3,9 @@
   "modid": "compatskills",
   "name": "CompatSkills",
   "description": "CompatSkills is the official compatibility add-on for Reskillable.",
-  "version": "1.17.0",
+  "version": "1.17.2",
   "mcversion": "1.12.2",
-  "url": "https://minecraft.curseforge.com/projects/compatskills",
+  "url": "https://www.curseforge.com/minecraft/mc-mods/compatskills-fork",
   "authorList": ["Lanse505", "pupnewfster"],
   "credits": "Buuz135, Jaredlll08, and Kindlich",
   "dependencies": ["required-after:reskillable"]

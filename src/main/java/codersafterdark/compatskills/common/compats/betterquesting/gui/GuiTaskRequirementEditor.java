@@ -3,7 +3,6 @@ package codersafterdark.compatskills.common.compats.betterquesting.gui;
 import betterquesting.api.api.ApiReference;
 import betterquesting.api.api.QuestingAPI;
 import betterquesting.api.client.gui.misc.IVolatileScreen;
-import betterquesting.api.enums.EnumPacketAction;
 import betterquesting.api.network.QuestingPacket;
 import betterquesting.api.questing.IQuest;
 import betterquesting.api2.client.gui.GuiScreenCanvas;
@@ -98,7 +97,7 @@ public class GuiTaskRequirementEditor extends GuiScreenCanvas implements IPEvent
                 base.setTag("config", quest.getValue().writeToNBT(new NBTTagCompound()));
                 base.setTag("progress", quest.getValue().writeProgressToNBT(new NBTTagCompound(), null));
                 NBTTagCompound tags = new NBTTagCompound();
-                tags.setInteger("action", EnumPacketAction.EDIT.ordinal()); // Action: Update data
+                tags.setInteger("action", 1); // Action: Update data
                 tags.setInteger("questID", quest.getID());
                 tags.setTag("data", base);
                 QuestingAPI.getAPI(ApiReference.PACKET_SENDER).sendToServer(new QuestingPacket(new ResourceLocation("betterquesting:quest_edit"), tags));

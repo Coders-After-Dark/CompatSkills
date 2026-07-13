@@ -3,6 +3,7 @@ package codersafterdark.compatskills.common.compats.reskillable.playerexpansion.
 import codersafterdark.reskillable.api.data.PlayerData;
 import codersafterdark.reskillable.api.data.PlayerSkillInfo;
 import crafttweaker.annotations.ZenRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenGetter;
 import stanhebben.zenscript.annotations.ZenMethod;
@@ -11,9 +12,11 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenRegister
 public class CTPlayerData {
     private final PlayerData playerData;
+    private final EntityPlayer player;
 
-    public CTPlayerData(PlayerData playerData) {
+    public CTPlayerData(PlayerData playerData, EntityPlayer player) {
         this.playerData = playerData;
+        this.player = player;
     }
 
     @ZenGetter("hasAnyAbilities")
@@ -25,6 +28,6 @@ public class CTPlayerData {
     @ZenMethod
     public CTPlayerSkillInfo getSkillInfo(CTSkill skill) {
         PlayerSkillInfo info = playerData.getSkillInfo(skill.skill);
-        return info == null ? null : new CTPlayerSkillInfo(info);
+        return info == null ? null : new CTPlayerSkillInfo(info, playerData, player);
     }
 }

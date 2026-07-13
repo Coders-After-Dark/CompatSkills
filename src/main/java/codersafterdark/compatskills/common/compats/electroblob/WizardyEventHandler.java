@@ -6,7 +6,7 @@ import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import codersafterdark.reskillable.api.data.RequirementHolder;
 import codersafterdark.reskillable.base.LevelLockHandler;
 import electroblob.wizardry.event.SpellBindEvent;
-import electroblob.wizardry.tileentity.ContainerArcaneWorkbench;
+import electroblob.wizardry.inventory.ContainerArcaneWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;

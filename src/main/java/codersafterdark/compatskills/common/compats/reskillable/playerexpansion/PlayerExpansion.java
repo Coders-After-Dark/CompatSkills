@@ -6,6 +6,7 @@ import codersafterdark.reskillable.api.data.PlayerDataHandler;
 import crafttweaker.annotations.ZenRegister;
 import crafttweaker.api.minecraft.CraftTweakerMC;
 import crafttweaker.api.player.IPlayer;
+import net.minecraft.entity.player.EntityPlayer;
 import stanhebben.zenscript.annotations.ZenExpansion;
 import stanhebben.zenscript.annotations.ZenGetter;
 
@@ -14,7 +15,8 @@ import stanhebben.zenscript.annotations.ZenGetter;
 public class PlayerExpansion {
     @ZenGetter("skillData")
     public static CTPlayerData getSkillData(IPlayer iPlayer) {
-        PlayerData playerData = PlayerDataHandler.get(CraftTweakerMC.getPlayer(iPlayer));
-        return playerData == null ? null : new CTPlayerData(playerData);
+        EntityPlayer player = CraftTweakerMC.getPlayer(iPlayer);
+        PlayerData playerData = PlayerDataHandler.get(player);
+        return playerData == null ? null : new CTPlayerData(playerData, player);
     }
 }
